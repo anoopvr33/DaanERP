@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+p,
+input,
+button,
+li {
+  font-size: 14px;
+}
+/* #1a1a40
+#3f3f70
+#7070a3
+#d3d3e6
+#f5f5ff
+ */
