@@ -57,7 +57,7 @@ const data = {
     {
       label: "Sales",
       data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: "#7070a3",
+      backgroundColor: "rgb(190, 133, 255)",
       barTickness: 10,
       barPercentage: 0.6,
     },
@@ -76,18 +76,32 @@ const options = {
       text: "Monthly Sales Data",
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false, // removes vertical grid lines
+        drawBorder: false, // removes axis border
+      },
+    },
+    y: {
+      grid: {
+        // display: false, // removes horizontal grid lines
+        drawBorder: false,
+      },
+    },
+  },
 };
 
 export default function Chart() {
   return (
     <div
       style={{
-        width: "1000px",
+        width: "800px",
         height: "400px",
-        background: "white",
+        background: "rgb(255, 255, 255)",
         padding: "10px",
         borderRadius: "20px",
-        margin: "auto 0px",
+        margin: "0px 0px",
         boxShadow: "0px 5px 10px #d3d3e6",
       }}
     >

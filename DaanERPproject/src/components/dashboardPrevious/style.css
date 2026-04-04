@@ -1,0 +1,29 @@
+.dash-prev {
+  display: grid;
+  gap: 20px;
+  width: 40%;
+}
+.dash-prev .sub-1 {
+  width: 100%;
+  color: rgb(44, 44, 44);
+  background: hsl(0, 0%, 100%);
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+  /* height: 100px; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  border-radius: 20px;
+}
+.dash-prev h2 {
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.dash-prev h1 {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 40px;
+}

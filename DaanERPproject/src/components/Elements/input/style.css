@@ -1,0 +1,13 @@
+.custom-inp {
+  width: 200px;
+  padding: 7px 15px;
+  border-radius: 20px;
+  outline: none;
+  color: black;
+  border: 1px solid #69af99;
+  /* background-color: #3d866c; */
+
+  /* border-bottom: 3px solid hsl(243, 37%, 52%); */
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.067); */
+}
+/* border: 1px solid #7070a3;/ */

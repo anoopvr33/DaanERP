@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import FormItems from "../formItems";
-import Button from "../button";
+import FormItems from "../Elements/formItems";
+import Button from "../Elements/button";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { addBookingThunk } from "../../redux/bookingSlice";

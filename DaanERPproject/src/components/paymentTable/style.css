@@ -1,0 +1,50 @@
+.accounts-table {
+  border-collapse: separate;
+  /* background-color: rgb(255, 255, 255); */
+  width: 100%;
+  border-spacing: 0px;
+  /* border: 1px solid #386f74; */
+
+  /* box-shadow: 0px 5px 5px #d3d3e6; */
+
+  /* border-bottom: 2px solid #d3d3e6; */
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.accounts-error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+.accounts-table i {
+  /* background-color: #7070a3; */
+  color: #1a1a40;
+  width: 30px;
+  height: 30px;
+  place-content: center;
+  border-radius: 20px;
+}
+.accounts-table i:hover {
+  background-color: #7070a317;
+}
+.accounts-table th,
+.accounts-table td {
+  padding: 11px 10px;
+  border: none;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 0px;
+}
+.accounts-table tr {
+  background: #ffffff;
+  /* color: white; */
+  font-size: 16px;
+  /* border-bottom: 1px solid red; */
+
+  /* border: none; */
+}
+.accounts-table tr:hover {
+  /* background-color: hsl(243, 37%, 52%);/ */
+  /* color: white; */
+}
