@@ -1,0 +1,62 @@
+.accounts-table {
+  border-collapse: separate;
+  /* background-color: rgb(255, 255, 255); */
+  width: 100%;
+  border-spacing: 0px;
+  border: 1px solid #cce8e0;
+  /* background: #cce8e0; */
+  /* box-shadow: 0px 5px 5px #d3d3e6; */
+
+  /* border-bottom: 2px solid #d3d3e6; */
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.accounts-error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+.accounts-table i {
+  /* background-color: #7070a3; */
+  color: #1a1a40;
+  width: 30px;
+  height: 30px;
+  place-content: center;
+  border-radius: 20px;
+}
+.accounts-table i:hover {
+  background-color: #7070a317;
+}
+.accounts-table th,
+.accounts-table td {
+  padding: 11px 10px;
+  border: none;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 0px;
+}
+.accounts-table tr {
+  background: #ffffff;
+  /* color: white; */
+  font-size: 16px;
+  /* border-bottom: 1px solid red; */
+
+  /* border: none; */
+}
+.accounts-table tr:hover {
+  /* background-color: hsl(243, 37%, 52%);/ */
+  /* color: white; */
+}
+
+.accounts-table th {
+  /* border-radius: 5px; */
+  /* background-color: #d3d3e6; */
+  /* border-bottom: 1px solid rgba(107, 102, 207, 0.315); */
+  /* padding: 10px; */
+  /* width: fit-content; */
+  background: #cce8e0;
+  color: rgb(59, 114, 94);
+  /* font-size: 1px; */
+  /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.137); */
+}

@@ -3,10 +3,10 @@
   /* background-color: rgb(255, 255, 255); */
   width: 100%;
   border-spacing: 0px;
-  border: 1px solid rgba(234, 234, 234, 0);
-  box-shadow: 0px 5px 5px #d3d3e6;
+  border: 1px solid #cce8e0;
+  /* box-shadow: 0px 5px 5px #ffffff; */
 
-  border-bottom: 2px solid #d3d3e6;
+  border-bottom: 2px solid #ffffff;
   border-radius: 20px;
   overflow: hidden;
   margin-top: 20px;
@@ -43,13 +43,15 @@
   /* border: none; */
 }
 .booking-table tr:hover {
-  background-color: #f5f5ff;
+  background-color: #fdfdfd;
 }
 
 .booking-table th {
   /* border-radius: 5px; */
-  background-color: #d3d3e6;
-  color: #3f3f70;
+  /* padding: 10px; */
+  /* width: fit-content; */
+  background: #cce8e0;
+  color: rgb(59, 114, 94);
   /* font-size: 1px; */
   /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.137); */
 }
@@ -60,9 +62,10 @@
   padding: 30px 20px;
   /* padding-top: 30px; */
   gap: 30px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.029);
   border-radius: 20px;
-  box-shadow: 0px 5px 10px #d3d3e6;
+  border: 1px solid gainsboro;
+  /* box-shadow: 0px 5px 10px #d3d3e6; */
   /* flex-direction: column; */
 }
 .booking-table .booking-expand p {
@@ -94,8 +97,8 @@
 }
 .booking-table .booking-expand span {
   /* border: 2px solid #7070a3; */
-  background-color: #f5f5ff;
-  color: #3f3f70;
+  background-color: #ffffff;
+  color: #000000;
   font-weight: 400;
   padding: 9px 25px;
   border-radius: 20px;
@@ -104,8 +107,6 @@
   border-bottom: 1px solid rgba(213, 224, 255, 0.801);
   color: #3f3f70;
   font-weight: 400;
-  /* border-radius: 5px; */
-  /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.137); */
 }
 /* .booking-table {
   border-collapse: separate;

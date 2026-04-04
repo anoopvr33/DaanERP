@@ -1,0 +1,180 @@
+import "./style.css";
+import { useEffect, useState } from "react";
+import PaymentDetails from "./bill_company";
+import BillCompanyTab from "./bill_company";
+import UpiCompanyTab from "./upi_company";
+import UpiCurrentTab from "./upi_current";
+import CashPayTab from "./cash_pay";
+import { API, getCookie } from "../../utils/axios";
+
+const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
+  const [tab, setTab] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const BillCompany = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 0 && "    hsl(0, 0%, 100%)",
+    color: tab == 0 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 0 && "20px",
+    borderBottomLeftRadius: tab + 1 == 0 && "20px",
+  };
+  const UpiCom = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 1 && "    hsl(0, 0%, 100%)",
+    color: tab == 1 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 1 && "20px",
+    borderBottomLeftRadius: tab + 1 == 1 && "20px",
+  };
+  const UpiCurent = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 2 && "    hsl(0, 0%, 100%)",
+    color: tab == 2 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 2 && "20px",
+    borderBottomLeftRadius: tab + 1 == 2 && "20px",
+  };
+  const Cash = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 3 && "    hsl(0, 0%, 100%)",
+    color: tab == 3 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 3 && "20px",
+    borderBottomLeftRadius: tab + 1 == 3 && "20px",
+  };
+  const None = {
+    borderRadius: "20px 20px 0px 0px",
+    // background: tab == 0 && "    hsl(0, 0%, 100%)",
+    color: tab == 4 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 4 && "20px",
+    borderBottomLeftRadius: tab + 1 == 4 && "20px",
+  };
+
+  const TabArray = [
+    {
+      id: 0,
+      name: "Bill to Company",
+      link: "pos",
+      style: BillCompany,
+    },
+    {
+      id: 1,
+      name: "UPI to Company",
+      link: "pos",
+      style: UpiCom,
+    },
+    {
+      id: 2,
+      name: "UPI to Current",
+      link: "pos",
+      style: UpiCurent,
+    },
+    {
+      id: 3,
+      name: "Cash",
+      link: "pos",
+      style: Cash,
+    },
+    {
+      id: 4,
+      name: "",
+      link: "",
+      style: None,
+    },
+  ];
+
+  const [data, setData] = useState([]);
+  // const d = new Date(setDat);
+  // const first = new Date(d.getFullYear(), d.getMonth(), 1);
+
+  // const year = first.getFullYear();
+  // const month = String(first.getMonth() + 1).padStart(2, "0");
+  // const day = "01";
+
+  // const formatted = `${year}-${month}-${day}`;
+
+  const GetPos = async () => {
+    console.log("payment format", prevmonth, yesterday, hotelsArray);
+    try {
+      const response = await API.post(
+        "/reports/get_payment_report/",
+        {
+          // date: formattedDate,
+          hotels: hotelsArray,
+          from_date: prevmonth,
+          to_date: yesterday,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
+        },
+      );
+      console.log("payemtn res", response);
+      if (response.data.report) {
+        setData(response.data.report);
+      } else alert("some error");
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    GetPos();
+    // console.log("fate", formattedDate);
+    // eslint(react-hooks/set-state-in-effect)
+  }, [trigger]);
+
+  return (
+    <div className="acc-tabs">
+      <div className="acc-tabs-flex">
+        {TabArray.map((item, index) => (
+          <p
+            style={{
+              borderBottomLeftRadius: tab + 1 === index ? "20px" : "0px",
+              borderBottomRightRadius: tab - 1 === index ? "20px" : "0px",
+            }}
+            onClick={() => setTab(index)}
+          >
+            <text style={item?.style}>{item?.name}</text>
+          </p>
+        ))}
+      </div>
+      <div
+        style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
+        className="acc-tabs-container"
+      >
+        {tab === 0 && (
+          <BillCompanyTab result={data?.bill_to_company}></BillCompanyTab>
+        )}
+        {tab === 1 && (
+          <UpiCompanyTab result={data?.upi_company}></UpiCompanyTab>
+        )}
+        {tab === 2 && (
+          <UpiCurrentTab result={data?.upi_current}></UpiCurrentTab>
+        )}
+        {tab === 3 && <CashPayTab result={data?.cash}></CashPayTab>}
+      </div>
+      <br />
+
+      <div className="acc-tabs-container">
+        <h3>Total Amounts</h3> <br />
+        <p>
+          <b>bill_to_company</b>: {data?.total_amount?.bill_to_company}
+        </p>{" "}
+        <br />
+        <p>
+          <b>upi_current</b>: {data?.total_amount?.upi_current}
+        </p>{" "}
+        <br />
+        <p>
+          <b>upi_company</b>: {data?.total_amount?.upi_company}
+        </p>{" "}
+        <br />
+        <p>
+          <b>cash</b>: {data?.total_amount?.cash}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default PaymentTabs;

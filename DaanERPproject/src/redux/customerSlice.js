@@ -20,9 +20,9 @@ export const addCustomerThunk = createAsyncThunk(
 
 export const getCustomerData = createAsyncThunk(
   "customer/getdata",
-  async (_, thunkAPI) => {
+  async (date, thunkAPI) => {
     try {
-      const response = await GetCustomerDataAPI();
+      const response = await GetCustomerDataAPI(date);
       console.log("my latest", response);
       if (response.status == 201) return response?.data;
       return thunkAPI.rejectWithValue(
@@ -33,7 +33,7 @@ export const getCustomerData = createAsyncThunk(
     }
   },
 );
-
+  
 const customerSlice = createSlice({
   name: "customer",
   initialState: {

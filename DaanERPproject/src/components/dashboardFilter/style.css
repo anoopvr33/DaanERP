@@ -1,0 +1,10 @@
+.dashboard-filter .sub-1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.dashboard-filter .sub-2 {
+}
+.dashboard-filter input {
+  /* background-color: rgba(190, 133, 255, 0.129); */
+}

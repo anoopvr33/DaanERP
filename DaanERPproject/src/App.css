@@ -16,3 +16,15 @@ li {
 #d3d3e6
 #f5f5ff
  */
+.app {
+  max-width: 100rem;
+  margin: auto;
+}
+
+.common-flex {
+  /* background: #386f74; */
+  background-color: #ebf1ef;
+}
+.common-element {
+  background-color: #ebf1ef;
+}

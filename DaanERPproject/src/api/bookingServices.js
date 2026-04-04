@@ -1,7 +1,13 @@
-import { API } from "../utils/axios";
+import { API, getCookie } from "../utils/axios";
 
 export const GetBookingDataAPI = async (data) => {
-  return await API.post("/bookings/booking_list/", data);
+  console.log("filter date", data);
+  return await API.post("/bookings/bookings_by_date/", data, {
+    withCredentials: true,
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+    },
+  });
 };
 
 export const AddBookingAPI = async (data) => {

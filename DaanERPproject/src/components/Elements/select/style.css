@@ -1,0 +1,16 @@
+.custom_select {
+  width: 200px;
+  padding: 8px 15px;
+  border-radius: 30px;
+  border: none;
+  border: 1px solid #69af99;
+  /* border-bottom: 3px solid #7070a3; */
+  /* font-size: 16px; */
+  /* box-shadow: 0px 5px 5px #6777d310; */
+  outline: none;
+  /* border: 1px solid black; */
+}
+
+.custom_select::-webkit-scrollbar {
+  display: none;
+}
