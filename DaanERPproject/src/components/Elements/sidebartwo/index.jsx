@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import { IsSuper } from "../../../utils";
+import { Hotels, IsSuper } from "../../../utils";
 
 const menuItems = [
   "",
@@ -59,14 +59,18 @@ export default function SidebarTwo() {
         ))}
       </ul>
       <div className="bottom">
-        <p
-          onClick={() => (
-            localStorage.removeItem("hotel"),
-            (window.location.href = "/login")
-          )}
-        >
-          Logout <i class="fa-solid fa-right-from-bracket"></i>
-        </p>
+        {!Hotels() ? (
+          <p>Login</p>
+        ) : (
+          <p
+            onClick={() => (
+              localStorage.removeItem("hotel"),
+              (window.location.href = "/login")
+            )}
+          >
+            Logout <i class="fa-solid fa-right-from-bracket"></i>
+          </p>
+        )}
       </div>
       {/* <p>Login</p> */}
     </aside>
