@@ -12,10 +12,12 @@ import { API, getCookie } from "../../utils/axios";
 import FormItems from "../../components/Elements/formItems";
 import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const today = new Date();
   const [hotelData, setHotelData] = useState(Hotels());
+  const navigate = useNavigate();
 
   // Yesterday
   const yesterday = new Date(today);
@@ -70,7 +72,12 @@ const Dashboard = () => {
   // }
 
   useEffect(() => {
-    GetPos();
+    if (Hotels()) {
+      GetPos();
+    } else {
+      navigate("/login");
+    }
+
     console.log("fate");
     // eslint(react-hooks/set-state-in-effect)
   }, [yesterdayDate]);
