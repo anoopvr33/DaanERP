@@ -110,7 +110,7 @@ const EmployeeAdd = () => {
 
             multiple
             element="select"
-            option={Hotels}
+            option={Hotels()}
             name={"hotel_name"}
             required
           ></FormItems>

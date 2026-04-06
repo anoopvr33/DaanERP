@@ -63,7 +63,8 @@ const Dashboard = () => {
         setData(response.data);
       } else alert("something went wrong getting Dashboard data");
     } catch (error) {
-      alert("Something wrong or Please Login");
+      // alert("Something wrong or Please Login");
+      navigate("/login");
     }
   };
 
