@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "https://backend.daanhotels.in/",
+  baseURL: "https://admin.daanregency.com/",
   headers: {
     "Content-Type": "application/json",
   },
