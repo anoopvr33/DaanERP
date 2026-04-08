@@ -18,8 +18,9 @@ const BookingAdd = () => {
     adults: 0,
     children: 0,
     total_amount: 0,
+    payment_mode: "",
     booking_source: "",
-    booking_plan: "",
+    meal_plan: "",
   });
   const dispatch = useDispatch();
 
@@ -122,6 +123,14 @@ const BookingAdd = () => {
           ></FormItems>
         </label>
         <label htmlFor="">
+          <p>Payment Mode</p>
+          <FormItems
+            onChange={OnInput}
+            type="text"
+            name={"payment_mode"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
           <p>Total Amount</p>
           <FormItems
             onChange={OnInput}
@@ -134,8 +143,13 @@ const BookingAdd = () => {
           <FormItems onChange={OnInput} name={"booking_source"}></FormItems>
         </label>
         <label htmlFor="">
-          <p>Booking Plan</p>
-          <FormItems onChange={OnInput} name={"booking_plan"}></FormItems>
+          <p>Meal Plan</p>
+          <FormItems
+            element="select"
+            option={["Select Plan", "EP", "CP"]}
+            onChange={OnInput}
+            name={"meal_plan"}
+          ></FormItems>
         </label>
         <Button type={"submit"} child={"Add Details"}></Button>
       </form>
