@@ -56,8 +56,9 @@ const CustomerTable = ({ date, count }) => {
         <th>Mob.No</th>
         <th>Email</th>
         <th>Count</th>
+        <th>Total Revenue</th>
         <th>last_booking_date</th>
-        <th>Booking History</th>
+        <th>Last Booking Details</th>
       </tr>
       <tbody>
         {array.length > 0 ? (
@@ -73,7 +74,9 @@ const CustomerTable = ({ date, count }) => {
                 <td>{i.lastName}</td>
                 <td>{i.phone}</td>
                 <td>{i.email}</td>
-                <td>{i.total_booking_counts}</td> <td>{i.last_booking_date}</td>
+                <td>{i.total_booking_counts}</td>
+                <td>{i.total_revenue?.toFixed(2)}</td>
+                <td>{i.last_booking_date}</td>
                 <td
                   onClick={() => setExpand({ row: index, open: !expand.open })}
                 >
