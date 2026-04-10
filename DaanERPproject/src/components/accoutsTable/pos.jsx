@@ -19,7 +19,7 @@ const AccountsPos = ({ data, type }) => {
     >
       <tr>
         <th>{data.category}</th>
-
+        <th>Hotel</th>
         <th>Budget Amt</th>
         <th>Actual Amt</th>
       </tr>
@@ -36,6 +36,7 @@ const AccountsPos = ({ data, type }) => {
               <tr className="accounts-row">
                 {/* <td>{item.date}</td> */}
                 <td>{item.sub_category}</td>
+                <td>{item.hotel ? item.hotel : "_"}</td>
                 {/* <td>{item.sub_category}</td> */}
                 <td>{item.budget_amount}</td>
                 {/* <td>{type === "EX" ? item.amount : "_"}</td> */}
@@ -47,6 +48,7 @@ const AccountsPos = ({ data, type }) => {
               <td>
                 <b>Total</b>
               </td>
+              <td></td>
               <td>
                 <b>{data.total_budget}</b>
               </td>

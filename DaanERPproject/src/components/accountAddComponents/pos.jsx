@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
+import { Hotels } from "../../utils";
 
 const AccountsPosAdd = ({ formdate, type }) => {
   const [category, setCategory] = useState([]);
@@ -20,6 +21,7 @@ const AccountsPosAdd = ({ formdate, type }) => {
     sub_category: "New Sub Food",
     budget_amount: null,
     actual_amount: null,
+    hotel: "",
   });
   const dispatch = useDispatch();
 
@@ -161,6 +163,17 @@ const AccountsPosAdd = ({ formdate, type }) => {
             }
             type="number"
             name={"actual_amount"}
+            required
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>Hotel</p>
+          <FormItems
+            onChange={(e) => setData({ ...data, hotel: e.target.value })}
+            option={["Select Hotel", ...Hotels()]}
+            element="select"
+            type="text"
+            name={"hotel"}
             required
           ></FormItems>
         </label>

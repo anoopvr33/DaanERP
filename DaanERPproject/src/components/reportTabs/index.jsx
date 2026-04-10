@@ -56,7 +56,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel }) => {
   const TabArray = [
     {
       id: 0,
-      name: "Daily Summary",
+      name: "Night Audit",
       link: "pos",
       style: POS,
     },
@@ -74,7 +74,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel }) => {
     },
     {
       id: 3,
-      name: "Tax Summary",
+      name: "Gst Bookings",
       link: "vendor",
       style: Vendor,
     },

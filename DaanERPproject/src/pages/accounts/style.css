@@ -10,16 +10,17 @@
   height: 100vh;
   /* background-color: aqua; */
 }
-.accounts .elements h2 {
+.accounts .elements .h2-sub {
   color: #386f74;
   margin-top: 20px;
   background: #ffffff;
   /* font-size: 20px; */
   padding: 20px 20px;
   border-radius: 20px;
-  font-size: 25px;
+  /* font-size: 25px; */
   margin-bottom: 20px;
 }
+
 .accounts .flex {
   display: flex;
   justify-content: start;

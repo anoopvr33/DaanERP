@@ -6,17 +6,25 @@ import DashboardPrev from "../../components/dashboardPrevious";
 import DashResult from "../../components/dashboardResult";
 import Navbar from "../../components/Elements/navbar";
 import SidebarTwo from "../../components/Elements/sidebartwo";
-
+import Select from "react-select";
 import "./style.css";
 import { API, getCookie } from "../../utils/axios";
 import FormItems from "../../components/Elements/formItems";
 import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
 import { useNavigate } from "react-router-dom";
+import Filter from "../../components/Elements/Filter";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Dashboard = () => {
   const today = new Date();
-  const [hotelData, setHotelData] = useState(Hotels());
+  const [hotelData, setHotelData] = useState(option2);
   const navigate = useNavigate();
 
   // Yesterday
@@ -42,11 +50,14 @@ const Dashboard = () => {
   const GetPos = async () => {
     // console.log("maiaaa daarf", yesterdayDate, prevMonthDate);
 
+    const SelectedHotel = hotelData.map((i) => i.value);
+    console.log("select hoeee", SelectedHotel);
+
     try {
       const response = await API.post(
         "/dashboard/get_report/",
         {
-          hotels: hotelData,
+          hotels: SelectedHotel,
           from_date: prevMonthDate,
           to_date: yesterdayDate,
         },
@@ -72,6 +83,13 @@ const Dashboard = () => {
   //   window.location.reload();
   // }
 
+  // setHotelData(option2);
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
   useEffect(() => {
     if (Hotels()) {
       GetPos();
@@ -83,6 +101,7 @@ const Dashboard = () => {
     // eslint(react-hooks/set-state-in-effect)
   }, [yesterdayDate]);
 
+  console.log("my dataaa", option2);
   // useEffect(() => {}, [formattedDate2]);
 
   if (!data) {
@@ -95,8 +114,8 @@ const Dashboard = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <div className="sub-1">
-            <FormItems
+          <div className="sub-1-1">
+            {/* <FormItems
               option={["All Hotels", ...(Hotels() ? Hotels() : "No Data")]}
               onChange={(e) =>
                 setHotelData(
@@ -105,29 +124,43 @@ const Dashboard = () => {
               }
               type="text"
               element="select"
-            />
-            <span> </span>
-            {/* <br /> */}
-            <label htmlFor="">
-              <b>From</b>{" "}
-            </label>
-            <FormItems
-              value={prevMonthDate}
-              onChange={(e) => setPrevMonthDate(e.target.value)}
-              type="date"
-            />
-            <span> </span>
-            <label htmlFor="">
-              <b>to</b>
-            </label>
-            <FormItems
-              value={yesterdayDate}
-              onChange={(e) => setYesterdayDate(e.target.value)}
-              type="date"
-            />
+            /> */}
+            {/* <Select
+              onChange={(selected) => {
+                if (!selected) return setHotelData([]);
+                if (!selected || selected.length === 0) {
+                  setHotelData(option2);
+                  return;
+                }
+                setHotelData(selected);
+              }}
+              // defaultValue={hotelData}
 
-            <span> </span>
-            <Button onClick={GetPos} child={"FIlter"}></Button>
+              isMulti
+              placeholder={"All Hotels"}
+              options={option2}
+            ></Select> */}
+            <div className="flex-1">
+              <h2>Dashboard</h2> <br /> <br />
+              <Filter
+                onChange={(selected) => {
+                  if (!selected) return setHotelData([]);
+                  if (!selected || selected.length === 0) {
+                    setHotelData(option2);
+                    return;
+                  }
+                  setHotelData(selected);
+                }}
+                isMulti
+                options={option2}
+                prevMonthDate={prevMonthDate}
+                prevOnchange={(e) => setPrevMonthDate(e.target.value)}
+                yesterday={yesterdayDate}
+                yesOnchange={(e) => setYesterdayDate(e.target.value)}
+                onClick={GetPos}
+                child={"Filter"}
+              />
+            </div>
           </div>
           <DashResult data={data}></DashResult>
           <div className="flex-2">

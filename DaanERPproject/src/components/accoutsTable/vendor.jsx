@@ -8,6 +8,7 @@ const AccountsVendor = ({ yesterdate }) => {
   const [vendor, setVendor] = useState([]);
 
   const GetVendor = async () => {
+    console.log("vendor date", yesterdate);
     const res = await API.post("/daybook/get_vendor_payout/", {
       date: yesterdate,
     });
@@ -53,7 +54,7 @@ const AccountsVendor = ({ yesterdate }) => {
         ) : (
           <tr>
             {" "}
-            <td colSpan={9}> Empty Data  </td>{" "}
+            <td colSpan={9}> Empty Data </td>{" "}
           </tr>
         )}
       </tbody>

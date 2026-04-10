@@ -39,9 +39,10 @@ const Accounts = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <h2>
-            Reports
+          <div className="h2-sub">
+            <h2>Reports</h2>
             <div className="element-sub">
+              {/* <Filter /> */}
               <FormItems
                 element={"select"}
                 option={["All Hotels", ...(Hotels() ? Hotels() : "")]}
@@ -70,7 +71,7 @@ const Accounts = () => {
               />
               <Button onClick={() => setOpen(!open)} child={"Submit"}></Button>
             </div>
-          </h2>
+          </div>
 
           <ReportTabs
             hotel={hotel}
