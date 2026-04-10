@@ -34,6 +34,9 @@ const AccountsVendorAdd = ({ formdate }) => {
         "X-CSRFToken": getCookie("csrftoken"),
       },
     });
+    if (response.data.status) {
+      alert("addedd successfully");
+    }
     console.log("add vemdor", response);
   };
 

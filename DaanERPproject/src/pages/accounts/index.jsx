@@ -6,10 +6,17 @@ import AccountsTabs from "../../components/accountsTabs";
 import FormItems from "../../components/Elements/formItems";
 import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
+import Filter from "../../components/Elements/Filter";
+
+const option2 = Hotels()? Hotels().map((i) => ({
+  value: i,
+  label: i.charAt(0).toUpperCase() + i.slice(1),
+})):[];
 
 const Accounts = () => {
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState(false);
+  const [hotelData, setHotelData] = useState();
 
   const today = new Date();
 
@@ -40,32 +47,37 @@ const Accounts = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <h2>
-            Accounts Management
+          <div className="h2-sub">
+            <h2
+              style={{
+                margin: 0,
+                marginTop: 0,
+                padding: 0,
+                paddingBottom: "0px",
+              }}
+            >
+              Accounts Management
+            </h2>
             <div className="flex-1">
-              <FormItems
-                element={"select"}
-                option={["All Hotels", ...(Hotels() ? Hotels() : "")]}
-                onChange={(e) => setHotel(e.target.value)}
-                type="date"
+              <Filter
+                onChange={(selected) => {
+                  if (!selected) return setHotelData([]);
+                  if (!selected || selected.length === 0) {
+                    setHotelData(option2);
+                    return;
+                  }
+                  setHotelData(selected);
+                }}
+                isMulti
+                options={option2}
+                prevMonthDate={prevMonthDate}
+                prevOnchange={(e) => setPrevMonthDate(e.target.value)}
+                yesterday={yesterdayDate}
+                yesOnchange={(e) => setYesterdayDate(e.target.value)}
+                child={"Filter"}
               />
-              <span> </span>
-              <p htmlFor="">from</p>
-              <FormItems
-                value={prevMonthDate}
-                onChange={(e) => setPrevMonthDate(e.target.value)}
-                type="date"
-              />
-              <span> </span>
-              <p htmlFor="">to </p>
-              <FormItems
-                value={yesterdayDate}
-                onChange={(e) => setYesterdayDate(e.target.value)}
-                type="date"
-              />
-              <Button child={"Submit"}></Button>
             </div>
-          </h2>
+          </div>
           <AccountsTabs
             prevMonth={prevMonthDate}
             dateset={yesterdayDate}
