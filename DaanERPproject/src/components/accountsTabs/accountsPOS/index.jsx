@@ -9,7 +9,7 @@ import AccountsPos from "../../accoutsTable/pos";
 import AccountsPosAdd from "../../accountAddComponents/pos";
 import { API, getCookie } from "../../../utils/axios";
 
-const AccPOS = ({ dateset }) => {
+const AccPOS = ({ dateset, trigger }) => {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
@@ -37,7 +37,7 @@ const AccPOS = ({ dateset }) => {
       // setData2(response.data.pos_expense);
     } else alert("something went wrong getting Budget data");
   };
-  
+
   const GetCategory = async () => {
     const res = await API.get("/daybook/get_budget_categories/");
 
@@ -91,7 +91,7 @@ const AccPOS = ({ dateset }) => {
   useEffect(() => {
     GetPos();
     // eslint(react-hooks/set-state-in-effect)
-  }, [dateset]);
+  }, [trigger]);
 
   useEffect(() => {
     console.log("data1", data1);

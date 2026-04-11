@@ -5,11 +5,8 @@ import AccountsVendor from "../../accoutsTable/vendor";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
 
-const AccVendor = ({ yesterdate }) => {
+const AccVendor = ({ yesterdate, trigger }) => {
   const [open, setOpen] = useState(false);
-
-  const head1 = ["Id", "purchase date", "Amount", "Payment Status"];
-  const data1 = [{ id: "2", details: "rent", amount: "2900", remark: "true" }];
 
   return (
     <div>
@@ -19,14 +16,12 @@ const AccVendor = ({ yesterdate }) => {
       </div>
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
       <p>
-        {" "}
         <br />
-        <b>Date : </b> {yesterdate}{" "}
+        <b>Date : </b> {yesterdate}
       </p>
       <AccountsVendor
         yesterdate={yesterdate}
-        head={head1}
-        data={data1}
+        trigger={trigger}
       ></AccountsVendor>
     </div>
   );

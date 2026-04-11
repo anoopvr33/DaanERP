@@ -7,7 +7,7 @@ import ReportTotalTab from "./reportTotal";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
 
-const ReportTabs = ({ yesterday, prevmonth, hotel }) => {
+const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -141,7 +141,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel }) => {
     GetAudit();
     // console.log("fate", formattedDate);
     // eslint(react-hooks/set-state-in-effect)
-  }, [yesterday, prevmonth, hotel]);
+  }, [trigger]);
 
   useEffect(() => {
     console.log("latest audit", audit);

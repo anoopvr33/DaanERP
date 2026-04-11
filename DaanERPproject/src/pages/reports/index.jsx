@@ -6,10 +6,19 @@ import "./style.css";
 import SidebarTwo from "../../components/Elements/sidebartwo";
 import ReportTabs from "../../components/reportTabs";
 import { Hotels } from "../../utils";
+import Filter from "../../components/Elements/Filter";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Accounts = () => {
   const [open, setOpen] = useState(false);
-  const [hotel, setHotel] = useState(Hotels());
+  const [hotel, setHotel] = useState(option2);
+  const [trigger, setTrigger] = useState(false);
 
   const today = new Date();
 
@@ -42,41 +51,33 @@ const Accounts = () => {
           <div className="h2-sub">
             <h2>Reports</h2>
             <div className="element-sub">
+              <Filter
+                onChange={(selected) => {
+                  // if (!selected) return setHotel([]);
+                  if (!selected || selected.length === 0) {
+                    setHotel(option2);
+                    return;
+                  }
+                  setHotel(selected);
+                }}
+                isMulti
+                options={option2}
+                prevMonthDate={prevMonthDate}
+                prevOnchange={(e) => setPrevMonthDate(e.target.value)}
+                yesterday={yesterdayDate}
+                yesOnchange={(e) => setYesterdayDate(e.target.value)}
+                child={"Filter"}
+                onClick={() => setTrigger(false)}
+              />
               {/* <Filter /> */}
-              <FormItems
-                element={"select"}
-                option={["All Hotels", ...(Hotels() ? Hotels() : "")]}
-                onChange={(e) =>
-                  setHotel(
-                    e.target.value === "All Hotels"
-                      ? Hotels()
-                      : [e.target.value],
-                  )
-                }
-                type="date"
-              />
-              <span> </span>
-              <p>From</p>
-              <FormItems
-                value={prevMonthDate}
-                onChange={(e) => setPrevMonthDate(e.target.value)}
-                type="date"
-              />
-              <span> </span>
-              <p>to</p>
-              <FormItems
-                value={yesterdayDate}
-                onChange={(e) => setYesterdayDate(e.target.value)}
-                type="date"
-              />
-              <Button onClick={() => setOpen(!open)} child={"Submit"}></Button>
             </div>
           </div>
 
           <ReportTabs
-            hotel={hotel}
+            hotel={hotel.map((i) => i.value)}
             yesterday={yesterdayDate}
             prevmonth={prevMonthDate}
+            trigger={trigger}
           ></ReportTabs>
           {/* <AccountsTabs></AccountsTabs> */}
           {/* <CustomerTable></CustomerTable> */}

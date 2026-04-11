@@ -16,17 +16,19 @@ import SidebarTwo from "../../components/Elements/sidebartwo";
 import EmployeeAdd from "../../components/EmployeAdd";
 import EmployeeTable from "../../components/EmployeTable";
 import { Hotels } from "../../utils";
+import Select from "react-select";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Employee = () => {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState({ year: "2026", month: "", day: "" });
+  const [data, setData] = useState(option2);
   const dispatch = useDispatch();
-
-  // const hotels = JSON.parse(localStorage.getItem("hotel"));
-  const Select = ["Select Hotel", "Daan Lux", "Daan Amabalath", "Daan Hotek"];
-  const Year = ["Select Year", 2026, 2027, 2028];
-  const month = ["Search Name", 2, 3, 6, 12];
-  // const date = ["Select Date", 10, 11, 12];
 
   const onFilter = () => {
     console.log("jjkkkjk", data);
@@ -44,24 +46,21 @@ const Employee = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <h2>
-            User Management <br /> <br />
+          <div className="h2-sub">
+            <h2>User Management</h2>
             <div className="flex-1">
-              <FormItems
-                element={"select"}
-                option={["All Hotels", ...(Hotels() ? Hotels() : "")]}
-                onChange={(e) => setData(e.target.value)}
-                type="date"
-              />
-
-              <FormItems
-                onChange={(e) =>
-                  setData({ ...data, month: Number(e.target.value) })
-                }
-                placeholder={"Search users"}
-                // option={month}
-                // element=""
-              ></FormItems>
+              <Select
+                onChange={(selected) => {
+                  // if (!selected) return setHotel([]);
+                  if (!selected || selected.length === 0) {
+                    setData(option2);
+                    return;
+                  }
+                  setData(selected);
+                }}
+                options={option2}
+                className="custom-multi-select"
+              ></Select>
 
               <Button onClick={onFilter} child={"Filter"}></Button>
               <Button
@@ -70,7 +69,7 @@ const Employee = () => {
                 child={open ? "Close" : "Add"}
               ></Button>
             </div>
-          </h2>
+          </div>
           {/* <p className="line">.</p> */}
 
           {open && <EmployeeAdd></EmployeeAdd>}

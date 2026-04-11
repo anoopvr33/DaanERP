@@ -5,7 +5,7 @@
   border-spacing: 0px;
   border: 1px solid #cce8e0;
   /* box-shadow: 0px 5px 5px #ffffff; */
-
+  /* z-index: 0; */
   border-bottom: 2px solid #ffffff;
   border-radius: 20px;
   overflow: hidden;
@@ -15,6 +15,26 @@
   color: red;
   text-align: center;
   margin-top: 20px;
+}
+.booking-table .hotel-data {
+  /* position: relative; */
+}
+.booking-table span {
+  position: absolute;
+  /* left: 10px; */
+  width: 200px;
+  z-index: 3;
+  right: 200px;
+  display: none;
+  padding: 10px;
+  margin-top: -20px;
+  /* display: grid; */
+  gap: 10px;
+  background-color: #ffffff;
+}
+.booking-table .hotel-data:hover span {
+  display: grid;
+  gap: 5px;
 }
 .booking-table i {
   /* background-color: #7070a3; */

@@ -12,20 +12,27 @@ import { Hotels } from "../../utils";
 import CustomerTable from "../../components/CustomerTable";
 import { useDispatch } from "react-redux";
 import { getCustomerData } from "../../redux/customerSlice";
+import Select from "react-select";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Customer = () => {
   const [date, setDate] = useState(12);
   const [count, setCount] = useState("");
   const [year, setYear] = useState("");
   const [form, setForm] = useState({
-    hotels: Hotels(),
+    hotels: option2,
     month: 12,
   });
-
+  
   const dispatch = useDispatch();
 
-  // const Select = ["select month", 3, 6, 12];
-  const Select = [
+  const elect = [
     { name: "Last 12 Months", value: 12 },
     { name: "Last 6 Months", value: 6 },
     { name: "Last 3 Months", value: 3 },
@@ -34,12 +41,6 @@ const Customer = () => {
     { name: "Count vise", value: "" },
     { name: "More Count", value: "More Count" },
     { name: "Less Count", value: "Less Count" },
-  ];
-  // const Year = ["Select Year", "2026", "2025", "2024"];
-  const Year = [
-    { name: "Select Year", value: "" },
-    { name: "2026", value: 2026 },
-    { name: "2025", value: 2025 },
   ];
 
   useEffect(() => {
@@ -52,22 +53,31 @@ const Customer = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <h2>
-            Customer Management
+          <div className="h2-sub">
+            <h2>Customer Management</h2>
             <div className="flex-1">
-              <FormItems
+              <Select
+                // styles={{ width: "500px" }}
+                onChange={(selected) => {
+                  // if (!selected) return setForm({ ...form, hotels: [] });
+                  if (!selected || selected.length === 0) {
+                    setForm({ ...form, hotels: option2 });
+                    return;
+                  }
+                  setForm({ ...form, hotels: selected });
+                }}
+                isMulti
+                className="custom-multi-select"
+                placeholder={"All Hotels"}
+                options={option2}
+              ></Select>
+              {/* <FormItems
                 element={"select"}
                 option={[
                   "All Hotels",
                   ...(Hotels() ? Hotels() : ["no data found"]),
                 ]}
-                // multiple
                 onChange={(e) => {
-                  // const selected = Array.from(
-                  //   e.target.selectedOptions,
-                  //   (opt) => opt.value,
-                  // );
-                  // setForm((prev) => ({ ...prev, hotels: selected }));
                   setForm((prev) => ({
                     ...prev,
                     hotels:
@@ -77,25 +87,25 @@ const Customer = () => {
                   }));
                 }}
                 type="date"
-              />
+              /> */}
               <FormItems
                 onChange={(e) =>
                   setForm({ ...form, month: Number(e.target.value) })
                 }
-                option={Select}
+                option={elect}
                 element="select"
               ></FormItems>
               <FormItems
                 onChange={(e) => setCount(e.target.value)}
                 option={Count}
                 element="select"
-              ></FormItems>{" "}
+              ></FormItems>
               <Button
                 onClick={() => dispatch(getCustomerData(form))}
                 child={"Filter"}
               ></Button>
             </div>
-          </h2>
+          </div>
 
           <CustomerTable date={date} count={count}></CustomerTable>
 

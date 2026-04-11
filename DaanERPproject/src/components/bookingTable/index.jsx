@@ -51,7 +51,7 @@ const BookingTable = () => {
                   background: `${expand.row == index && expand.open ? "#ffffff" : ""}`,
                 }}
               >
-                <td>{new Date(i?.bookedOn).toLocaleDateString()}</td>
+                <td>{i?.booking_date}</td>
                 <td>{i?.booking_id}</td>
                 <td>{i.checkin_date}</td>
                 <td>{i.checkout_date}</td>

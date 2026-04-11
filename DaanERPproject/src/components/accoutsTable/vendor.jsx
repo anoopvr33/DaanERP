@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { API } from "../../utils/axios";
 import "./style.css";
 
-const AccountsVendor = ({ yesterdate }) => {
+const AccountsVendor = ({ yesterdate, trigger }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
   const [vendor, setVendor] = useState([]);
@@ -18,7 +18,7 @@ const AccountsVendor = ({ yesterdate }) => {
 
   useEffect(() => {
     GetVendor();
-  }, [yesterdate]);
+  }, [trigger]);
 
   return (
     <table className="accounts-table">

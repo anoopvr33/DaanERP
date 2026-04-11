@@ -7,7 +7,7 @@ import axios from "axios";
 import AccountsDailyAdd from "../../accountAddComponents";
 import { API } from "../../../utils/axios";
 
-const AccDailyLog = ({ dateset }) => {
+const AccDailyLog = ({ dateset, trigger }) => {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
@@ -63,7 +63,7 @@ const AccDailyLog = ({ dateset }) => {
     GetPos();
     console.log("fate", dateset);
     // eslint(react-hooks/set-state-in-effect)
-  }, [dateset]);
+  }, [trigger]);
 
   return (
     <div>
