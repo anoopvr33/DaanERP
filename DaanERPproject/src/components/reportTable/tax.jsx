@@ -12,7 +12,7 @@ const ReportTax = ({ data }) => {
       </tr>
 
       <tbody>
-        {data.length > 0 &&
+        {data.length > 0 ? (
           data.map((item) => (
             <tr className="report-row">
               <td>{item.name}</td>
@@ -20,7 +20,12 @@ const ReportTax = ({ data }) => {
               <td>{item.preTax}</td>
               <td>{item.amount}</td>
             </tr>
-          ))}
+          ))
+        ) : (
+          <tr>
+            <td colSpan={4}> empty data </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

@@ -39,7 +39,7 @@ const EmployeeTable = () => {
   }, [items]);
 
   return (
-    <table className="booking-table" border={1}>
+    <table style={{ width: "900px" }} className="booking-table" border={1}>
       <tr>
         <th>ID</th>
         <th>Username</th>
@@ -72,10 +72,13 @@ const EmployeeTable = () => {
                 <td style={{ fontWeight: "500", color: "#7070a3" }}>
                   {new Date(i.last_login).toLocaleDateString()}
                 </td>
-                <td>
-                  {i.hotel_name.map((item, ind) => (
-                    <p>{item},</p>
-                  ))}
+                <td className="hotel-data">
+                  Hotels <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                  <span className="hotel-hover">
+                    {i.hotel_name.map((item, ind) => (
+                      <p style={{ lineBreak: "anywhere" }}>{item},</p>
+                    ))}
+                  </span>
                 </td>
                 {/* <td
                   onClick={() => setExpand({ row: index, open: !expand.open })}

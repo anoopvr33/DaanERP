@@ -7,10 +7,18 @@ import PaymentTabs from "../../components/paymentTabs";
 import FormItems from "../../components/Elements/formItems";
 import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
+import Filter from "../../components/Elements/Filter";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Payment = () => {
   // const [date, setDate] = useState("");
-  const [hotels, setHotel] = useState(Hotels());
+  const [hotels, setHotel] = useState(option2);
   const [trigger, setTrigger] = useState(false);
 
   const today = new Date();
@@ -42,53 +50,32 @@ const Payment = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <h2>
-            Payment Management
+          <div className="h2-sub">
+            <h2>Payment Management</h2>
             <div className="flex-1">
-              <FormItems
-                element={"select"}
-                option={["All Hotels", ...(Hotels() ? Hotels() : "")]}
-                // multiple
-                onChange={(e) => {
-                  // const selected = Array.from(
-                  //   e.target.selectedOptions,
-                  //   (opt) => opt.value,
-                  // );
-                  // setHotel(() => selected);
-                  setHotel(
-                    e.target.value === "All Hotels"
-                      ? Hotels()
-                      : [e.target.value],
-                  );
+              <Filter
+                onChange={(selected) => {
+                  // if (!selected) return setHotel([]);
+                  if (!selected || selected.length === 0) {
+                    setHotel(option2);
+                    return;
+                  }
+                  setHotel(selected);
                 }}
-                // setHotel(e.target.value)
-
-                type="date"
+                isMulti
+                options={option2}
+                prevMonthDate={prevMonthDate}
+                prevOnchange={(e) => setPrevMonthDate(e.target.value)}
+                yesterday={yesterdayDate}
+                yesOnchange={(e) => setYesterdayDate(e.target.value)}
+                child={"Filter"}
               />
-              <span> </span>
-              <p>From</p>
-              <FormItems
-                value={prevMonthDate}
-                onChange={(e) => setPrevMonthDate(e.target.value)}
-                type="date"
-              />
-              <span> </span>
-              <p>to</p>
-              <FormItems
-                value={yesterdayDate}
-                onChange={(e) => setYesterdayDate(e.target.value)}
-                type="date"
-              />
-              <Button
-                onClick={() => setTrigger(!trigger)}
-                child={"Submit"}
-              ></Button>
             </div>
-          </h2>
+          </div>
           <PaymentTabs
             prevmonth={prevMonthDate}
             yesterday={yesterdayDate}
-            hotelsArray={hotels}
+            hotelsArray={hotels.map((i) => i.value)}
             trigger={trigger}
           ></PaymentTabs>
 

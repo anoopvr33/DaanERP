@@ -14,10 +14,20 @@ import { useDispatch } from "react-redux";
 import { getBookingData } from "../../redux/bookingSlice";
 import SidebarTwo from "../../components/Elements/sidebartwo";
 import { Hotels } from "../../utils";
+import Filter from "../../components/Elements/Filter";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Booking = () => {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("booking");
+
+
 
   const dispatch = useDispatch();
 
@@ -64,46 +74,27 @@ const Booking = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <h2>
-            Booking Management <br /> <br />
+          <div className="h2-sub">
+            <h2>Booking Management</h2>
+            {/* <p>lsad{formatted}</p> */}
             <div className="flex-1">
-              <FormItems
-                element={"select"}
-                option={["Select Hotels", ...(Hotels() ? Hotels() : "")]}
-                // multiple
-                onChange={(e) =>
-                  //   {
-                  //   const selected = Array.from(
-                  //     e.target.selectedOptions,
-                  //     (opt) => opt.value,
-                  //   );
-                  //   setData((prev) => ({ ...prev, hotels: selected }));
-                  //   // setForm((prev) => ({ ...prev, hotels: [e.target.value] }));
-                  // }
-                  setData({
-                    ...data,
-                    hotels:
-                      e.target.value === "Select Hotels"
-                        ? [e.target.value]
-                        : Hotels(),
-                  })
-                }
-                type="date"
+              <Filter
+                onChange={(selected) => {
+                  // if (!selected) return setHotel([]);
+                  if (!selected || selected.length === 0) {
+                    setData({ ...data, hotels: option2 });
+                    return;
+                  }
+                  setData({ ...data, hotels: selected });
+                }}
+                isMulti
+                options={option2}
+                prevMonthDate={prevMonthDate}
+                prevOnchange={(e) => setPrevMonthDate(e.target.value)}
+                yesterday={yesterdayDate}
+                yesOnchange={(e) => setYesterdayDate(e.target.value)}
+                // child={"Filter"}
               />
-              <span> </span>
-              <p>from</p>
-              <FormItems
-                value={prevMonthDate}
-                onChange={(e) => setPrevMonthDate(e.target.value)}
-                type="date"
-              ></FormItems>
-              <span> </span>
-              <p>to</p>
-              <FormItems
-                value={yesterdayDate}
-                onChange={(e) => setYesterdayDate(e.target.value)}
-                type="date"
-              ></FormItems>
 
               <FormItems
                 onChange={(e) => setSort(e.target.value)}
@@ -116,13 +107,13 @@ const Booking = () => {
                 element="select"
               ></FormItems>
               <Button onClick={onFilter} child={"Filter"}></Button>
-              <Button
+              {/* <Button
                 onClick={() => setOpen(!open)}
                 className={"booking-add"}
                 child={open ? "Close" : "Add"}
-              ></Button>
+              ></Button> */}
             </div>
-          </h2>
+          </div>
 
           {open && <BookingAdd></BookingAdd>}
 

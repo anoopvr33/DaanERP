@@ -7,7 +7,7 @@ import AccountsHotel from "../../accoutsTable/hotel";
 import AccountsHotelAdd from "../../accountAddComponents/hotel";
 import { API } from "../../../utils/axios";
 
-const AccHotelExpense = ({ dateset }) => {
+const AccHotelExpense = ({ dateset, trigger }) => {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState([]);
   const [form, setForm] = useState({
@@ -45,7 +45,7 @@ const AccHotelExpense = ({ dateset }) => {
     GetHotel();
     console.log("my date", dateset);
     // eslint(react-hooks/set-state-in-effect)
-  }, [dateset]);
+  }, [trigger]);
 
   useEffect(() => {
     GetCategory();

@@ -97,9 +97,7 @@ const Dashboard = () => {
       navigate("/login");
     }
 
-    console.log("fate");
-    // eslint(react-hooks/set-state-in-effect)
-  }, [yesterdayDate]);
+  }, []);
 
   console.log("my dataaa", option2);
   // useEffect(() => {}, [formattedDate2]);
@@ -114,8 +112,8 @@ const Dashboard = () => {
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
-          <div className="sub-1-1">
-            {/* <FormItems
+
+          {/* <FormItems
               option={["All Hotels", ...(Hotels() ? Hotels() : "No Data")]}
               onChange={(e) =>
                 setHotelData(
@@ -125,26 +123,27 @@ const Dashboard = () => {
               type="text"
               element="select"
             /> */}
-            {/* <Select
-              onChange={(selected) => {
-                if (!selected) return setHotelData([]);
-                if (!selected || selected.length === 0) {
-                  setHotelData(option2);
-                  return;
-                }
-                setHotelData(selected);
-              }}
-              // defaultValue={hotelData}
+          {/* <Select
+            onChange={(selected) => {
+              if (!selected) return setHotelData([]);
+              if (!selected || selected.length === 0) {
+                setHotelData(option2);
+                return;
+              }
+              setHotelData(selected);
+            }}
+            // defaultValue={hotelData}
 
-              isMulti
-              placeholder={"All Hotels"}
-              options={option2}
-            ></Select> */}
+            isMulti
+            placeholder={"All Hotels"}
+            options={option2}
+          ></Select> */}
+          <div className="h2-sub">
+            <h2>Dashboard</h2>
             <div className="flex-1">
-              <h2>Dashboard</h2> <br /> <br />
               <Filter
                 onChange={(selected) => {
-                  if (!selected) return setHotelData([]);
+                  // if (!selected) return setHotelData([]);
                   if (!selected || selected.length === 0) {
                     setHotelData(option2);
                     return;
@@ -162,6 +161,7 @@ const Dashboard = () => {
               />
             </div>
           </div>
+
           <DashResult data={data}></DashResult>
           <div className="flex-2">
             <Chart></Chart>

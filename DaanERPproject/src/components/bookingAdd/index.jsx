@@ -22,15 +22,43 @@ const BookingAdd = () => {
     booking_source: "",
     meal_plan: "",
   });
+
   const dispatch = useDispatch();
 
   const OnInput = (e) => {
     const { name, value } = e.target;
+
+    if (name === "checkin_date" || name === "checkout_date") {
+      const dateObj = new Date(value);
+
+      const formatted = dateObj.toLocaleString("en-IN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+
+      // format fix: convert "16/03/2026, 5:30 am" → "2026-03-16 05:30 AM"
+      const [datePart, timePart] = formatted.split(", ");
+
+      const [day, month, year] = datePart.split("/");
+
+      const final = `${year}-${month}-${day} ${timePart.toUpperCase()}`;
+
+      setData({
+        ...data,
+        [name]: final,
+      });
+      return;
+    }
     setData({ ...data, [name]: value });
   };
 
   const OnSubmit = async (e) => {
     e.preventDefault();
+    // console.log("my check vdate", data);
     dispatch(addBookingThunk(data));
 
     // fetch("https://27abf324a5b5.ngrok-free.app/bookings/booking_create/", {
@@ -93,7 +121,7 @@ const BookingAdd = () => {
           <p>checkin date</p>
           <FormItems
             onChange={OnInput}
-            type="date"
+            type="datetime-local"
             name={"checkin_date"}
           ></FormItems>
         </label>
@@ -102,7 +130,7 @@ const BookingAdd = () => {
           <FormItems
             onChange={OnInput}
             className={"booking-date"}
-            type="date"
+            type="datetime-local"
             name={"checkout_date"}
           ></FormItems>
         </label>

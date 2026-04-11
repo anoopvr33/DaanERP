@@ -77,8 +77,7 @@ const Filter = ({
           type={yesType}
         ></FormItems>
       </label>
-
-      <Button onClick={onClick} child={child}></Button>
+      {child && <Button onClick={onClick} child={child}></Button>}
     </div>
   );
 };

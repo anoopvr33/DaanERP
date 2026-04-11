@@ -8,15 +8,18 @@ import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
 
-const option2 = Hotels()? Hotels().map((i) => ({
-  value: i,
-  label: i.charAt(0).toUpperCase() + i.slice(1),
-})):[];
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const Accounts = () => {
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState(false);
   const [hotelData, setHotelData] = useState();
+  const [trigger, setTrigger] = useState(false);
 
   const today = new Date();
 
@@ -61,7 +64,7 @@ const Accounts = () => {
             <div className="flex-1">
               <Filter
                 onChange={(selected) => {
-                  if (!selected) return setHotelData([]);
+                  // if (!selected) return setHotelData([]);
                   if (!selected || selected.length === 0) {
                     setHotelData(option2);
                     return;
@@ -75,10 +78,12 @@ const Accounts = () => {
                 yesterday={yesterdayDate}
                 yesOnchange={(e) => setYesterdayDate(e.target.value)}
                 child={"Filter"}
+                onClick={() => setTrigger(!trigger)}
               />
             </div>
           </div>
           <AccountsTabs
+            trigger={trigger}
             prevMonth={prevMonthDate}
             dateset={yesterdayDate}
           ></AccountsTabs>

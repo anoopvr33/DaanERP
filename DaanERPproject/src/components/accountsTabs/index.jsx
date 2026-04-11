@@ -5,7 +5,7 @@ import AccDailyLog from "./accountDailyLog";
 import AccHotelExpense from "./accountsHotelExpense";
 import AccVendor from "./accountsVendor";
 
-const AccountsTabs = ({ dateset }) => {
+const AccountsTabs = ({ dateset, trigger }) => {
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -103,10 +103,19 @@ const AccountsTabs = ({ dateset }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {tab === 0 && <AccPOS dateset={dateset}></AccPOS>}
-        {tab === 1 && <AccDailyLog dateset={dateset}></AccDailyLog>}
-        {tab === 2 && <AccHotelExpense dateset={dateset}></AccHotelExpense>}
-        {tab === 3 && <AccVendor yesterdate={dateset}></AccVendor>}
+        {tab === 0 && <AccPOS trigger={trigger} dateset={dateset}></AccPOS>}
+        {tab === 1 && (
+          <AccDailyLog trigger={trigger} dateset={dateset}></AccDailyLog>
+        )}
+        {tab === 2 && (
+          <AccHotelExpense
+            trigger={trigger}
+            dateset={dateset}
+          ></AccHotelExpense>
+        )}
+        {tab === 3 && (
+          <AccVendor trigger={trigger} yesterdate={dateset}></AccVendor>
+        )}
       </div>
     </div>
   );
