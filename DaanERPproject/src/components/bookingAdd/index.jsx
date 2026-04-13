@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API } from "../../utils/axios";
+import { Hotels } from "../../utils";
 
 const BookingAdd = () => {
   const [data, setData] = useState({
@@ -21,6 +22,7 @@ const BookingAdd = () => {
     payment_mode: "",
     booking_source: "",
     meal_plan: "",
+    booking_date: new Date().toISOString().split("T")[0],
   });
 
   const dispatch = useDispatch();
@@ -58,7 +60,7 @@ const BookingAdd = () => {
 
   const OnSubmit = async (e) => {
     e.preventDefault();
-    // console.log("my check vdate", data);
+    console.log("my check vdate", data);
     dispatch(addBookingThunk(data));
 
     // fetch("https://27abf324a5b5.ngrok-free.app/bookings/booking_create/", {
@@ -89,11 +91,29 @@ const BookingAdd = () => {
     <div className="add-book-main">
       <form action="" onSubmit={OnSubmit}>
         <label htmlFor="">
+          <p>Booking Date</p>
+          <FormItems
+            // placeholder={"Hotel"}
+            onChange={(e) => {
+              const formattedDate = new Date(e.target.value)
+                .toISOString()
+                .split("T")[0];
+
+              setData({ ...data, booking_date: formattedDate });
+            }}
+            type="date"
+            value={data.booking_date.split("T")[0]}
+            name={"booking_date"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
           <p>Hotel</p>
           <FormItems
             // placeholder={"Hotel"}
             onChange={OnInput}
             name={"hotel"}
+            element="select"
+            option={["select Hotel", ...Hotels()]}
           ></FormItems>
         </label>
         <label htmlFor="">

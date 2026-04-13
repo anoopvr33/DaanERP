@@ -10,15 +10,16 @@ const TotalReciept = ({ data }) => {
   return (
     <table className="report-table">
       <tr>
-        <th>room</th>
-        <th>guest</th>
-        <th>amount</th>
-        <th>invoice</th>
-        <th>folioNo</th>
-        <th>payAmount</th>
-        <th>mode</th>
-        <th>time</th>
-        <th>comments</th>
+        <th>Room No.</th>
+        <th>Guest Name</th>
+        <th>Amount</th>
+        <th>Invoice No.</th>
+        <th>Folio No.</th>
+        <th>Payment Amount</th>
+        <th>Mode of Payment</th>
+        <th>Time</th>
+        <th>Comments</th>
+        <th>Balance</th>
       </tr>
 
       <tbody>

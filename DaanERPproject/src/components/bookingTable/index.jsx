@@ -19,7 +19,7 @@ const BookingTable = () => {
   return (
     <table className="booking-table" border={1}>
       <tr>
-        <th>Date</th>
+        <th>Booking Date</th>
         <th>Booking ID</th>
         <th>Check In</th>
         <th>Check Out</th>

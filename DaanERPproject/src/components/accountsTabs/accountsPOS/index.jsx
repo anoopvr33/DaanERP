@@ -28,6 +28,7 @@ const AccPOS = ({ dateset, trigger }) => {
   // const data1 =;
 
   const GetPos = async () => {
+    console.log("getting pos data for this date", dateset);
     const response = await API.post("/daybook/get_budget/", {
       date: dateset,
     });
@@ -62,6 +63,7 @@ const AccPOS = ({ dateset, trigger }) => {
         },
       },
     );
+
     console.log("success cat", res);
     if (res.data.message) {
       alert("category created please refresh");
@@ -162,10 +164,17 @@ const AccPOS = ({ dateset, trigger }) => {
             </form>
           </div>
         )}
-        {data1.map((i) => (
-          <AccountsPos data={i} />
-        ))}
+        <br />
+        <p>
+          <b>Date</b>: {dateset}
+        </p>
+        {data1.length > 0 ? (
+          data1.map((i) => <AccountsPos data={i} />)
+        ) : (
+          <p style={{ textAlign: "center", margin: "10px 10px" }}>Empty Data</p>
+        )}
       </div>
+
       {/* <div>
         <h3>Actual Expense</h3> <br />
         <div className="flex-1">

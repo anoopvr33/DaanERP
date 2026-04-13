@@ -27,8 +27,6 @@ const Booking = () => {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("booking");
 
-
-
   const dispatch = useDispatch();
 
   const today = new Date();
@@ -59,12 +57,13 @@ const Booking = () => {
   });
 
   const onFilter = () => {
-    console.log("jjkkkjk", data);
+    console.log("booking datas", data);
 
     dispatch(getBookingData(data));
   };
 
   useEffect(() => {
+    // console.log("my booking data", sort);
     dispatch(getBookingData(data));
   }, []);
 
@@ -82,22 +81,27 @@ const Booking = () => {
                 onChange={(selected) => {
                   // if (!selected) return setHotel([]);
                   if (!selected || selected.length === 0) {
-                    setData({ ...data, hotels: option2 });
+                    setData({ ...data, hotels: Hotels() ? Hotels() : [] });
                     return;
                   }
                   setData({ ...data, hotels: selected });
                 }}
                 isMulti
                 options={option2}
-                prevMonthDate={prevMonthDate}
-                prevOnchange={(e) => setPrevMonthDate(e.target.value)}
-                yesterday={yesterdayDate}
-                yesOnchange={(e) => setYesterdayDate(e.target.value)}
+                prevMonthDate={data.from_date}
+                prevOnchange={(e) =>
+                  setData({ ...data, from_date: e.target.value })
+                }
+                yesterday={data.to_date}
+                yesOnchange={(e) =>
+                  setData({ ...data, to_date: e.target.value })
+                }
                 // child={"Filter"}
               />
-
               <FormItems
-                onChange={(e) => setSort(e.target.value)}
+                onChange={(e) =>
+                  setData({ ...data, filter_method: e.target.value })
+                }
                 option={[
                   { name: "Booking Date", value: "booking" },
                   { name: "Check In", value: "checkin" },
@@ -107,11 +111,12 @@ const Booking = () => {
                 element="select"
               ></FormItems>
               <Button onClick={onFilter} child={"Filter"}></Button>
-              {/* <Button
+
+              <Button
                 onClick={() => setOpen(!open)}
                 className={"booking-add"}
                 child={open ? "Close" : "Add"}
-              ></Button> */}
+              ></Button>
             </div>
           </div>
 

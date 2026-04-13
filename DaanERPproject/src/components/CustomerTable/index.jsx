@@ -134,7 +134,7 @@ const CustomerTable = ({ date, count }) => {
           ))
         ) : (
           <tr>
-            <td colSpan={7}>Empty Data</td>
+            <td colSpan={8}>Empty Data</td>
           </tr>
         )}
       </tbody>

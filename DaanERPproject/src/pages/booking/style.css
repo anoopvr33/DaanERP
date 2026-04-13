@@ -1,5 +1,6 @@
 .booking .flex-1 {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   /* background-color: aqua; */
   width: 100%;
@@ -7,10 +8,10 @@
   align-items: center;
 }
 
-.booking .booking-add {
+/* .booking .booking-add {
   position: absolute;
   right: 0px;
-}
+} */
 
 .booking {
   /* display: ; */
