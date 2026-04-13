@@ -4,8 +4,9 @@ import AccountsHotelAdd from "../../accountAddComponents/hotel";
 import { API } from "../../../utils/axios";
 import TotalReciept from "../../reportTable/total";
 import TotalRecieptSub from "../../reportTable/totalsub";
+import ReportCheckout from "../../reportTable/checkout";
 
-const ReportTotalTab = ({ formattedDate }) => {
+const ReportCheckoutTab = ({ formattedDate }) => {
   const [open, setOpen] = useState(false);
   const [data1, setData1] = useState([
     {
@@ -42,10 +43,10 @@ const ReportTotalTab = ({ formattedDate }) => {
       <div className="flex-1"></div>
       {open && <AccountsHotelAdd formdate={formattedDate}></AccountsHotelAdd>}
       <h3></h3>
-      <TotalRecieptSub data={data2}></TotalRecieptSub>
-      <TotalReciept data={data1} />
+      <ReportCheckout data={[]}></ReportCheckout>
+      {/* <TotalReciept data={data1} /> */}
     </div>
   );
 };
 
-export default ReportTotalTab;
+export default ReportCheckoutTab;

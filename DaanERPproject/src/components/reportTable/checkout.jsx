@@ -1,14 +1,20 @@
 import "./style.css";
 
-const ReportTax = ({ data }) => {
+const ReportCheckout = ({ data }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
   return (
-    <table style={{ width: "700px" }} className="report-table">
+    <table className="report-table">
       <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Pre-Tax</th>
-        <th>Amount</th>
+        <th>Guest Name</th>
+        <th>Room No.</th>
+        <th>Source</th>
+        <th>CheckIn</th>
+        <th>CheckOut</th>
+        <th>No. of Guests</th>
+        <th>Status</th>
+        <th>Total(INR)</th>
+        <th>Folio No.</th>
+        <th>Invoice No.</th>
       </tr>
 
       <tbody>
@@ -31,4 +37,4 @@ const ReportTax = ({ data }) => {
   );
 };
 
-export default ReportTax;
+export default ReportCheckout;

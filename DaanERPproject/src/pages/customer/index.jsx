@@ -26,10 +26,10 @@ const Customer = () => {
   const [count, setCount] = useState("");
   const [year, setYear] = useState("");
   const [form, setForm] = useState({
-    hotels: option2,
+    hotels: Hotels() ? Hotels() : [],
     month: 12,
   });
-  
+
   const dispatch = useDispatch();
 
   const elect = [
@@ -61,7 +61,7 @@ const Customer = () => {
                 onChange={(selected) => {
                   // if (!selected) return setForm({ ...form, hotels: [] });
                   if (!selected || selected.length === 0) {
-                    setForm({ ...form, hotels: option2 });
+                    setForm({ ...form, hotels: Hotels() ? Hotels() : [] });
                     return;
                   }
                   setForm({ ...form, hotels: selected });

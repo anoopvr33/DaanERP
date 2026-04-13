@@ -6,6 +6,7 @@ import ReportTaxTab from "./reportTax";
 import ReportTotalTab from "./reportTotal";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
+import ReportCheckoutTab from "./reportCheckout";
 
 const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const [tab, setTab] = useState(0);
@@ -46,11 +47,20 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     borderBottomRightRadius: tab - 1 == 3 && "20px",
   };
 
+  const Checkout = {
+    borderRadius: "20px 20px 0px 0px",
+    // padding: "  0px 20px",
+    background: tab == 4 && "  hsl(0, 0%, 100%)",
+    color: tab == 4 && "#69af99",
+    borderBottomLeftRadius: tab + 1 == 4 && "20px",
+    borderBottomRightRadius: tab - 1 == 4 && "20px",
+  };
+
   const None = {
     borderRadius: "20px 20px 0px 0px",
     background: "transparent",
-    borderBottomLeftRadius: tab + 1 == 4 && "20px",
-    borderBottomRightRadius: tab - 1 == 4 && "20px",
+    borderBottomLeftRadius: tab + 1 == 5 && "20px",
+    borderBottomRightRadius: tab - 1 == 5 && "20px",
   };
 
   const TabArray = [
@@ -79,7 +89,13 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
       style: Vendor,
     },
     {
-      id: 4,
+      id: 3,
+      name: "Checkout",
+      link: "checkout",
+      style: Checkout,
+    },
+    {
+      id: 5,
       name: null,
       link: null,
       style: None,
@@ -170,6 +186,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
         {tab === 1 && <ReportRevenueTab revenue={revenue}></ReportRevenueTab>}
         {tab === 2 && <ReportTotalTab></ReportTotalTab>}
         {tab === 3 && <ReportTaxTab></ReportTaxTab>}
+        {tab === 4 && <ReportCheckoutTab></ReportCheckoutTab>}
       </div>
     </div>
   );
