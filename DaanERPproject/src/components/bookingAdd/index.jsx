@@ -10,7 +10,7 @@ import { Hotels } from "../../utils";
 
 const BookingAdd = () => {
   const [data, setData] = useState({
-    hotel: "",
+    hotel_code: "",
     customer_name: "",
     phone_number: "",
     email: "",
@@ -18,10 +18,17 @@ const BookingAdd = () => {
     checkout_date: "",
     adults: 0,
     children: 0,
+    room_category: "",
+    pah: "",
     total_amount: 0,
     payment_mode: "",
     booking_source: "",
     meal_plan: "",
+    booking_plan: "",
+    status: "",
+    booking_id: "",
+    invoice_pdf: null,
+    gst_number: null,
     booking_date: new Date().toISOString().split("T")[0],
   });
 
@@ -107,11 +114,15 @@ const BookingAdd = () => {
           ></FormItems>
         </label>
         <label htmlFor="">
+          <p>Booking ID</p>
+          <FormItems onChange={OnInput} name={"booking_id"}></FormItems>
+        </label>
+        <label htmlFor="">
           <p>Hotel</p>
           <FormItems
             // placeholder={"Hotel"}
             onChange={OnInput}
-            name={"hotel"}
+            name={"hotel_code"}
             element="select"
             option={["select Hotel", ...Hotels()]}
           ></FormItems>
@@ -187,6 +198,18 @@ const BookingAdd = () => {
           ></FormItems>
         </label>
         <label htmlFor="">
+          <p>Gst No.</p>
+          <FormItems
+            onChange={OnInput}
+            type="number"
+            name={"gst_number"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>invoice_pdf</p>
+          <FormItems onChange={OnInput} name={"invoice_pdf"}></FormItems>
+        </label>
+        <label htmlFor="">
           <p>Booking Source</p>
           <FormItems onChange={OnInput} name={"booking_source"}></FormItems>
         </label>
@@ -197,6 +220,58 @@ const BookingAdd = () => {
             option={["Select Plan", "EP", "CP"]}
             onChange={OnInput}
             name={"meal_plan"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>Booking Plan</p>
+          <FormItems
+            element="select"
+            option={["Select Plan", "room_only", "CP"]}
+            onChange={OnInput}
+            name={"booking_plan"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>Pah</p>
+          <FormItems
+            element="select"
+            option={["Select", "Completed", "Pending"]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                pah: e.target.value === "Completed" ? true : false,
+              })
+            }
+            name={"pah"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>Status</p>
+          <FormItems
+            element="select"
+            option={["Select Status", "True", "False"]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                status: e.target.value === "True" ? true : false,
+              })
+            }
+            name={"status"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>Room Category</p>
+          <FormItems
+            element="select"
+            option={[
+              "Select Category",
+              "EXECUTIVE",
+              "STANDARD",
+              "DELUXE",
+              "SUITE",
+            ]}
+            onChange={OnInput}
+            name={"room_category"}
           ></FormItems>
         </label>
         <Button type={"submit"} child={"Add Details"}></Button>

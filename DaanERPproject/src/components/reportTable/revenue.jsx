@@ -15,15 +15,16 @@ const ReportRevenue = ({ data }) => {
         )}
       </tr>
       <tbody>
-        {data?.length > 0 && (
-          <tr className="report-row">
-            {data?.length != 0 ? (
-              Object.values(data[0]).map((i) => <td>{i}</td>)
-            ) : (
-              <td>Empty data</td>
-            )}
-          </tr>
-        )}
+        {data?.length > 0 &&
+          data.map((item, index) => (
+            <tr>
+              {data?.length > 0 ? (
+                Object.values(data[index]).map((i) => <td>{i}</td>)
+              ) : (
+                <td>Empty data</td>
+              )}
+            </tr>
+          ))}
       </tbody>
     </table>
   );

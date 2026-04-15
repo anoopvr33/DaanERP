@@ -30,6 +30,8 @@ const BookingTable = () => {
         <th>Customer</th>
         <th>Mob.No</th>
         <th>Booking Source</th>
+        <th>Gst No.</th>
+        <th>Invoice</th>
         <th></th>
       </tr>
       <tbody>
@@ -67,6 +69,21 @@ const BookingTable = () => {
                 <td style={{ fontWeight: "500", color: "#7070a3" }}>
                   {i.booking_source}
                 </td>
+                <td>{i.gst_number ? i.gst_number : "Null"}</td>
+
+                <td>
+                  {i.invoice_pdf ? (
+                    <a
+                      href={i.invoice_pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Invoice
+                    </a>
+                  ) : (
+                    "Null"
+                  )}
+                </td>
                 <td
                   onClick={() => setExpand({ row: index, open: !expand.open })}
                 >
@@ -85,12 +102,12 @@ const BookingTable = () => {
                   }}
                 >
                   <td
-                    colSpan={10}
+                    colSpan={14}
                     style={{ backgroundColor: "", padding: "20px 10px" }}
                   >
                     <div className="booking-expand">
                       <p>
-                        <b>Adults</b> <span> {i.adults}</span>
+                        <b>Adults</b> <span> 23 {i.adults}</span>
                       </p>
                       <p>
                         <b>Children</b> <span> {i.children}</span>
@@ -107,7 +124,10 @@ const BookingTable = () => {
                       </p> */}
                       <p>
                         <b>
-                          pah <span>{i.pah}</span>
+                          pah{" "}
+                          <span>
+                            {i.pah === false ? "completed" : "pending"}
+                          </span>
                         </b>
                       </p>
                       {/* <p>
