@@ -97,8 +97,8 @@
 }
 .booking-table .booking-expand span {
   /* border: 2px solid #7070a3; */
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #ffffff !important;
+  color: #000000 !important;
   font-weight: 400;
   padding: 9px 25px;
   border-radius: 20px;

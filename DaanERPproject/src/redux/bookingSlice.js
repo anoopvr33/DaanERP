@@ -7,7 +7,7 @@ export const addBookingThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await AddBookingAPI(data);
-      console.log("my response", res);
+      console.log("my response", res || "erro");
       if (res.status == 201) return res.data;
       return thunkAPI.rejectWithValue(
         res?.data?.status || "something went wrong",

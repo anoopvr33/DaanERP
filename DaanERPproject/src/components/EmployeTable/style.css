@@ -19,7 +19,7 @@
 .booking-table .hotel-data {
   /* position: relative; */
 }
-.booking-table span {
+.booking-table .hotel-hover {
   position: absolute;
   /* left: 10px; */
   width: 200px;
@@ -32,7 +32,7 @@
   gap: 10px;
   background-color: #ffffff;
 }
-.booking-table .hotel-data:hover span {
+.booking-table .hotel-data:hover .hotel-hover {
   display: grid;
   gap: 5px;
 }
