@@ -5,7 +5,7 @@ const ReportTax = ({ data }) => {
   return (
     <table style={{ width: "700px" }} className="report-table">
       <tr>
-        <th>Name</th>
+        <th>Guest Name</th>
         <th>Hotel</th>
         <th>GST Number</th>
         <th>Total Amount</th>

@@ -185,7 +185,13 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
         {tab === 0 && <ReportAuditTab audit={audit}></ReportAuditTab>}
         {tab === 1 && <ReportRevenueTab revenue={revenue}></ReportRevenueTab>}
         {tab === 2 && <ReportTotalTab></ReportTotalTab>}
-        {tab === 3 && <ReportTaxTab></ReportTaxTab>}
+        {tab === 3 && (
+          <ReportTaxTab
+            hotel={hotel}
+            prevmonth={prevmonth}
+            yesterday={yesterday}
+          ></ReportTaxTab>
+        )}
         {tab === 4 && <ReportCheckoutTab></ReportCheckoutTab>}
       </div>
     </div>

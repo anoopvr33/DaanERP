@@ -6,7 +6,7 @@ import ReportTax from "../../reportTable/tax";
 import { API, getCookie } from "../../../utils/axios";
 import { Hotels } from "../../../utils";
 
-const ReportTaxTab = () => {
+const ReportTaxTab = ({ prevmonth, yesterday, hotel }) => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
 
@@ -14,9 +14,9 @@ const ReportTaxTab = () => {
     const response = await API.post(
       "/bookings/gst_bookings_by_date/",
       {
-        hotels: Hotels(),
-        from_date: "2026-03-16",
-        to_date: "2026-04-15",
+        hotels: hotel,
+        from_date: prevmonth,
+        to_date: yesterday,
         filter_method: "booking",
       },
       {
@@ -36,14 +36,12 @@ const ReportTaxTab = () => {
 
   return (
     <div>
-      
-
       {/* <div className="flex-1">
         <FormItems type="date"></FormItems>{" "}
         
         <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
       </div> */}
-      
+
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
       <ReportTax data={data}></ReportTax>
     </div>
