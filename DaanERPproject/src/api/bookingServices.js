@@ -12,5 +12,10 @@ export const GetBookingDataAPI = async (data) => {
 
 export const AddBookingAPI = async (data) => {
   console.log("my booking data to add", data);
-  return await API.post("/bookings/booking_create/", data);
+  return await API.post("/bookings/booking_create/", data, {
+    withCredentials: true,
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+    },
+  });
 };

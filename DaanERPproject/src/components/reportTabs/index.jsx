@@ -78,7 +78,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     },
     {
       id: 2,
-      name: "Total Reciepts",
+      name: "",
       link: "hotel",
       style: Hotel,
     },
@@ -90,7 +90,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     },
     {
       id: 3,
-      name: "Checkout",
+      name: "",
       link: "checkout",
       style: Checkout,
     },
@@ -185,7 +185,13 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
         {tab === 0 && <ReportAuditTab audit={audit}></ReportAuditTab>}
         {tab === 1 && <ReportRevenueTab revenue={revenue}></ReportRevenueTab>}
         {tab === 2 && <ReportTotalTab></ReportTotalTab>}
-        {tab === 3 && <ReportTaxTab></ReportTaxTab>}
+        {tab === 3 && (
+          <ReportTaxTab
+            hotel={hotel}
+            prevmonth={prevmonth}
+            yesterday={yesterday}
+          ></ReportTaxTab>
+        )}
         {tab === 4 && <ReportCheckoutTab></ReportCheckoutTab>}
       </div>
     </div>

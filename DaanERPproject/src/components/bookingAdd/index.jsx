@@ -26,8 +26,8 @@ const BookingAdd = () => {
     meal_plan: "",
     booking_plan: "",
     status: "",
-    booking_id: "",
-    invoice_pdf: null,
+    // booking_id: "",
+    // invoice_pdf: null,
     gst_number: null,
     booking_date: new Date().toISOString().split("T")[0],
   });
@@ -113,10 +113,10 @@ const BookingAdd = () => {
             name={"booking_date"}
           ></FormItems>
         </label>
-        <label htmlFor="">
+        {/* <label htmlFor="">
           <p>Booking ID</p>
           <FormItems onChange={OnInput} name={"booking_id"}></FormItems>
-        </label>
+        </label> */}
         <label htmlFor="">
           <p>Hotel</p>
           <FormItems
@@ -205,10 +205,10 @@ const BookingAdd = () => {
             name={"gst_number"}
           ></FormItems>
         </label>
-        <label htmlFor="">
+        {/* <label htmlFor="">
           <p>invoice_pdf</p>
           <FormItems onChange={OnInput} name={"invoice_pdf"}></FormItems>
-        </label>
+        </label> */}
         <label htmlFor="">
           <p>Booking Source</p>
           <FormItems onChange={OnInput} name={"booking_source"}></FormItems>
@@ -217,7 +217,7 @@ const BookingAdd = () => {
           <p>Meal Plan</p>
           <FormItems
             element="select"
-            option={["Select Plan", "EP", "CP"]}
+            option={["Select Meal Plan", "EP", "CP", "MAP"]}
             onChange={OnInput}
             name={"meal_plan"}
           ></FormItems>
@@ -226,7 +226,7 @@ const BookingAdd = () => {
           <p>Booking Plan</p>
           <FormItems
             element="select"
-            option={["Select Plan", "room_only", "CP"]}
+            option={["Select Booking Plan", "room_only", "CP"]}
             onChange={OnInput}
             name={"booking_plan"}
           ></FormItems>
@@ -235,11 +235,16 @@ const BookingAdd = () => {
           <p>Pah</p>
           <FormItems
             element="select"
-            option={["Select", "Completed", "Pending"]}
+            option={["Select Pah", "Completed", "Pending"]}
             onChange={(e) =>
               setData({
                 ...data,
-                pah: e.target.value === "Completed" ? true : false,
+                pah:
+                  e.target.value === "Completed"
+                    ? true
+                    : e.target.value === "Pending"
+                      ? false
+                      : "",
               })
             }
             name={"pah"}
