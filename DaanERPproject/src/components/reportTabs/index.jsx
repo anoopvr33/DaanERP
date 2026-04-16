@@ -78,7 +78,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     },
     {
       id: 2,
-      name: "Total Reciepts",
+      name: "",
       link: "hotel",
       style: Hotel,
     },
@@ -90,7 +90,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     },
     {
       id: 3,
-      name: "Checkout",
+      name: "",
       link: "checkout",
       style: Checkout,
     },

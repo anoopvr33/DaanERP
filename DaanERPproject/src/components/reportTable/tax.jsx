@@ -6,9 +6,9 @@ const ReportTax = ({ data }) => {
     <table style={{ width: "700px" }} className="report-table">
       <tr>
         <th>Name</th>
-        <th>Description</th>
-        <th>Pre-Tax</th>
-        <th>Amount</th>
+        <th>Hotel</th>
+        <th>GST Number</th>
+        <th>Total Amount</th>
       </tr>
 
       <tbody>
@@ -16,9 +16,9 @@ const ReportTax = ({ data }) => {
           data.map((item) => (
             <tr className="report-row">
               <td>{item.name}</td>
-              <td>{item.description}</td>
-              <td>{item.preTax}</td>
-              <td>{item.amount}</td>
+              <td>{item.hotel_code}</td>
+              <td>{item.gst_number}</td>
+              <td>{item.total_amount}</td>
             </tr>
           ))
         ) : (
