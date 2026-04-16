@@ -69,6 +69,7 @@ const Payment = () => {
                 yesterday={yesterdayDate}
                 yesOnchange={(e) => setYesterdayDate(e.target.value)}
                 child={"Filter"}
+                onClick={() => setTrigger(!trigger)}
               />
             </div>
           </div>
