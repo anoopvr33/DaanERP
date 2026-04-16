@@ -67,7 +67,7 @@ const Accounts = () => {
                 yesterday={yesterdayDate}
                 yesOnchange={(e) => setYesterdayDate(e.target.value)}
                 child={"Filter"}
-                onClick={() => setTrigger(false)}
+                onClick={() => setTrigger(!trigger)}
               />
               {/* <Filter /> */}
             </div>
