@@ -11,12 +11,15 @@ const BillCompany = ({ result }) => {
         <th>bookingId</th>
         <th>bookedOn</th>
         <th> paymentMode</th>
+        <th>out Standing</th>
+        <th>debit/credit</th>
         <th>amount</th>
         <th> source</th>
         <th>guest_name</th>
         <th> checkin</th>
         <th>checkout</th>
         <th>room category</th>
+        <th>payment_link</th>
       </tr>
 
       <tbody>
@@ -26,12 +29,15 @@ const BillCompany = ({ result }) => {
               <td>{row.bookingId}</td>
               <td>{new Date(row.bookedOn).toLocaleString()}</td>
               <td>{row.paymentMode}</td>
+              <td>{row.outstanding ? row.outstanding : "200"}</td>
+              <td>{row.debit ? row.debit : "debit"}</td>
               <td>{row.amount.toFixed(2)}</td>
               <td>{row.source}</td>
               <td>{row.guest_name}</td>
               <td>{row.checkin}</td>
               <td>{row.checkout}</td>
               <td>{row.room_code}</td>
+              <td>{row.payment_link ? row.payment_link : "link"}</td>
             </tr>
           ))
         ) : (

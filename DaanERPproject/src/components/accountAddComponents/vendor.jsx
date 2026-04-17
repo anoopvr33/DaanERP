@@ -22,7 +22,10 @@ const AccountsVendorAdd = ({ formdate }) => {
 
   const OnInput = (e) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+
+    name === "file_path"
+      ? setData({ ...data, [name]: e.target.files[0] })
+      : setData({ ...data, [name]: value });
   };
 
   const OnSubmit = async (e) => {
@@ -110,7 +113,7 @@ const AccountsVendorAdd = ({ formdate }) => {
           <p>file_path</p>
           <FormItems
             onChange={OnInput}
-            type="text"
+            type="file"
             name={"file_path"}
             required
           ></FormItems>

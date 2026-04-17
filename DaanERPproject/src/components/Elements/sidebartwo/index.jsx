@@ -12,7 +12,7 @@ const menuItems = [
   "Reports",
   "Payment",
   "Booking",
-  IsSuper && "Employees",
+  IsSuper === false && "Employees",
   "",
 ];
 
@@ -65,6 +65,7 @@ export default function SidebarTwo() {
           <p
             onClick={() => (
               localStorage.removeItem("hotel"),
+              localStorage.removeItem("is_super"),
               (window.location.href = "/login")
             )}
           >

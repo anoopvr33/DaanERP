@@ -42,7 +42,7 @@ const BookingTable = () => {
           </tr>
         ) : items?.data?.length === 0 ? (
           <tr>
-            <td colSpan={11}> Empty Data </td>{" "}
+            <td colSpan={13}> Empty Data </td>{" "}
           </tr>
         ) : (
           items?.data?.map((i, index) => (
