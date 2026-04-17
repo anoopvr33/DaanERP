@@ -21,11 +21,13 @@ const AccountsVendorAdd = ({ formdate }) => {
   const dispatch = useDispatch();
 
   const OnInput = (e) => {
-    const { name, value } = e.target;
+    const { name, files, value } = e.target;
 
-    name === "file_path"
-      ? setData({ ...data, [name]: e.target.files[0] })
-      : setData({ ...data, [name]: value });
+    if (name === "file_path") {
+      setData({ ...data, [name]: files[0] });
+    } else {
+      setData({ ...data, [name]: value });
+    }
   };
 
   const OnSubmit = async (e) => {

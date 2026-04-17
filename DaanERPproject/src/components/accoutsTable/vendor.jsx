@@ -46,7 +46,7 @@ const AccountsVendor = ({ yesterdate, trigger }) => {
               <td>{item.remarks}</td>
               <td>{item.payment_date}</td>
               <td>{item.due_date}</td>
-              <td>{item.file_path}</td>
+              <td>{item.file_path ? item.file_path : "_"}</td>
               {/* <td>{item?.transaction_type == "EX" ? item.amount : "_"}</td>
               <td>{item?.transaction_type == "IN" ? item.amount : "_"}</td> */}
               {/* <td>{item.remarks}</td> */}
