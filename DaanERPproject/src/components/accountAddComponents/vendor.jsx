@@ -24,20 +24,52 @@ const AccountsVendorAdd = ({ formdate }) => {
     const { name, files, value } = e.target;
 
     if (name === "file_path") {
-      setData({ ...data, [name]: files[0] });
+      console.log("files:", files);
+      console.log("file[0]:", files?.[0]);
+      setData((prev) => ({
+        ...prev,
+        [name]: files[0],
+      }));
     } else {
-      setData({ ...data, [name]: value });
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     }
   };
 
   const OnSubmit = async (e) => {
     e.preventDefault();
-    console.log("vendor", data);
-    const response = await API.post("/daybook/add_vendor_payout/", data, {
+
+    const formData = new FormData();
+
+    // Object.keys(data).forEach((key) => {
+    //   formData.append(key, data[key]);
+    // });
+
+    formData.append("amount", data.amount);
+    formData.append("bill_no", data.bill_no);
+    formData.append("date", data.date);
+    formData.append("due_date", data.due_date);
+    formData.append("file_path", data.file_path); // important
+    formData.append("name", data.name);
+    formData.append("payment_date", data.payment_date);
+    formData.append("remarks", data.remarks);
+
+    console.log("FINAL file:", data.file_path);
+    console.log("isFile:", data.file_path instanceof File);
+
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+    const response = await API.post("/daybook/add_vendor_payout/", formData, {
       withCredentials: true,
       headers: {
         "X-CSRFToken": getCookie("csrftoken"),
+        "Content-Type": "multipart/form-data", // 👈 add this
       },
+      transformRequest: [(data) => data], // 👈 bypass JSON transform
     });
     if (response.data.status) {
       alert("addedd successfully");
