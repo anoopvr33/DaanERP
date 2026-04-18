@@ -90,7 +90,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     },
     {
       id: 3,
-      name: "",
+      name: "Checkout Report",
       link: "checkout",
       style: Checkout,
     },
@@ -104,6 +104,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
   const [audit, setAudit] = useState({ name: [], current: [], upto: [] });
   const [revenue, setRevenue] = useState([]);
+  const [checkout, setCheckout] = useState([]);
 
   const GetAudit = async () => {
     console.log("report date format", prevmonth, yesterday, hotel);
@@ -147,7 +148,12 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
       } else alert("something went wrong please login again");
 
       setRevenue(res?.revenu_details);
-      console.log("reeeaaa", res, res?.revenu_details);
+      setCheckout(res?.checkout_details);
+      console.log(
+        "checkout response and revenue",
+        res?.checkout_details,
+        res?.revenu_details,
+      );
     } catch (error) {
       alert(error, "please login");
     }
@@ -161,7 +167,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
   useEffect(() => {
     console.log("latest audit", audit);
-  }, [audit, revenue]);
+  }, [audit, revenue, checkout]);
 
   return (
     <div className="acc-tabs">
@@ -192,7 +198,9 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
             yesterday={yesterday}
           ></ReportTaxTab>
         )}
-        {tab === 4 && <ReportCheckoutTab></ReportCheckoutTab>}
+        {tab === 4 && (
+          <ReportCheckoutTab checkout={checkout}></ReportCheckoutTab>
+        )}
       </div>
     </div>
   );

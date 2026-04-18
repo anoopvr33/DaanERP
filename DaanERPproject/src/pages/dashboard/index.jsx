@@ -25,6 +25,7 @@ const option2 = Hotels()
 const Dashboard = () => {
   const today = new Date();
   const [hotelData, setHotelData] = useState(option2);
+
   const navigate = useNavigate();
 
   // Yesterday
@@ -46,10 +47,14 @@ const Dashboard = () => {
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const GetPos = async () => {
     // console.log("maiaaa daarf", yesterdayDate, prevMonthDate);
 
+    setLoading(true);
+    setError(null);
     const SelectedHotel = hotelData.map((i) => i.value);
     console.log("select hoeee", SelectedHotel);
 
@@ -96,15 +101,10 @@ const Dashboard = () => {
     } else {
       navigate("/login");
     }
-
   }, []);
 
   console.log("my dataaa", option2);
   // useEffect(() => {}, [formattedDate2]);
-
-  if (!data) {
-    return <div className="dashboard">Loading...</div>;
-  }
 
   return (
     <div className="dashboard">

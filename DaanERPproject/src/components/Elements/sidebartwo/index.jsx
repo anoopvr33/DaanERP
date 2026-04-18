@@ -12,7 +12,7 @@ const menuItems = [
   "Reports",
   "Payment",
   "Booking",
-  IsSuper === false && "Employees",
+  IsSuper() === true && "Employees",
   "",
 ];
 
@@ -28,7 +28,7 @@ export default function SidebarTwo() {
 
   useEffect(() => {}, [ind]);
 
-  console.log("is super", IsSuper);
+  console.log("is super", IsSuper());
 
   return (
     <aside className="sidebar-3">
