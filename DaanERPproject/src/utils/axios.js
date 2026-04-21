@@ -7,6 +7,23 @@ export const API = axios.create({
   },
 });
 
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Unauthorized
+      console.log("Unauthorized - redirecting");
+
+      localStorage.removeItem("hotel");
+      localStorage.removeItem("isSuper");
+
+      // redirect to login
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  },
+);
+
 export function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);

@@ -8,6 +8,8 @@ import FormItems from "../../components/Elements/formItems";
 import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
+import ErrorPage from "../../components/Elements/Error";
+import LoadingItem from "../../components/Elements/Loading";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -20,6 +22,8 @@ const Payment = () => {
   // const [date, setDate] = useState("");
   const [hotels, setHotel] = useState(option2);
   const [trigger, setTrigger] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const today = new Date();
 
@@ -73,12 +77,18 @@ const Payment = () => {
               />
             </div>
           </div>
-          <PaymentTabs
-            prevmonth={prevMonthDate}
-            yesterday={yesterdayDate}
-            hotelsArray={hotels.map((i) => i.value)}
-            trigger={trigger}
-          ></PaymentTabs>
+          {loading ? (
+            <LoadingItem />
+          ) : error ? (
+            <ErrorPage />
+          ) : (
+            <PaymentTabs
+              prevmonth={prevMonthDate}
+              yesterday={yesterdayDate}
+              hotelsArray={hotels.map((i) => i.value)}
+              trigger={trigger}
+            ></PaymentTabs>
+          )}
 
           {/* <CustomerTable></CustomerTable> */}
         </div>

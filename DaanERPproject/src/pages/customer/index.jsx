@@ -10,9 +10,11 @@ import CustomTabs from "../../components/CustomerTabs";
 import { useEffect, useState } from "react";
 import { Hotels } from "../../utils";
 import CustomerTable from "../../components/CustomerTable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCustomerData } from "../../redux/customerSlice";
 import Select from "react-select";
+import LoadingItem from "../../components/Elements/Loading";
+import ErrorPage from "../../components/Elements/Error";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -28,9 +30,12 @@ const Customer = () => {
   const [form, setForm] = useState({
     hotels: Hotels() ? Hotels() : [],
     month: 12,
+    value: 0,
+    operator: "Equal",
   });
-
   const dispatch = useDispatch();
+
+  const { items, error, loading } = useSelector((state) => state.customer);
 
   const elect = [
     { name: "Last 12 Months", value: 12 },
@@ -38,13 +43,24 @@ const Customer = () => {
     { name: "Last 3 Months", value: 3 },
   ];
   const Count = [
-    { name: "Count vise", value: "" },
+    { name: "Default", value: "" },
     { name: "More Count", value: "More Count" },
     { name: "Less Count", value: "Less Count" },
+  ];
+  const Operator = [
+    { name: "Equal", value: "Equal" },
+    { name: "Contain", value: "Contain" },
+    { name: "Not Contain", value: "Not Contain" },
   ];
 
   useEffect(() => {
     dispatch(getCustomerData(form));
+  }, []);
+
+  console.log("customer error", error);
+
+  useEffect(() => {
+    console.log("my form", form);
   }, []);
 
   return (
@@ -64,7 +80,7 @@ const Customer = () => {
                     setForm({ ...form, hotels: Hotels() ? Hotels() : [] });
                     return;
                   }
-                  setForm({ ...form, hotels: selected });
+                  setForm({ ...form, hotels: selected.map((i) => i.value) });
                 }}
                 isMulti
                 className="custom-multi-select"
@@ -88,26 +104,66 @@ const Customer = () => {
                 }}
                 type="date"
               /> */}
-              <FormItems
-                onChange={(e) =>
-                  setForm({ ...form, month: Number(e.target.value) })
-                }
-                option={elect}
-                element="select"
-              ></FormItems>
-              <FormItems
-                onChange={(e) => setCount(e.target.value)}
-                option={Count}
-                element="select"
-              ></FormItems>
+              <label htmlFor="">
+                <p className="placeholder">Select Months</p>
+                <FormItems
+                  onChange={(e) =>
+                    setForm({ ...form, month: Number(e.target.value) })
+                  }
+                  option={elect}
+                  element="select"
+                ></FormItems>
+              </label>
+              <label htmlFor="">
+                <p className="placeholder">Select Operator</p>
+                <FormItems
+                  onChange={(e) =>
+                    setForm({ ...form, operator: e.target.value })
+                  }
+                  option={Operator}
+                  element="select"
+                ></FormItems>
+              </label>
+
+              <label htmlFor="">
+                <p className="placeholder">No. of Bookings</p>
+                <FormItems
+                  onChange={(e) =>
+                    setForm({ ...form, value: Number(e.target.value) })
+                  }
+                  option={Count}
+                  type="number"
+                  defualt={0}
+                  // element="select"
+                ></FormItems>
+              </label>
               <Button
+                // onClick={() => console.log("my form", form)}
                 onClick={() => dispatch(getCustomerData(form))}
                 child={"Filter"}
               ></Button>
+
+              <label style={{ margin: "auto", marginRight: "0px" }} htmlFor="">
+                <p className="placeholder">Count Vise</p>
+                <FormItems
+                  onChange={(e) => setCount(e.target.value)}
+                  option={Count}
+                  element="select"
+                ></FormItems>
+              </label>
             </div>
           </div>
-
-          <CustomerTable date={date} count={count}></CustomerTable>
+          {loading ? (
+            <LoadingItem />
+          ) : error ? (
+            <ErrorPage />
+          ) : (
+            <CustomerTable
+              items={items}
+              date={date}
+              count={count}
+            ></CustomerTable>
+          )}
 
           {/* <CustomTabs date={date} count={count}></CustomTabs> */}
         </div>

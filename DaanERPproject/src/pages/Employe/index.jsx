@@ -17,6 +17,8 @@ import EmployeeAdd from "../../components/EmployeAdd";
 import EmployeeTable from "../../components/EmployeTable";
 import { Hotels } from "../../utils";
 import Select from "react-select";
+import LoadingItem from "../../components/Elements/Loading";
+import ErrorPage from "../../components/Elements/Error";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -28,6 +30,8 @@ const option2 = Hotels()
 const Employee = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState(option2);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
 
   const onFilter = () => {
@@ -74,7 +78,13 @@ const Employee = () => {
 
           {open && <EmployeeAdd></EmployeeAdd>}
 
-          <EmployeeTable></EmployeeTable>
+          {loading ? (
+            <LoadingItem />
+          ) : error ? (
+            <ErrorPage />
+          ) : (
+            <EmployeeTable></EmployeeTable>
+          )}
         </div>
       </div>
     </div>

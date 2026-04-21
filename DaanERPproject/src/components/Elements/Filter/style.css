@@ -1,9 +1,10 @@
 .custom-multi-select {
-  width: 500px;
+  width: 450px;
   /* background-color: #799e92; */
 }
 .custom-select-two {
   background-color: antiquewhite;
+  /* width: 200px; */
 }
 .custom-filter label {
   height: fit-content;

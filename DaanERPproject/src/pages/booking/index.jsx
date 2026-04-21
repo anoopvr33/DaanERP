@@ -15,6 +15,8 @@ import { getBookingData } from "../../redux/bookingSlice";
 import SidebarTwo from "../../components/Elements/sidebartwo";
 import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
+import LoadingItem from "../../components/Elements/Loading";
+import ErrorPage from "../../components/Elements/Error";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -24,6 +26,8 @@ const option2 = Hotels()
   : [];
 
 const Booking = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("booking");
 
@@ -121,8 +125,13 @@ const Booking = () => {
           </div>
 
           {open && <BookingAdd></BookingAdd>}
-
-          <BookingTable></BookingTable>
+          {loading ? (
+            <LoadingItem />
+          ) : error ? (
+            <ErrorPage />
+          ) : (
+            <BookingTable></BookingTable>
+          )}
         </div>
       </div>
     </div>
