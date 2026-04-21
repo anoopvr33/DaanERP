@@ -8,6 +8,41 @@ import axios from "axios";
 import { API } from "../../utils/axios";
 import { Hotels } from "../../utils";
 
+const PaymentMode = [
+  {
+    name: "Select Payment Mode",
+    value: "",
+  },
+  {
+    name: "Cash",
+    value: "Cash",
+  },
+  {
+    name: "Bill to Company",
+    value: "Bill to Company",
+  },
+  {
+    name: "UPI to Company",
+    value: "UPI to Company",
+  },
+  {
+    name: "UPI to Current",
+    value: "UPI to Current",
+  },
+  {
+    name: "Bank Transfer",
+    value: "Bank Transfer",
+  },
+  {
+    name: "Outstanding",
+    value: "Outstanding",
+  },
+  {
+    name: "Complementary",
+    value: "Complementary",
+  },
+];
+
 const BookingAdd = () => {
   const [data, setData] = useState({
     hotel_code: "",
@@ -185,7 +220,8 @@ const BookingAdd = () => {
           <p>Payment Mode</p>
           <FormItems
             onChange={OnInput}
-            type="text"
+            element="select"
+            option={PaymentMode}
             name={"payment_mode"}
           ></FormItems>
         </label>

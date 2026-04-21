@@ -13,7 +13,7 @@ const AccSalary = ({ yesterdate, trigger }) => {
     <div>
       <div className="flex-1">
         {/* <FormItems type="date"></FormItems>{" "} */}
-        <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
+        {/* <Button onClick={() => setOpen(!open)} child={"create +"}></Button> */}
       </div>
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
       <p>
