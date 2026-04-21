@@ -7,11 +7,13 @@ const Input = ({
   placeholder,
   name,
   className,
+  defualt,
 }) => {
   return (
     <input
       // type=''
       type={type}
+      defaultValue={defualt}
       onChange={onChange}
       value={value}
       // onClick={onClick}

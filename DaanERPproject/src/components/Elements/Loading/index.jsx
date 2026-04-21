@@ -1,7 +1,12 @@
-import React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const LoadingItem = () => {
-  return <div>LoadingItem...</div>;
+  return (
+    <Box sx={{ display: "flex", margin: "30px auto" }}>
+      <CircularProgress size="4rem" aria-label="Loading…" />
+    </Box>
+  );
 };
 
 export default LoadingItem;

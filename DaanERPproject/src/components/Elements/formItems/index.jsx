@@ -14,6 +14,7 @@ const FormItems = ({
   option,
   name,
   multiple,
+  defualt,
 }) => {
   let component = <></>;
 
@@ -25,6 +26,7 @@ const FormItems = ({
         type={type}
         name={name}
         className={className}
+        defualt={defualt}
         icon={icon}
         placeholder={placeholder}
         label={label}

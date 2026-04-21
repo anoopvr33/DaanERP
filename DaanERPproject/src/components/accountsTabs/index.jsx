@@ -4,6 +4,7 @@ import AccPOS from "./accountsPOS";
 import AccDailyLog from "./accountDailyLog";
 import AccHotelExpense from "./accountsHotelExpense";
 import AccVendor from "./accountsVendor";
+import AccSalary from "./accountSalary";
 
 const AccountsTabs = ({ dateset, trigger }) => {
   const [tab, setTab] = useState(0);
@@ -44,11 +45,19 @@ const AccountsTabs = ({ dateset, trigger }) => {
     borderBottomRightRadius: tab - 1 == 3 && "20px",
   };
 
+  const Salary = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 4 && "  hsl(0, 0%, 100%)",
+    color: tab == 4 && "#69af99",
+    borderBottomLeftRadius: tab + 1 == 4 && "20px",
+    borderBottomRightRadius: tab - 1 == 4 && "20px",
+  };
+
   const None = {
     borderRadius: "20px 20px 0px 0px",
     background: "transparent",
-    borderBottomLeftRadius: tab + 1 == 4 && "20px",
-    borderBottomRightRadius: tab - 1 == 4 && "20px",
+    borderBottomLeftRadius: tab + 1 == 5 && "20px",
+    borderBottomRightRadius: tab - 1 == 5 && "20px",
   };
 
   const TabArray = [
@@ -78,6 +87,12 @@ const AccountsTabs = ({ dateset, trigger }) => {
     },
     {
       id: 4,
+      name: "Salary ",
+      link: "salary",
+      style: Salary,
+    },
+    {
+      id: 5,
       name: null,
       link: null,
       style: None,
@@ -115,6 +130,9 @@ const AccountsTabs = ({ dateset, trigger }) => {
         )}
         {tab === 3 && (
           <AccVendor trigger={trigger} yesterdate={dateset}></AccVendor>
+        )}
+        {tab === 4 && (
+          <AccSalary trigger={trigger} yesterdate={dateset}></AccSalary>
         )}
       </div>
     </div>

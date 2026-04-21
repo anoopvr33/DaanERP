@@ -26,6 +26,17 @@
   margin-bottom: 20px;
 }
 
+.customer label {
+  position: relative;
+}
+.customer label .placeholder {
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background-color: white;
+  padding: 0px 5px;
+}
+
 .customer .flex {
   display: flex;
   justify-content: start;

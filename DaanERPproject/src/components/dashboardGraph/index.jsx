@@ -1,34 +1,3 @@
-// import {
-//   BarChart,
-//   Bar,
-//   XAxis,
-//   YAxis,
-//   Tooltip,
-//   ResponsiveContainer,
-// } from "recharts";
-
-// const data = [
-//   { name: "Jan", value: 400 },
-//   { name: "Feb", value: 300 },
-//   { name: "Mar", value: 500 },
-// ];
-
-// function MyBarChart() {
-//   return (
-//     <ResponsiveContainer width="100%" height={300}>
-//       <BarChart data={data}>
-//         <XAxis dataKey="name" />
-//         <YAxis />
-//         <Tooltip />
-//         <Bar dataKey="value" fill="#4c7cff" />
-//       </BarChart>
-//     </ResponsiveContainer>
-//   );
-// }
-
-// export default MyBarChart;
-// App.js
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -85,8 +54,12 @@ const options = {
     },
     y: {
       grid: {
-        // display: false, // removes horizontal grid lines
+        display: false, // removes horizontal grid lines
         drawBorder: false,
+      },
+      ticks: {
+        display: false, // hides y-axis labels
+        beginAtZero: true, // starts y-axis at zero
       },
     },
   },
@@ -96,13 +69,13 @@ export default function Chart() {
   return (
     <div
       style={{
-        width: "800px",
-        height: "400px",
+        width: "100%",
+        height: "320px",
         background: "rgb(255, 255, 255)",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",
-        boxShadow: "0px 5px 10px #d3d3e6",
+        // boxShadow: "0px 5px 10px #d3d3e6",
       }}
     >
       <Bar data={data} options={options} />

@@ -7,6 +7,8 @@ import SidebarTwo from "../../components/Elements/sidebartwo";
 import ReportTabs from "../../components/reportTabs";
 import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
+import LoadingItem from "../../components/Elements/Loading";
+import ErrorPage from "../../components/Elements/Error";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -19,6 +21,8 @@ const Accounts = () => {
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState(option2);
   const [trigger, setTrigger] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const today = new Date();
 
@@ -73,12 +77,19 @@ const Accounts = () => {
             </div>
           </div>
 
-          <ReportTabs
-            hotel={hotel.map((i) => i.value)}
-            yesterday={yesterdayDate}
-            prevmonth={prevMonthDate}
-            trigger={trigger}
-          ></ReportTabs>
+          {loading ? (
+            <LoadingItem />
+          ) : error ? (
+            <ErrorPage />
+          ) : (
+            <ReportTabs
+              hotel={hotel.map((i) => i.value)}
+              yesterday={yesterdayDate}
+              prevmonth={prevMonthDate}
+              trigger={trigger}
+            ></ReportTabs>
+          )}
+
           {/* <AccountsTabs></AccountsTabs> */}
           {/* <CustomerTable></CustomerTable> */}
         </div>

@@ -8,6 +8,8 @@ import axios from "axios";
 import AccountsPos from "../../accoutsTable/pos";
 import AccountsPosAdd from "../../accountAddComponents/pos";
 import { API, getCookie } from "../../../utils/axios";
+import LoadingItem from "../../Elements/Loading";
+import ErrorPage from "../../Elements/Error";
 
 const AccPOS = ({ dateset, trigger }) => {
   const [open, setOpen] = useState(false);
@@ -25,7 +27,6 @@ const AccPOS = ({ dateset, trigger }) => {
 
   const head1 = ["Id", "Details", "Expense", "Remark"];
   const head2 = ["Id", "Details", "Income", "Remark"];
-  // const data1 =;
 
   const GetPos = async () => {
     console.log("getting pos data for this date", dateset);
@@ -174,15 +175,6 @@ const AccPOS = ({ dateset, trigger }) => {
           <p style={{ textAlign: "center", margin: "10px 10px" }}>Empty Data</p>
         )}
       </div>
-
-      {/* <div>
-        <h3>Actual Expense</h3> <br />
-        <div className="flex-1">
-          <Button onClick={() => setOpen2(!open2)} child={"Create +"} />
-        </div>
-        {open2 && <AccountsPosAdd type={"EX"} formdate={dateset} />}
-        <AccountsPos type={"EX"} head={head2} data={data2} />
-      </div> */}
     </div>
   );
 };

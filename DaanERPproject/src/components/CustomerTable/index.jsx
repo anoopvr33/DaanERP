@@ -3,18 +3,16 @@ import "./style.css";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { getCustomerData } from "../../redux/customerSlice";
 
-const CustomerTable = ({ date, count }) => {
+const CustomerTable = ({ date, count, items }) => {
   const dispatch = useDispatch();
 
   const [expand, setExpand] = useState({ row: null, open: false });
 
   const [array, setArray] = useState([]);
 
-  const { items, error, loading } = useSelector((state) => state.customer);
-
   const sortedArray = useMemo(() => {
     console.log("okkkkkk");
-    // if (!Array.isArray(items)) return [];
+    if (!Array.isArray(array)) return [];
 
     if (count === "Less Count") {
       return [...array].sort(
@@ -38,10 +36,12 @@ const CustomerTable = ({ date, count }) => {
   }, [items]);
 
   useEffect(() => {}, [count]);
+
   useEffect(() => {
     console.log("sorted arra", sortedArray);
     setArray(sortedArray);
   }, [sortedArray]);
+
   useEffect(() => {
     console.log("arrraa", array);
   }, [array]);

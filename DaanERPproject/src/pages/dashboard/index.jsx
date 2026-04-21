@@ -14,6 +14,9 @@ import Button from "../../components/Elements/button";
 import { Hotels } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import Filter from "../../components/Elements/Filter";
+import LoadingItem from "../../components/Elements/Loading";
+import ErrorPage from "../../components/Elements/Error";
+import MarkOptimization from "../../components/dashboardLineChart";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -48,13 +51,16 @@ const Dashboard = () => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const GetPos = async () => {
     // console.log("maiaaa daarf", yesterdayDate, prevMonthDate);
 
     setLoading(true);
     setError(null);
+
+    if (!hotelData || hotelData.length === 0) window.location.reload();
+
     const SelectedHotel = hotelData.map((i) => i.value);
     console.log("select hoeee", SelectedHotel);
 
@@ -77,34 +83,20 @@ const Dashboard = () => {
       console.log("dashpo res", response);
       if (response.data.status === "success") {
         setData(response.data);
-      } else alert("something went wrong getting Dashboard data");
+        setLoading(false);
+      } else {
+        setError(true);
+        setLoading(false);
+      }
     } catch (error) {
-      // alert("Something wrong or Please Login");
-      navigate("/login");
+      setLoading(false);
+      setError(true);
     }
   };
 
-  // if (!Hotels) {
-  //   window.location.reload();
-  // }
-
-  // setHotelData(option2);
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
   useEffect(() => {
-    if (Hotels()) {
-      GetPos();
-    } else {
-      navigate("/login");
-    }
+    GetPos();
   }, []);
-
-  console.log("my dataaa", option2);
-  // useEffect(() => {}, [formattedDate2]);
 
   return (
     <div className="dashboard">
@@ -162,11 +154,20 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <DashResult data={data}></DashResult>
-          <div className="flex-2">
-            <Chart></Chart>
-            <DashboardPrev data={data}></DashboardPrev>
-          </div>
+          {loading ? (
+            <LoadingItem />
+          ) : error ? (
+            <ErrorPage />
+          ) : (
+            <>
+              <DashResult data={data}></DashResult>
+              <div className="flex-2">
+                <Chart></Chart>
+                <MarkOptimization></MarkOptimization>
+              </div>
+              <DashboardPrev data={data}></DashboardPrev>
+            </>
+          )}
         </div>
       </div>
     </div>

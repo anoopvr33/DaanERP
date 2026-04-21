@@ -6,6 +6,9 @@ import UpiCompanyTab from "./upi_company";
 import UpiCurrentTab from "./upi_current";
 import CashPayTab from "./cash_pay";
 import { API, getCookie } from "../../utils/axios";
+import BankTransferTab from "./bank_transfer";
+import OutstandingTab from "./out_standing";
+import ComplementaryTab from "./complementary";
 
 const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const [tab, setTab] = useState(0);
@@ -39,12 +42,33 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
     borderBottomRightRadius: tab - 1 == 3 && "20px",
     borderBottomLeftRadius: tab + 1 == 3 && "20px",
   };
-  const None = {
+  const bank_transfer = {
     borderRadius: "20px 20px 0px 0px",
-    // background: tab == 0 && "    hsl(0, 0%, 100%)",
+    background: tab == 4 && "    hsl(0, 0%, 100%)",
     color: tab == 4 && "#386f74",
     borderBottomRightRadius: tab - 1 == 4 && "20px",
     borderBottomLeftRadius: tab + 1 == 4 && "20px",
+  };
+  const outstanding = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 5 && "    hsl(0, 0%, 100%)",
+    color: tab == 5 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 5 && "20px",
+    borderBottomLeftRadius: tab + 1 == 5 && "20px",
+  };
+  const complementary = {
+    borderRadius: "20px 20px 0px 0px",
+    background: tab == 6 && "    hsl(0, 0%, 100%)",
+    color: tab == 6 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 6 && "20px",
+    borderBottomLeftRadius: tab + 1 == 6 && "20px",
+  };
+  const None = {
+    borderRadius: "20px 20px 0px 0px",
+    // background: tab == 0 && "    hsl(0, 0%, 100%)",
+    color: tab == 7 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 7 && "20px",
+    borderBottomLeftRadius: tab + 1 == 7 && "20px",
   };
 
   const TabArray = [
@@ -74,6 +98,24 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
     },
     {
       id: 4,
+      name: "Bank Transfer",
+      link: "pos",
+      style: bank_transfer,
+    },
+    {
+      id: 5,
+      name: "Outstanding",
+      link: "pos",
+      style: outstanding,
+    },
+    {
+      id: 6,
+      name: "Complementary",
+      link: "pos",
+      style: complementary,
+    },
+    {
+      id: 7,
       name: "",
       link: "",
       style: None,
@@ -152,6 +194,15 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
           <UpiCurrentTab result={data?.upi_current}></UpiCurrentTab>
         )}
         {tab === 3 && <CashPayTab result={data?.cash}></CashPayTab>}
+        {tab === 4 && (
+          <BankTransferTab result={data?.bank_transfer}></BankTransferTab>
+        )}
+        {tab === 5 && (
+          <OutstandingTab result={data?.outstanding}></OutstandingTab>
+        )}
+        {tab === 6 && (
+          <ComplementaryTab result={data?.complementary}></ComplementaryTab>
+        )}
       </div>
       <br />
 
@@ -171,6 +222,15 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
         <br />
         <p>
           <b>cash</b>: {data?.total_amount?.cash}
+        </p>
+        <p>
+          <b>cash</b>: {data?.total_amount?.bank_transfer}
+        </p>{" "}
+        <p>
+          <b>cash</b>: {data?.total_amount?.outstanding}
+        </p>{" "}
+        <p>
+          <b>cash</b>: {data?.total_amount?.complementary}
         </p>
       </div>
     </div>
