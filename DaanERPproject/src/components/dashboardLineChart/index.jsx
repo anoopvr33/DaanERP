@@ -1,6 +1,45 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
-export default function MarkOptimization() {
+export default function MarkOptimization({ data }) {
+  console.log("my line cart", data);
+
+  const Occupancy = data?.map((i) => i.occupancy);
+
+  // last 6 days
+  const last6Days = data?.slice(-6);
+
+  // map for chart
+  const xData = last6Days?.map((item) => item.date);
+  const yData = last6Days?.map((item) => item.occupancy);
+
+  if (!yData) {
+    return;
+  }
+  const max = Math.max(...yData);
+  const min = 0;
+
+  // 👇 choose exact number of ticks
+  const tickCount = 6;
+
+  // raw step
+  const step = (max - min) / (tickCount - 1);
+
+  // OPTIONAL: round step for cleaner numbers
+  const roundStep = (value) => {
+    const magnitude = Math.pow(10, Math.floor(Math.log10(value)));
+    return Math.ceil(value / magnitude) * magnitude;
+  };
+
+  const niceStep = roundStep(step);
+
+  // adjust max based on rounded step
+  const roundedMax = niceStep * (tickCount - 1);
+
+  // generate ticks
+  const yTicks = Array.from({ length: tickCount }, (_, i) => i * niceStep);
+
+  console.log("line occupancy", Occupancy);
+
   return (
     <div
       style={{
@@ -25,13 +64,15 @@ export default function MarkOptimization() {
         Weekly Occupacy Chart
       </p>
       <LineChart
-        xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
-        series={[
+        xAxis={[{ data: xData, scaleType: "point" }]}
+        yAxis={[
           {
-            data: [2, 3, 5.5, 8.5, 1.5, 5, 1, 4, 3, 8],
-            showMark: ({ index }) => index % 2 === 0,
+            min: 0,
+            max: roundedMax,
+            ticks: yTicks,
           },
         ]}
+        series={[{ data: yData }]}
         width={580}
         height={280}
       />

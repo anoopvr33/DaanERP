@@ -20,7 +20,7 @@ const option2 = Hotels()
 const Accounts = () => {
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState(false);
-  const [hotelData, setHotelData] = useState();
+  const [hotelData, setHotelData] = useState(option2);
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -95,6 +95,7 @@ const Accounts = () => {
               trigger={trigger}
               prevMonth={prevMonthDate}
               dateset={yesterdayDate}
+              hotels={hotelData.map((i) => i.value)}
             ></AccountsTabs>
           )}
 

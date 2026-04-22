@@ -11,7 +11,7 @@ import { API, getCookie } from "../../../utils/axios";
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
 
-const AccPOS = ({ dateset, trigger }) => {
+const AccPOS = ({ dateset, trigger, hotels }) => {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
@@ -32,6 +32,7 @@ const AccPOS = ({ dateset, trigger }) => {
     console.log("getting pos data for this date", dateset);
     const response = await API.post("/daybook/get_budget/", {
       date: dateset,
+      hotel: hotels,
     });
     console.log("pos res", response.data.data);
     if (response.data.data) {

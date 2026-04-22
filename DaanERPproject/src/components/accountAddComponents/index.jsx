@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
+import { Hotels } from "../../utils";
 
 const AccountsDailyAdd = ({ formdate }) => {
   const [selectedCat, setSelectedCat] = useState({});
@@ -19,6 +20,7 @@ const AccountsDailyAdd = ({ formdate }) => {
     balance: Number(""),
     description: "",
     bank: "",
+    hotel: "",
   });
 
   const [category, setCategory] = useState([]);
@@ -181,6 +183,18 @@ const AccountsDailyAdd = ({ formdate }) => {
             onChange={OnInput}
             type="text"
             name={"bank"}
+            required
+          ></FormItems>
+        </label>
+
+        <label htmlFor="">
+          <p>Hotel</p>
+          <FormItems
+            onChange={(e) => setData({ ...data, hotel: e.target.value })}
+            option={["Select Hotel", ...Hotels()]}
+            element="select"
+            type="text"
+            name={"hotel"}
             required
           ></FormItems>
         </label>
