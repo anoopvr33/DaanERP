@@ -14,6 +14,7 @@ const AccountsTable = ({ data }) => {
         <th>Reciepts</th>
         <th>Payments</th>
         <th>Balance</th>
+        <th>Hotel</th>
         {/* {head.map((i) => (
           <th key={i}>{i}</th>
         ))} */}
@@ -36,6 +37,7 @@ const AccountsTable = ({ data }) => {
               <td>{item.receipts}</td>
               <td>{item.payments}</td>
               <td>{item.balance}</td>
+              <td>{item.hotel}</td>
             </tr>
           ))
         ) : (

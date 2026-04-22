@@ -6,7 +6,7 @@ import AccHotelExpense from "./accountsHotelExpense";
 import AccVendor from "./accountsVendor";
 import AccSalary from "./accountSalary";
 
-const AccountsTabs = ({ dateset, trigger }) => {
+const AccountsTabs = ({ dateset, trigger, hotels }) => {
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -118,9 +118,15 @@ const AccountsTabs = ({ dateset, trigger }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {tab === 0 && <AccPOS trigger={trigger} dateset={dateset}></AccPOS>}
+        {tab === 0 && (
+          <AccPOS trigger={trigger} dateset={dateset} hotels={hotels}></AccPOS>
+        )}
         {tab === 1 && (
-          <AccDailyLog trigger={trigger} dateset={dateset}></AccDailyLog>
+          <AccDailyLog
+            trigger={trigger}
+            dateset={dateset}
+            hotels={hotels}
+          ></AccDailyLog>
         )}
         {tab === 2 && (
           <AccHotelExpense

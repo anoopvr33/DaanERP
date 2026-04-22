@@ -7,7 +7,7 @@ import axios from "axios";
 import AccountsDailyAdd from "../../accountAddComponents";
 import { API } from "../../../utils/axios";
 
-const AccDailyLog = ({ dateset, trigger }) => {
+const AccDailyLog = ({ dateset, trigger, hotels }) => {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
@@ -19,8 +19,10 @@ const AccDailyLog = ({ dateset, trigger }) => {
   const [subcat, setSubcat] = useState({ category: null, sub_category: "" });
 
   const GetPos = async () => {
+    console.log("get daily", hotels);
     const response = await API.post("daybook/get_daybook_log/", {
       date: dateset,
+      hotel: hotels,
     });
     console.log("daily res", response);
     setData(response.data.data);

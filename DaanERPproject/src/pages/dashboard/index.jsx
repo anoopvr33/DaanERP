@@ -163,7 +163,9 @@ const Dashboard = () => {
               <DashResult data={data}></DashResult>
               <div className="flex-2">
                 <Chart></Chart>
-                <MarkOptimization></MarkOptimization>
+                <MarkOptimization
+                  data={data.daily_occupancy}
+                ></MarkOptimization>
               </div>
               <DashboardPrev data={data}></DashboardPrev>
             </>
