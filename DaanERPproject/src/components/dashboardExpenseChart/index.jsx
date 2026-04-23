@@ -19,20 +19,6 @@ ChartJS.register(
   Legend,
 );
 
-// Chart data
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June"],
-  datasets: [
-    {
-      label: "Sales",
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: "rgb(190, 133, 255)",
-      barTickness: 10,
-      barPercentage: 0.6,
-    },
-  ],
-};
-
 // Chart options
 const options = {
   responsive: true,
@@ -42,14 +28,16 @@ const options = {
     },
     title: {
       display: true,
-      text: "Monthly Sales Data",
+      text: "Monthly Expense Data",
     },
   },
+
   scales: {
     x: {
       grid: {
         display: false, // removes vertical grid lines
         drawBorder: false, // removes axis border
+        length: "100px",
       },
     },
     y: {
@@ -65,14 +53,15 @@ const options = {
   },
 };
 
-export default function Chart({ data }) {
+export default function ExpenseChart({ data }) {
+  // Chart data
   const chartData = {
-    labels: data?.slice(0, 5).map((i) => i.month),
+    labels: data?.slice(0, 3).map((i) => i.month),
     datasets: [
       {
-        label: "Sales",
-        data: data?.slice(0, 5).map((i) => i.sales),
-        backgroundColor: "rgb(190, 133, 255)",
+        label: "Expense",
+        data: data?.slice(0, 3).map((i) => i.expense),
+        backgroundColor: "rgb(249, 72, 84)",
         barTickness: 10,
         barPercentage: 0.6,
       },

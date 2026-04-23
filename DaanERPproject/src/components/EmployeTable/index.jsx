@@ -9,6 +9,29 @@ const EmployeeTable = () => {
   // const [expand, setExpand] = useState({ row: null, open: false });
   const [items, setItems] = useState([]);
 
+  const Delete = async (_id) => {
+    try {
+      const res = await API.post(
+        "/main/delete_user/",
+        { id: _id },
+        // "/main/profile/",
+        {
+          withCredentials: true,
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
+        },
+      );
+      console.log("res user", res);
+      if (res.data.status === "success") {
+        alert("successflly deleted");
+        // setItems(res.data);
+      } else alert("please login or some error");
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   const GetUsers = async () => {
     try {
       const res = await API.get(
@@ -48,6 +71,7 @@ const EmployeeTable = () => {
         <th>is_active</th>
         <th>last_login</th>
         <th>Hotels</th>
+        <th></th>
         {/* <th></th> */}
       </tr>
       <tbody>
@@ -80,6 +104,7 @@ const EmployeeTable = () => {
                     ))}
                   </span>
                 </td>
+                <td onClick={() => Delete(i.id)}>delete</td>
                 {/* <td
                   onClick={() => setExpand({ row: index, open: !expand.open })}
                 >

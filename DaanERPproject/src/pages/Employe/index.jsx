@@ -63,6 +63,7 @@ const Employee = () => {
                   setData(selected);
                 }}
                 options={option2}
+                isMulti
                 className="custom-multi-select"
               ></Select>
 

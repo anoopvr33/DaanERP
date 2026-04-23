@@ -7,6 +7,15 @@ import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
+import Select from "react-select";
+// import Select from "../Elements/select";
+
+const option2 = Hotels()
+  ? Hotels().map((i) => ({
+      value: i,
+      label: i.charAt(0).toUpperCase() + i.slice(1),
+    }))
+  : [];
 
 const EmployeeAdd = () => {
   const [data, setData] = useState({
@@ -97,23 +106,23 @@ const EmployeeAdd = () => {
         </label>
         <label htmlFor="">
           <p>Select Hotels</p>
-          <FormItems
-            onChange={(e) => {
-              const selected = Array.from(
-                e.target.selectedOptions,
-                (opt) => opt.value,
-              );
-              setData((prev) => ({ ...prev, hotels: selected }));
-              // setForm((prev) => ({ ...prev, hotels: [e.target.value] }));
-            }}
-            // onChange={(e) => setData({ ...data, hotels: [e.target.value] })}
 
-            multiple
-            element="select"
-            option={Hotels()}
-            name={"hotel_name"}
-            required
-          ></FormItems>
+          <Select
+            onChange={(selected) => {
+              // if (!selected) return setHotel([]);
+              if (!selected || selected.length === 0) {
+                setData((prev) => ({ ...prev, hotels: Hotels() }));
+                return;
+              }
+              setData((prev) => ({
+                ...prev,
+                hotels: selected.map((i) => i.value),
+              }));
+            }}
+            options={option2}
+            isMulti
+            className="custom-multi-select"
+          ></Select>
         </label>
         <label htmlFor="">
           <p>is_superuser</p>
