@@ -224,13 +224,13 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
           <b>cash</b>: {data?.total_amount?.cash}
         </p>
         <p>
-          <b>cash</b>: {data?.total_amount?.bank_transfer}
+          <b>bank_transfer</b>: {data?.total_amount?.bank_transfer}
         </p>{" "}
         <p>
-          <b>cash</b>: {data?.total_amount?.outstanding}
+          <b>outstanding</b>: {data?.total_amount?.outstanding}
         </p>{" "}
         <p>
-          <b>cash</b>: {data?.total_amount?.complementary}
+          <b>complementary</b>: {data?.total_amount?.complementary}
         </p>
       </div>
     </div>

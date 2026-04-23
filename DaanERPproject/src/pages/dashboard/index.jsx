@@ -17,6 +17,7 @@ import Filter from "../../components/Elements/Filter";
 import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
 import MarkOptimization from "../../components/dashboardLineChart";
+import ExpenseChart from "../../components/dashboardExpenseChart";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -162,12 +163,15 @@ const Dashboard = () => {
             <>
               <DashResult data={data}></DashResult>
               <div className="flex-2">
-                <Chart></Chart>
+                <Chart data={data.monthly_sales}></Chart>
                 <MarkOptimization
                   data={data.daily_occupancy}
                 ></MarkOptimization>
               </div>
-              <DashboardPrev data={data}></DashboardPrev>
+              <div className="flex-2">
+                <DashboardPrev data={data}></DashboardPrev>
+                <ExpenseChart data={data.monthly_expense}></ExpenseChart>
+              </div>
             </>
           )}
         </div>
