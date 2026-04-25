@@ -30,7 +30,7 @@ const Customer = () => {
   const [form, setForm] = useState({
     hotels: Hotels() ? Hotels() : [],
     month: 12,
-    value: 0,
+    value: null,
     operator: "Equal",
   });
   const dispatch = useDispatch();
@@ -54,14 +54,11 @@ const Customer = () => {
   ];
 
   useEffect(() => {
+    console.log("customer details", form);
     dispatch(getCustomerData(form));
   }, []);
 
   console.log("customer error", error);
-
-  useEffect(() => {
-    console.log("my form", form);
-  }, []);
 
   return (
     <div className="customer">
@@ -129,7 +126,9 @@ const Customer = () => {
                 <p className="placeholder">No. of Bookings</p>
                 <FormItems
                   onChange={(e) =>
-                    setForm({ ...form, value: Number(e.target.value) })
+                    e.target.value === "0"
+                      ? setForm({ ...form, value: null })
+                      : setForm({ ...form, value: Number(e.target.value) })
                   }
                   option={Count}
                   type="number"

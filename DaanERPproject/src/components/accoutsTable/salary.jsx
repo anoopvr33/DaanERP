@@ -2,23 +2,32 @@ import { useEffect, useState } from "react";
 import { API } from "../../utils/axios";
 import "./style.css";
 
-const AccountsSalary = ({ yesterdate, trigger }) => {
+const AccountsSalary = ({
+  yesterdate,
+  trigger,
+  prevMonth,
+  hotels,
+  department,
+}) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
   const [salary, setSalary] = useState([]);
 
   const GetSalary = async () => {
-    console.log("salary date", yesterdate);
+    console.log("salary date", yesterdate, prevMonth, hotels, department);
     const res = await API.post("/daybook/get_salary/", {
-      date: yesterdate,
+      from_date: prevMonth,
+      to_date: yesterdate,
+      hotels: hotels,
+      departmemt: department,
     });
     console.log("salary", res);
     setSalary(res?.data?.data);
   };
 
   useEffect(() => {
-    // GetSalary();
-  }, [trigger]);
+    GetSalary();
+  }, [trigger, department]);
 
   return (
     <table className="accounts-table">

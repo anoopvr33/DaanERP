@@ -8,7 +8,7 @@ const CustomerTable = ({ date, count, items }) => {
 
   const [expand, setExpand] = useState({ row: null, open: false });
 
-  const [array, setArray] = useState([]);
+  const [array, setArray] = useState(items.data || []);
 
   const sortedArray = useMemo(() => {
     console.log("okkkkkk");
@@ -18,35 +18,24 @@ const CustomerTable = ({ date, count, items }) => {
       return [...array].sort(
         (a, b) => a.total_booking_counts - b.total_booking_counts,
       );
-    }
-
-    if (count === "More Count") {
+    } else if (count === "More Count") {
       console.log("finneee ok");
       return [...array].sort(
         (a, b) => b.total_booking_counts - a.total_booking_counts,
       );
+    } else if (count === "") {
+      return items.data;
     }
 
     return array;
   }, [count]);
 
   useEffect(() => {
-    console.log("my customer", items);
-    setArray(items.data);
-  }, [items]);
-
-  useEffect(() => {}, [count]);
-
-  useEffect(() => {
     console.log("sorted arra", sortedArray);
     setArray(sortedArray);
   }, [sortedArray]);
 
-  useEffect(() => {
-    console.log("arrraa", array);
-  }, [array]);
-
-  console.log("my dateee", date);
+  console.log("my dateee", date, array);
   return (
     <table className="customer-table" border={1}>
       <tr>

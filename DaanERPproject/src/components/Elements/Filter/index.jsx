@@ -43,6 +43,7 @@ const Filter = ({
   yesterday,
   yesOnchange,
   onClick,
+  disableFrom,
   child,
   yesType = "date",
 }) => {
@@ -60,15 +61,19 @@ const Filter = ({
           classNamePrefix={`custom-select-two`}
         ></Select>
       </label>
+      {disableFrom ? (
+        ""
+      ) : (
+        <label htmlFor="">
+          <p>From</p>
+          <FormItems
+            value={prevMonthDate}
+            onChange={prevOnchange}
+            type={prevType}
+          ></FormItems>
+        </label>
+      )}
 
-      <label htmlFor="">
-        <p>From</p>
-        <FormItems
-          value={prevMonthDate}
-          onChange={prevOnchange}
-          type={prevType}
-        ></FormItems>
-      </label>
       <label htmlFor="">
         <p>to</p>
         <FormItems

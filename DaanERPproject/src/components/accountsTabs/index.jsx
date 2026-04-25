@@ -6,7 +6,7 @@ import AccHotelExpense from "./accountsHotelExpense";
 import AccVendor from "./accountsVendor";
 import AccSalary from "./accountSalary";
 
-const AccountsTabs = ({ dateset, trigger, hotels }) => {
+const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -138,7 +138,12 @@ const AccountsTabs = ({ dateset, trigger, hotels }) => {
           <AccVendor trigger={trigger} yesterdate={dateset}></AccVendor>
         )}
         {tab === 4 && (
-          <AccSalary trigger={trigger} yesterdate={dateset}></AccSalary>
+          <AccSalary
+            trigger={trigger}
+            yesterdate={dateset}
+            prevMonth={prevMonth}
+            hotels={hotels}
+          ></AccSalary>
         )}
       </div>
     </div>
