@@ -5,17 +5,25 @@ import AccountsVendor from "../../accoutsTable/vendor";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
 import AccountsSalary from "../../accoutsTable/salary";
+import AddSalary from "../../accountAddComponents/salary";
 
-const AccSalary = ({ yesterdate, trigger }) => {
+const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(false);
+  const [department, setDepartment] = useState("");
 
   return (
     <div>
       <div className="flex-1">
-        {/* <FormItems type="date"></FormItems>{" "} */}
-        {/* <Button onClick={() => setOpen(!open)} child={"create +"}></Button> */}
+        <FormItems
+          element="select"
+          onChange={(e) => setDepartment(e.target.value)}
+          option={["select department", "House Keeping"]}
+        ></FormItems>{" "}
+        <span style={{ margin: "auto", marginRight: "0px" }}>
+          <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
+        </span>
       </div>
-      {open && <AccountsVendorAdd></AccountsVendorAdd>}
+      {open && <AddSalary></AddSalary>}
       <p>
         <br />
         <b>Date : </b> {yesterdate}
@@ -23,6 +31,9 @@ const AccSalary = ({ yesterdate, trigger }) => {
       <AccountsSalary
         yesterdate={yesterdate}
         trigger={trigger}
+        prevMonth={prevMonth}
+        hotels={hotels}
+        department={department}
       ></AccountsSalary>
     </div>
   );
