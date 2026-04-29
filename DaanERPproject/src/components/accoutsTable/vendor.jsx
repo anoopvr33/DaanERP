@@ -49,7 +49,7 @@ const AccountsVendor = ({ yesterdate, trigger }) => {
               <td>
                 {item.file_path ? (
                   <a
-                    href={`https://admin.daanregency.com/media/${item.file_path}`}
+                    href={`${item.file_path}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

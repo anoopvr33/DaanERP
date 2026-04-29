@@ -3,7 +3,7 @@ import "./style.css";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { getCustomerData } from "../../redux/customerSlice";
 
-const CustomerTable = ({ date, count, items }) => {
+const CustomerTable = ({ count, items }) => {
   const dispatch = useDispatch();
 
   const [expand, setExpand] = useState({ row: null, open: false });
@@ -35,7 +35,6 @@ const CustomerTable = ({ date, count, items }) => {
     setArray(sortedArray);
   }, [sortedArray]);
 
-  console.log("my dateee", date, array);
   return (
     <table className="customer-table" border={1}>
       <tr>

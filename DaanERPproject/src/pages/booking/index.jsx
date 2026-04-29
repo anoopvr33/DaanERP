@@ -17,6 +17,7 @@ import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
 import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
+import { useNavigate } from "react-router-dom";
 
 const option2 = Hotels()
   ? Hotels().map((i) => ({
@@ -30,6 +31,9 @@ const Booking = () => {
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("booking");
+
+  const navigate = useNavigate();
+  const [hotelOptions, setHotelOptions] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -54,7 +58,7 @@ const Booking = () => {
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
   const [data, setData] = useState({
-    hotels: Hotels(),
+    hotels: [],
     from_date: prevMonthDate,
     to_date: yesterdayDate,
     filter_method: sort,
@@ -67,8 +71,25 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    // console.log("my booking data", sort);
     dispatch(getBookingData(data));
+  }, [data.hotels]);
+
+  useEffect(() => {
+    const hotels = Hotels();
+    if (hotels.length === 0) {
+      navigate("/login");
+    }
+    console.log("hotelsss", hotels);
+
+    if (hotels && hotels.length > 0) {
+      const formatted = hotels.map((i) => ({
+        value: i,
+        label: i.charAt(0).toUpperCase() + i.slice(1),
+      }));
+
+      setHotelOptions(formatted); // initialize selection
+      setData({ ...data, hotels: formatted.map((i) => i.value) });
+    }
   }, []);
 
   return (
@@ -88,10 +109,10 @@ const Booking = () => {
                     setData({ ...data, hotels: Hotels() ? Hotels() : [] });
                     return;
                   }
-                  setData({ ...data, hotels: selected });
+                  setData({ ...data, hotels: selected.map((i) => i.value) });
                 }}
                 isMulti
-                options={option2}
+                options={hotelOptions}
                 prevMonthDate={data.from_date}
                 prevOnchange={(e) =>
                   setData({ ...data, from_date: e.target.value })

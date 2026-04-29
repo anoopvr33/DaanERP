@@ -15,24 +15,25 @@ import { getCustomerData } from "../../redux/customerSlice";
 import Select from "react-select";
 import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
+import { useNavigate } from "react-router-dom";
 
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
+// const option2 = Hotels()
+//   ? Hotels().map((i) => ({
+//       value: i,
+//       label: i.charAt(0).toUpperCase() + i.slice(1),
+//     }))
+//   : [];
 
 const Customer = () => {
-  const [date, setDate] = useState(12);
   const [count, setCount] = useState("");
-  const [year, setYear] = useState("");
+  const [hotelOptions, setHotelOptions] = useState([]);
   const [form, setForm] = useState({
     hotels: Hotels() ? Hotels() : [],
     month: 12,
     value: null,
     operator: "Equal",
   });
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { items, error, loading } = useSelector((state) => state.customer);
@@ -54,8 +55,25 @@ const Customer = () => {
   ];
 
   useEffect(() => {
-    console.log("customer details", form);
     dispatch(getCustomerData(form));
+  }, [hotelOptions]);
+
+  useEffect(() => {
+    const hotels = Hotels();
+    if (hotels.length === 0) {
+      navigate("/login");
+    }
+    console.log("hotelsss", hotels);
+
+    if (hotels && hotels.length > 0) {
+      const formatted = hotels.map((i) => ({
+        value: i,
+        label: i.charAt(0).toUpperCase() + i.slice(1),
+      }));
+
+      setHotelOptions(formatted); // initialize selection
+      setForm({ ...form, hotels: formatted.map((i) => i.value) });
+    }
   }, []);
 
   console.log("customer error", error);
@@ -70,9 +88,7 @@ const Customer = () => {
             <h2>Customer Management</h2>
             <div className="flex-1">
               <Select
-                // styles={{ width: "500px" }}
                 onChange={(selected) => {
-                  // if (!selected) return setForm({ ...form, hotels: [] });
                   if (!selected || selected.length === 0) {
                     setForm({ ...form, hotels: Hotels() ? Hotels() : [] });
                     return;
@@ -82,25 +98,9 @@ const Customer = () => {
                 isMulti
                 className="custom-multi-select"
                 placeholder={"All Hotels"}
-                options={option2}
+                options={hotelOptions}
               ></Select>
-              {/* <FormItems
-                element={"select"}
-                option={[
-                  "All Hotels",
-                  ...(Hotels() ? Hotels() : ["no data found"]),
-                ]}
-                onChange={(e) => {
-                  setForm((prev) => ({
-                    ...prev,
-                    hotels:
-                      e.target.value === "All Hotels"
-                        ? Hotels()
-                        : [e.target.value],
-                  }));
-                }}
-                type="date"
-              /> */}
+
               <label htmlFor="">
                 <p className="placeholder">Select Months</p>
                 <FormItems
@@ -157,11 +157,7 @@ const Customer = () => {
           ) : error ? (
             <ErrorPage />
           ) : (
-            <CustomerTable
-              items={items}
-              date={date}
-              count={count}
-            ></CustomerTable>
+            <CustomerTable items={items} count={count}></CustomerTable>
           )}
 
           {/* <CustomTabs date={date} count={count}></CustomTabs> */}

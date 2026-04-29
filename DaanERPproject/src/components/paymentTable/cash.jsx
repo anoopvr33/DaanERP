@@ -11,7 +11,7 @@ const CashPay = ({ result }) => {
         <th>bookingId</th>
         <th>bookedOn</th>
         <th> paymentMode</th>
-        <th>out Standing</th>
+
         <th>debit/credit</th>
         <th>amount</th>
         <th> source</th>
@@ -29,7 +29,7 @@ const CashPay = ({ result }) => {
               <td>{row.bookingId}</td>
               <td>{new Date(row.bookedOn).toLocaleString()}</td>
               <td>{row.paymentMode}</td>
-              <td>{row.outstanding ? row.outstanding : "Null"}</td>
+
               <td>{row.debit_credit ? row.debit_credit : "Null"}</td>
               <td>{row.amount.toFixed(2)}</td>
               <td>{row.source}</td>

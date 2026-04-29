@@ -19,16 +19,18 @@ import ErrorPage from "../../components/Elements/Error";
 import MarkOptimization from "../../components/dashboardLineChart";
 import ExpenseChart from "../../components/dashboardExpenseChart";
 
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
+// const option2 = Hotels()
+//   ? Hotels().map((i) => ({
+//       value: i,
+//       label: i.charAt(0).toUpperCase() + i.slice(1),
+//     }))
+//   : [];
 
 const Dashboard = () => {
   const today = new Date();
-  const [hotelData, setHotelData] = useState(option2);
+  const [hotelData, setHotelData] = useState([]);
+  const [hotelOptions, setHotelOptions] = useState([]);
+  const [trigger, setTrigger] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,49 +56,67 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const GetPos = async () => {
-    // console.log("maiaaa daarf", yesterdayDate, prevMonthDate);
+  useEffect(() => {
+    if (!hotelData || hotelData.length === 0) {
+      // navigate("/login");
+      return;
+    }
 
-    setLoading(true);
-    setError(null);
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
 
-    if (!hotelData || hotelData.length === 0) window.location.reload();
+      try {
+        const SelectedHotel = hotelData.map((i) => i.value);
 
-    const SelectedHotel = hotelData.map((i) => i.value);
-    console.log("select hoeee", SelectedHotel);
-
-    try {
-      const response = await API.post(
-        "/dashboard/get_report/",
-        {
-          hotels: SelectedHotel,
-          from_date: prevMonthDate,
-          to_date: yesterdayDate,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
+        const response = await API.post(
+          "/dashboard/get_report/",
+          {
+            hotels: SelectedHotel,
+            from_date: prevMonthDate,
+            to_date: yesterdayDate,
           },
-        },
-      );
+          {
+            withCredentials: true,
+            headers: {
+              "X-CSRFToken": getCookie("csrftoken"),
+            },
+          },
+        );
 
-      console.log("dashpo res", response);
-      if (response.data.status === "success") {
-        setData(response.data);
-        setLoading(false);
-      } else {
+        console.log("dashboad response>>>>", response);
+
+        if (response.data.status === "success") {
+          setData(response.data);
+        } else {
+          setError(true);
+        }
+      } catch (err) {
         setError(true);
+      } finally {
         setLoading(false);
       }
-    } catch (error) {
-      setLoading(false);
-      setError(true);
-    }
-  };
+    };
+
+    fetchData();
+  }, [hotelData, trigger, prevMonthDate, yesterdayDate]);
 
   useEffect(() => {
-    GetPos();
+    const hotels = Hotels();
+    if (hotels?.length === 0 || !hotels) {
+      navigate("/login");
+    }
+    console.log("hotelsss", hotels);
+
+    if (hotels && hotels.length > 0) {
+      const formatted = hotels.map((i) => ({
+        value: i,
+        label: i.charAt(0).toUpperCase() + i.slice(1),
+      }));
+
+      setHotelOptions(formatted);
+      setHotelData(formatted); // initialize selection
+    }
   }, []);
 
   return (
@@ -106,31 +126,6 @@ const Dashboard = () => {
         <div className="elements common-element">
           <Navbar></Navbar>
 
-          {/* <FormItems
-              option={["All Hotels", ...(Hotels() ? Hotels() : "No Data")]}
-              onChange={(e) =>
-                setHotelData(
-                  e.target.value === "All Hotels" ? Hotels() : [e.target.value],
-                )
-              }
-              type="text"
-              element="select"
-            /> */}
-          {/* <Select
-            onChange={(selected) => {
-              if (!selected) return setHotelData([]);
-              if (!selected || selected.length === 0) {
-                setHotelData(option2);
-                return;
-              }
-              setHotelData(selected);
-            }}
-            // defaultValue={hotelData}
-
-            isMulti
-            placeholder={"All Hotels"}
-            options={option2}
-          ></Select> */}
           <div className="h2-sub">
             <h2>Dashboard</h2>
             <div className="flex-1">
@@ -138,18 +133,18 @@ const Dashboard = () => {
                 onChange={(selected) => {
                   // if (!selected) return setHotelData([]);
                   if (!selected || selected.length === 0) {
-                    setHotelData(option2);
+                    setHotelData(hotelOptions);
                     return;
                   }
                   setHotelData(selected);
                 }}
                 isMulti
-                options={option2}
+                options={hotelOptions}
                 prevMonthDate={prevMonthDate}
                 prevOnchange={(e) => setPrevMonthDate(e.target.value)}
                 yesterday={yesterdayDate}
                 yesOnchange={(e) => setYesterdayDate(e.target.value)}
-                onClick={GetPos}
+                onClick={() => setTrigger(!trigger)}
                 child={"Filter"}
               />
             </div>
