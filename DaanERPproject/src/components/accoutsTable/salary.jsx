@@ -51,7 +51,7 @@ const AccountsSalary = ({
           salary.map((item) => (
             <tr className="accounts-row">
               <td>{item.name}</td>
-              <td>{item.departmemt}</td>
+              <td>{item.department}</td>
               <td>{item.hotel}</td>
               <td>{item.doj}</td>
               <td>{item.basic_salary}</td>

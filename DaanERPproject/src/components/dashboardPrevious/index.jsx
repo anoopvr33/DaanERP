@@ -12,11 +12,11 @@ const DashboardPrev = ({ data }) => {
         <h2>Last Month Occupancy</h2>
       </div>
       <div className="sub-1">
-        <span>{data.yestarday_occupancy}</span>
+        <span>{data?.yesterday_revenue}</span>
         <h2>Yesturday Revenue</h2>
       </div>
       <div className="sub-1">
-        <span>{data.last_month_occupancy}</span>
+        <span>{data?.last_month_revenue}</span>
         <h2>Last Month Revenue</h2>
       </div>
     </div>

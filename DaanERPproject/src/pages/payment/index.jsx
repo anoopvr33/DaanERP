@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Elements/navbar";
 import "./style.css";
 import SidebarTwo from "../../components/Elements/sidebartwo";
@@ -10,17 +10,13 @@ import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
 import ErrorPage from "../../components/Elements/Error";
 import LoadingItem from "../../components/Elements/Loading";
-
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
   // const [date, setDate] = useState("");
-  const [hotels, setHotel] = useState(option2);
+  const navigate = useNavigate();
+  const [hotelData, setHotelData] = useState([]);
+  const [hotelOptions, setHotelOptions] = useState([]);
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -45,8 +41,23 @@ const Payment = () => {
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
-  const Select = ["Hotel", "Daan Lux", "Daan Ambalath", "Regency"];
-  const Count = ["Sort", "By Date", "More Count", "Less Count", ""];
+  useEffect(() => {
+    const hotels = Hotels();
+    if (hotels.length === 0) {
+      navigate("/login");
+    }
+    console.log("hotelsss", hotels);
+
+    if (hotels && hotels.length > 0) {
+      const formatted = hotels.map((i) => ({
+        value: i,
+        label: i.charAt(0).toUpperCase() + i.slice(1),
+      }));
+
+      setHotelOptions(formatted);
+      setHotelData(formatted); // initialize selection
+    }
+  }, []);
 
   return (
     <div className="accounts">
@@ -61,13 +72,13 @@ const Payment = () => {
                 onChange={(selected) => {
                   // if (!selected) return setHotel([]);
                   if (!selected || selected.length === 0) {
-                    setHotel(option2);
+                    setHotelData(hotelOptions);
                     return;
                   }
-                  setHotel(selected);
+                  setHotelData(selected);
                 }}
                 isMulti
-                options={option2}
+                options={hotelOptions}
                 prevMonthDate={prevMonthDate}
                 prevOnchange={(e) => setPrevMonthDate(e.target.value)}
                 yesterday={yesterdayDate}
@@ -85,7 +96,7 @@ const Payment = () => {
             <PaymentTabs
               prevmonth={prevMonthDate}
               yesterday={yesterdayDate}
-              hotelsArray={hotels.map((i) => i.value)}
+              hotelsArray={hotelData.map((i) => i.value)}
               trigger={trigger}
             ></PaymentTabs>
           )}

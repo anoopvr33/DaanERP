@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Elements/navbar";
 import "./style.css";
 import SidebarTwo from "../../components/Elements/sidebartwo";
@@ -9,18 +9,20 @@ import { Hotels } from "../../utils";
 import Filter from "../../components/Elements/Filter";
 import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
+import { useNavigate } from "react-router-dom";
 
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
+// const option2 = Hotels()
+//   ? Hotels().map((i) => ({
+//       value: i,
+//       label: i.charAt(0).toUpperCase() + i.slice(1),
+//     }))
+//   : [];
 
 const Accounts = () => {
-  const [open, setOpen] = useState(false);
-  const [hotel, setHotel] = useState(false);
-  const [hotelData, setHotelData] = useState(option2);
+  const navigate = useNavigate();
+  const [hotelOptions, setHotelOptions] = useState([]);
+  const [hotelData, setHotelData] = useState([]);
+
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -48,6 +50,24 @@ const Accounts = () => {
   const Select = ["Hotel", "Daan Lux", "Daan Ambalath", "Regency"];
   const Count = ["Sort", "By Date", "More Count", "Less Count", ""];
 
+  useEffect(() => {
+    const hotels = Hotels();
+    if (hotels.length === 0) {
+      navigate("/login");
+    }
+    console.log("hotelsss", hotels);
+
+    if (hotels && hotels.length > 0) {
+      const formatted = hotels.map((i) => ({
+        value: i,
+        label: i.charAt(0).toUpperCase() + i.slice(1),
+      }));
+
+      setHotelOptions(formatted); // initialize selection
+      setHotelData(formatted);
+    }
+  }, []);
+
   return (
     <div className="accounts">
       <div className="flex common-flex">
@@ -70,13 +90,13 @@ const Accounts = () => {
                 onChange={(selected) => {
                   // if (!selected) return setHotelData([]);
                   if (!selected || selected.length === 0) {
-                    setHotelData(option2);
+                    setHotelData(hotelOptions);
                     return;
                   }
                   setHotelData(selected);
                 }}
                 isMulti
-                options={option2}
+                options={hotelOptions}
                 prevMonthDate={prevMonthDate}
                 prevOnchange={(e) => setPrevMonthDate(e.target.value)}
                 yesterday={yesterdayDate}

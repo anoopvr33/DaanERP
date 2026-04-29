@@ -9,7 +9,7 @@ import AddSalary from "../../accountAddComponents/salary";
 
 const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(false);
-  const [department, setDepartment] = useState("");
+  const [department, setDepartment] = useState("Housekeeping");
 
   return (
     <div>
@@ -17,7 +17,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
         <FormItems
           element="select"
           onChange={(e) => setDepartment(e.target.value)}
-          option={["select department", "House Keeping"]}
+          option={["select department", "Housekeeping"]}
         ></FormItems>{" "}
         <span style={{ margin: "auto", marginRight: "0px" }}>
           <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
