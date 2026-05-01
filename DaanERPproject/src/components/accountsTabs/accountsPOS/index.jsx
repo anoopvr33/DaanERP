@@ -10,8 +10,9 @@ import AccountsPosAdd from "../../accountAddComponents/pos";
 import { API, getCookie } from "../../../utils/axios";
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
+import { Hotels } from "../../../utils";
 
-const AccPOS = ({ dateset, trigger, hotels }) => {
+const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
@@ -21,24 +22,27 @@ const AccPOS = ({ dateset, trigger, hotels }) => {
     budget_sub_category: "",
   });
   const [category, setCategory] = useState([]);
-  const [open2, setOpen2] = useState(false);
   const [data1, setData1] = useState([]);
-  const [data2, setData2] = useState([]);
-
-  const head1 = ["Id", "Details", "Expense", "Remark"];
-  const head2 = ["Id", "Details", "Income", "Remark"];
 
   const GetPos = async () => {
-    console.log("getting pos data for this date", dateset);
-    const response = await API.post("/daybook/get_budget/", {
-      date: dateset,
-      hotel: hotels,
-    });
-    console.log("pos res", response.data.data);
-    if (response.data.data) {
-      setData1(response.data.data);
-      // setData2(response.data.pos_expense);
-    } else alert("something went wrong getting Budget data");
+    console.log("getting pos data for this date", dateset, prevMonth, hotels);
+    if (hotels.length === 0) return;
+
+    try {
+      const response = await API.post("/daybook/get_budget/", {
+        from_date: prevMonth,
+        to_date: dateset,
+        // date: dateset,
+        hotel: hotels,
+      });
+      console.log("pos res", response.data.data);
+      if (response.data.data) {
+        setData1(response.data.data);
+        // setData2(response.data.pos_expense);
+      } else alert("something went wrong getting Budget data");
+    } catch (error) {
+      alert("something went wrong");
+    }
   };
 
   const GetCategory = async () => {
@@ -95,7 +99,7 @@ const AccPOS = ({ dateset, trigger, hotels }) => {
   useEffect(() => {
     GetPos();
     // eslint(react-hooks/set-state-in-effect)
-  }, [trigger]);
+  }, [trigger, hotels]);
 
   useEffect(() => {
     console.log("data1", data1);

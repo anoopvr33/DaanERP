@@ -68,6 +68,10 @@ const Accounts = () => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("Hotels account", hotelData);
+  }, [hotelData]);
+
   return (
     <div className="accounts">
       <div className="flex common-flex">

@@ -71,12 +71,14 @@ const Booking = () => {
   };
 
   useEffect(() => {
+    if (data.hotels.length === 0) return;
+
     dispatch(getBookingData(data));
   }, [data.hotels]);
 
   useEffect(() => {
     const hotels = Hotels();
-    if (hotels.length === 0) {
+    if (hotels.length === 0 || !hotels) {
       navigate("/login");
     }
     console.log("hotelsss", hotels);

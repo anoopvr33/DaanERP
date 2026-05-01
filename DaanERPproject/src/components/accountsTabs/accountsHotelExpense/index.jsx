@@ -7,22 +7,34 @@ import AccountsHotel from "../../accoutsTable/hotel";
 import AccountsHotelAdd from "../../accountAddComponents/hotel";
 import { API } from "../../../utils/axios";
 
-const AccHotelExpense = ({ dateset, trigger }) => {
+const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState([]);
   const [form, setForm] = useState({
-    date: dateset,
+    // date: dateset,
+    from_date: prevMonth,
+    to_date: dateset,
     category: "",
     sub_category: "",
   });
+
   const [subcat, setSubCat] = useState([]);
   const [data1, setData1] = useState([]);
 
   const GetHotel = async () => {
     console.log("ops form", form);
-    const response = await API.post("/daybook/get_hotelexpense/", form);
-    console.log("hotel res", response);
-    setData1(response.data);
+
+    try {
+      const response = await API.post("/daybook/get_hotelexpense/", form);
+      console.log("hotel res", response);
+      if (response.data) {
+        setData1(response.data);
+      } else {
+        alert("something went wrong");
+      }
+    } catch (error) {
+      alert("something went wrong getting hotelops");
+    }
   };
 
   const GetCategory = async () => {

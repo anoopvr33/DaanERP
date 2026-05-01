@@ -30,10 +30,10 @@ const DashResult = ({ data }) => {
         <h1>{data.room_occupancy}</h1>
         <b> Room Occupancy</b>
       </div>
-      <div>
+      {/* <div>
         <h1>{data?.revenu_count?.total_amount || "NaN"}</h1>
         <b>Total Revenue</b>
-      </div>
+      </div> */}
     </div>
   );
 };

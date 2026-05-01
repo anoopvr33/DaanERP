@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { API } from "../../utils/axios";
 import "./style.css";
 
-const AccountsVendor = ({ yesterdate, trigger }) => {
+const AccountsVendor = ({ yesterdate, trigger, prevMonth, hotels }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
   const [vendor, setVendor] = useState([]);
 
   const GetVendor = async () => {
-    console.log("vendor date", yesterdate);
+    console.log("vendor date", yesterdate, prevMonth, hotels);
     const res = await API.post("/daybook/get_vendor_payout/", {
-      date: yesterdate,
+      from_date: prevMonth,
+      to_date: yesterdate,
+      hotel: hotels,
     });
     console.log("vendor", res);
     setVendor(res?.data?.data);
@@ -31,6 +33,7 @@ const AccountsVendor = ({ yesterdate, trigger }) => {
         <th>Remark</th>
         <th>Payment Date</th>
         <th>Due Date</th>
+        <th>Hotel</th>
         <th>File</th>
         {/* <th>Invoice</th>  */}
       </tr>
@@ -46,6 +49,7 @@ const AccountsVendor = ({ yesterdate, trigger }) => {
               <td>{item.remarks}</td>
               <td>{item.payment_date}</td>
               <td>{item.due_date}</td>
+              <td>{item.hotel}</td>
               <td>
                 {item.file_path ? (
                   <a

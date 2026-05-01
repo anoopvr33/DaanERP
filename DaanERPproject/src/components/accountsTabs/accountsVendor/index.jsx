@@ -5,7 +5,7 @@ import AccountsVendor from "../../accoutsTable/vendor";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
 
-const AccVendor = ({ yesterdate, trigger }) => {
+const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -17,11 +17,13 @@ const AccVendor = ({ yesterdate, trigger }) => {
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
       <p>
         <br />
-        <b>Date : </b> {yesterdate}
+        <b>Date : </b> {dateset}
       </p>
       <AccountsVendor
-        yesterdate={yesterdate}
+        yesterdate={dateset}
         trigger={trigger}
+        prevMonth={prevMonth}
+        hotels={hotels}
       ></AccountsVendor>
     </div>
   );

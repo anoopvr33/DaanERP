@@ -3,32 +3,26 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { Hotels, IsSuper } from "../../../utils";
 
-const menuItems = [
-  "",
-  "Dashboard",
-  "Customer",
-  // "Hotels",
-  "Accounts",
-  "Reports",
-  "Payment",
-  "Booking",
-  IsSuper() === true && "Employees",
-  "",
-];
-
 export default function SidebarTwo() {
-  const [active, setActive] = useState(0);
+  const menuItems = [
+    "",
+    "Dashboard",
+    "Customer",
+    // "Hotels",
+    "Accounts",
+    "Reports",
+    "Payment",
+    "Booking",
+    // "Employees",
+    IsSuper() ? "Employees" : "",
+    "",
+  ];
 
   const page = new URLSearchParams(location.search);
   const ind = Number(page.get("index"));
   const navigate = useNavigate();
-  //   const isTop={border}
 
-  console.log("indexx", ind - 1);
-
-  useEffect(() => {}, [ind]);
-
-  console.log("is super", IsSuper());
+  useEffect(() => {}, [IsSuper()]);
 
   return (
     <aside className="sidebar-3">
