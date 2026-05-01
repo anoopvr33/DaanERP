@@ -35,15 +35,21 @@ const AccountsPosAdd = ({ formdate, type }) => {
 
     console.log("posss", data);
 
-    const response = await API.post("/daybook/create_budget/", data, {
-      withCredentials: true,
-      headers: {
-        "X-CSRFToken": getCookie("csrftoken"),
-      },
-    });
-    console.log("add budget res", response, data);
-    if (response.data.status === "success") {
-      alert("success added");
+    try {
+      const response = await API.post("/daybook/create_budget/", data, {
+        withCredentials: true,
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+      });
+      console.log("add budget res", response, data);
+      if (response.data.status === "success") {
+        alert("success added");
+      } else {
+        alert("something went wrong");
+      }
+    } catch (error) {
+      alert("something went wrong adding budget");
     }
   };
 

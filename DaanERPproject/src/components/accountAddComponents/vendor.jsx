@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
+import { Hotels } from "../../utils";
 
 const AccountsVendorAdd = ({ formdate }) => {
   const [data, setData] = useState({
@@ -17,6 +18,7 @@ const AccountsVendorAdd = ({ formdate }) => {
     payment_date: "",
     due_date: "",
     file_path: "",
+    hotel: "",
   });
   const dispatch = useDispatch();
 
@@ -55,7 +57,7 @@ const AccountsVendorAdd = ({ formdate }) => {
     formData.append("name", data.name);
     formData.append("payment_date", data.payment_date);
     formData.append("remarks", data.remarks);
-
+    formData.append("hotel", data.hotel);
     console.log("FINAL file:", data.file_path);
     console.log("isFile:", data.file_path instanceof File);
 
@@ -71,6 +73,7 @@ const AccountsVendorAdd = ({ formdate }) => {
       },
       transformRequest: [(data) => data], // 👈 bypass JSON transform
     });
+    console.log("add vendor", response);
     if (response.data.status) {
       alert("addedd successfully");
     }
@@ -149,6 +152,16 @@ const AccountsVendorAdd = ({ formdate }) => {
             onChange={OnInput}
             type="file"
             name={"file_path"}
+            required
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>Select Hotel</p>
+          <FormItems
+            onChange={OnInput}
+            element="select"
+            option={["select hotel", ...Hotels()]}
+            name={"hotel"}
             required
           ></FormItems>
         </label>

@@ -80,7 +80,7 @@ const AddSalary = () => {
           <FormItems
             onChange={OnInput}
             element="select"
-            option={Hotels()}
+            option={["select hotel", ...Hotels()]}
             name={"hotel"}
             required
           ></FormItems>

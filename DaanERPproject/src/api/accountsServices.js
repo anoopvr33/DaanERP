@@ -5,6 +5,14 @@ import { API } from "../utils/axios";
 //       date: dateset,
 //     });
 
+export const GetBudget = async (form) => {
+  return await API.post("/daybook/get_budget/", form);
+};
+
+export const GetBudgetCategory = async () => {
+  return await API.get("/daybook/get_budget_categories/");
+};
+
 // add budget
 // API.post("/daybook/create_budget/", {
 //   date: formdate,

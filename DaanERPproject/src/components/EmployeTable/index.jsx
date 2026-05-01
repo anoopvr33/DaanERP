@@ -10,6 +10,10 @@ const EmployeeTable = () => {
   const [items, setItems] = useState([]);
 
   const Delete = async (_id) => {
+    const confirmed = window.confirm("Are you sure want to delete this user?");
+
+    if (!confirmed) return;
+
     try {
       const res = await API.post(
         "/main/delete_user/",

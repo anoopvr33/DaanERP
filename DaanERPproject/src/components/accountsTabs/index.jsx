@@ -119,12 +119,18 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
         className="acc-tabs-container"
       >
         {tab === 0 && (
-          <AccPOS trigger={trigger} dateset={dateset} hotels={hotels}></AccPOS>
+          <AccPOS
+            trigger={trigger}
+            prevMonth={prevMonth}
+            dateset={dateset}
+            hotels={hotels}
+          ></AccPOS>
         )}
         {tab === 1 && (
           <AccDailyLog
             trigger={trigger}
             dateset={dateset}
+            prevMonth={prevMonth}
             hotels={hotels}
           ></AccDailyLog>
         )}
@@ -132,10 +138,17 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
           <AccHotelExpense
             trigger={trigger}
             dateset={dateset}
+            prevMonth={prevMonth}
           ></AccHotelExpense>
         )}
         {tab === 3 && (
-          <AccVendor trigger={trigger} yesterdate={dateset}></AccVendor>
+          <AccVendor
+            prevMonth={prevMonth}
+            dateset={dateset}
+            trigger={trigger}
+            yesterdate={dateset}
+            hotels={hotels}
+          ></AccVendor>
         )}
         {tab === 4 && (
           <AccSalary
