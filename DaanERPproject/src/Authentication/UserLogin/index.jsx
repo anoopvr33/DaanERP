@@ -15,23 +15,27 @@ const UserLogin = () => {
   };
 
   const OnLog = async () => {
-    const response = await API.post("/main/admin_login/", data, {
-      withCredentials: true,
-      headers: {
-        "X-CSRFToken": getCookie("csrftoken"),
-      },
-    });
+    try {
+      const response = await API.post("/main/admin_login/", data, {
+        withCredentials: true,
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+      });
 
-    if (response.data.hotel) {
-      localStorage.setItem("hotel", JSON.stringify(response.data.hotel));
-      (localStorage.setItem(
-        "isSuper",
-        JSON.stringify(response.data.is_superuser ? true : false),
-      ),
-        navigate("/"));
+      if (response.data.hotel) {
+        localStorage.setItem("hotel", JSON.stringify(response.data.hotel));
+        (localStorage.setItem(
+          "isSuper",
+          JSON.stringify(response.data.is_superuser ? true : false),
+        ),
+          navigate("/"));
+      } else {
+        throw new Error("something wrong");
+      }
+    } catch (error) {
+      alert(error);
     }
-
-    console.log("mylog res", response);
   };
 
   // const OnLogin = async () => {

@@ -75,6 +75,8 @@ export default function Chart({ data }) {
         backgroundColor: "rgb(190, 133, 255)",
         barTickness: 10,
         barPercentage: 0.6,
+        maxBarThickness: 100,
+        width: "100px",
       },
     ],
   };

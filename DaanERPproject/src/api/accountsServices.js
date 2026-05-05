@@ -1,100 +1,96 @@
-import { API } from "../utils/axios";
+import { API, getCookie } from "../utils/axios";
 
+const credentials = {
+  withCredentials: true,
+  headers: {
+    "X-CSRFToken": getCookie("csrftoken"),
+  },
+};
 // Get budget --------------------------------------
 // API.post("/daybook/get_budget/", {
 //       date: dateset,
 //     });
 
+export const CreateBudget = async (form) => {
+  return await API.post("/daybook/create_budget/", form, credentials);
+};
+
 export const GetBudget = async (form) => {
   return await API.post("/daybook/get_budget/", form);
 };
 
-export const GetBudgetCategory = async () => {
+export const GetBudget_Category = async () => {
   return await API.get("/daybook/get_budget_categories/");
 };
 
-// add budget
-// API.post("/daybook/create_budget/", {
-//   date: formdate,
-//   category: "",
-//   sub_category: "New Sub Food",
-//   budget_amount: null,
-//   actual_amount: null,
-// },
+export const AddBudget_Category = async (data) => {
+  return await API.post(
+    "/daybook/create_budget_category/",
+    {
+      budget_category: data,
+    }.credentials,
+  );
+};
 
-// get category
-// API.get("/daybook/get_budget_categories/")
+export const AddBudgetSub_Category = async (data) => {
+  return await API.post(
+    "/daybook/create_budget_subcategory/",
+    data,
+    credentials,
+  );
+};
 
-// add category
-// API.post(
-//       "/daybook/create_budget_category/",
-//       {
-//         budget_category: newCat,
-//       },)
+export const GetBudgetSub_Category = async (data) => {
+  return await API.post("/daybook/get_budget_subcategories/", {
+    budget_category_id: data,
+  });
+};
 
-// add sub caches
-// API.post("/daybook/create_budget_subcategory/", {
-//   budget_category: null,
-//   budget_sub_category: "",
-// });
+///////////////////////////////////////////////////////// daily log
+export const Get_DailyLog = async (data) => {
+  return await API.post("daybook/get_daybook_log/", data);
+};
 
-// get sub category
-// API.post("/daybook/get_budget_subcategories/", {
-//       budget_category_id: subId,
-//     }
+export const Get_DailyLog_Category = async () => {
+  return await API.get("/daybook/get_categories/");
+};
 
-// Get Daily Log-----------------------------------
-// const response = await API.post("daybook/get_daybook_log/", {
-//     date: dateset,
-//   });
+export const Add_DailyLog_Category = async (data) => {
+  return await API.post(
+    "/daybook/create_category/",
+    {
+      category: data,
+    },
+    credentials,
+  );
+};
 
-// add daily log
-// API.post("/daybook/add_daybook_log/", {
-//   date: "",
-//   category: "",
-//   sub_category: "",
-//   receipts: Number(""),
-//   payments: Number(""),
-//   balance: Number(""),
-//   description: "",
-//   bank: "",
-// },
+export const Add_DailyLog_SubCategory = async (data) => {
+  return await API.post("/daybook/create_subcategory/", data, credentials);
+};
 
-// get category
-// const res = await API.get("/daybook/get_categories/");
+export const Add_DailyLog = async (data) => {
+  return await API.post("/daybook/add_daybook_log/", data, credentials);
+};
 
-// add category
-//   API.post("/daybook/create_category/", {
-//       category: newcat,
-//     });
+///////////////////////////////////////// hotel ops
 
-// add sub category
-// API.post("/daybook/create_subcategory/", { category: "", sub_category: "" });
+export const Get_HotelOps = async (data) => {
+  return await API.post("/daybook/get_hotelexpense/", data);
+};
+export const Get_HotelOps_Category = async () => {
+  return await API.get("/daybook/get_categories/");
+};
+export const Get_HotelOps_SubCategory = async (data) => {
+  return await API.post("/daybook/get_subcategories/", {
+    category_id: data,
+  });
+};
+export const Add_HotelOps = async (data) => {
+  return await API.post("/daybook/add_hotelops/", data);
+};
 
-// get Sub category
-// API.post("/daybook/get_subcategories/",{
-//       category_id: subId,
-//     }
 
-// get hotel ops---------------------------
+////////////////////////////////////////////// Vendor Payout
 
-// API.post("/daybook/get_hotelexpense/", {
-//       date: dateset,
-//     });
-
-// get vendor payout---------------------------
-//  API.post("/daybook/get_vendor_payout/", {
-//       date: yesterdate,
-//     });
-
-// add vendor
-// API.post("/daybook/add_vendor_payout/", {
-//   name: " ",
-//   date: "",
-//   bill_no: "",
-//   amount: "",
-//   remarks: "",
-//   payment_date: "",
-//   due_date: "",
-//   file_path: "",
-// },
+ 
