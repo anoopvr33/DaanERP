@@ -71,10 +71,10 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    if (data.hotels.length === 0) return;
+    if (data?.hotels?.length === 0) return;
 
     dispatch(getBookingData(data));
-  }, [data.hotels]);
+  }, [data?.hotels]);
 
   useEffect(() => {
     const hotels = Hotels();
@@ -102,7 +102,7 @@ const Booking = () => {
           <Navbar></Navbar>
           <div className="h2-sub">
             <h2>Booking Management</h2>
-            {/* <p>lsad{formatted}</p> */}
+
             <div className="flex-1">
               <Filter
                 onChange={(selected) => {
@@ -114,6 +114,7 @@ const Booking = () => {
                   setData({ ...data, hotels: selected.map((i) => i.value) });
                 }}
                 isMulti
+                placeholder={"All Hotels"}
                 options={hotelOptions}
                 prevMonthDate={data.from_date}
                 prevOnchange={(e) =>
@@ -126,6 +127,7 @@ const Booking = () => {
                 // child={"Filter"}
               />
               <FormItems
+                labelData="Sort"
                 onChange={(e) =>
                   setData({ ...data, filter_method: e.target.value })
                 }

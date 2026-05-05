@@ -5,10 +5,12 @@ import "./style.css";
 import Button from "../button";
 
 const customStyles = {
+  
   control: (provided) => ({
     ...provided,
     backgroundColor: "#ffffff", // main input background
     border: "1px solid #69af99",
+
     borderRadius: "20px",
     paddingLeft: "15px",
   }),
@@ -50,7 +52,9 @@ const Filter = ({
   return (
     <div className="custom-filter" style={{ display: "flex", gap: "10px" }}>
       <label htmlFor="">
-        <p style={{ zIndex: "1" }}>Select Hotels</p>
+        <p className="label-p" style={{ zIndex: "1" }}>
+          Select Hotels
+        </p>
         <Select
           styles={customStyles}
           onChange={onChange}
@@ -64,24 +68,21 @@ const Filter = ({
       {disableFrom ? (
         ""
       ) : (
-        <label htmlFor="">
-          <p>From</p>
-          <FormItems
-            value={prevMonthDate}
-            onChange={prevOnchange}
-            type={prevType}
-          ></FormItems>
-        </label>
+        <FormItems
+          value={prevMonthDate}
+          labelData={"From Date"}
+          onChange={prevOnchange}
+          type={prevType}
+        ></FormItems>
       )}
 
-      <label htmlFor="">
-        <p>to</p>
-        <FormItems
-          value={yesterday}
-          onChange={yesOnchange}
-          type={yesType}
-        ></FormItems>
-      </label>
+      <FormItems
+        value={yesterday}
+        onChange={yesOnchange}
+        type={yesType}
+        labelData={"To Date"}
+      ></FormItems>
+
       {child && <Button onClick={onClick} child={child}></Button>}
     </div>
   );

@@ -5,9 +5,22 @@
   outline: none;
   color: black;
   border: 1px solid #69af99;
-  /* background-color: #3d866c; */
-
-  /* border-bottom: 3px solid hsl(243, 37%, 52%); */
-  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.067); */
 }
-/* border: 1px solid #7070a3;/ */
+
+
+.custom-label {
+  width: fit-content;
+  height: fit-content;
+  display: grid;
+  place-content: center;
+  position: relative;
+  /* border: 1px solid red; */
+}
+.custom-label p {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  left: 15px;
+  top: -15px;
+  font-size: 13px;
+  padding: 0px 5px;
+}
