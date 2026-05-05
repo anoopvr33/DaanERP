@@ -60,7 +60,7 @@ const BookingTable = () => {
                   <td>{i.checkout_date}</td>
                   {/* <td>{i.paymentMode}</td> */}
                   <td>{i?.total_amount?.toFixed(2)}</td>
-                  <td>{i.payment_mode ? i.payment_mode : "check field"}</td>
+                  <td>{i.payment_mode ? i.payment_mode : "-"}</td>
                   <td>{i.meal_plan}</td>
                   <td>{i.room_category}</td>
                   <td>{i.name}</td>

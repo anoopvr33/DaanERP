@@ -69,6 +69,12 @@ const Dashboard = () => {
       try {
         const SelectedHotel = hotelData.map((i) => i.value);
 
+        console.log(
+          "dahsboard get resquest",
+          SelectedHotel,
+          prevMonthDate,
+          yesterdayDate,
+        );
         const response = await API.post(
           "/dashboard/get_report/",
           {
