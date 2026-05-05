@@ -132,189 +132,169 @@ const BookingAdd = () => {
   return (
     <div className="add-book-main">
       <form action="" onSubmit={OnSubmit}>
-        <label htmlFor="">
-          <p>Booking Date</p>
-          <FormItems
-            // placeholder={"Hotel"}
-            onChange={(e) => {
-              const formattedDate = new Date(e.target.value)
-                .toISOString()
-                .split("T")[0];
+        <FormItems
+          labelData="Booking Date"
+          // placeholder={"Hotel"}
+          onChange={(e) => {
+            const formattedDate = new Date(e.target.value)
+              .toISOString()
+              .split("T")[0];
 
-              setData({ ...data, booking_date: formattedDate });
-            }}
-            type="date"
-            value={data.booking_date.split("T")[0]}
-            name={"booking_date"}
-          ></FormItems>
-        </label>
-        {/* <label htmlFor="">
-          <p>Booking ID</p>
-          <FormItems onChange={OnInput} name={"booking_id"}></FormItems>
-        </label> */}
-        <label htmlFor="">
-          <p>Hotel</p>
-          <FormItems
-            // placeholder={"Hotel"}
-            onChange={OnInput}
-            name={"hotel_code"}
-            element="select"
-            option={["select Hotel", ...Hotels()]}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Customer Name</p>
-          <FormItems onChange={OnInput} name={"customer_name"}></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Phone Number</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"phone_number"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Email</p>
-          <FormItems
-            onChange={OnInput}
-            type="email"
-            name={"email"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>checkin date</p>
-          <FormItems
-            onChange={OnInput}
-            type="datetime-local"
-            name={"checkin_date"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>checkout date</p>
-          <FormItems
-            onChange={OnInput}
-            className={"booking-date"}
-            type="datetime-local"
-            name={"checkout_date"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Adults</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"adults"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Children</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"children"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Payment Mode</p>
-          <FormItems
-            onChange={OnInput}
-            element="select"
-            option={PaymentMode}
-            name={"payment_mode"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Total Amount</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"total_amount"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Gst No.</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"gst_number"}
-          ></FormItems>
-        </label>
-        {/* <label htmlFor="">
-          <p>invoice_pdf</p>
-          <FormItems onChange={OnInput} name={"invoice_pdf"}></FormItems>
-        </label> */}
-        <label htmlFor="">
-          <p>Booking Source</p>
-          <FormItems onChange={OnInput} name={"booking_source"}></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Meal Plan</p>
-          <FormItems
-            element="select"
-            option={["Select Meal Plan", "EP", "CP", "MAP"]}
-            onChange={OnInput}
-            name={"meal_plan"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Booking Plan</p>
-          <FormItems
-            element="select"
-            option={["Select Booking Plan", "room_only", "CP"]}
-            onChange={OnInput}
-            name={"booking_plan"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Pah</p>
-          <FormItems
-            element="select"
-            option={["Select Pah", "Completed", "Pending"]}
-            onChange={(e) =>
-              setData({
-                ...data,
-                pah:
-                  e.target.value === "Completed"
-                    ? true
-                    : e.target.value === "Pending"
-                      ? false
-                      : "",
-              })
-            }
-            name={"pah"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Status</p>
-          <FormItems
-            element="select"
-            option={["Select Status", "True", "False"]}
-            onChange={(e) =>
-              setData({
-                ...data,
-                status: e.target.value === "True" ? true : false,
-              })
-            }
-            name={"status"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Room Category</p>
-          <FormItems
-            element="select"
-            option={[
-              "Select Category",
-              "EXECUTIVE",
-              "STANDARD",
-              "DELUXE",
-              "SUITE",
-            ]}
-            onChange={OnInput}
-            name={"room_category"}
-          ></FormItems>
-        </label>
+            setData({ ...data, booking_date: formattedDate });
+          }}
+          type="date"
+          value={data.booking_date.split("T")[0]}
+          name={"booking_date"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Hotel"
+          // placeholder={"Hotel"}
+          onChange={OnInput}
+          name={"hotel_code"}
+          element="select"
+          option={["select Hotel", ...Hotels()]}
+        ></FormItems>
+
+        <FormItems
+          labelData="Customer Name"
+          onChange={OnInput}
+          name={"customer_name"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Mob No."
+          onChange={OnInput}
+          type="number"
+          name={"phone_number"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Email Address"
+          onChange={OnInput}
+          type="email"
+          name={"email"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData="CheckIn Date"
+          onChange={OnInput}
+          type="datetime-local"
+          name={"checkin_date"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Checkout Date"
+          onChange={OnInput}
+          className={"booking-date"}
+          type="datetime-local"
+          name={"checkout_date"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Adults"
+          onChange={OnInput}
+          type="number"
+          name={"adults"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Children"
+          onChange={OnInput}
+          type="number"
+          name={"children"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Payment Mode"
+          onChange={OnInput}
+          element="select"
+          option={PaymentMode}
+          name={"payment_mode"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Total Amount"
+          onChange={OnInput}
+          type="number"
+          name={"total_amount"}
+        ></FormItems>
+
+        <FormItems
+          labelData="GST No."
+          onChange={OnInput}
+          type="number"
+          name={"gst_number"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Booking Source"
+          onChange={OnInput}
+          name={"booking_source"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Meal Plan"
+          element="select"
+          option={["Select Meal Plan", "EP", "CP", "MAP"]}
+          onChange={OnInput}
+          name={"meal_plan"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Booking Plan"
+          element="select"
+          option={["Select Booking Plan", "room_only", "CP"]}
+          onChange={OnInput}
+          name={"booking_plan"}
+        ></FormItems>
+
+        <FormItems
+          labelData="PAH"
+          element="select"
+          option={["Select Pah", "Completed", "Pending"]}
+          onChange={(e) =>
+            setData({
+              ...data,
+              pah:
+                e.target.value === "Completed"
+                  ? true
+                  : e.target.value === "Pending"
+                    ? false
+                    : "",
+            })
+          }
+          name={"pah"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Status"
+          element="select"
+          option={["Select Status", "True", "False"]}
+          onChange={(e) =>
+            setData({
+              ...data,
+              status: e.target.value === "True" ? true : false,
+            })
+          }
+          name={"status"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Room Category"
+          element="select"
+          option={[
+            "Select Category",
+            "EXECUTIVE",
+            "STANDARD",
+            "DELUXE",
+            "SUITE",
+          ]}
+          onChange={OnInput}
+          name={"room_category"}
+        ></FormItems>
+
         <Button type={"submit"} child={"Add Details"}></Button>
       </form>
     </div>

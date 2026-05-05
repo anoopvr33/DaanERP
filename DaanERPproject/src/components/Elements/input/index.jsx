@@ -8,20 +8,24 @@ const Input = ({
   name,
   className,
   defualt,
+  labelData,
 }) => {
   return (
-    <input
-      // type=''
-      type={type}
-      defaultValue={defualt}
-      onChange={onChange}
-      value={value}
-      // onClick={onClick}
-      className={`custom-inp ${className}`}
-      placeholder={placeholder}
-      name={name}
-      id=""
-    />
+    <label className="custom-label" htmlFor="">
+      <p>{labelData}</p>
+      <input
+        // type=''
+        type={type}
+        defaultValue={defualt}
+        onChange={onChange}
+        value={value}
+        // onClick={onClick}
+        className={`custom-inp ${className}`}
+        placeholder={placeholder}
+        name={name}
+        id=""
+      />
+    </label>
   );
 };
 

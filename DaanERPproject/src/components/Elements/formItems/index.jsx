@@ -15,6 +15,7 @@ const FormItems = ({
   name,
   multiple,
   defualt,
+  labelData,
 }) => {
   let component = <></>;
 
@@ -25,6 +26,7 @@ const FormItems = ({
         onChange={onChange}
         type={type}
         name={name}
+        labelData={labelData}
         className={className}
         defualt={defualt}
         icon={icon}
@@ -40,6 +42,7 @@ const FormItems = ({
         value={value}
         name={name}
         onChange={onChange}
+        labelData={labelData}
         multiple={multiple}
         option={option}
       ></Select>

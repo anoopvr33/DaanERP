@@ -2,23 +2,17 @@
   width: 350px;
   /* background-color: #799e92; */
 }
+
 .custom-select-two {
   background-color: antiquewhite;
   /* width: 200px; */
 }
-.custom-filter label {
-  height: fit-content;
-  width: fit-content;
-  position: relative;
-}
 
-.custom-filter input {
-  /* background-color: rgba(240, 248, 255, 0); */
-}
-.custom-filter p {
+.custom-filter .label-p {
   position: absolute;
   top: -12px;
   left: 20px;
+  font-size: 13px;
   padding: 0px 3px;
   background-color: #ffffff;
   /* background-color: rgba(255, 255, 255, 0); */

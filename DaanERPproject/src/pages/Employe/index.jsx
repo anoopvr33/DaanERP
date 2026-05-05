@@ -45,7 +45,7 @@ const Employee = () => {
   }, []);
 
   return (
-    <div className="booking">
+    <div className="employee">
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
