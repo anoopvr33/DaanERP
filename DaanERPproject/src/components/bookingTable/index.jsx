@@ -29,7 +29,7 @@ const BookingTable = () => {
           <th>Amount</th>
           <th>Payment Mode</th>
           <th>Rate Plan Code</th>
-          <th>Meal Plan</th>
+          {/* <th>Meal Plan</th> */}
           <th>Room Cat.</th>
           <th>Customer</th>
           <th>Mob.No</th>
@@ -88,7 +88,7 @@ const BookingTable = () => {
                     <td>{i?.total_amount?.toFixed(2)}</td>
                     <td>{i.paymentMode ? i.paymentMode : "-"}</td>
                     <td>{i.rateplanCode || "_"}</td>
-                    <td>{i.meal_plan || "-"}</td>
+                    {/* <td>{i.meal_plan || "-"}</td> */}
                     <td>{i.room_category || "_"}</td>
                     <td>{i.name}</td>
 

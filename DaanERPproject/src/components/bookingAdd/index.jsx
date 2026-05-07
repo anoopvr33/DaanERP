@@ -58,7 +58,7 @@ const BookingAdd = () => {
     total_amount: 0,
     payment_mode: "",
     booking_source: "",
-    meal_plan: "",
+    rateplanCode: "",
     booking_plan: "",
     status: "",
     // booking_id: "",
@@ -250,11 +250,11 @@ const BookingAdd = () => {
         ></FormItems>
 
         <FormItems
-          labelData="Meal Plan"
+          labelData="Rate Plan Code"
           element="select"
-          option={["Select Meal Plan", "EP", "CP", "MAP"]}
+          option={["Select Rate Plan", "EP", "CP", "MP"]}
           onChange={OnInput}
-          name={"meal_plan"}
+          name={"rateplanCode"}
         ></FormItems>
 
         <FormItems
