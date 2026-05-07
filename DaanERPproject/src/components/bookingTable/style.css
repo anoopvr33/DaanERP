@@ -32,6 +32,10 @@
   padding: 11px 10px;
   border: none;
   font-size: 14px;
+  line-break: anywhere;
+  /* width: 100px; */
+  /* border: 1px solid red; */
+  /* text-wrap: 100px; */
   text-align: center;
   border-radius: 0px;
 }

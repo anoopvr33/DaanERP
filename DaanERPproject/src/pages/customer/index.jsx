@@ -101,55 +101,47 @@ const Customer = () => {
                 options={hotelOptions}
               ></Select>
 
-              <label htmlFor="">
-                <p className="placeholder">Select Months</p>
-                <FormItems
-                  onChange={(e) =>
-                    setForm({ ...form, month: Number(e.target.value) })
-                  }
-                  option={elect}
-                  element="select"
-                ></FormItems>
-              </label>
-              <label htmlFor="">
-                <p className="placeholder">Select Operator</p>
-                <FormItems
-                  onChange={(e) =>
-                    setForm({ ...form, operator: e.target.value })
-                  }
-                  option={Operator}
-                  element="select"
-                ></FormItems>
-              </label>
+              <FormItems
+                onChange={(e) =>
+                  setForm({ ...form, month: Number(e.target.value) })
+                }
+                option={elect}
+                element="select"
+                labelData={"Select Months"}
+              ></FormItems>
 
-              <label htmlFor="">
-                <p className="placeholder">No. of Bookings</p>
-                <FormItems
-                  onChange={(e) =>
-                    e.target.value === "0"
-                      ? setForm({ ...form, value: null })
-                      : setForm({ ...form, value: Number(e.target.value) })
-                  }
-                  option={Count}
-                  type="number"
-                  defualt={0}
-                  // element="select"
-                ></FormItems>
-              </label>
+              <FormItems
+                onChange={(e) => setForm({ ...form, operator: e.target.value })}
+                option={Operator}
+                element="select"
+                labelData={"Select Operator"}
+              ></FormItems>
+
+              <FormItems
+                onChange={(e) =>
+                  e.target.value === "0"
+                    ? setForm({ ...form, value: null })
+                    : setForm({ ...form, value: Number(e.target.value) })
+                }
+                option={Count}
+                type="number"
+                defualt={0}
+                labelData={"No. of Bookings"}
+                // element="select"
+              ></FormItems>
+
               <Button
                 // onClick={() => console.log("my form", form)}
                 onClick={() => dispatch(getCustomerData(form))}
                 child={"Filter"}
               ></Button>
 
-              <label style={{ margin: "auto", marginRight: "0px" }} htmlFor="">
-                <p className="placeholder">Count Vise</p>
-                <FormItems
-                  onChange={(e) => setCount(e.target.value)}
-                  option={Count}
-                  element="select"
-                ></FormItems>
-              </label>
+              <FormItems
+                onChange={(e) => setCount(e.target.value)}
+                option={Count}
+                element="select"
+                labelData={"Sort"}
+              ></FormItems>
             </div>
           </div>
           {loading ? (

@@ -232,6 +232,21 @@ const BookingAdd = () => {
           labelData="Booking Source"
           onChange={OnInput}
           name={"booking_source"}
+          element="select"
+          option={[
+            "select source",
+            "Goibibo",
+            "MakeMyTrip",
+            "agoda",
+            "travelguru",
+            "booking.com",
+            "easemytrip",
+            "ClearTrip",
+            "Aiosell",
+            "PMS single booking",
+            "PMS group booking",
+            "DaanERP",
+          ]}
         ></FormItems>
 
         <FormItems
