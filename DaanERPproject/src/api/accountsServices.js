@@ -90,7 +90,42 @@ export const Add_HotelOps = async (data) => {
   return await API.post("/daybook/add_hotelops/", data);
 };
 
-
 ////////////////////////////////////////////// Vendor Payout
 
- 
+export const Get_Vendor = async (data) => {
+  return await API.post("/daybook/get_vendor_payout/", {
+    from_date: data.prevMonth,
+    to_date: data.yesterdate,
+    hotel: data.hotels,
+  });
+};
+
+export const Add_Vendor = async (dataa) => {
+  return await API.post("/daybook/add_vendor_payout/", dataa, {
+    withCredentials: true,
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+      "Content-Type": "multipart/form-data", // 👈 add this
+    },
+    transformRequest: [(data) => data], // 👈 bypass JSON transform
+  });
+};
+
+export const Get_Salary = async (data) => {
+  return await API.post("/daybook/get_salary/", {
+    from_date: data.prevMonth,
+    to_date: data.yesterdate,
+    hotels: data.hotels,
+    departmemt: data.department,
+  });
+};
+
+export const Add_Salary = async (data) => {
+  return await API.post("/daybook/add_salary/", data, {
+    withCredentials: true,
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+      // "Content-Type": "multipart/form-data", // 👈 add this
+    },
+  });
+};

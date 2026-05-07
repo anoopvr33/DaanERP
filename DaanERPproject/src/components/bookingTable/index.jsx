@@ -28,7 +28,8 @@ const BookingTable = () => {
           <th>Check Out</th>
           <th>Amount</th>
           <th>Payment Mode</th>
-          <th>Meal Plan</th>
+          <th>Rate Plan Code</th>
+          {/* <th>Meal Plan</th> */}
           <th>Room Cat.</th>
           <th>Customer</th>
           <th>Mob.No</th>
@@ -68,18 +69,27 @@ const BookingTable = () => {
                     <td>{i?.booking_date}</td>
                     <td>{i?.booking_id}</td>
                     <td>
-                      {i.checkin_date === "" ? (
-                        <button onClick={() => setOpen(index)}>Add</button>
-                      ) : (
-                        i.checkin_date
-                      )}
+                      {i.checkin_date === "" || !i.checkout_date
+                        ? // <button
+                          //   style={{ padding: "2px 10px" }}
+                          //   onClick={() => setOpen(index)}
+                          // >
+                          //   Add
+                          // </button>
+                          "__"
+                        : i.checkin_date}
                     </td>
-                    <td>{i.checkout_date === "" ? "-" : i.checkout_date}</td>
+                    <td>
+                      {i.checkout_date === "" || !i.checkout_date
+                        ? "__"
+                        : i.checkout_date}
+                    </td>
                     {/* <td>{i.paymentMode}</td> */}
                     <td>{i?.total_amount?.toFixed(2)}</td>
-                    <td>{i.payment_mode ? i.payment_mode : "-"}</td>
-                    <td>{i.meal_plan}</td>
-                    <td>{i.room_category}</td>
+                    <td>{i.paymentMode ? i.paymentMode : "-"}</td>
+                    <td>{i.rateplanCode || "_"}</td>
+                    {/* <td>{i.meal_plan || "-"}</td> */}
+                    <td>{i.room_category || "_"}</td>
                     <td>{i.name}</td>
 
                     <td>{i.phone}</td>
@@ -87,7 +97,7 @@ const BookingTable = () => {
                     <td style={{ fontWeight: "500", color: "#7070a3" }}>
                       {i.booking_source}
                     </td>
-                    <td>{i.gst_number ? i.gst_number : "Null"}</td>
+                    <td>{i.gst_number || "_"}</td>
 
                     <td>
                       {i.invoice_pdf ? (
@@ -96,7 +106,7 @@ const BookingTable = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          View Invoice
+                          view
                         </a>
                       ) : (
                         "Null"

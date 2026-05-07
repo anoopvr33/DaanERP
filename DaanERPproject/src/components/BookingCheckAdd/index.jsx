@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
@@ -39,11 +39,11 @@ const AddBookindCheck = ({ setOpen }) => {
       <h2>Add CheckIn</h2>
       <p>Customer : GEORGE THOMAS</p>
       <p>Booking ID : MANashb87623</p> <br />
-      <div>
+      <>
         <FormItems labelData={"checkIn"} type="datetime-local"></FormItems>{" "}
         <span> </span>
         <Button child="Submit"></Button>
-      </div>
+      </>
     </div>
   );
 };
