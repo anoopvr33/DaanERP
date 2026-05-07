@@ -132,7 +132,7 @@ const BookingTable = () => {
                       >
                         <div className="booking-expand">
                           <p>
-                            <b>Adults</b> <span> 23 {i.adults}</span>
+                            <b>Adults</b> <span> {i.adults}</span>
                           </p>
                           <p>
                             <b>Children</b> <span> {i.children}</span>
