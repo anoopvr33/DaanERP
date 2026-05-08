@@ -45,7 +45,7 @@ const Booking = () => {
 
   // Same date previous month
   const prevMonth = new Date(today);
-  prevMonth.setMonth(today.getMonth() - 1);
+  prevMonth.setDate(today.getDate() - 7);
 
   // Format function
   const formatDate = (d) => d.toISOString().split("T")[0];
@@ -56,6 +56,11 @@ const Booking = () => {
   // React state example
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
+
+  const diffInMs =
+    new Date(yesterdayDate).getTime() - new Date(prevMonthDate).getTime();
+
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
   const [data, setData] = useState({
     hotels: [],
@@ -81,7 +86,7 @@ const Booking = () => {
     if (hotels.length === 0 || !hotels) {
       navigate("/login");
     }
-    console.log("hotelsss", hotels);
+    console.log("hotelsss", hotels, diffInDays, diffInMs);
 
     if (hotels && hotels.length > 0) {
       const formatted = hotels.map((i) => ({
@@ -155,7 +160,10 @@ const Booking = () => {
           ) : error ? (
             <ErrorPage />
           ) : (
-            <BookingTable></BookingTable>
+            <>
+              <p>Showing {diffInDays} days result</p>
+              <BookingTable></BookingTable>
+            </>
           )}
         </div>
       </div>

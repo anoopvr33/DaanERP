@@ -6,7 +6,7 @@ import AddBookindCheck from "../BookingCheckAdd";
 
 const BookingTable = () => {
   const [expand, setExpand] = useState({ row: null, open: false });
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState({ index: null, check: null });
 
   const { items, error, loading } = useSelector((state) => state.booking);
 
@@ -53,11 +53,14 @@ const BookingTable = () => {
             items?.data
               ?.map((i, index) => (
                 <Fragment>
-                  {open === index && (
+                  {open.index === index && (
                     <AddBookindCheck
                       customer={i.name}
                       bookid={i.booking_id}
+                      hotelId={i.hotel_code}
+                      checkIn={i.checkin_date}
                       setOpen={setOpen}
+                      check={open.check}
                     ></AddBookindCheck>
                   )}
                   <tr
@@ -69,24 +72,34 @@ const BookingTable = () => {
                     <td>{i?.booking_date}</td>
                     <td>{i?.booking_id}</td>
                     <td>
-                      {i.checkin_date === "" || !i.checkout_date
-                        ? // <button
-                          //   style={{ padding: "2px 10px" }}
-                          //   onClick={() => setOpen(index)}
-                          // >
-                          //   Add
-                          // </button>
-                          "__"
-                        : i.checkin_date}
+                      {i.checkin_date === "" || !i.checkout_date ? (
+                        <button
+                          style={{ padding: "2px 10px", fontSize: "12px" }}
+                          onClick={() =>
+                            setOpen({ index: index, check: false })
+                          }
+                        >
+                          Add
+                        </button>
+                      ) : (
+                        i.checkin_date
+                      )}
                     </td>
                     <td>
-                      {i.checkout_date === "" || !i.checkout_date
-                        ? "__"
-                        : i.checkout_date}
+                      {i.checkout_date === "" || !i.checkout_date ? (
+                        <button
+                          style={{ padding: "2px 10px", fontSize: "12px" }}
+                          onClick={() => setOpen({ index: index, check: true })}
+                        >
+                          Add
+                        </button>
+                      ) : (
+                        i.checkout_date
+                      )}
                     </td>
                     {/* <td>{i.paymentMode}</td> */}
                     <td>{i?.total_amount?.toFixed(2)}</td>
-                    <td>{i.paymentMode ? i.paymentMode : "-"}</td>
+                    <td>{i.paymentMode || "-"}</td>
                     <td>{i.rateplanCode || "_"}</td>
                     {/* <td>{i.meal_plan || "-"}</td> */}
                     <td>{i.room_category || "_"}</td>
