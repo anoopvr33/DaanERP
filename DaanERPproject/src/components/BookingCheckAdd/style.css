@@ -7,8 +7,18 @@
   width: fit-content;
   background: #ffffff;
   position: absolute;
+  z-index: 3;
   border-radius: 10px;
   left: 50%;
-  top: 200px;
-  transform: translate(-50%, 0%);
+  top: 150px;
+  transform: translate(-45%, 0%);
+  box-shadow: 0px 0px 20px 20px rgba(133, 133, 133, 0.175);
+}
+
+.booking-check div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  row-gap: 20px;
+  /* column-gap: 20px; */
 }

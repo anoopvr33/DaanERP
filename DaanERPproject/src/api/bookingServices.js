@@ -16,3 +16,13 @@ export const AddBookingAPI = async (data) => {
   console.log("my booking data to add", data);
   return await API.post("/bookings/booking_create/", data, credentials);
 };
+
+export const AddBooking_CheckIn = async (data) => {
+  console.log("my booking checkin", data);
+  return await API.post("/bookings/checkin/", data, credentials);
+};
+
+export const AddBooking_CheckOut = async (data) => {
+  console.log("my booking checkout", data);
+  return await API.post("/bookings/checkout/", data, credentials);
+};
