@@ -54,23 +54,10 @@ const AddBookindCheckOut = ({
 
     if (name === "checkinDate" || name === "checkoutDate") {
       const dateObj = new Date(value);
-      const formatted = dateObj.toLocaleString("en-IN", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
 
-      // format fix: convert "16/03/2026, 5:30 am" → "2026-03-16 05:30 AM"
-      const [datePart, timePart] = formatted.split(", ");
+      const pad = (num) => String(num).padStart(2, "0");
 
-      const [day, month, year] = datePart.split("/");
-
-      const final = `${year}-${month}-${day} ${timePart.toUpperCase()}`;
-
-      // setData({ ...data, [name]: final });/
+      const final = `${dateObj.getFullYear()}-${pad(dateObj.getMonth() + 1)}-${pad(dateObj.getDate())} ${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}:${pad(dateObj.getSeconds())}`;
 
       setData({
         ...data,
@@ -121,6 +108,10 @@ const AddBookindCheckOut = ({
           onChange={OnChange}
           labelData={"operation"}
           name="operation"
+          // element="select"
+          defualt={"checkout"}
+          // option={["checkout", "checkin"]}
+          type="text"
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -146,6 +137,8 @@ const AddBookindCheckOut = ({
               },
             })
           }
+          element="select"
+          option={["Select Rm. type", "DEL", "STD", "Deluxe Room"]}
           labelData={"roomType"}
           name="roomType"
         ></FormItems>
@@ -200,6 +193,8 @@ const AddBookindCheckOut = ({
               },
             })
           }
+          element="select"
+          option={["Select Rm. plan", "EP", "CP", "MAP"]}
           labelData={"ratePlan"}
           name="ratePlan"
         ></FormItems>
@@ -214,6 +209,8 @@ const AddBookindCheckOut = ({
               },
             })
           }
+          max={20}
+          min={1}
           labelData={"guestCount"}
           name="guestCount"
         ></FormItems>
@@ -227,6 +224,8 @@ const AddBookindCheckOut = ({
               },
             })
           }
+          element="select"
+          option={["Select segment", "Walk-in", "Corporate", "OTA"]}
           labelData={"segment"}
           name="segment"
         ></FormItems>
@@ -240,6 +239,8 @@ const AddBookindCheckOut = ({
               },
             })
           }
+          element="select"
+          option={["Select Channel", "PMS", "Direct", "Booking.com"]}
           labelData={"channel"}
           name="channel"
         ></FormItems>
@@ -274,6 +275,8 @@ const AddBookindCheckOut = ({
           onChange={OnChange}
           labelData={"hotelCountryCode"}
           name="hotelCountryCode"
+          element="select"
+          option={["Select Code", "IN", "91"]}
         ></FormItems>
       </div>
       <Button onClick={OnSubmit} child={"Submit"}></Button>
