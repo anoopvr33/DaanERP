@@ -3,6 +3,7 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookingData } from "../../redux/bookingSlice";
 import AddBookindCheck from "../BookingCheckAdd";
+import AddBookindCheckOut from "../BookingCheckAdd/checkout";
 
 const BookingTable = () => {
   const [expand, setExpand] = useState({ row: null, open: false });
@@ -53,16 +54,23 @@ const BookingTable = () => {
             items?.data
               ?.map((i, index) => (
                 <Fragment>
-                  {open.index === index && (
-                    <AddBookindCheck
-                      customer={i.name}
-                      bookid={i.booking_id}
-                      hotelId={i.hotel_code}
-                      checkIn={i.checkin_date}
-                      setOpen={setOpen}
-                      check={open.check}
-                    ></AddBookindCheck>
-                  )}
+                  {open.index === index &&
+                    (!open.check && open.check === false ? (
+                      <AddBookindCheck
+                        customer={i.name}
+                        bookid={i.booking_id}
+                        hotelId={i.hotel_code}
+                        checkIn={i.checkin_date}
+                        setOpen={setOpen}
+                      ></AddBookindCheck>
+                    ) : (
+                      <AddBookindCheckOut
+                        customer={i.name}
+                        bookid={i.booking_id}
+                        hotelId={i.hotel_code}
+                        setOpen={setOpen}
+                      />
+                    ))}
                   <tr
                     className="booking-row"
                     style={{
