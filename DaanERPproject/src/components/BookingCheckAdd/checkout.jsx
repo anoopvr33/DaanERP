@@ -5,9 +5,15 @@ import "./style.css";
 import { API } from "../../utils/axios";
 import { AddBooking_CheckIn, AddBooking_CheckOut } from "../../api";
 
-const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
+const AddBookindCheckOut = ({
+  setOpen,
+  hotelId,
+  customer,
+  bookid,
+  checkIn,
+}) => {
   const [data, setData] = useState({
-    checkin: {
+    checkout: {
       guestName: customer,
       roomType: "",
       roomTypeName: "",
@@ -30,10 +36,10 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
   });
 
   const OnSubmit = async () => {
-    console.log("checkin data", data);
+    console.log("checkout data", data);
     try {
-      const response = await AddBooking_CheckIn(data);
-      console.log("checkin respose", response);
+      const response = await AddBooking_CheckOut(data);
+      console.log("checkout respose", response);
 
       if (response.data.success === true) {
         return alert("successfully updated");
@@ -68,8 +74,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
 
       setData({
         ...data,
-        checkin: {
-          ...data.checkin,
+        checkout: {
+          ...data.checkout,
           [name]: final,
         },
       });
@@ -81,7 +87,7 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
   };
 
   useEffect(() => {
-    console.log("checkin console data", data);
+    console.log("checkout console data", data);
   }, [data]);
 
   return (
@@ -91,7 +97,7 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
         style={{ margin: "auto", marginRight: "0px" }}
         class="fa-regular fa-circle-xmark"
       ></i>
-      {<h2> Check-In</h2>}
+      {<h2>Check-out</h2>}
       <p>Customer : {customer}</p>
       <p>Booking ID : {bookid}</p> <br />
       <div>
@@ -120,22 +126,22 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 guestName: e.target.value,
               },
             })
           }
           labelData={"guestName"}
-          value={data.checkin.guestName}
+          value={data.checkout.guestName}
           name="guestName"
         ></FormItems>
         <FormItems
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 roomType: e.target.value,
               },
             })
@@ -147,8 +153,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 roomTypeName: e.target.value,
               },
             })
@@ -174,8 +180,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 nights: Number(e.target.value),
               },
             })
@@ -188,8 +194,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 ratePlan: e.target.value,
               },
             })
@@ -202,8 +208,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 guestCount: Number(e.target.value),
               },
             })
@@ -215,8 +221,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 segment: e.target.value,
               },
             })
@@ -228,8 +234,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 channel: e.target.value,
               },
             })
@@ -241,8 +247,8 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 folioNum: e.target.value,
               },
             })
@@ -254,14 +260,14 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
           onChange={(e) =>
             setData({
               ...data,
-              checkin: {
-                ...data.checkin,
+              checkout: {
+                ...data.checkout,
                 bookingId: e.target.value,
               },
             })
           }
           labelData={"bookingId"}
-          value={data.checkin.bookingId}
+          value={data.checkout.bookingId}
           name="bookingId"
         ></FormItems>
         <FormItems
@@ -275,4 +281,4 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
   );
 };
 
-export default AddBookindCheck;
+export default AddBookindCheckOut;
