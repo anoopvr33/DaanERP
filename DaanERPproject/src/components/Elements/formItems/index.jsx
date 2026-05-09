@@ -15,6 +15,8 @@ const FormItems = ({
   name,
   multiple,
   defualt,
+  max,
+  min,
   labelData,
 }) => {
   let component = <></>;
@@ -25,6 +27,8 @@ const FormItems = ({
         value={value}
         onChange={onChange}
         type={type}
+        max={max}
+        min={min}
         name={name}
         labelData={labelData}
         className={className}

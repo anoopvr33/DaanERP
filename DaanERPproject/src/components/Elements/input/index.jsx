@@ -9,6 +9,8 @@ const Input = ({
   className,
   defualt,
   labelData,
+  max,
+  min,
 }) => {
   return (
     <label className="custom-label" htmlFor="">
@@ -19,6 +21,8 @@ const Input = ({
         defaultValue={defualt}
         onChange={onChange}
         value={value}
+        max={max}
+        min={min}
         // onClick={onClick}
         className={`custom-inp ${className}`}
         placeholder={placeholder}
