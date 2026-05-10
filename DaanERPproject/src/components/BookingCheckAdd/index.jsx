@@ -25,7 +25,7 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
     hotelId: hotelId,
     roomNum: "",
     roomNumId: "",
-    operation: "",
+    operation: "checkin",
     hotelCountryCode: "",
   });
 

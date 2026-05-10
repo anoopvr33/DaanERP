@@ -31,7 +31,7 @@ const AddBookindCheckOut = ({
     hotelId: hotelId,
     roomNum: "",
     roomNumId: "",
-    operation: "",
+    operation: "checkout",
     hotelCountryCode: "",
   });
 
