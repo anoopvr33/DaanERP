@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Button from "../../components/Elements/button";
 import CustomerTable from "../../components/CustomerTable";
 import Chart from "../../components/dashboardGraph";
@@ -19,17 +19,12 @@ import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
 import { useNavigate } from "react-router-dom";
 
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
-
 const Booking = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [dayData, setDaydata] = useState(null);
   const [sort, setSort] = useState("booking");
 
   const navigate = useNavigate();
@@ -57,11 +52,6 @@ const Booking = () => {
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
-  const diffInMs =
-    new Date(yesterdayDate).getTime() - new Date(prevMonthDate).getTime();
-
-  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-
   const [data, setData] = useState({
     hotels: [],
     from_date: prevMonthDate,
@@ -69,24 +59,29 @@ const Booking = () => {
     filter_method: sort,
   });
 
+  // find length of numbers between days
+
+  // Submit filter data
   const onFilter = () => {
     console.log("booking datas", data);
 
     dispatch(getBookingData(data));
   };
 
+  // get data by default
   useEffect(() => {
     if (data?.hotels?.length === 0) return;
 
     dispatch(getBookingData(data));
-  }, [data?.hotels]);
+  }, [data.hotels, dispatch]);
 
+  // get hotels from login and store in useState
   useEffect(() => {
     const hotels = Hotels();
     if (hotels.length === 0 || !hotels) {
       navigate("/login");
     }
-    console.log("hotelsss", hotels, diffInDays, diffInMs);
+    console.log("hotelsss", hotels);
 
     if (hotels && hotels.length > 0) {
       const formatted = hotels.map((i) => ({
@@ -98,6 +93,15 @@ const Booking = () => {
       setData({ ...data, hotels: formatted.map((i) => i.value) });
     }
   }, []);
+
+  useEffect(() => {
+    const diffInMs =
+      new Date(data.to_date).getTime() - new Date(data.from_date).getTime();
+
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    setDaydata(diffInDays);
+  }, [toggle]);
 
   return (
     <div className="booking">
@@ -144,7 +148,10 @@ const Booking = () => {
                 ]}
                 element="select"
               ></FormItems>
-              <Button onClick={onFilter} child={"Filter"}></Button>
+              <Button
+                onClick={() => (onFilter(), setToggle(!toggle))}
+                child={"Filter"}
+              ></Button>
 
               <Button
                 onClick={() => setOpen(!open)}
@@ -161,7 +168,7 @@ const Booking = () => {
             <ErrorPage />
           ) : (
             <>
-              <p>Showing {diffInDays} days result</p>
+              <p>Showing {dayData} days result</p>
               <BookingTable></BookingTable>
             </>
           )}
