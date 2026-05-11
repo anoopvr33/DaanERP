@@ -56,11 +56,11 @@ const options = {
 export default function ExpenseChart({ data }) {
   // Chart data
   const chartData = {
-    labels: data?.slice(0, 3).map((i) => i.month),
+    labels: data?.slice(0, 5).map((i) => i.month),
     datasets: [
       {
         label: "Expense",
-        data: data?.slice(0, 3).map((i) => i.expense),
+        data: data?.slice(0, 5).map((i) => i.expense),
         backgroundColor: "rgb(249, 72, 84)",
         barTickness: 10,
         barPercentage: 0.6,

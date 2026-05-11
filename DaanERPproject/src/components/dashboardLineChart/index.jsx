@@ -73,7 +73,7 @@ export default function MarkOptimization({ data }) {
           },
         ]}
         series={[{ data: yData }]}
-        width={580}
+        width={750}
         height={280}
       />
     </div>
