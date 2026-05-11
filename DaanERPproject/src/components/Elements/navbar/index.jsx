@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="nav-menu">
         <nav>
           <FormItems
-            placeholder={"Search results.."}
+            placeholder={"Search by name..."}
             onChange={onChange}
             name={""}
           ></FormItems>
