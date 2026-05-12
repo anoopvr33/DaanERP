@@ -109,6 +109,8 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const GetAudit = async () => {
     console.log("report date format", prevmonth, yesterday, hotel);
 
+    if (hotel.length === 0) return alert("Hotel is required");
+
     try {
       const response = await API.post(
         "/reports/get_nightaudit_report/",
@@ -163,11 +165,11 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     GetAudit();
     // console.log("fate", formattedDate);
     // eslint(react-hooks/set-state-in-effect)
-  }, [trigger]);
+  }, [trigger, hotel]);
 
   useEffect(() => {
-    console.log("latest audit", audit);
-  }, [audit, revenue, checkout]);
+    console.log("latest audit", audit, hotel);
+  }, [audit, revenue, checkout, hotel]);
 
   return (
     <div className="acc-tabs">
