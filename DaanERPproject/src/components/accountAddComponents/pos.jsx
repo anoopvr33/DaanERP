@@ -7,6 +7,7 @@ import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
+import { addBudgetThunk } from "../../redux/budgetActualSlice";
 
 const AccountsPosAdd = ({ formdate, type }) => {
   const [category, setCategory] = useState([]);
@@ -32,25 +33,8 @@ const AccountsPosAdd = ({ formdate, type }) => {
 
   const OnSubmit = async (e) => {
     e.preventDefault();
-
     console.log("posss", data);
-
-    try {
-      const response = await API.post("/daybook/create_budget/", data, {
-        withCredentials: true,
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-      });
-      console.log("add budget res", response, data);
-      if (response.data.status === "success") {
-        alert("success added");
-      } else {
-        alert("something went wrong");
-      }
-    } catch (error) {
-      alert("something went wrong adding budget");
-    }
+    dispatch(addBudgetThunk(data));
   };
 
   const GetCategory = async () => {

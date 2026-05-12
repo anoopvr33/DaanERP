@@ -11,12 +11,7 @@ import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
 import { useNavigate } from "react-router-dom";
 
-// const option2 = Hotels()
-//   ? Hotels().map((i) => ({
-//       value: i,
-//       label: i.charAt(0).toUpperCase() + i.slice(1),
-//     }))
-//   : [];
+
 
 const Accounts = () => {
   const navigate = useNavigate();
@@ -46,9 +41,6 @@ const Accounts = () => {
   // React state example
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
-  // const [formattedDate2, setDate2] = useState(date.toISOString().split("T")[0]);
-  const Select = ["Hotel", "Daan Lux", "Daan Ambalath", "Regency"];
-  const Count = ["Sort", "By Date", "More Count", "Less Count", ""];
 
   useEffect(() => {
     const hotels = Hotels();
@@ -68,9 +60,6 @@ const Accounts = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log("Hotels account", hotelData);
-  }, [hotelData]);
 
   return (
     <div className="accounts">

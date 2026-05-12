@@ -11,11 +11,11 @@ const credentials = {
 //       date: dateset,
 //     });
 
-export const CreateBudget = async (form) => {
+export const CreateBudgetAPI = async (form) => {
   return await API.post("/daybook/create_budget/", form, credentials);
 };
 
-export const GetBudget = async (form) => {
+export const GetBudgetAPI = async (form) => {
   return await API.post("/daybook/get_budget/", form);
 };
 
@@ -24,15 +24,10 @@ export const GetBudget_Category = async () => {
 };
 
 export const AddBudget_Category = async (data) => {
-  return await API.post(
-    "/daybook/create_budget_category/",
-    {
-      budget_category: data,
-    }.credentials,
-  );
+  return await API.post("/daybook/create_budget_category/", data, credentials);
 };
 
-export const AddBudgetSub_Category = async (data) => {
+export const AddBudgetSub_CategoryAPI = async (data) => {
   return await API.post(
     "/daybook/create_budget_subcategory/",
     data,

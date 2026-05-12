@@ -5,12 +5,48 @@ import "./style.css";
 import { API } from "../../utils/axios";
 import { AddBooking_CheckIn, AddBooking_CheckOut } from "../../api";
 
+const PaymentModeOptions = [
+  {
+    name: "Select Payment Mode",
+    value: "",
+  },
+  {
+    name: "Cash",
+    value: "Cash",
+  },
+  {
+    name: "Bill to Company",
+    value: "Bill to Company",
+  },
+  {
+    name: "UPI to Company",
+    value: "UPI to Company",
+  },
+  {
+    name: "UPI to Current",
+    value: "UPI to Current",
+  },
+  {
+    name: "Bank Transfer",
+    value: "Bank Transfer",
+  },
+  {
+    name: "Outstanding",
+    value: "Outstanding",
+  },
+  {
+    name: "Complementary",
+    value: "Complementary",
+  },
+];
+
 const AddBookindCheckOut = ({
   setOpen,
   hotelId,
   customer,
   bookid,
   checkIn,
+  guest,
 }) => {
   const [data, setData] = useState({
     checkout: {
@@ -21,7 +57,8 @@ const AddBookindCheckOut = ({
       checkoutDate: "",
       nights: 1,
       ratePlan: "",
-      guestCount: 1,
+      guestCount: guest,
+      paymentMode: "",
       segment: "",
       channel: "",
       folioNum: "",
@@ -155,13 +192,13 @@ const AddBookindCheckOut = ({
           labelData={"roomTypeName"}
           name="roomTypeName"
         ></FormItems>
-        <FormItems
+        {/* <FormItems
           onChange={OnChange}
           labelData={"checkinDate"}
-          // value={data.checkinDate}
+     
           type="datetime-local"
           name="checkinDate"
-        ></FormItems>
+        ></FormItems> */}
         <FormItems
           onChange={OnChange}
           labelData={"checkoutDate"}
@@ -200,6 +237,22 @@ const AddBookindCheckOut = ({
         ></FormItems>
 
         <FormItems
+          labelData="Payment Mode"
+          onChange={(e) =>
+            setData({
+              ...data,
+              checkout: {
+                ...data.checkout,
+                paymentMode: e.target.value,
+              },
+            })
+          }
+          element="select"
+          option={PaymentModeOptions}
+          name={"paymentMode"}
+        ></FormItems>
+
+        <FormItems
           onChange={(e) =>
             setData({
               ...data,
@@ -211,6 +264,7 @@ const AddBookindCheckOut = ({
           }
           max={20}
           min={1}
+          defualt={guest}
           labelData={"guestCount"}
           name="guestCount"
         ></FormItems>

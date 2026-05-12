@@ -9,7 +9,7 @@ const BookingTable = () => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
 
-  const { items, error, loading } = useSelector((state) => state.booking);
+  const { items, geterror, loading } = useSelector((state) => state.booking);
 
   const { inputValue } = useSelector((state) => state.search);
 
@@ -22,9 +22,10 @@ const BookingTable = () => {
   }, [items, inputValue]);
 
   useEffect(() => {
-    console.log("my table content", items, error);
+    console.log("my table content", items);
+    console.log("error detection", geterror);
     // console.log("search input",);
-  }, [items, error, loading]);
+  }, [items]);
 
   if (loading) {
     return <p className="loading">Loading...</p>;
@@ -52,7 +53,7 @@ const BookingTable = () => {
           <th></th>
         </tr>
         <tbody>
-          {!items || error ? (
+          {!items || geterror ? (
             <tr>
               {" "}
               <td colSpan={11}> Please Login or Something wrong </td>{" "}
@@ -71,6 +72,7 @@ const BookingTable = () => {
                       bookid={i.booking_id}
                       hotelId={i.hotel_code}
                       checkIn={i.checkin_date}
+                      guest={i.adults + i.children}
                       setOpen={setOpen}
                     ></AddBookindCheck>
                   ) : (
@@ -78,6 +80,7 @@ const BookingTable = () => {
                       customer={i.name}
                       bookid={i.booking_id}
                       hotelId={i.hotel_code}
+                      guest={i.adults + i.children}
                       setOpen={setOpen}
                     />
                   ))}
@@ -135,7 +138,7 @@ const BookingTable = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        view
+                        view file
                       </a>
                     ) : (
                       "Null"

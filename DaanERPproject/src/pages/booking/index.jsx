@@ -59,8 +59,6 @@ const Booking = () => {
     filter_method: sort,
   });
 
-  // find length of numbers between days
-
   // Submit filter data
   const onFilter = () => {
     console.log("booking datas", data);
@@ -69,13 +67,16 @@ const Booking = () => {
   };
 
   // get data by default
+
   useEffect(() => {
+    console.log("triggered");
     if (data?.hotels?.length === 0) return;
 
     dispatch(getBookingData(data));
-  }, [data.hotels, dispatch]);
+  }, [data.hotels]);
 
   // get hotels from login and store in useState
+
   useEffect(() => {
     const hotels = Hotels();
     if (hotels.length === 0 || !hotels) {
@@ -93,6 +94,8 @@ const Booking = () => {
       setData({ ...data, hotels: formatted.map((i) => i.value) });
     }
   }, []);
+
+  // find length of numbers between days
 
   useEffect(() => {
     const diffInMs =

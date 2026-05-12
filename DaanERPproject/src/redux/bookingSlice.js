@@ -39,7 +39,8 @@ const bookSlice = createSlice({
   initialState: {
     items: [],
     loading: false,
-    error: null,
+    adderror: null,
+    geterror: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -54,7 +55,7 @@ const bookSlice = createSlice({
       })
       .addCase(addBookingThunk.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error;
+        state.adderror = action.error;
         toast.error("Error occured");
       });
     builder
@@ -66,9 +67,9 @@ const bookSlice = createSlice({
         state.loading = false;
       })
       .addCase(getBookingData.rejected, (state, action) => {
-        state.error = action.error;
+        state.geterror = action.error;
         state.loading = false;
-        toast.error(action.error);
+        toast.error(action.geterror);
       });
   },
 });
