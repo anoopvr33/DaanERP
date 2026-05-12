@@ -11,6 +11,12 @@ import { API, getCookie } from "../../../utils/axios";
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
 import { Hotels } from "../../../utils";
+import {
+  addBudgetCategoryThunk,
+  addBudgetSub_CategoryThunk,
+  getBudgetData,
+} from "../../../redux/budgetActualSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(false);
@@ -23,27 +29,9 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   });
   const [category, setCategory] = useState([]);
   const [data1, setData1] = useState([]);
+  const dispatch = useDispatch();
 
-  const GetPos = async () => {
-    console.log("getting pos data for this date", dateset, prevMonth, hotels);
-    if (hotels.length === 0) return;
-
-    try {
-      const response = await API.post("/daybook/get_budget/", {
-        from_date: prevMonth,
-        to_date: dateset,
-        // date: dateset,
-        hotel: hotels,
-      });
-      console.log("pos res", response.data.data);
-      if (response.data.data) {
-        setData1(response.data.data);
-        // setData2(response.data.pos_expense);
-      } else alert("something went wrong getting Budget data");
-    } catch (error) {
-      alert("something went wrong");
-    }
-  };
+  const { items, geterror, loading } = useSelector((state) => state.budget);
 
   const GetCategory = async () => {
     const res = await API.get("/daybook/get_budget_categories/");
@@ -56,35 +44,12 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
 
   const AddCategory = async (e) => {
     e.preventDefault();
-    console.log("new cat", newCat);
-    const res = await API.post(
-      "/daybook/create_budget_category/",
-      {
-        budget_category: newCat,
-      },
-      {
-        withCredentials: true,
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-      },
-    );
-
-    console.log("success cat", res);
-    if (res.data.message) {
-      alert("category created please refresh");
-      GetCategory();
-    } else alert("something went wrong");
+    dispatch(addBudgetCategoryThunk({ budget_category: newCat }));
   };
 
   const AddSubCat = async (e) => {
     e.preventDefault();
-    console.log("my sub", newSub);
-    const res = await API.post("/daybook/create_budget_subcategory/", newSub);
-    console.log("succes sub", res);
-    if (res.data.status === "success") {
-      alert("created SubCategory please refresh");
-    } else alert("something went wrong");
+    dispatch(addBudgetSub_CategoryThunk(newSub));
   };
 
   const CatOption = [
@@ -97,13 +62,15 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   }, []);
 
   useEffect(() => {
-    GetPos();
+    dispatch(
+      getBudgetData({
+        from_date: prevMonth,
+        to_date: dateset,
+        hotel: hotels,
+      }),
+    );
     // eslint(react-hooks/set-state-in-effect)
   }, [trigger, hotels]);
-
-  useEffect(() => {
-    console.log("data1", data1);
-  }, [data1]);
 
   return (
     <div className="acc-pos">
@@ -174,8 +141,8 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         <p>
           <b>Date</b>: {dateset}
         </p>
-        {data1.length > 0 ? (
-          data1.map((i) => <AccountsPos data={i} />)
+        {items?.data?.length > 0 ? (
+          items?.data?.map((i) => <AccountsPos data={i} />)
         ) : (
           <p style={{ textAlign: "center", margin: "10px 10px" }}>Empty Data</p>
         )}

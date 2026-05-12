@@ -5,7 +5,49 @@ import "./style.css";
 import { API } from "../../utils/axios";
 import { AddBooking_CheckIn, AddBooking_CheckOut } from "../../api";
 
-const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
+const PaymentModeOptions = [
+  {
+    name: "Select Payment Mode",
+    value: "",
+  },
+  {
+    name: "Cash",
+    value: "Cash",
+  },
+  {
+    name: "Bill to Company",
+    value: "Bill to Company",
+  },
+  {
+    name: "UPI to Company",
+    value: "UPI to Company",
+  },
+  {
+    name: "UPI to Current",
+    value: "UPI to Current",
+  },
+  {
+    name: "Bank Transfer",
+    value: "Bank Transfer",
+  },
+  {
+    name: "Outstanding",
+    value: "Outstanding",
+  },
+  {
+    name: "Complementary",
+    value: "Complementary",
+  },
+];
+
+const AddBookindCheck = ({
+  setOpen,
+  hotelId,
+  customer,
+  bookid,
+  checkIn,
+  guest,
+}) => {
   const [data, setData] = useState({
     checkin: {
       guestName: customer,
@@ -15,8 +57,9 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
       checkoutDate: "",
       nights: 1,
       ratePlan: "",
-      guestCount: 1,
+      guestCount: guest,
       segment: "",
+      paymentMode: "",
       channel: "",
       folioNum: "",
       bookingId: bookid,
@@ -194,6 +237,22 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
         ></FormItems>
 
         <FormItems
+          labelData="Payment Mode"
+          onChange={(e) =>
+            setData({
+              ...data,
+              checkout: {
+                ...data.checkout,
+                paymentMode: e.target.value,
+              },
+            })
+          }
+          element="select"
+          option={PaymentModeOptions}
+          name={"paymentMode"}
+        ></FormItems>
+
+        <FormItems
           onChange={(e) =>
             setData({
               ...data,
@@ -203,8 +262,10 @@ const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, checkIn }) => {
               },
             })
           }
+          defualt={guest}
           max={20}
           min={1}
+          type="number"
           labelData={"guestCount"}
           name="guestCount"
         ></FormItems>

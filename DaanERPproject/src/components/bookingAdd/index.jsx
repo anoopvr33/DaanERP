@@ -59,6 +59,7 @@ const BookingAdd = () => {
     payment_mode: "",
     booking_source: "",
     rateplanCode: "",
+    meal_plan: "",
     booking_plan: "",
     status: "",
     // booking_id: "",
@@ -104,25 +105,6 @@ const BookingAdd = () => {
     e.preventDefault();
     console.log("my check vdate", data);
     dispatch(addBookingThunk(data));
-
-    // fetch("https://27abf324a5b5.ngrok-free.app/bookings/booking_create/", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    // })
-    //   .then(async (response) => {
-    //     if (!response.status == "success") {
-    //       // const errorData = await response.json();
-    //       // throw errorData;
-    //       alert("success");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((result) => {
-    //     console.log("Success:", result);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   };
 
   useEffect(() => {
@@ -252,9 +234,22 @@ const BookingAdd = () => {
         <FormItems
           labelData="Rate Plan Code"
           element="select"
-          option={["Select Rate Plan", "EP", "CP", "MP"]}
+          option={[
+            "Select Rate Plan",
+            "premium-rooms-s-ep",
+            "super-deluxe-s-ep",
+            "super-deluxe-d-cp",
+          ]}
           onChange={OnInput}
           name={"rateplanCode"}
+        ></FormItems>
+
+        <FormItems
+          labelData="Meal Plan"
+          element="select"
+          option={["Select Meal Plan", "EP", "CP", "MP"]}
+          onChange={OnInput}
+          name={"meal_plan"}
         ></FormItems>
 
         <FormItems
