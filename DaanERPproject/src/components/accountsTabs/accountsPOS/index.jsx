@@ -62,6 +62,8 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   }, []);
 
   useEffect(() => {
+    if (hotels.length === 0) return alert("Hotel is required");
+
     dispatch(
       getBudgetData({
         from_date: prevMonth,

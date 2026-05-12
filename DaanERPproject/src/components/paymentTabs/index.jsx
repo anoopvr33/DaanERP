@@ -134,6 +134,8 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
 
   const GetPos = async () => {
     console.log("payment format", prevmonth, yesterday, hotelsArray);
+
+    if (hotelsArray.length === 0) return alert("Hotel is required");
     try {
       const response = await API.post(
         "/reports/get_payment_report/",
@@ -163,7 +165,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
     GetPos();
     // console.log("fate", formattedDate);
     // eslint(react-hooks/set-state-in-effect)
-  }, [trigger]);
+  }, [trigger, hotelsArray]);
 
   return (
     <div className="acc-tabs">
