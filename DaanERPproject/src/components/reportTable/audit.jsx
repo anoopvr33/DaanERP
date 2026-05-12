@@ -1,6 +1,6 @@
 import "./style.css";
 
-const ReportAudit = ({ data }) => {
+const ReportAudit = ({ data, yesterday, prevmonth }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
   console.log("audit data", data);
@@ -9,8 +9,10 @@ const ReportAudit = ({ data }) => {
     <table style={{ width: "600px" }} className="report-table">
       <tr>
         <th>Name</th>
-        <th>Current</th>
-        <th>Upto</th>
+        <th>Current ({yesterday})</th>
+        <th>
+          Upto ({prevmonth})-({yesterday})
+        </th>
       </tr>
 
       <tbody>

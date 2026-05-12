@@ -190,7 +190,13 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {tab === 0 && <ReportAuditTab audit={audit}></ReportAuditTab>}
+        {tab === 0 && (
+          <ReportAuditTab
+            yesterday={yesterday}
+            prevmonth={prevmonth}
+            audit={audit}
+          ></ReportAuditTab>
+        )}
         {tab === 1 && <ReportRevenueTab revenue={revenue}></ReportRevenueTab>}
         {tab === 2 && <ReportTotalTab></ReportTotalTab>}
         {tab === 3 && (
