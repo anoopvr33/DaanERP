@@ -3,7 +3,7 @@ import AccountsDailyAdd from "../../accountAddComponents";
 import { API } from "../../../utils/axios";
 import ReportAudit from "../../reportTable/audit";
 
-const ReportAuditTab = ({ audit }) => {
+const ReportAuditTab = ({ audit, yesterday, prevmonth }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,11 @@ const ReportAuditTab = ({ audit }) => {
         <Button onClick={() => setOpen(!open)} child={"create +"}></Button> */}
       </div>
       {open && <AccountsDailyAdd></AccountsDailyAdd>}
-      <ReportAudit data={audit}></ReportAudit>
+      <ReportAudit
+        yesterday={yesterday}
+        prevmonth={prevmonth}
+        data={audit}
+      ></ReportAudit>
     </div>
   );
 };

@@ -78,6 +78,7 @@ const Accounts = () => {
                 }}
                 isMulti
                 options={hotelOptions}
+                placeholder={"All Hotels"}
                 prevMonthDate={prevMonthDate}
                 prevOnchange={(e) => setPrevMonthDate(e.target.value)}
                 yesterday={yesterdayDate}
