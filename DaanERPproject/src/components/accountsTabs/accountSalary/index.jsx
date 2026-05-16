@@ -20,7 +20,11 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
           option={["select department", "Housekeeping"]}
         ></FormItems>{" "}
         <span style={{ margin: "auto", marginRight: "0px" }}>
-          <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
+          <Button
+            onClick={() => setOpen(!open)}
+            child={"New Salary +"}
+            className={"add-salary"}
+          ></Button>
         </span>
       </div>
       {open && <AddSalary></AddSalary>}

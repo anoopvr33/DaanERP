@@ -12,6 +12,11 @@ export const GetBookingDataAPI = async (data) => {
   return await API.post("/bookings/bookings_by_date/", data, credentials);
 };
 
+export const EditBookingDataAPI = async (data, id) => {
+  console.log("filter date", data);
+  return await API.post(`/bookings/booking_update/${id}`, data, credentials);
+};
+
 export const AddBookingAPI = async (data) => {
   console.log("my booking data to add", data);
   return await API.post("/bookings/booking_create/", data, credentials);

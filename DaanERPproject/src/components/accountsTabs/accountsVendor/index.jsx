@@ -12,13 +12,17 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
     <div>
       <div className="flex-1">
         {/* <FormItems type="date"></FormItems>{" "} */}
-        <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
+        <p>
+          <b>Date : </b> {dateset}
+        </p>
+        <Button
+          onClick={() => setOpen(!open)}
+          className={"add-vendor"}
+          child={"New Vendor +"}
+        ></Button>
       </div>
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
-      <p>
-        <br />
-        <b>Date : </b> {dateset}
-      </p>
+
       <AccountsVendor
         yesterdate={dateset}
         trigger={trigger}

@@ -12,7 +12,7 @@ import ComplementaryTab from "./complementary";
 
 const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const [tab, setTab] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const BillCompany = {
     borderRadius: "20px 20px 0px 0px",
@@ -135,7 +135,9 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const GetPos = async () => {
     console.log("payment format", prevmonth, yesterday, hotelsArray);
 
-    if (hotelsArray.length === 0) return alert("Hotel is required");
+    if (hotelsArray.length === 0) return setLoading(true);
+
+    setLoading(false);
     try {
       const response = await API.post(
         "/reports/get_payment_report/",
@@ -186,6 +188,8 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
+        {loading ?? "Loading..."}
+
         {tab === 0 && (
           <BillCompanyTab result={data?.bill_to_company}></BillCompanyTab>
         )}

@@ -71,3 +71,21 @@
   /* background: #ebebeb; */
   padding: 40px 20px;
 }
+/* ///////////////////////// */
+
+.add-dailylog {
+  margin: auto;
+  margin-right: 0px;
+  background-image: linear-gradient(40deg, #69af99);
+}
+
+.add-vendor {
+  margin: auto;
+  margin-right: 0px;
+  background-image: linear-gradient(40deg, #69af99);
+}
+.add-salary {
+  margin: auto;
+  margin-right: 0px;
+  background-image: linear-gradient(40deg, #69af99);
+}

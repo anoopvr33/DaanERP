@@ -2,11 +2,13 @@ import { Search } from "lucide-react";
 import FormItems from "../formItems";
 import "./style.css";
 import Button from "../button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchInput } from "../../../redux/SearchSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
+  const { inputValue } = useSelector((state) => state.search);
 
   const onChange = (e) => {
     dispatch(searchInput(e.target.value));
@@ -20,6 +22,7 @@ const Navbar = () => {
             placeholder={"Search by name..."}
             onChange={onChange}
             name={""}
+            value={inputValue}
           ></FormItems>
           <i class="fa-solid fa-magnifying-glass"></i>
         </nav>
