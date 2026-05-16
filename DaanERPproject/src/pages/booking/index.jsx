@@ -159,7 +159,7 @@ const Booking = () => {
               <Button
                 onClick={() => setOpen(!open)}
                 className={"booking-add"}
-                child={open ? "Close" : "Add"}
+                child={open ? "Close" : "New Booking+"}
               ></Button>
             </div>
           </div>
@@ -171,8 +171,8 @@ const Booking = () => {
             <ErrorPage />
           ) : (
             <>
-              <p>Showing {dayData} days result</p>
-              <BookingTable></BookingTable>
+              {/* <p>Showing {dayData} days result</p> */}
+              <BookingTable SortedDays={dayData}></BookingTable>
             </>
           )}
         </div>

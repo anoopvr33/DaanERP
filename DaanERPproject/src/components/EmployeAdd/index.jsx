@@ -8,14 +8,8 @@ import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 // import Select from "../Elements/select";
-
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
 
 const EmployeeAdd = () => {
   const [data, setData] = useState({
@@ -26,6 +20,13 @@ const EmployeeAdd = () => {
     hotels: [],
   });
 
+  //   Monsoon Retreats by DAAN
+  // The Cloud by Daan
+  // Daan Ambalath Maple
+
+  const navigate = useNavigate();
+  const [options, setHotelOptions] = useState([]);
+  const [hotelData, setHotelData] = useState([]);
   const dispatch = useDispatch();
 
   const OnInput = (e) => {
@@ -81,6 +82,24 @@ const EmployeeAdd = () => {
     console.log("my data", data);
   }, [data]);
 
+  useEffect(() => {
+    const hotels = Hotels();
+    if (hotels?.length === 0 || !hotels) {
+      navigate("/login");
+    }
+    console.log("hotelsss", hotels);
+
+    if (hotels && hotels.length > 0) {
+      const formatted = hotels.map((i) => ({
+        value: i,
+        label: i.charAt(0).toUpperCase() + i.slice(1),
+      }));
+
+      setHotelOptions(formatted);
+      setData((prev) => ({ ...prev, hotels: formatted.map((i) => i.value) })); // initialize selection
+    }
+  }, []);
+
   return (
     <div className="add-book-main">
       <form action="" onSubmit={OnSubmit}>
@@ -111,7 +130,10 @@ const EmployeeAdd = () => {
             onChange={(selected) => {
               // if (!selected) return setHotel([]);
               if (!selected || selected.length === 0) {
-                setData((prev) => ({ ...prev, hotels: Hotels() }));
+                setData((prev) => ({
+                  ...prev,
+                  hotels: options.map((i) => i.value),
+                }));
                 return;
               }
               setData((prev) => ({
@@ -119,7 +141,7 @@ const EmployeeAdd = () => {
                 hotels: selected.map((i) => i.value),
               }));
             }}
-            options={option2}
+            options={options}
             isMulti
             className="custom-multi-select"
           ></Select>

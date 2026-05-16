@@ -14,6 +14,8 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
   const [cat, setCat] = useState(false);
   const [sub, setSub] = useState(false);
   const [data, setData] = useState([]);
+  const [list, setList] = useState(false);
+
   const [category, setCategory] = useState([]);
   const [newcat, setNewcat] = useState("");
   const [subcat, setSubcat] = useState({ category: null, sub_category: "" });
@@ -98,25 +100,45 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
           onClick={() => (
             setOpenCatSub(false),
             setOpen(false),
-            setOpenCat(!openCat)
+            setOpenCat(!openCat),
+            setList(false)
           )}
-          child={"Add Category +"}
+          child={"New Category +"}
         ></Button>
         <Button
           onClick={() => (
             setOpen(false),
             setOpenCat(false),
-            setOpenCatSub(!openCatSub)
+            setOpenCatSub(!openCatSub),
+            setList(false)
           )}
-          child={"Add Subcategory +"}
+          child={"New Subcategory +"}
         ></Button>
+
         <Button
           onClick={() => (
             setOpenCat(false),
             setOpenCatSub(false),
-            setOpen(!open)
+            setOpen(false),
+            setList(!list)
           )}
-          child={"Create +"}
+          child={
+            <>
+              {" "}
+              List Categories{" "}
+              <i class="fa fa-angle-down" aria-hidden="true"></i>{" "}
+            </>
+          }
+        />
+        <Button
+          onClick={() => (
+            setOpenCat(false),
+            setOpenCatSub(false),
+            setOpen(!open),
+            setList(false)
+          )}
+          child={"New Daily Log +"}
+          className={"add-dailylog"}
         />
       </div>
       {open && <AccountsDailyAdd formdate={dateset}></AccountsDailyAdd>}
@@ -157,6 +179,32 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
 
             <Button child={"Add"} onClick={AddSubCat}></Button>
           </form>
+        </div>
+      )}
+
+      {list && (
+        <div
+          style={{
+            width: "500px",
+            height: "fit-content",
+            maxHeight: "300px",
+            overflowY: "scroll",
+            border: "1px solid #d9d9d9",
+            borderRadius: "20px",
+            padding: "15px",
+          }}
+          className="add-account-main"
+        >
+          {category.map((i) => (
+            <div style={{ marginBottom: "10px" }}>
+              <b>{i.category}</b>
+              <ul>
+                {/* {i.sub_category.map((j) => (
+                    <li>{j.sub_category}</li>
+                  ))} */}
+              </ul>
+            </div>
+          ))}
         </div>
       )}
 

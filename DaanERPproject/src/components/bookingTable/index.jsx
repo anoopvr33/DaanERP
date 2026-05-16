@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBookingData } from "../../redux/bookingSlice";
 import AddBookindCheck from "../BookingCheckAdd";
 import AddBookindCheckOut from "../BookingCheckAdd/checkout";
+import BookingEdit from "../bookingEdit";
+import ErrorPage from "../Elements/Error";
 
-const BookingTable = () => {
+const BookingTable = ({ SortedDays }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
+  const [edit, setEdit] = useState(null);
 
   const { items, geterror, loading } = useSelector((state) => state.booking);
 
@@ -27,12 +30,16 @@ const BookingTable = () => {
     // console.log("search input",);
   }, [items]);
 
-  if (loading) {
+  if (loading && !geterror) {
     return <p className="loading">Loading...</p>;
   }
 
   return (
     <>
+      <p>
+        Showing <b>{FilterData?.length}</b> results of{" "}
+        <b>{SortedDays + 1 || 1}</b> Days
+      </p>
       <table className="booking-table" border={1}>
         <tr>
           <th>Booking Date</th>
@@ -55,8 +62,10 @@ const BookingTable = () => {
         <tbody>
           {!items || geterror ? (
             <tr>
-              {" "}
-              <td colSpan={11}> Please Login or Something wrong </td>{" "}
+              <td colSpan={15} style={{ padding: "20px 0px" }}>
+                {" "}
+                <ErrorPage></ErrorPage>{" "}
+              </td>{" "}
             </tr>
           ) : FilterData?.length === 0 ? (
             <tr>
@@ -84,6 +93,22 @@ const BookingTable = () => {
                       setOpen={setOpen}
                     />
                   ))}
+                {edit === index && (
+                  <BookingEdit
+                    phone={i.phone}
+                    customer={i.name}
+                    checkIn={i.checkin_date}
+                    adult={i.adults}
+                    child={i.children}
+                    payment={i.paymentMode}
+                    meal={i.meal_plan}
+                    room={i.room_category}
+                    total={i.total_amount}
+                    checkout={i.checkout_date}
+                    id={i.id}
+                    setEdit={setEdit}
+                  />
+                )}
                 <tr
                   className="booking-row"
                   style={{
@@ -145,8 +170,11 @@ const BookingTable = () => {
                     )}
                   </td>
                   <td>
-                    {" "}
-                    <i class="fa fa-edit" aria-hidden="true"></i>{" "}
+                    <i
+                      onClick={() => setEdit(index)}
+                      class="fa fa-edit"
+                      aria-hidden="true"
+                    ></i>{" "}
                     <i class="fa fa-trash" aria-hidden="true"></i>{" "}
                   </td>
                   <td

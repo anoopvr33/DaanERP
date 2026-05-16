@@ -21,6 +21,16 @@
   /* padding: 10px; */
   /* background-color: aqua; */
 }
+.booking-add {
+  margin: auto;
+  margin-right: 0px;
+  background-image: linear-gradient(40deg, #69af99);
+  /* border: 1px solid #3b8f6d; */
+  color: #ffffff;
+}
+.booking-add:active {
+  background-image: linear-gradient(40deg, #69af99b6);
+}
 /* .booking .line {
   width: 100%;
   height: 2px;

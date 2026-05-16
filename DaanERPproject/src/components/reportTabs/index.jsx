@@ -11,6 +11,7 @@ import ReportCheckoutTab from "./reportCheckout";
 const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const POS = {
     borderRadius: "20px 20px 0px 0px",
@@ -109,7 +110,9 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const GetAudit = async () => {
     console.log("report date format", prevmonth, yesterday, hotel);
 
-    if (hotel.length === 0) return alert("Hotel is required");
+    if (hotel.length === 0) return setLoading(true);
+
+    setLoading(false);
 
     try {
       const response = await API.post(
@@ -186,10 +189,17 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
           </p>
         ))}
       </div>
+      {/* {loading && (
+        <div style={{ padding: "20px" }}>
+          <p>Loading...</p>
+        </div>
+      )} */}
+
       <div
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
+        {loading && "Loading..."}
         {tab === 0 && (
           <ReportAuditTab
             yesterday={yesterday}

@@ -20,8 +20,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(false);
+  const [list, setList] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
+  const [loadingg, setLoading] = useState(false);
   const [newCat, setNewCat] = useState("");
   const [newSub, setNewSub] = useState({
     budget_category: null,
@@ -62,7 +64,9 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   }, []);
 
   useEffect(() => {
-    if (hotels.length === 0) return alert("Hotel is required");
+    if (hotels.length === 0) return setLoading(true);
+
+    setLoading(false);
 
     dispatch(
       getBudgetData({
@@ -83,25 +87,46 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             onClick={() => (
               setOpenCatSub(false),
               setOpen(false),
-              setOpenCat(!openCat)
+              setOpenCat(!openCat),
+              setList(false)
             )}
-            child={"Add Category +"}
+            child={"New Category +"}
           ></Button>
           <Button
             onClick={() => (
               setOpen(false),
               setOpenCat(false),
-              setOpenCatSub(!openCatSub)
+              setOpenCatSub(!openCatSub),
+              setList(false)
             )}
-            child={"Add Subcategory +"}
+            child={"New Subcategory +"}
           ></Button>
+
           <Button
             onClick={() => (
               setOpenCat(false),
               setOpenCatSub(false),
-              setOpen(!open)
+              setOpen(false),
+              setList(!list)
             )}
-            child={"Create +"}
+            child={
+              <>
+                {" "}
+                List Categories{" "}
+                <i class="fa fa-angle-down" aria-hidden="true"></i>{" "}
+              </>
+            }
+          />
+
+          <Button
+            onClick={() => (
+              setOpenCat(false),
+              setOpenCatSub(false),
+              setOpen(!open),
+              setList(false)
+            )}
+            className={"add-budget"}
+            child={"New Budget +"}
           />
         </div>
         {open && <AccountsPosAdd type={"IN"} formdate={dateset} />}
@@ -139,6 +164,33 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             </form>
           </div>
         )}
+
+        {list && (
+          <div
+            style={{
+              width: "500px",
+              height: "fit-content",
+              maxHeight: "300px",
+              overflowY: "scroll",
+              border: "1px solid #d9d9d9",
+              borderRadius: "20px",
+              padding: "15px",
+            }}
+            className="add-account-main"
+          >
+            {category.map((i) => (
+              <div style={{ marginBottom: "10px" }}>
+                <b>{i.category}</b>
+                <ul>
+                  {/* {i.sub_category.map((j) => (
+                    <li>{j.sub_category}</li>
+                  ))} */}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+        {loadingg && <LoadingItem></LoadingItem>}
         <br />
         <p>
           <b>Date</b>: {dateset}
