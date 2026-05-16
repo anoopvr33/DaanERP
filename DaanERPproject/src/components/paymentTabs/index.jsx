@@ -188,8 +188,8 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {loading ?? "Loading..."}
-
+        {loading ? <p>Loading...</p> : ""}
+        {/* <p>Loading</p> */}
         {tab === 0 && (
           <BillCompanyTab result={data?.bill_to_company}></BillCompanyTab>
         )}
