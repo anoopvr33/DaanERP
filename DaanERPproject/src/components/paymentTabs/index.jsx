@@ -137,7 +137,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
 
     if (hotelsArray.length === 0) return setLoading(true);
 
-    setLoading(false);
+    // setLoading(false);
     try {
       const response = await API.post(
         "/reports/get_payment_report/",
@@ -160,6 +160,8 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
       } else alert("some error");
     } catch (error) {
       alert(error);
+    } finally {
+      setLoading(false);
     }
   };
 

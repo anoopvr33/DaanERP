@@ -112,8 +112,6 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
     if (hotel.length === 0) return setLoading(true);
 
-    setLoading(false);
-
     try {
       const response = await API.post(
         "/reports/get_nightaudit_report/",
@@ -161,6 +159,8 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
       );
     } catch (error) {
       alert(error, "please login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -200,6 +200,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
         className="acc-tabs-container"
       >
         {loading ? <p>Loading...</p> : ""}
+        {/* <p>Loading</p> */}
         {tab === 0 && (
           <ReportAuditTab
             yesterday={yesterday}

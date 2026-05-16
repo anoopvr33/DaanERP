@@ -65,16 +65,20 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
 
   useEffect(() => {
     if (hotels.length === 0) return setLoading(true);
+    try {
+      dispatch(
+        getBudgetData({
+          from_date: prevMonth,
+          to_date: dateset,
+          hotel: hotels,
+        }),
+      );
+    } catch (error) {
+      alert("something went wrong getting budget data");
+    } finally {
+      setLoading(false);
+    }
 
-    setLoading(false);
-
-    dispatch(
-      getBudgetData({
-        from_date: prevMonth,
-        to_date: dateset,
-        hotel: hotels,
-      }),
-    );
     // eslint(react-hooks/set-state-in-effect)
   }, [trigger, hotels]);
 
