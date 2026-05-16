@@ -190,7 +190,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             ))}
           </div>
         )}
-        {loadingg && <LoadingItem></LoadingItem>}
+        {loadingg ? <p>Loading...</p> : ""}
         <br />
         <p>
           <b>Date</b>: {dateset}
