@@ -6,11 +6,29 @@ import AddBookindCheck from "../BookingCheckAdd";
 import AddBookindCheckOut from "../BookingCheckAdd/checkout";
 import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
+import { DeleteBookingDataAPI } from "../../api";
 
 const BookingTable = ({ SortedDays }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
   const [edit, setEdit] = useState(null);
+
+  const Delete = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure want to delete this booking?",
+    );
+
+    if (!confirmed) return;
+    try {
+      const res = await DeleteBookingDataAPI(id);
+      console.log("delete res", res);
+      if (res.data.status === "success") {
+        alert("successflly deleted");
+      } else alert("please login or some error");
+    } catch (error) {
+      alert("delete error", error);
+    }
+  };
 
   const { items, geterror, loading } = useSelector((state) => state.booking);
 
@@ -175,7 +193,11 @@ const BookingTable = ({ SortedDays }) => {
                       class="fa fa-edit"
                       aria-hidden="true"
                     ></i>{" "}
-                    <i class="fa fa-trash" aria-hidden="true"></i>{" "}
+                    <i
+                      onClick={() => Delete(i.id)}
+                      class="fa fa-trash"
+                      aria-hidden="true"
+                    ></i>{" "}
                   </td>
                   <td
                     onClick={() =>
