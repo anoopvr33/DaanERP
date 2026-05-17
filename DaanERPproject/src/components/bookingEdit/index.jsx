@@ -91,17 +91,17 @@ const BookingEdit = ({
   });
 
   const OnSubmit = async () => {
-    console.log("booking edit data final", data);
-    // try {
-    //   const response = await EditBookingDataAPI(data, id);
-    //   console.log("book edit respose", response);
+    // console.log("booking edit data final", data);
+    try {
+      const response = await EditBookingDataAPI(data, id);
+      console.log("book edit respose", response);
 
-    //   if (response.data.success === true) {
-    //     return alert("successfully updated");
-    //   } else throw response.data.message || "Error";
-    // } catch (error) {
-    //   alert(error);
-    // }
+      if (response.data.success === true) {
+        return alert("successfully updated");
+      } else throw response.data.message || "Error";
+    } catch (error) {
+      alert(error);
+    }
   };
 
   // const formatDateTimeLocal = (dateString) => {
