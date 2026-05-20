@@ -13,16 +13,31 @@
   background: hsl(0, 0%, 100%);
   /* border: 2px solid rgb(119, 119, 255); */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   gap: 15px;
   transition: 0.6s;
   /* border: 1px solid hsl(243, 37%, 52%); */
   /* border-bottom: 3px solid hsl(243, 37%, 52%); */
-  color: #7070a3;
+  color: rgb(61, 185, 144);
+}
+.dash-result h1 {
+  font-size: 25px;
+  color: rgb(92, 144, 127);
+}
+.dash-result i {
+  font-size: 25px;
+  background-color: rgb(219, 255, 243);
+  width: 50px;
+  height: 55px;
+  place-content: center;
+  border-radius: 5px;
+  /* padding: 20px; */
+  /* flex-shrink: 0; */
+  color: rgb(61, 185, 144);
 }
 .dash-result div:nth-child(even) {
   /* background: white; */

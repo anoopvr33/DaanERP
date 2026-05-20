@@ -45,7 +45,7 @@ export default function MarkOptimization({ data }) {
       style={{
         width: "100%",
         height: "320px",
-        background: "rgb(255, 255, 255)",
+        backgroundImage: "linear-gradient(to right,  #e34646, #f9cfc7)",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",
@@ -56,8 +56,9 @@ export default function MarkOptimization({ data }) {
         style={{
           fontWeight: "bold",
           fontSize: "13px",
-          color: "#575757",
+          color: "#ffffff",
           textAlign: "center",
+
           padding: "10px 0px",
         }}
       >
