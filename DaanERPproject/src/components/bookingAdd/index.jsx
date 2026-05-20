@@ -74,6 +74,11 @@ const BookingAdd = () => {
     const { name, value } = e.target;
 
     if (name === "checkin_date" || name === "checkout_date") {
+      if (!value) {
+        setData({ ...data, [name]: "" });
+        return;
+      }
+
       const dateObj = new Date(value);
 
       const formatted = dateObj.toLocaleString("en-IN", {

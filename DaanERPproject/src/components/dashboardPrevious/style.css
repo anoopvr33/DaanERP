@@ -1,19 +1,20 @@
 .dash-prev {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 5px;
   height: 320px;
   width: fit-content;
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
+  /* background-color: rgb(255, 255, 255); */
+  /* padding: 20px; */
   border-radius: 20px;
 }
 .dash-prev .sub-1 {
   width: 150px;
   color: rgb(44, 44, 44);
-  background: hsl(0, 0%, 100%);
+  background-image: linear-gradient(to right, #ffffff);
   padding: 15px;
-  display: grid;
+  /* display: ; */
+  place-content: center;
   text-align: center;
   border: 1px solid rgb(221, 221, 221);
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
@@ -30,7 +31,11 @@
   font-size: 16px;
   /* text-decoration: underline; */
 }
-
+.dash-prev .sub-1 span {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(233, 122, 122);
+}
 .dash-prev h1 {
   display: flex;
   justify-content: space-between;

@@ -20,18 +20,6 @@ ChartJS.register(
 );
 
 // Chart data
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June"],
-  datasets: [
-    {
-      label: "Sales",
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: "rgb(190, 133, 255)",
-      barTickness: 10,
-      barPercentage: 0.6,
-    },
-  ],
-};
 
 // Chart options
 const options = {
@@ -58,7 +46,7 @@ const options = {
         drawBorder: false,
       },
       ticks: {
-        display: false, // hides y-axis labels
+        display: true, // hides y-axis labels
         beginAtZero: true, // starts y-axis at zero
       },
     },
@@ -72,9 +60,10 @@ export default function Chart({ data }) {
       {
         label: "Sales",
         data: data?.slice(0, 5).map((i) => i.sales),
-        backgroundColor: "rgb(190, 133, 255)",
+        backgroundColor: "rgb(255, 242, 231)",
         barTickness: 10,
         barPercentage: 0.6,
+        borderRadius: 5,
         maxBarThickness: 100,
         width: "100px",
       },
@@ -86,7 +75,7 @@ export default function Chart({ data }) {
       style={{
         width: "100%",
         height: "320px",
-        background: "rgb(255, 255, 255)",
+        backgroundImage: "linear-gradient(to right,  #f9a231, #ffd6c2)",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",

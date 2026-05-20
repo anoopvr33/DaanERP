@@ -46,7 +46,8 @@ const options = {
         drawBorder: false,
       },
       ticks: {
-        display: false, // hides y-axis labels
+        color: "rgba(0, 0, 0, 0.5)", // sets y-axis label color
+        display: true, // hides y-axis labels
         beginAtZero: true, // starts y-axis at zero
       },
     },
@@ -55,15 +56,19 @@ const options = {
 
 export default function ExpenseChart({ data }) {
   // Chart data
+
   const chartData = {
     labels: data?.slice(0, 5).map((i) => i.month),
     datasets: [
       {
         label: "Expense",
         data: data?.slice(0, 5).map((i) => i.expense),
-        backgroundColor: "rgb(249, 72, 84)",
+        backgroundColor: "rgb(61, 185, 144)",
         barTickness: 10,
+        borderRadius: 5,
         barPercentage: 0.6,
+        maxBarThickness: 100,
+        // barPercentage: 0.6,
       },
     ],
   };
@@ -73,7 +78,7 @@ export default function ExpenseChart({ data }) {
       style={{
         width: "100%",
         height: "320px",
-        background: "rgb(255, 255, 255)",
+        backgroundImage: "linear-gradient(to right, #55b197, #bde8d1)",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",

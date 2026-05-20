@@ -5,7 +5,6 @@ import "./style.css";
 import Button from "../button";
 
 const customStyles = {
-  
   control: (provided) => ({
     ...provided,
     backgroundColor: "#ffffff", // main input background
