@@ -18,6 +18,17 @@ export default function SidebarTwo() {
     "",
   ];
 
+  const Icons = [
+    "",
+    <i class="fa-solid fa-chart-simple"></i>,
+    <i class="fa-solid fa-users"></i>,
+    <i class="fa-solid fa-hotel"></i>,
+    <i class="fa-solid fa-money-bill"></i>,
+    <i class="fa-solid fa-file-invoice-dollar"></i>,
+    <i class="fa-solid fa-suitcase-rolling"></i>,
+    <i class="fa-solid fa-user-tie"></i>,
+  ];
+
   const page = new URLSearchParams(location.search);
   const ind = Number(page.get("index"));
   const navigate = useNavigate();
@@ -47,6 +58,7 @@ export default function SidebarTwo() {
               }}
               className={`menu-item ${ind == index ? "active" : ""}`}
             >
+              {Icons[index]} <span> </span>
               {item}
             </li>
           </p>

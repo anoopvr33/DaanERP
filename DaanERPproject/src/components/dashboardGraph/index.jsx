@@ -31,6 +31,10 @@ const options = {
     title: {
       display: true,
       text: "Monthly Sales Data",
+      font: {
+        size: 16,
+      },
+      color: "#836767",
     },
   },
   scales: {
@@ -39,6 +43,7 @@ const options = {
         display: false, // removes vertical grid lines
         drawBorder: false, // removes axis border
       },
+      width: "100px",
     },
     y: {
       grid: {
