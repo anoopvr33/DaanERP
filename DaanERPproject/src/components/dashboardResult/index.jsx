@@ -8,7 +8,7 @@ const DashResult = ({ data }) => {
       <div style={{ display: "flex" }}>
         <i class="fa-solid fa-suitcase-rolling"></i>
         <span>
-          <h1>{data.booking_count}</h1>
+          <h1>{data?.booking_count}</h1>
           <b> Bookings</b>
         </span>
       </div>
@@ -19,21 +19,21 @@ const DashResult = ({ data }) => {
       <div>
         <i class="fa-brands fa-cash-app"></i>
         <span>
-          <h1>{data.arr}</h1>
+          <h1>{data?.arr}</h1>
           <b> ARR</b>
         </span>
       </div>
       <div>
         <i class="fa-solid fa-bed"></i>
         <span>
-          <h1>{data.room_nights}</h1>
+          <h1>{data?.room_nights}</h1>
           <b> Room Night</b>
         </span>
       </div>
       <div>
         <i class="fa-solid fa-door-open"></i>
         <span>
-          <h1>{data.room_count}</h1>
+          <h1>{data?.room_count}</h1>
           <b> Room Count</b>
         </span>
       </div>
@@ -41,7 +41,7 @@ const DashResult = ({ data }) => {
         {/* <h1>{data.unique_room}</h1> */}
         <i class="fa-solid fa-chart-pie"></i>
         <span>
-          <h1>{data.room_occupancy}</h1>
+          <h1>{data?.room_occupancy}</h1>
           <b> Room Occupancy</b>
         </span>
       </div>

@@ -4,11 +4,11 @@ const DashboardPrev = ({ data }) => {
   return (
     <div className="dash-prev">
       <div className="sub-1">
-        <span>{data.yestarday_occupancy}</span>
+        <span>{data?.yestarday_occupancy}</span>
         <h2>Yesturday Occupancy</h2>
       </div>
       <div className="sub-1">
-        <span>{data.last_month_occupancy}</span>
+        <span>{data?.last_month_occupancy}</span>
         <h2>Last Month Occupancy</h2>
       </div>
       <div className="sub-1">
