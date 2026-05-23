@@ -57,9 +57,16 @@
 .customer-table td {
   padding: 11px 10px;
   border: none;
-  font-size: 15px;
+  font-size: 14px;
+  width: 200px;
+  border-left: 1px solid rgba(213, 224, 255, 0.801);
+  border-bottom: 1px solid rgba(213, 224, 255, 0.801);
   text-align: center;
   border-radius: 0px;
+  line-break: anywhere;
+}
+.customer-table th {
+  padding: 15px;
 }
 
 .customer-table .customer-expand td {
