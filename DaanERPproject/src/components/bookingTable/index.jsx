@@ -68,7 +68,7 @@ const BookingTable = ({ SortedDays }) => {
           <th>Payment Mode</th>
           <th>Rate Plan Code</th>
           {/* <th>Meal Plan</th> */}
-          <th>Room Cat.</th>
+          <th>Room No.</th>
           <th>Customer</th>
           <th>Mob.No</th>
           <th>Booking Source</th>
@@ -164,7 +164,7 @@ const BookingTable = ({ SortedDays }) => {
                   <td>{i.paymentMode || "-"}</td>
                   <td>{i.rateplanCode || "_"}</td>
                   {/* <td>{i.meal_plan || "-"}</td> */}
-                  <td>{i.room_category || "_"}</td>
+                  <td>{i.room_number || "_"}</td>
                   <td>{i.name}</td>
 
                   <td>{i.phone}</td>
@@ -232,6 +232,11 @@ const BookingTable = ({ SortedDays }) => {
                         <p>
                           <b>
                             room_category <span>{i.room_category}</span>
+                          </b>
+                        </p>
+                        <p>
+                          <b>
+                            room_count <span>{i.room_count}</span>
                           </b>
                         </p>
                         <p>

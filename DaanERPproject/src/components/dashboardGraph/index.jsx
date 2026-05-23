@@ -60,11 +60,11 @@ const options = {
 
 export default function Chart({ data }) {
   const chartData = {
-    labels: data?.slice(0, 5).map((i) => i.month),
+    labels: data?.slice(0, 6).map((i) => i.month),
     datasets: [
       {
         label: "Sales",
-        data: data?.slice(0, 5).map((i) => i.sales),
+        data: data?.slice(0, 6).map((i) => i.sales),
         backgroundColor: "rgb(255, 242, 231)",
         barTickness: 10,
         barPercentage: 0.6,

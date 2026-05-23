@@ -66,7 +66,7 @@ const EmployeeTable = () => {
   }, [items]);
 
   return (
-    <table style={{ width: "900px" }} className="booking-table" border={1}>
+    <table style={{ width: "900px" }} className="employee-table" border={1}>
       <tr>
         <th>ID</th>
         <th>Username</th>
@@ -91,7 +91,7 @@ const EmployeeTable = () => {
         ) : (
           items?.data?.map((i, index) => (
             <Fragment>
-              <tr className="booking-row">
+              <tr className="employee-row">
                 <td>{i.id}</td>
                 <td>{i.username}</td>
                 <td>{i.email}</td>

@@ -58,7 +58,7 @@ const Dashboard = () => {
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
-          <Navbar></Navbar>
+          {/* <Navbar></Navbar> */}
 
           <div className="h2-sub">
             <h2>Dashboard</h2>
