@@ -23,7 +23,11 @@ ChartJS.register(
 
 // Chart options
 const options = {
-  responsive: true,
+  window: {
+    width: "100%",
+    responsive: true,
+    maintainAspectRatio: false,
+  },
   plugins: {
     legend: {
       position: "top",
@@ -43,9 +47,16 @@ const options = {
         display: false, // removes vertical grid lines
         drawBorder: false, // removes axis border
       },
-      width: "100px",
     },
     y: {
+      // title: {
+      //   text: "Sales",
+      //   display: true,
+      //   color: "#836767",
+      //   font: {
+      //     size: 14,
+      //   },
+      // },
       grid: {
         display: false, // removes horizontal grid lines
         drawBorder: false,
@@ -65,12 +76,11 @@ export default function Chart({ data }) {
       {
         label: "Sales",
         data: data?.slice(0, 6).map((i) => i.sales),
-        backgroundColor: "rgb(255, 242, 231)",
-        barTickness: 10,
-        barPercentage: 0.6,
+        backgroundColor: "rgb(255, 251, 240)",
+        barTickness: 30,
+        // barPercentage: 0.6,
         borderRadius: 5,
-        maxBarThickness: 100,
-        width: "100px",
+        maxBarThickness: 50,
       },
     ],
   };

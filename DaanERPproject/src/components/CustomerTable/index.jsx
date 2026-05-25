@@ -82,7 +82,7 @@ const CustomerTable = ({ count, items }) => {
                     background: `${expand.row == index && expand.open ? "#f5f5ff" : ""}`,
                   }}
                 >
-                  <td colSpan={7}>
+                  <td colSpan={8}>
                     <div className="customer-expand">
                       <table>
                         <tr>

@@ -61,7 +61,7 @@ const BookingAdd = () => {
     rateplanCode: "",
     meal_plan: "",
     booking_plan: "",
-    status: "",
+    tag_status: "Confirmed",
     // booking_id: "",
     // invoice_pdf: null,
     gst_number: null,
@@ -286,14 +286,14 @@ const BookingAdd = () => {
         <FormItems
           labelData="Status"
           element="select"
-          option={["Select Status", "True", "False"]}
+          option={["Confirmed", "Cancelled"]}
           onChange={(e) =>
             setData({
               ...data,
-              status: e.target.value === "True" ? true : false,
+              tag_status: e.target.value,
             })
           }
-          name={"status"}
+          name={"tag_status"}
         ></FormItems>
 
         <FormItems

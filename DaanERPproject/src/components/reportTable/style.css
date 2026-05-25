@@ -31,7 +31,11 @@
 .report-table td {
   padding: 11px 10px;
   border: none;
+  max-width: 200px;
   /* width: 100px; */
+  border-left: 1px solid rgba(213, 224, 255, 0.801);
+  border-bottom: 1px solid rgba(213, 224, 255, 0.801);
+
   font-size: 14px;
   text-align: center;
   /* border-radius: 0px; */

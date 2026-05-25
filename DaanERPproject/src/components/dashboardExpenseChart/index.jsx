@@ -21,7 +21,11 @@ ChartJS.register(
 
 // Chart options
 const options = {
-  responsive: true,
+  window: {
+    width: "100%",
+    responsive: true,
+    maintainAspectRatio: false,
+  },
   plugins: {
     legend: {
       position: "top",
@@ -37,7 +41,7 @@ const options = {
       grid: {
         display: false, // removes vertical grid lines
         drawBorder: false, // removes axis border
-        length: "100px",
+        // length: "100px",
       },
     },
     y: {
@@ -64,10 +68,10 @@ export default function ExpenseChart({ data }) {
         label: "Expense",
         data: data?.slice(0, 6).map((i) => i.expense),
         backgroundColor: "rgb(61, 185, 144)",
-        barTickness: 10,
+        barTickness: 30,
         borderRadius: 5,
-        barPercentage: 0.6,
-        maxBarThickness: 100,
+        // barPercentage: 0.6,
+        maxBarThickness: 60,
         // barPercentage: 0.6,
       },
     ],

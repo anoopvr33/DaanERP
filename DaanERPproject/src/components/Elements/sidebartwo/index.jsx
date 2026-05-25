@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { Hotels, IsSuper } from "../../../utils";
 
 export default function SidebarTwo() {
+  const [side, setOpen] = useState(false);
+
+  const open = useMemo(() => {
+    return localStorage.getItem("sidebar") === "true" ? true : false;
+  }, [side]);
+
   const menuItems = [
     "",
     "Dashboard",
@@ -35,13 +41,25 @@ export default function SidebarTwo() {
 
   useEffect(() => {}, [IsSuper()]);
 
+  useEffect(() => {}, [side]);
+
+  // useEffect(() => {}, [open]);
+
   return (
-    <aside className="sidebar-3">
+    <aside className={`sidebar-3 ${open && "active"}`}>
       <h1 className="logo">
-        Daan<span style={{ color: "rgb(190, 133, 255)" }}>ERP</span>
+        <i
+          onClick={() => (
+            setOpen(!side),
+            localStorage.setItem("sidebar", !side)
+          )}
+          class={`fa  ${open ? "fa-angle-right" : "fa-angle-left"}`}
+          aria-hidden="true"
+        ></i>
+        {/* <span>DaanERP</span> */}
       </h1>
 
-      <ul className="menu">
+      <ul className={`menu ${open && "menu-active"}`}>
         {menuItems.map((item, index) => (
           <p
             key={item}
@@ -56,15 +74,15 @@ export default function SidebarTwo() {
                 borderBottomRightRadius: `${ind - 1 == index ? "20px" : ""}`,
                 borderTopRightRadius: `${ind + 1 == index ? "20px" : ""}`,
               }}
-              className={`menu-item ${ind == index ? "active" : ""}`}
+              className={`menu-item ${ind == index ? "active" : ""} ${open && "menu-item-active"}`}
             >
               {Icons[index]} <span> </span>
-              {item}
+              {!open && item}
             </li>
           </p>
         ))}
       </ul>
-      <div className="bottom">
+      <div className={`bottom ${open && "bot-active"}`}>
         {!Hotels() ? (
           <p>Login</p>
         ) : (
@@ -75,7 +93,7 @@ export default function SidebarTwo() {
               (window.location.href = "/login")
             )}
           >
-            Logout <i class="fa-solid fa-right-from-bracket"></i>
+            {!open && "Logout"} <i class="fa-solid fa-right-from-bracket"></i>
           </p>
         )}
       </div>

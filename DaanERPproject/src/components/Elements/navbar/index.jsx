@@ -5,7 +5,7 @@ import Button from "../button";
 import { useDispatch, useSelector } from "react-redux";
 import { searchInput } from "../../../redux/SearchSlice";
 
-const Navbar = () => {
+const Navbar = ({ placeholder }) => {
   const dispatch = useDispatch();
 
   const { inputValue } = useSelector((state) => state.search);
@@ -16,10 +16,11 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
+      <img src="/logo.png " alt="" />{" "}
       <div className="nav-menu">
         <nav>
           <FormItems
-            placeholder={"Search by name..."}
+            placeholder={placeholder || "Search here..."}
             onChange={onChange}
             name={""}
             value={inputValue}

@@ -10,7 +10,7 @@
   /* border-bottom: 2px solid #d3d3e6; */
   border-radius: 20px;
   overflow: hidden;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .customer-table .customer-expand {
   width: fit-content;

@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: end;
-  padding: 0px 0px 20px 20px;
+  justify-content: space-between;
+  padding: 0px 0px 20px 0px;
   /* background-color: antiquewhite; */
 }
 .navbar .nav-menu {
@@ -12,6 +12,11 @@
   /* position: absolute; */
   align-items: center;
   gap: 10px;
+}
+.navbar img {
+  /* width: 50px; */
+  height: 80px;
+  border-radius: 5px;
 }
 .navbar .nav-menu i {
   padding: 11px 0px 11px 0px;
