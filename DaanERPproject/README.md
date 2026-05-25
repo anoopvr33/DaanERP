@@ -23,7 +23,6 @@ git commit -m ""
 
 git push origin branch-1
 
-
 ///////////////////////////
 
 Step 1 Clone the repository or update your local repository with the latest changes.
@@ -36,7 +35,7 @@ git checkout main
 
 Step 3 Merge the head branch into the base branch.
 
-git merge branch-1
+git merge branch-1(branch name)
 
 Step 4 Push the changes.
 

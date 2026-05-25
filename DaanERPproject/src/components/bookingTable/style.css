@@ -35,13 +35,7 @@
   line-break: anywhere;
   border-left: 1px solid rgba(213, 224, 255, 0.801);
   border-bottom: 1px solid rgba(213, 224, 255, 0.801);
-  /* width: 100px; */
-  /* border:  0.5px solid rgb(236, 236, 236); */
-  /* border: 0.5px solid rgb(236, 236, 236); */
   max-width: 200px;
-  /* min-width: 50px; */
-  /* width: 230px; */
-  /* text-wrap: 100px; */
   text-align: center;
   border-radius: 0px;
 }

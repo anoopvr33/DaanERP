@@ -40,7 +40,7 @@
 } */
 .booking .elements .h2-sub {
   color: #386f74;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* background-image: linear-gradient(90deg, #386f74, #649ea3); */
   background: #ffffff;
   /* font-size: 20px; */
@@ -69,7 +69,7 @@
   /* background-color: #dde9e5; */
 
   /* background-image: linear-gradient(40deg, rgb(56, 61, 90)); */
-  padding: 20px;
+  padding: 0px 20px;
   height: 100%;
   display: flex;
   overflow-y: scroll;

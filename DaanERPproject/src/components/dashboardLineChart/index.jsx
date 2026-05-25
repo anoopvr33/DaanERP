@@ -63,7 +63,7 @@ export default function MarkOptimization({ data }) {
           padding: "10px 0px",
         }}
       >
-        Weekly Occupacy Chart
+        <p> Daily Occupancy Data</p>
       </p>
       <LineChart
         xAxis={[
@@ -76,6 +76,7 @@ export default function MarkOptimization({ data }) {
           {
             min: 0,
             max: roundedMax,
+            barGapRatio: 2,
             ticks: yTicks,
             label: "Occupancy",
           },
