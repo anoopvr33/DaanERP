@@ -19,7 +19,7 @@ const CashPay = ({ result }) => {
         <th> checkin</th>
         <th>checkout</th>
         <th>room category</th>
-        <th>payment_link</th>
+        {/* <th>payment_link</th> */}
       </tr>
 
       <tbody>
@@ -38,7 +38,7 @@ const CashPay = ({ result }) => {
                 <td>{row.checkin}</td>
                 <td>{row.checkout}</td>
                 <td>{row.room_code}</td>
-                <td>{row.payment_link ? row.payment_link : "Null"}</td>
+                {/* <td>{row.payment_link ? row.payment_link : "Null"}</td> */}
               </tr>
             ))
             .reverse()

@@ -9,6 +9,7 @@ import { API, getCookie } from "../../utils/axios";
 import BankTransferTab from "./bank_transfer";
 import OutstandingTab from "./out_standing";
 import ComplementaryTab from "./complementary";
+import PaymentLink from "./paymentLink";
 
 const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const [tab, setTab] = useState(0);
@@ -63,12 +64,19 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
     borderBottomRightRadius: tab - 1 == 6 && "20px",
     borderBottomLeftRadius: tab + 1 == 6 && "20px",
   };
-  const None = {
+  const payment = {
     borderRadius: "20px 20px 0px 0px",
-    // background: tab == 0 && "    hsl(0, 0%, 100%)",
+    background: tab == 7 && "    hsl(0, 0%, 100%)",
     color: tab == 7 && "#386f74",
     borderBottomRightRadius: tab - 1 == 7 && "20px",
     borderBottomLeftRadius: tab + 1 == 7 && "20px",
+  };
+  const None = {
+    borderRadius: "20px 20px 0px 0px",
+    // background: tab == 0 && "    hsl(0, 0%, 100%)",
+    color: tab == 8 && "#386f74",
+    borderBottomRightRadius: tab - 1 == 8 && "20px",
+    borderBottomLeftRadius: tab + 1 == 8 && "20px",
   };
 
   const TabArray = [
@@ -116,6 +124,12 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
     },
     {
       id: 7,
+      name: "Payment Link Mode",
+      link: "pos",
+      style: payment,
+    },
+    {
+      id: 8,
       name: "",
       link: "",
       style: None,
@@ -211,6 +225,9 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
         {tab === 6 && (
           <ComplementaryTab result={data?.complementary}></ComplementaryTab>
         )}
+        {tab === 7 && (
+          <PaymentLink result={data?.payment_link_mode}></PaymentLink>
+        )}
       </div>
       <br />
 
@@ -239,6 +256,9 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
         </p>{" "}
         <p>
           <b>complementary</b>: {data?.total_amount?.complementary}
+        </p>
+        <p>
+          <b>payment_link_mode</b>: {data?.total_amount?.payment_link_mode}
         </p>
       </div>
     </div>

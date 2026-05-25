@@ -36,17 +36,33 @@ const CustomerTable = ({ count, items }) => {
   }, [sortedArray]);
 
   return (
-    <table className="customer-table" border={1}>
+    <table className="customer-table">
       <tr>
         {/* <th>ID</th> */}
-        <th>Fisrt Name</th>
+        <th
+          style={{
+            borderLeft: "2px solid rgb(59, 205, 159)",
+            borderTopLeftRadius: "20px",
+            borderBottomLeftRadius: "20px",
+          }}
+        >
+          Fisrt Name
+        </th>
         <th>Last Name</th>
         <th>Mob.No</th>
         <th>Email</th>
         <th>Count</th>
         <th>Total Revenue</th>
         <th>last_booking_date</th>
-        <th>Last Booking Details</th>
+        <th
+          style={{
+            borderRight: "2px solid rgb(59, 205, 159)",
+            borderTopRightRadius: "20px",
+            borderBottomRightRadius: "20px",
+          }}
+        >
+          Last Booking Details
+        </th>
       </tr>
       <tbody>
         {array.length > 0 ? (

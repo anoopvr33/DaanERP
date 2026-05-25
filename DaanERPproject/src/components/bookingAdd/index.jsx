@@ -41,6 +41,10 @@ const PaymentMode = [
     name: "Complementary",
     value: "Complementary",
   },
+  {
+    name: "Payment Link",
+    value: "Payment Link",
+  },
 ];
 
 const BookingAdd = () => {
