@@ -21,8 +21,9 @@ ChartJS.register(
 
 // Chart options
 const options = {
-  responsive: true,
-  maintainAspectRatio: false,
+  // width: "100%",
+  // responsive: true,
+  // maintainAspectRatio: false,
   window: {
     width: "100%",
     responsive: true,

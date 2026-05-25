@@ -23,8 +23,6 @@ ChartJS.register(
 
 // Chart options
 const options = {
-  responsive: true,
-  maintainAspectRatio: false,
   window: {
     width: "100%",
     responsive: true,
@@ -76,6 +74,7 @@ export default function Chart({ data }) {
     labels: data?.slice(0, 6).map((i) => i.month),
     datasets: [
       {
+        // responsive: true,
         label: "Sales",
         data: data?.slice(0, 6).map((i) => i.sales),
         backgroundColor: "rgb(255, 251, 240)",
