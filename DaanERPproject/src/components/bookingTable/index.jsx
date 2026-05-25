@@ -35,8 +35,11 @@ const BookingTable = ({ SortedDays }) => {
   const { inputValue } = useSelector((state) => state.search);
 
   const FilterData = useMemo(() => {
-    const filter = items?.data?.filter((i) =>
-      i.name.toLowerCase().includes(inputValue.toLowerCase()),
+    const filter = items?.data?.filter(
+      (i) =>
+        i.name?.toLowerCase().includes(inputValue.toLowerCase()) ||
+        i.booking_id?.toLowerCase().includes(inputValue.toLowerCase()) ||
+        i.phone?.toLowerCase().includes(inputValue.toLowerCase()),
     );
 
     return filter;
@@ -60,20 +63,19 @@ const BookingTable = ({ SortedDays }) => {
       </p>
       <table className="booking-table" border={1}>
         <tr>
-          <th>Booking Date</th>
+          <th>Date</th>
           <th>Booking ID</th>
+          <th>Source</th>
+          <th>Customer</th>
+          <th>Mob.No</th>
+          <th>Room No.</th>
+          <th>Rate Plan</th>
           <th>Check In</th>
           <th>Check Out</th>
           <th>Amount</th>
-          <th>Payment Mode</th>
-          <th>Rate Plan Code</th>
+          <th>Payment</th>
+          <th>Status</th>
           {/* <th>Meal Plan</th> */}
-          <th>Room No.</th>
-          <th>Customer</th>
-          <th>Mob.No</th>
-          <th>Booking Source</th>
-          <th>Gst No.</th>
-          <th>Invoice</th>
           <th>Action</th>
           <th></th>
         </tr>
@@ -123,6 +125,7 @@ const BookingTable = ({ SortedDays }) => {
                     room={i.room_category}
                     total={i.total_amount}
                     checkout={i.checkout_date}
+                    status={i.tag_status}
                     id={i.id}
                     setEdit={setEdit}
                   />
@@ -135,6 +138,13 @@ const BookingTable = ({ SortedDays }) => {
                 >
                   <td>{i?.booking_date}</td>
                   <td>{i?.booking_id}</td>
+                  <td style={{ fontWeight: "500", color: "#7070a3" }}>
+                    {i.booking_source}
+                  </td>
+                  <td>{i.name}</td>
+                  <td>{i.phone}</td>
+                  <td>{i.room_number || "_"}</td>
+                  <td>{i.rateplanCode || "_"}</td>
                   <td>
                     {i.checkin_date === "" || !i.checkin_date ? (
                       <button
@@ -162,31 +172,9 @@ const BookingTable = ({ SortedDays }) => {
                   {/* <td>{i.paymentMode}</td> */}
                   <td>{i?.total_amount?.toFixed(2)}</td>
                   <td>{i.paymentMode || "-"}</td>
-                  <td>{i.rateplanCode || "_"}</td>
+                  <td>{i.tag_status}</td>
                   {/* <td>{i.meal_plan || "-"}</td> */}
-                  <td>{i.room_number || "_"}</td>
-                  <td>{i.name}</td>
 
-                  <td>{i.phone}</td>
-
-                  <td style={{ fontWeight: "500", color: "#7070a3" }}>
-                    {i.booking_source}
-                  </td>
-                  <td>{i.gst_number || "_"}</td>
-
-                  <td>
-                    {i.invoice_pdf ? (
-                      <a
-                        href={i.invoice_pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        view file
-                      </a>
-                    ) : (
-                      "Null"
-                    )}
-                  </td>
                   <td>
                     <i
                       onClick={() => setEdit(index)}
@@ -234,6 +222,7 @@ const BookingTable = ({ SortedDays }) => {
                             room_category <span>{i.room_category}</span>
                           </b>
                         </p>
+
                         <p>
                           <b>
                             room_count <span>{i.room_count}</span>
@@ -244,6 +233,7 @@ const BookingTable = ({ SortedDays }) => {
                             Hotel Code <span>{i.hotel_code}</span>
                           </b>
                         </p>
+
                         <p>
                           <b>
                             pah
@@ -251,6 +241,27 @@ const BookingTable = ({ SortedDays }) => {
                               {i.pah === false ? "completed" : "pending"}
                             </span>
                           </b>
+                        </p>
+                        <p>
+                          <b>
+                            GST No. <span>{i.gst_number || "_"}</span>
+                          </b>
+                        </p>
+                        <p>
+                          <b>Invoice</b>{" "}
+                          <span>
+                            {i.invoice_pdf ? (
+                              <a
+                                href={i.invoice_pdf}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                view file
+                              </a>
+                            ) : (
+                              "Null"
+                            )}
+                          </span>
                         </p>
                         {/* <p>
                         <b>

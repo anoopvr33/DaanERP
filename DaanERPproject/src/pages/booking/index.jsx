@@ -111,7 +111,7 @@ const Booking = () => {
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
-          <Navbar></Navbar>
+          <Navbar placeholder={"Search Name, ID, Mob No ..."}></Navbar>
           <div className="h2-sub">
             <h2>Booking Management</h2>
 

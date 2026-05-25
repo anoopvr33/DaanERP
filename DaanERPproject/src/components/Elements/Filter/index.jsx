@@ -79,7 +79,7 @@ const Filter = ({
         value={yesterday}
         onChange={yesOnchange}
         type={yesType}
-        labelData={"To Date"}
+        labelData={"InTake Date"}
       ></FormItems>
 
       {child && <Button onClick={onClick} child={child}></Button>}

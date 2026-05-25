@@ -58,6 +58,7 @@ const BookingEdit = ({
   room,
   total,
   checkout,
+  status,
 }) => {
   //////////////////////////////////////////////// checkin format
   const check = new Date(checkIn);
@@ -88,6 +89,7 @@ const BookingEdit = ({
     payment_mode: payment,
     meal_plan: meal,
     room_category: room,
+    tag_status: status,
   });
 
   const OnSubmit = async () => {
@@ -118,6 +120,10 @@ const BookingEdit = ({
     const { name, value } = e.target;
 
     if (name === "checkin_date" || name === "checkout_date") {
+      if (!value) {
+        setData({ ...data, [name]: "" });
+        return;
+      }
       const dateObj = new Date(value);
 
       const pad = (num) => String(num).padStart(2, "0");
@@ -258,6 +264,24 @@ const BookingEdit = ({
           element="select"
           option={[`${data.payment_mode}`, ...PaymentModeOptions]}
           name={"paymentMode"}
+        ></FormItems>
+        <FormItems
+          labelData="Status"
+          element="select"
+          option={[
+            `${data.tag_status}`,
+            "Confirmed",
+            "Cancelled",
+            // "Checked In",
+            // "Checked Out",
+          ]}
+          onChange={(e) =>
+            setData({
+              ...data,
+              tag_status: e.target.value,
+            })
+          }
+          name={"tag_status"}
         ></FormItems>
       </div>
       <Button onClick={OnSubmit} child={"Submit"}></Button>

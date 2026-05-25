@@ -5,12 +5,13 @@ export default function MarkOptimization({ data }) {
 
   const Occupancy = data?.map((i) => i.occupancy);
 
-  // last 6 days
-  const last6Days = data?.slice(-6);
+  // last 10 days
+  const last10Days = data?.slice(-9);
 
   // map for chart
-  const xData = last6Days?.map((item) => item.date);
-  const yData = last6Days?.map((item) => item.occupancy);
+
+  const xData = last10Days.map((item) => item.date);
+  const yData = last10Days.map((item) => item.occupancy);
 
   if (!yData) {
     return;
@@ -65,16 +66,28 @@ export default function MarkOptimization({ data }) {
         Weekly Occupacy Chart
       </p>
       <LineChart
-        xAxis={[{ data: xData, scaleType: "point" }]}
+        xAxis={[
+          {
+            data: xData,
+            scaleType: "point",
+          },
+        ]}
         yAxis={[
           {
             min: 0,
             max: roundedMax,
             ticks: yTicks,
+            label: "Occupancy",
           },
         ]}
         series={[{ data: yData }]}
-        width={750}
+        // width={
+        //   100 %
+        //   -20 /* full width minus horizontal padding (10px on each side) */
+        // }
+        sx={{
+          width: "100%",
+        }}
         height={280}
       />
     </div>
