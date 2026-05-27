@@ -141,6 +141,7 @@ const EmployeeAdd = () => {
                 hotels: selected.map((i) => i.value),
               }));
             }}
+            placeholder={"All Hotels"}
             options={options}
             isMulti
             className="custom-multi-select"

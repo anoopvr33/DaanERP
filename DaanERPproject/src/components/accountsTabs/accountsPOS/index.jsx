@@ -1,48 +1,36 @@
 import "./style.css";
 import { useEffect, useState } from "react";
-// import AccountsAdd from "../accountsAdd";
-// import AccountsTable from "../../accoutsTable";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
-import axios from "axios";
 import AccountsPos from "../../accoutsTable/pos";
 import AccountsPosAdd from "../../accountAddComponents/pos";
-import { API, getCookie } from "../../../utils/axios";
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
-import { Hotels } from "../../../utils";
 import {
   addBudgetCategoryThunk,
   addBudgetSub_CategoryThunk,
+  getBudgetCategory,
   getBudgetData,
 } from "../../../redux/budgetActualSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Get_Budget_CatSub } from "../../../api/accountsServices";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(false);
   const [list, setList] = useState(false);
   const [openCat, setOpenCat] = useState(false);
   const [openCatSub, setOpenCatSub] = useState(false);
-  const [loadingg, setLoading] = useState(false);
   const [newCat, setNewCat] = useState("");
+  const [catSub, setCatSub] = useState({});
   const [newSub, setNewSub] = useState({
     budget_category: null,
     budget_sub_category: "",
   });
-  const [category, setCategory] = useState([]);
-  const [data1, setData1] = useState([]);
   const dispatch = useDispatch();
 
-  const { items, geterror, loading } = useSelector((state) => state.budget);
-
-  const GetCategory = async () => {
-    const res = await API.get("/daybook/get_budget_categories/");
-
-    console.log("my category", res.data.data);
-    if (res.data.data) {
-      setCategory(res?.data?.data);
-    } else alert("something wrong getting budget category");
-  };
+  const { items, geterror, loading, category } = useSelector(
+    (state) => state.budget,
+  );
 
   const AddCategory = async (e) => {
     e.preventDefault();
@@ -55,32 +43,27 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   };
 
   const CatOption = [
+    // { name: categoryLoading ? "loading" : "", value: "" },
     { name: "select category", value: "" },
     ...category.map((i) => ({ name: i.category, value: i.id })),
   ];
 
   useEffect(() => {
-    GetCategory();
+    dispatch(getBudgetCategory());
+  }, [dispatch]);
+
+  useEffect(() => {
+    Get_Budget_CatSub().then((res) => {
+      console.log("bud cat sub", res);
+      if (res.data) setCatSub(res.data);
+    });
   }, []);
 
   useEffect(() => {
-    if (hotels.length === 0) return setLoading(true);
-    try {
-      dispatch(
-        getBudgetData({
-          from_date: prevMonth,
-          to_date: dateset,
-          hotel: hotels,
-        }),
-      );
-    } catch (error) {
-      alert("something went wrong getting budget data");
-    } finally {
-      setLoading(false);
-    }
-
-    // eslint(react-hooks/set-state-in-effect)
-  }, [trigger, hotels]);
+    const data = { from_date: prevMonth, to_date: dateset, hotel: hotels };
+    if (hotels?.length === 0) return;
+    dispatch(getBudgetData(data));
+  }, [trigger, hotels, dispatch]);
 
   return (
     <div className="acc-pos">
@@ -115,8 +98,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             )}
             child={
               <>
-                {" "}
-                List Categories{" "}
+                List Categories
                 <i class="fa fa-angle-down" aria-hidden="true"></i>{" "}
               </>
             }
@@ -182,25 +164,34 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             }}
             className="add-account-main"
           >
-            {category.map((i) => (
-              <div style={{ marginBottom: "10px" }}>
-                <b>{i.category}</b>
-                <ul>
-                  {/* {i.sub_category.map((j) => (
-                    <li>{j.sub_category}</li>
-                  ))} */}
+            <h2>Category and Subcategory</h2> <br />
+            {Object.entries(catSub).map(([key, values]) => (
+              <div key={key}>
+                <h4 style={{ textDecoration: "underline" }}>{key}</h4>
+                <ul style={{ padding: "10px 20px" }}>
+                  {values.length === 0
+                    ? "no data"
+                    : values?.map((sub) => (
+                        <li style={{ fontSize: "13px" }} key={sub.id}>
+                          {sub.sub}
+                        </li>
+                      ))}
                 </ul>
               </div>
             ))}
           </div>
         )}
-        {loadingg ? <p>Loading...</p> : ""}
+
         <br />
         <p>
           <b>Date</b>: {dateset}
         </p>
-        {items?.data?.length > 0 ? (
-          items?.data?.map((i) => <AccountsPos data={i} />)
+        {loading ? (
+          <LoadingItem></LoadingItem>
+        ) : geterror ? (
+          <ErrorPage></ErrorPage>
+        ) : items?.length > 0 ? (
+          items?.map((i) => <AccountsPos data={i} />)
         ) : (
           <p style={{ textAlign: "center", margin: "10px 10px" }}>Empty Data</p>
         )}

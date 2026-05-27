@@ -6,6 +6,7 @@ import AccountsTable from "../../accoutsTable";
 import axios from "axios";
 import AccountsDailyAdd from "../../accountAddComponents";
 import { API } from "../../../utils/axios";
+import { Get_DailyLog_CatSub } from "../../../api/accountsServices";
 
 const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(false);
@@ -13,10 +14,11 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
   const [openCatSub, setOpenCatSub] = useState(false);
   const [cat, setCat] = useState(false);
   const [sub, setSub] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [list, setList] = useState(false);
 
   const [category, setCategory] = useState([]);
+  const [catsub, setCatSub] = useState([]);
   const [newcat, setNewcat] = useState("");
   const [subcat, setSubcat] = useState({ category: null, sub_category: "" });
 
@@ -70,6 +72,17 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
       return alert("created SubCategory please refresh");
     }
   };
+
+  useEffect(() => {
+    Get_DailyLog_CatSub()
+      .then((res) => {
+        console.log("my cat sub", res.data);
+        if (res.data) setCatSub(res.data);
+      })
+      .catch((err) => {
+        alert("something went wrong getting category and subcategory");
+      });
+  }, []);
 
   useEffect(() => {
     GetCategory();
@@ -195,21 +208,39 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
           }}
           className="add-account-main"
         >
-          {category.map((i) => (
+          {/* {catsub.map((i) => (
             <div style={{ marginBottom: "10px" }}>
               <b>{i.category}</b>
               <ul>
-                {/* {i.sub_category.map((j) => (
+                {i.sub_category.map((j) => (
                     <li>{j.sub_category}</li>
-                  ))} */}
+                  ))}
               </ul>
             </div>
-          ))}
+          ))} */}
+
+          <h1>Category & Subcategory</h1>
+          <br />
+          <div>
+            {Object.entries(catsub).map(([key, values]) => (
+              <div key={key}>
+                <h4 style={{ textDecoration: "underline" }}>{key}</h4>
+                <ul style={{ padding: "10px 20px" }}>
+                  {values.length === 0
+                    ? "no data"
+                    : values?.map((sub) => (
+                        <li style={{ fontSize: "13px" }} key={sub.id}>
+                          {sub.sub}
+                        </li>
+                      ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
       <p>
-        {" "}
         <br />
         <b>Date : </b> {dateset}{" "}
       </p>

@@ -11,8 +11,6 @@ import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Accounts = () => {
   const navigate = useNavigate();
   const [hotelOptions, setHotelOptions] = useState([]);
@@ -44,7 +42,7 @@ const Accounts = () => {
 
   useEffect(() => {
     const hotels = Hotels();
-    if (hotels.length === 0) {
+    if (hotels?.length === 0) {
       navigate("/login");
     }
     console.log("hotelsss", hotels);
@@ -59,7 +57,6 @@ const Accounts = () => {
       setHotelData(formatted);
     }
   }, []);
-
 
   return (
     <div className="accounts">

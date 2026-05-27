@@ -23,11 +23,9 @@ ChartJS.register(
 
 // Chart options
 const options = {
-  window: {
-    width: "100%",
-    responsive: true,
-    maintainAspectRatio: false,
-  },
+  responsive: true,
+  maintainAspectRatio: false,
+
   plugins: {
     legend: {
       position: "top",
@@ -49,14 +47,6 @@ const options = {
       },
     },
     y: {
-      // title: {
-      //   text: "Sales",
-      //   display: true,
-      //   color: "#836767",
-      //   font: {
-      //     size: 14,
-      //   },
-      // },
       grid: {
         display: false, // removes horizontal grid lines
         drawBorder: false,
@@ -74,12 +64,10 @@ export default function Chart({ data }) {
     labels: data?.slice(0, 6).map((i) => i.month),
     datasets: [
       {
-        // responsive: true,
         label: "Sales",
         data: data?.slice(0, 6).map((i) => i.sales),
         backgroundColor: "rgb(255, 251, 240)",
         barTickness: 30,
-        // barPercentage: 0.6,
         borderRadius: 5,
         maxBarThickness: 50,
       },
@@ -90,15 +78,23 @@ export default function Chart({ data }) {
     <div
       style={{
         width: "100%",
+        minWidth: "300px",
         height: "320px",
-        backgroundImage: "linear-gradient(to right,  #f9a231, #ffd6c2)",
+        backgroundImage: "linear-gradient(to right, #f9a231, #ffd6c2)",
         padding: "10px",
         borderRadius: "20px",
-        margin: "0px 0px",
-        // boxShadow: "0px 5px 10px #d3d3e6",
+        position: "relative",
       }}
     >
-      <Bar data={chartData} options={options} />
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "relative",
+        }}
+      >
+        <Bar width={"100%"} data={chartData} options={options} />
+      </div>
     </div>
   );
 }

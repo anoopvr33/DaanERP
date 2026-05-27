@@ -21,14 +21,9 @@ ChartJS.register(
 
 // Chart options
 const options = {
-  // width: "100%",
-  // responsive: true,
-  // maintainAspectRatio: false,
-  window: {
-    width: "100%",
-    responsive: true,
-    maintainAspectRatio: false,
-  },
+  responsive: true,
+  maintainAspectRatio: false,
+
   plugins: {
     legend: {
       position: "top",
@@ -73,9 +68,7 @@ export default function ExpenseChart({ data }) {
         backgroundColor: "rgb(61, 185, 144)",
         barTickness: 30,
         borderRadius: 5,
-        // barPercentage: 0.6,
         maxBarThickness: 60,
-        // barPercentage: 0.6,
       },
     ],
   };
@@ -85,14 +78,25 @@ export default function ExpenseChart({ data }) {
       style={{
         width: "100%",
         height: "320px",
+        minWidth: "300px",
         backgroundImage: "linear-gradient(to right, #55b197, #bde8d1)",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",
+        position: "relative",
         // boxShadow: "0px 5px 10px #d3d3e6",
       }}
     >
-      <Bar data={chartData} options={options} />
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "relative",
+        }}
+      >
+        {" "}
+        <Bar width={"100%"} data={chartData} options={options} />
+      </div>
     </div>
   );
 }

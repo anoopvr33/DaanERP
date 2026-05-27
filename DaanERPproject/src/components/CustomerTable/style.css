@@ -42,8 +42,7 @@
   border-radius: 20px;
 }
 .customer-table th {
-  border-bottom: 2px solid rgb(59, 205, 159);
-  border-top: 2px solid rgb(59, 205, 159);
+  background: #cce8e0;
   /* border: 1px solid red; */
   /* border: none; */
   /* border-top: 4px solid #1a1a40; */
@@ -89,7 +88,7 @@
 }
 .customer-table th {
   /* background: #cce8e0; */
-  color: rgb(98, 165, 128);
+  color: rgb(78, 142, 118);
 }
 .customer-table td {
 }

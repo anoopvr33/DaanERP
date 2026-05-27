@@ -1,7 +1,16 @@
 import React from "react";
 import "./style.css";
 
-const Select = ({ value, name, option, onChange, multiple, labelData }) => {
+const Select = ({
+  value,
+  name,
+  option,
+  onChange,
+  multiple,
+  labelData,
+  disabled,
+  className,
+}) => {
   return (
     <label className="custom-select-label" htmlFor="">
       <p>{labelData}</p>
@@ -9,9 +18,11 @@ const Select = ({ value, name, option, onChange, multiple, labelData }) => {
         value={value}
         name={name}
         onChange={onChange}
-        className="custom_select"
+        className={`custom_select ${className}`}
         id=""
         multiple={multiple}
+        disabled={disabled}
+        // readOnly={readOnly}
       >
         {option?.map((i, idx) =>
           i.name ? (

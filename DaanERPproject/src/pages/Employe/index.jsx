@@ -62,6 +62,7 @@ const Employee = () => {
                   }
                   setData(selected);
                 }}
+                placeholder={"All Hotels"}
                 options={option2}
                 isMulti
                 className="custom-multi-select"

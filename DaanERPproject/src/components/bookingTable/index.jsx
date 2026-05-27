@@ -7,6 +7,7 @@ import AddBookindCheckOut from "../BookingCheckAdd/checkout";
 import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
+import { IsSuper } from "../../utils";
 
 const BookingTable = ({ SortedDays }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
@@ -127,6 +128,7 @@ const BookingTable = ({ SortedDays }) => {
                     checkout={i.checkout_date}
                     status={i.tag_status}
                     id={i.id}
+                    gstno={i.gst_number}
                     setEdit={setEdit}
                   />
                 )}
@@ -148,6 +150,7 @@ const BookingTable = ({ SortedDays }) => {
                   <td>
                     {i.checkin_date === "" || !i.checkin_date ? (
                       <button
+                        disabled={IsSuper() === false}
                         style={{ padding: "2px 10px", fontSize: "12px" }}
                         onClick={() => setOpen({ index: index, check: false })}
                       >
@@ -160,6 +163,7 @@ const BookingTable = ({ SortedDays }) => {
                   <td>
                     {i.checkout_date === "" || !i.checkout_date ? (
                       <button
+                        disabled={IsSuper() === false}
                         style={{ padding: "2px 10px", fontSize: "12px" }}
                         onClick={() => setOpen({ index: index, check: true })}
                       >
@@ -172,7 +176,18 @@ const BookingTable = ({ SortedDays }) => {
                   {/* <td>{i.paymentMode}</td> */}
                   <td>{i?.total_amount?.toFixed(2)}</td>
                   <td>{i.paymentMode || "-"}</td>
-                  <td>{i.tag_status}</td>
+                  <td
+                    style={{
+                      color:
+                        i.tag_status === "Cancelled"
+                          ? "red"
+                          : i.tag_status === "Confirmed"
+                            ? "rgb(74, 194, 74)"
+                            : "",
+                    }}
+                  >
+                    {i.tag_status}
+                  </td>
                   {/* <td>{i.meal_plan || "-"}</td> */}
 
                   <td>
