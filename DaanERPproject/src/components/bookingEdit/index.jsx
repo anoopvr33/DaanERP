@@ -8,6 +8,7 @@ import {
   AddBooking_CheckOut,
   EditBookingDataAPI,
 } from "../../api";
+import { IsSuper } from "../../utils";
 
 const PaymentModeOptions = [
   {
@@ -59,6 +60,7 @@ const BookingEdit = ({
   total,
   checkout,
   status,
+  gstno,
 }) => {
   //////////////////////////////////////////////// checkin format
   const check = new Date(checkIn);
@@ -90,6 +92,7 @@ const BookingEdit = ({
     meal_plan: meal,
     room_category: room,
     tag_status: status,
+    gst_number: gstno,
   });
 
   const OnSubmit = async () => {
@@ -165,9 +168,11 @@ const BookingEdit = ({
               customer_name: e.target.value,
             })
           }
+          className={`${IsSuper() === false && "normal-user"}`}
           labelData={"customer_name"}
           value={data.customer_name}
           name="customer_name"
+          readOnly={IsSuper() === false}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -176,9 +181,11 @@ const BookingEdit = ({
               phone_number: e.target.value,
             })
           }
+          className={`${IsSuper() === false && "normal-user"}`}
           labelData={"phone_number"}
           value={data.phone_number}
           name="phone_number"
+          readOnly={true}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -187,7 +194,9 @@ const BookingEdit = ({
               meal_plan: e.target.value,
             })
           }
+          disabled={true}
           value={data.meal_plan}
+          className={`${IsSuper() === false && "normal-user"}`}
           element="select"
           option={[`${data.meal_plan}`, "DEL", "STD", "Deluxe Room"]}
           labelData={"meal_plan"}
@@ -200,10 +209,12 @@ const BookingEdit = ({
               room_category: e.target.value,
             })
           }
+          disabled={true}
           element="select"
           option={[`${data.room_category}`, "DEL", "STD", "Deluxe Room"]}
           labelData={"room_category"}
           name="room_category"
+          className={`${IsSuper() === false && "normal-user"}`}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -214,6 +225,8 @@ const BookingEdit = ({
           }
           labelData={"adults"}
           value={data.adults}
+          className={`${IsSuper() === false && "normal-user"}`}
+          readOnly={true}
           name="adults"
         ></FormItems>{" "}
         <FormItems
@@ -224,6 +237,8 @@ const BookingEdit = ({
             })
           }
           labelData={"children"}
+          className={`${IsSuper() === false && "normal-user"}`}
+          readOnly={true}
           value={data.children}
           name="children"
         ></FormItems>{" "}
@@ -235,6 +250,8 @@ const BookingEdit = ({
             })
           }
           type="number"
+          readOnly={true}
+          className={`${IsSuper() === false && "normal-user"}`}
           labelData={"total_amount"}
           value={data.total_amount}
           name="total_amount"
@@ -242,7 +259,9 @@ const BookingEdit = ({
         <FormItems
           onChange={OnChange}
           labelData={"checkin_date"}
+          readOnly={true}
           type="datetime-local"
+          className={`${IsSuper() === false && "normal-user"}`}
           value={data.checkin_date ? data.checkin_date : ""}
           name="checkin_date"
         ></FormItems>
@@ -250,11 +269,14 @@ const BookingEdit = ({
           onChange={OnChange}
           value={data.checkout_date ? data.checkout_date : ""}
           labelData={"checkout_date"}
+          readOnly={true}
           type="datetime-local"
+          className={`${IsSuper() === false && "normal-user"}`}
           name="checkout_date"
         ></FormItems>
         <FormItems
           labelData="Payment Mode"
+          className={`${IsSuper() === false && "normal-user"}`}
           onChange={(e) =>
             setData({
               ...data,
@@ -262,8 +284,20 @@ const BookingEdit = ({
             })
           }
           element="select"
+          disabled={true}
           option={[`${data.payment_mode}`, ...PaymentModeOptions]}
           name={"paymentMode"}
+        ></FormItems>
+        <FormItems
+          labelData="GST No."
+          onChange={(e) =>
+            setData({
+              ...data,
+              gst_number: e.target.value,
+            })
+          }
+          value={data.gst_number}
+          name={"GST No."}
         ></FormItems>
         <FormItems
           labelData="Status"

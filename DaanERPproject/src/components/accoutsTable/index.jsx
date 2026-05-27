@@ -27,19 +27,21 @@ const AccountsTable = ({ data }) => {
         <td>Expense</td>
         <td>null</td> */}
         {data.length > 0 ? (
-          data.map((item) => (
-            <tr className="accounts-row">
-              <td>{item.date}</td>
-              <td>{item.category}</td>
-              <td>{item.sub_category}</td>
-              <td>{item.bank}</td>
-              <td>{item.description}</td>
-              <td>{item.receipts}</td>
-              <td>{item.payments}</td>
-              <td>{item.balance}</td>
-              <td>{item.hotel}</td>
-            </tr>
-          ))
+          data
+            .map((item) => (
+              <tr className="accounts-row">
+                <td>{item.date}</td>
+                <td>{item.category}</td>
+                <td>{item.sub_category}</td>
+                <td>{item.bank}</td>
+                <td>{item.description}</td>
+                <td>{item.receipts}</td>
+                <td>{item.payments}</td>
+                <td>{item.balance}</td>
+                <td>{item.hotel}</td>
+              </tr>
+            ))
+            .reverse()
         ) : (
           <tr>
             <td colSpan={8}>Empty Data</td>

@@ -15,11 +15,15 @@ export const CreateBudgetAPI = async (form) => {
   return await API.post("/daybook/create_budget/", form, credentials);
 };
 
+export const Get_Budget_CatSub = async () => {
+  return await API.get("/daybook/get_budget_catsub/");
+};
+
 export const GetBudgetAPI = async (form) => {
   return await API.post("/daybook/get_budget/", form);
 };
 
-export const GetBudget_Category = async () => {
+export const GetBudget_CategoryAPI = async () => {
   return await API.get("/daybook/get_budget_categories/");
 };
 
@@ -44,6 +48,10 @@ export const GetBudgetSub_Category = async (data) => {
 ///////////////////////////////////////////////////////// daily log
 export const Get_DailyLog = async (data) => {
   return await API.post("daybook/get_daybook_log/", data);
+};
+
+export const Get_DailyLog_CatSub = async () => {
+  return await API.get("/daybook/get_dailyLog_catsub/");
 };
 
 export const Get_DailyLog_Category = async () => {

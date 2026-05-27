@@ -32,14 +32,14 @@ export default function SidebarTwo() {
     <i class="fa-solid fa-money-bill"></i>,
     <i class="fa-solid fa-file-invoice-dollar"></i>,
     <i class="fa-solid fa-suitcase-rolling"></i>,
-    <i class="fa-solid fa-user-tie"></i>,
+    IsSuper() ? <i class="fa-solid fa-user-tie"></i> : "",
   ];
 
   const page = new URLSearchParams(location.search);
   const ind = Number(page.get("index"));
   const navigate = useNavigate();
 
-  useEffect(() => {}, [IsSuper()]);
+  // useEffect(() => {}, [IsSuper()]);
 
   useEffect(() => {}, [side]);
 

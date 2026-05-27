@@ -5,7 +5,7 @@ const DashboardPrev = ({ data }) => {
     <div className="dash-prev">
       <div className="sub-1">
         <span>{data?.yestarday_occupancy}</span>
-        <h2>Yesturday Occupancy</h2>
+        <h2>Yesterday Occupancy</h2>
       </div>
       <div className="sub-1">
         <span>{data?.last_month_occupancy}</span>
@@ -13,7 +13,7 @@ const DashboardPrev = ({ data }) => {
       </div>
       <div className="sub-1">
         <span>{data?.yesterday_revenue}</span>
-        <h2>Yesturday Revenue</h2>
+        <h2>Yesterday Revenue</h2>
       </div>
       <div className="sub-1">
         <span>{data?.last_month_revenue}</span>

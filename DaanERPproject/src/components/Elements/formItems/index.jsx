@@ -13,11 +13,13 @@ const FormItems = ({
   className,
   option,
   name,
+  disabled,
   multiple,
   defualt,
   max,
   min,
   labelData,
+  readOnly,
 }) => {
   let component = <></>;
 
@@ -27,8 +29,10 @@ const FormItems = ({
         value={value}
         onChange={onChange}
         type={type}
+        readOnly={readOnly}
         max={max}
         min={min}
+        disabled={disabled}
         name={name}
         labelData={labelData}
         className={className}
@@ -45,6 +49,8 @@ const FormItems = ({
       <Select
         value={value}
         name={name}
+        disabled={disabled}
+        className={className}
         onChange={onChange}
         labelData={labelData}
         multiple={multiple}

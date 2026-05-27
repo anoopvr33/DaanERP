@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AddBookingAPI, GetBookingDataAPI } from "../api";
 import { toast } from "react-toastify";
 import {
   AddBudget_Category,
   AddBudgetSub_CategoryAPI,
   CreateBudgetAPI,
+  GetBudget_CategoryAPI,
   GetBudgetAPI,
 } from "../api/accountsServices";
 
@@ -13,7 +13,6 @@ export const addBudgetThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await CreateBudgetAPI(data);
-      console.log("my bud add response", res || "erro");
       if (res?.data?.status === "success") return res.data;
       return thunkAPI.rejectWithValue(
         res?.data?.status || "something went wrong",
@@ -29,7 +28,6 @@ export const addBudgetCategoryThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await AddBudget_Category(data);
-      console.log("my bud add response", res || "erro");
       if (res?.data?.status === "success") return res.data;
       return thunkAPI.rejectWithValue(
         res?.data?.status || "something went wrong",
@@ -45,7 +43,6 @@ export const addBudgetSub_CategoryThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await AddBudgetSub_CategoryAPI(data);
-      console.log("my bud add response", res || "erro");
       if (res?.data?.status === "success") return res.data;
       return thunkAPI.rejectWithValue(
         res?.data?.status || "something went wrong",
@@ -61,7 +58,22 @@ export const getBudgetData = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await GetBudgetAPI(data);
-      if (response?.data?.status === "success") return response?.data;
+      if (response?.data?.status === "success") return response?.data?.data;
+      return thunkAPI.rejectWithValue(
+        response.data.status || "something went wrong",
+      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const getBudgetCategory = createAsyncThunk(
+  "budget/getcategory",
+  async (thunkAPI) => {
+    try {
+      const response = await GetBudget_CategoryAPI();
+      if (response?.data?.status === "success") return response?.data?.data;
       return thunkAPI.rejectWithValue(
         response.data.status || "something went wrong",
       );
@@ -78,6 +90,8 @@ const budgetSlice = createSlice({
     loading: false,
     adderror: null,
     geterror: null,
+    category: [],
+
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -139,6 +153,12 @@ const budgetSlice = createSlice({
         state.loading = false;
         toast.error(action.geterror);
       });
+
+    builder
+      .addCase(getBudgetCategory.fulfilled, (state, action) => {
+        state.category = action.payload;
+        state.catgoryLoading = false;
+      })
   },
 });
 

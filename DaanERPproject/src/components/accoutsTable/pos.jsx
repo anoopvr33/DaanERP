@@ -32,18 +32,20 @@ const AccountsPos = ({ data, type }) => {
         <td>null</td> */}
         {data.data.length > 0 ? (
           <>
-            {data.data.map((item) => (
-              <tr className="accounts-row">
-                {/* <td>{item.date}</td> */}
-                <td>{item.sub_category}</td>
-                <td>{item.hotel ? item.hotel : "_"}</td>
-                {/* <td>{item.sub_category}</td> */}
-                <td>{item.budget_amount}</td>
-                {/* <td>{type === "EX" ? item.amount : "_"}</td> */}
-                {/* <td>{type == "IN" ? item.amount : "_"}</td> */}
-                <td>{item.actual_amount}</td>
-              </tr>
-            ))}
+            {data.data
+              .map((item) => (
+                <tr className="accounts-row">
+                  {/* <td>{item.date}</td> */}
+                  <td>{item.sub_category}</td>
+                  <td>{item.hotel ? item.hotel : "_"}</td>
+                  {/* <td>{item.sub_category}</td> */}
+                  <td>{item.budget_amount}</td>
+                  {/* <td>{type === "EX" ? item.amount : "_"}</td> */}
+                  {/* <td>{type == "IN" ? item.amount : "_"}</td> */}
+                  <td>{item.actual_amount}</td>
+                </tr>
+              ))
+              .reverse()}
             <tr>
               <td>
                 <b>Total</b>
