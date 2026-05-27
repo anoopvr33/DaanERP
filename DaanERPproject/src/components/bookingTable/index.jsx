@@ -183,7 +183,9 @@ const BookingTable = ({ SortedDays }) => {
                           ? "red"
                           : i.tag_status === "Confirmed"
                             ? "rgb(74, 194, 74)"
-                            : "",
+                            : i.tag_status === "Checked Out"
+                              ? "rgb(24, 124, 255)"
+                              : "",
                     }}
                   >
                     {i.tag_status}
