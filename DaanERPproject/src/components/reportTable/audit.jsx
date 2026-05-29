@@ -9,9 +9,9 @@ const ReportAudit = ({ data, yesterday, prevmonth }) => {
     <table style={{ width: "600px" }} className="report-table">
       <tr>
         <th>Name</th>
-        <th>Current ({yesterday})</th>
+        <th>Current {yesterday}</th>
         <th>
-          Upto ({prevmonth})-({yesterday})
+          {prevmonth} to {yesterday}
         </th>
       </tr>
 
