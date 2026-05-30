@@ -222,7 +222,7 @@ const BookingTable = ({ SortedDays }) => {
                   <tr
                     style={{
                       padding: "30px",
-                      background: `${expand.row == index && expand.open ? "#ffffff" : ""}`,
+                      background: `${expand.row == index && expand.open ? "#e8f1ee" : ""}`,
                     }}
                   >
                     <td

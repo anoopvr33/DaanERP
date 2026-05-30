@@ -8,7 +8,11 @@
 .acc-pos div {
   width: 100%;
 }
-
+.active-btn {
+  background-image: linear-gradient(to left, white);
+  border-color: #447b64;
+  color: #447b64;
+}
 .add-budget {
   margin: auto;
   margin-right: 0px;
