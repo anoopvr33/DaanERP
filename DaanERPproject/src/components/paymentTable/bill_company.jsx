@@ -6,12 +6,11 @@ const BillCompany = ({ result }) => {
   console.log("rsssult", result);
 
   return (
-    <table className="accounts-table">
+    <table className="daan-table">
       <tr className="accounts-row">
         <th>bookingId</th>
         <th>bookedOn</th>
         <th> paymentMode</th>
-
         <th>debit/credit</th>
         <th>amount</th>
         <th> source</th>

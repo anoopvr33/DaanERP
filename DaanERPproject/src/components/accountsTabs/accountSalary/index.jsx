@@ -32,6 +32,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
         <br />
         <b>Date : </b> {yesterdate}
       </p>
+      <br />
       <AccountsSalary
         yesterdate={yesterdate}
         trigger={trigger}

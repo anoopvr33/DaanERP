@@ -1,65 +1,4 @@
-.booking-table {
-  border-collapse: separate;
-  /* background-color: rgb(255, 255, 255); */
-  width: 100%;
-  border-spacing: 0px;
-  border: 1px solid #cce8e0;
-  /* box-shadow: 0px 5px 5px #ffffff; */
-
-  border-bottom: 2px solid #ffffff;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-.booking-error {
-  color: red;
-  text-align: center;
-  margin-top: 20px;
-}
-.booking-table i {
-  /* background-color: #7070a3; */
-  color: #1a1a40;
-  width: 30px;
-  height: 30px;
-  place-content: center;
-  border-radius: 20px;
-}
-.booking-table i:hover {
-  background-color: #7070a317;
-}
-.booking-table th,
-.booking-table td {
-  padding: 11px 10px;
-  border: none;
-  font-size: 14px;
-  line-break: anywhere;
-  border-left: 1px solid rgba(213, 224, 255, 0.801);
-  border-bottom: 1px solid rgba(213, 224, 255, 0.801);
-  max-width: 200px;
-  text-align: center;
-  border-radius: 0px;
-}
-.booking-table tr {
-  background: #ffffff;
-  /* color: white; */
-  font-size: 16px;
-
-  /* border: none; */
-}
-.booking-table tr:hover {
-  background-color: #fdfdfd;
-}
-
-.booking-table th {
-  /* border-radius: 5px; */
-  /* padding: 10px; */
-  /* width: fit-content; */
-  background: #cce8e0;
-  color: rgb(59, 114, 94);
-  /* font-size: 1px; */
-  /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.137); */
-}
-.booking-table .booking-expand {
+.daan-table .daan-expand {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -72,30 +11,18 @@
   /* box-shadow: 0px 5px 10px #d3d3e6; */
   /* flex-direction: column; */
 }
-.booking-table .booking-expand p {
+.daan-table .daan-expand p {
   margin-top: 5px;
   /* min-width: 120px; */
   /* background-color: #d3d3e6; */
 }
-.booking-table .booking-expand .booking-upt span:nth-child(2) {
+.daan-table .daan-expand .daan-upt span:nth-child(2) {
   background-color: #ff4343;
   color: white;
   border: none;
 }
-.loading,
-.no-data {
-  text-align: center;
-  /* width: 100%; */
-  margin: auto;
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-bottom: 10px;
 
-  /* background-color: #ffffff; */
-  /* position: absolute; */
-}
-
-.booking-table .booking-expand span {
+.daan-table .daan-expand span {
   /* border: 2px solid #7070a3; */
   background-color: #ffffff !important;
   color: #000000 !important;
@@ -103,17 +30,3 @@
   padding: 9px 25px;
   border-radius: 20px;
 }
-.booking-table td {
-  color: #3f3f70;
-  font-weight: 400;
-}
-/* .booking-table {
-  border-collapse: separate;
-  width: 100%;
-  border-spacing: 0px;
-  border: 1px solid rgba(234, 234, 234, 0);
-  box-shadow: 0px 5px 10px #383d5a1f;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 20px;
-} */

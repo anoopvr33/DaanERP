@@ -22,6 +22,7 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
         ></Button>
       </div>
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
+      <br />
 
       <AccountsVendor
         yesterdate={dateset}

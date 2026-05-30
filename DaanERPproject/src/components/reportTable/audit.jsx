@@ -6,7 +6,7 @@ const ReportAudit = ({ data, yesterday, prevmonth }) => {
   console.log("audit data", data);
 
   return (
-    <table style={{ width: "600px" }} className="report-table">
+    <table style={{ width: "600px" }} className="daan-table">
       <tr>
         <th>Name</th>
         <th>Current {yesterday}</th>

@@ -1,4 +1,3 @@
-import React from "react";
 import BillCompany from "../../paymentTable/bill_company";
 
 const ComplementaryTab = ({ date, result }) => {

@@ -46,7 +46,7 @@ export default function MarkOptimization({ data }) {
       style={{
         width: "100%",
         height: "320px",
-        backgroundImage: "linear-gradient(to right,  #e34646, #f9cfc7)",
+        backgroundImage: "linear-gradient(to right,  #69af99,#386f74 )",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",

@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 import { API } from "../../utils/axios";
+import { IndianRupee, Backpack } from "lucide-react";
+import { LucideBedDouble, DoorOpenIcon, ChartPie } from "lucide-react";
 
 const DashResult = ({ data }) => {
   return (
     <div className="dash-result">
       <div style={{ display: "flex" }}>
-        <i class="fa-solid fa-suitcase-rolling"></i>
+        {/* <i data-lucide="indian-rupee" class="fa-solid fa-suitcase-rolling"></i> */}
+        <Backpack></Backpack>
         <span>
           <h1>{data?.booking_count}</h1>
           <b> Bookings</b>
@@ -17,21 +20,23 @@ const DashResult = ({ data }) => {
         <b> Room Result</b>
       </div> */}
       <div>
-        <i class="fa-brands fa-cash-app"></i>
+        <IndianRupee></IndianRupee>
         <span>
           <h1>{data?.arr}</h1>
           <b> ARR</b>
         </span>
       </div>
       <div>
-        <i class="fa-solid fa-bed"></i>
+        {/* <MdOutlineBed></MdOutlineBed> */}
+
+        <LucideBedDouble></LucideBedDouble>
         <span>
           <h1>{data?.room_nights}</h1>
           <b> Room Night</b>
         </span>
       </div>
       <div>
-        <i class="fa-solid fa-door-open"></i>
+        <DoorOpenIcon></DoorOpenIcon>
         <span>
           <h1>{data?.room_count}</h1>
           <b> Room Count</b>
@@ -39,7 +44,7 @@ const DashResult = ({ data }) => {
       </div>
       <div>
         {/* <h1>{data.unique_room}</h1> */}
-        <i class="fa-solid fa-chart-pie"></i>
+        <ChartPie></ChartPie>
         <span>
           <h1>{data?.room_occupancy}</h1>
           <b> Room Occupancy</b>

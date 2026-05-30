@@ -1,31 +1,26 @@
-import React, { useEffect, useMemo, useState } from "react";
-import Button from "../../components/Elements/button";
-import CustomerTable from "../../components/CustomerTable";
-import Chart from "../../components/dashboardGraph";
-import FormItems from "../../components/Elements/formItems";
-// import MyBarChart from "../../components/dashboardGraph";
-// import BasicLineChart from "../../components/DashboardGraph";
-// import DashResult from "../../components/dashboardResult";
-import Navbar from "../../components/Elements/navbar";
-import "./style.css";
-import BookingTable from "../../components/bookingTable";
-import BookingAdd from "../../components/bookingAdd";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import Button from "../components/Elements/button";
+import FormItems from "../components/Elements/formItems";
+import Navbar from "../components/Elements/navbar";
+import BookingTable from "../components/bookingTable";
+import BookingAdd from "../components/bookingAdd";
 import { useDispatch } from "react-redux";
-import { getBookingData } from "../../redux/bookingSlice";
-import SidebarTwo from "../../components/Elements/sidebartwo";
-import { Hotels } from "../../utils";
-import Filter from "../../components/Elements/Filter";
-import LoadingItem from "../../components/Elements/Loading";
-import ErrorPage from "../../components/Elements/Error";
+import { getBookingData } from "../redux/bookingSlice";
+import SidebarTwo from "../components/Elements/sidebartwo";
+import { Hotels } from "../utils";
+import Filter from "../components/Elements/Filter";
+import LoadingItem from "../components/Elements/Loading";
+import ErrorPage from "../components/Elements/Error";
 import { useNavigate } from "react-router-dom";
 
 const Booking = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading] = useState(false);
+  const [error] = useState(false);
   const [open, setOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [dayData, setDaydata] = useState(null);
-  const [sort, setSort] = useState("booking");
+  const [sort] = useState("booking");
 
   const navigate = useNavigate();
   const [hotelOptions, setHotelOptions] = useState([]);
@@ -49,8 +44,8 @@ const Booking = () => {
   const formattedPrevMonth = formatDate(prevMonth);
 
   // React state example
-  const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
-  const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
+  const [yesterdayDate] = useState(formattedYesterday);
+  const [prevMonthDate] = useState(formattedPrevMonth);
 
   const [data, setData] = useState({
     hotels: [],
@@ -107,7 +102,7 @@ const Booking = () => {
   }, [toggle]);
 
   return (
-    <div className="booking">
+    <div className="daan">
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">

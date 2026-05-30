@@ -1,28 +1,17 @@
-import Button from "../../components/Elements/button";
-import FormItems from "../../components/Elements/formItems";
-// import MyBarChart from "../../components/dashboardGraph";
-// import BasicLineChart from "../../components/DashboardGraph";
-// import DashResult from "../../components/dashboardResult";
-import Navbar from "../../components/Elements/navbar";
-import "./style.css";
-import SidebarTwo from "../../components/Elements/sidebartwo";
-import CustomTabs from "../../components/CustomerTabs";
-import { useEffect, useState } from "react";
-import { Hotels } from "../../utils";
-import CustomerTable from "../../components/CustomerTable";
-import { useDispatch, useSelector } from "react-redux";
-import { getCustomerData } from "../../redux/customerSlice";
-import Select from "react-select";
-import LoadingItem from "../../components/Elements/Loading";
-import ErrorPage from "../../components/Elements/Error";
-import { useNavigate } from "react-router-dom";
+import Button from "../components/Elements/button";
+import FormItems from "../components/Elements/formItems";
 
-// const option2 = Hotels()
-//   ? Hotels().map((i) => ({
-//       value: i,
-//       label: i.charAt(0).toUpperCase() + i.slice(1),
-//     }))
-//   : [];
+import Navbar from "../components/Elements/navbar";
+import SidebarTwo from "../components/Elements/sidebartwo";
+import { useEffect, useState } from "react";
+import { Hotels } from "../utils";
+import CustomerTable from "../components/CustomerTable";
+import { useDispatch, useSelector } from "react-redux";
+import { getCustomerData } from "../redux/customerSlice";
+import Select from "react-select";
+import LoadingItem from "../components/Elements/Loading";
+import ErrorPage from "../components/Elements/Error";
+import { useNavigate } from "react-router-dom";
 
 const Customer = () => {
   const [count, setCount] = useState("");
@@ -56,7 +45,8 @@ const Customer = () => {
 
   useEffect(() => {
     dispatch(getCustomerData(form));
-  }, [hotelOptions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, hotelOptions]);
 
   useEffect(() => {
     const hotels = Hotels();
@@ -74,12 +64,13 @@ const Customer = () => {
       setHotelOptions(formatted); // initialize selection
       setForm({ ...form, hotels: formatted.map((i) => i.value) });
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
 
   console.log("customer error", error);
 
   return (
-    <div className="customer">
+    <div className="daan">
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">

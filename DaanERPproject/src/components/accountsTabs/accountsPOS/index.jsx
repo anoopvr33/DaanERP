@@ -186,6 +186,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         <p>
           <b>Date</b>: {dateset}
         </p>
+        <br />
         {loading ? (
           <LoadingItem></LoadingItem>
         ) : geterror ? (

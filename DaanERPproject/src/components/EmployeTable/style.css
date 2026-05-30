@@ -1,25 +1,4 @@
-.employee-table {
-  border-collapse: separate;
-  /* background-color: rgb(255, 255, 255); */
-  width: 100%;
-  border-spacing: 0px;
-  border: 1px solid #cce8e0;
-  /* box-shadow: 0px 5px 5px #ffffff; */
-  /* z-index: 0; */
-  border-bottom: 2px solid #ffffff;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-.employee-error {
-  color: red;
-  text-align: center;
-  margin-top: 20px;
-}
-.employee-table .hotel-data {
-  /* position: relative; */
-}
-.employee-table .hotel-hover {
+.daan-table .hotel-hover {
   position: absolute;
   /* left: 10px; */
   width: 200px;
@@ -33,75 +12,7 @@
   gap: 10px;
   background-color: #ffffff;
 }
-.employee-table .hotel-data:hover .hotel-hover {
+.daan-table .hotel-data:hover .hotel-hover {
   display: grid;
   gap: 5px;
 }
-.employee-table i {
-  /* background-color: #7070a3; */
-  color: #1a1a40;
-  width: 30px;
-  height: 30px;
-  place-content: center;
-  border-radius: 20px;
-}
-.employee-table i:hover {
-  background-color: #7070a317;
-}
-.employee-table th,
-.employee-table td {
-  padding: 11px 10px;
-  border: none;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 0px;
-}
-.employee-table tr {
-  background: #ffffff;
-  /* color: white; */
-  font-size: 16px;
-
-  /* border: none; */
-}
-.employee-table tr:hover {
-  background-color: #fdfdfd;
-}
-
-.employee-table th {
-  /* border-radius: 5px; */
-  /* padding: 10px; */
-  /* width: fit-content; */
-  background: #cce8e0;
-  color: rgb(59, 114, 94);
-  /* font-size: 1px; */
-  /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.137); */
-}
-
-.loading,
-.no-data {
-  text-align: center;
-  /* width: 100%; */
-  margin: auto;
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-
-  /* background-color: #ffffff; */
-  /* position: absolute; */
-}
-
-.employee-table td {
-  border-bottom: 1px solid rgba(213, 224, 255, 0.801);
-  color: #3f3f70;
-  font-weight: 400;
-}
-/* .employee-table {
-  border-collapse: separate;
-  width: 100%;
-  border-spacing: 0px;
-  border: 1px solid rgba(234, 234, 234, 0);
-  box-shadow: 0px 5px 10px #383d5a1f;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 20px;
-} */

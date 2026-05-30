@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
-import Button from "../../components/Elements/button";
-import FormItems from "../../components/Elements/formItems";
-import Navbar from "../../components/Elements/navbar";
-import "./style.css";
-import SidebarTwo from "../../components/Elements/sidebartwo";
-import ReportTabs from "../../components/reportTabs";
-import { Hotels } from "../../utils";
-import Filter from "../../components/Elements/Filter";
-import LoadingItem from "../../components/Elements/Loading";
-import ErrorPage from "../../components/Elements/Error";
+import Navbar from "../components/Elements/navbar";
+import SidebarTwo from "../components/Elements/sidebartwo";
+import AccountsTabs from "../components/accountsTabs";
+import { Hotels } from "../utils";
+import Filter from "../components/Elements/Filter";
+import LoadingItem from "../components/Elements/Loading";
+import ErrorPage from "../components/Elements/Error";
 import { useNavigate } from "react-router-dom";
 
 const Accounts = () => {
-  const [open, setOpen] = useState(false);
-  const [hotelData, setHotelData] = useState([]);
+  const navigate = useNavigate();
   const [hotelOptions, setHotelOptions] = useState([]);
+  const [hotelData, setHotelData] = useState([]);
+
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
 
   const today = new Date();
 
@@ -42,7 +39,7 @@ const Accounts = () => {
 
   useEffect(() => {
     const hotels = Hotels();
-    if (hotels.length === 0) {
+    if (hotels?.length === 0) {
       navigate("/login");
     }
     console.log("hotelsss", hotels);
@@ -53,23 +50,32 @@ const Accounts = () => {
         label: i.charAt(0).toUpperCase() + i.slice(1),
       }));
 
-      setHotelOptions(formatted);
-      setHotelData(formatted); // initialize selection
+      setHotelOptions(formatted); // initialize selection
+      setHotelData(formatted);
     }
   }, []);
 
   return (
-    <div className="accounts">
+    <div className="daan">
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
           <Navbar></Navbar>
           <div className="h2-sub">
-            <h2>Reports</h2>
-            <div className="element-sub">
+            <h2
+              style={{
+                margin: 0,
+                marginTop: 0,
+                padding: 0,
+                paddingBottom: "0px",
+              }}
+            >
+              Accounts Management
+            </h2>
+            <div className="flex-1">
               <Filter
                 onChange={(selected) => {
-                  // if (!selected) return setHotel([]);
+                  // if (!selected) return setHotelData([]);
                   if (!selected || selected.length === 0) {
                     setHotelData(hotelOptions);
                     return;
@@ -78,7 +84,6 @@ const Accounts = () => {
                 }}
                 isMulti
                 options={hotelOptions}
-                placeholder={"All Hotels"}
                 prevMonthDate={prevMonthDate}
                 prevOnchange={(e) => setPrevMonthDate(e.target.value)}
                 yesterday={yesterdayDate}
@@ -86,24 +91,21 @@ const Accounts = () => {
                 child={"Filter"}
                 onClick={() => setTrigger(!trigger)}
               />
-              {/* <Filter /> */}
             </div>
           </div>
-
           {loading ? (
             <LoadingItem />
           ) : error ? (
             <ErrorPage />
           ) : (
-            <ReportTabs
-              hotel={hotelData.map((i) => i.value)}
-              yesterday={yesterdayDate}
-              prevmonth={prevMonthDate}
+            <AccountsTabs
               trigger={trigger}
-            ></ReportTabs>
+              prevMonth={prevMonthDate}
+              dateset={yesterdayDate}
+              hotels={hotelData.map((i) => i.value)}
+            ></AccountsTabs>
           )}
 
-          {/* <AccountsTabs></AccountsTabs> */}
           {/* <CustomerTable></CustomerTable> */}
         </div>
       </div>

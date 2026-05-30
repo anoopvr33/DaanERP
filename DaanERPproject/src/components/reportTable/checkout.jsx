@@ -6,7 +6,7 @@ const ReportCheckout = ({ data }) => {
   console.log("account checkout", data);
 
   return (
-    <table className="report-table">
+    <table className="daan-table">
       <tr>
         <th>Guest Name</th>
         <th>Room No.</th>

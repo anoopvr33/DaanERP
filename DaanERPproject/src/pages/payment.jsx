@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Elements/navbar";
-import "./style.css";
-import SidebarTwo from "../../components/Elements/sidebartwo";
-// import AccountsTabs from "../../components/accountsTabs";
-import PaymentTabs from "../../components/paymentTabs";
-import FormItems from "../../components/Elements/formItems";
-import Button from "../../components/Elements/button";
-import { Hotels } from "../../utils";
-import Filter from "../../components/Elements/Filter";
-import ErrorPage from "../../components/Elements/Error";
-import LoadingItem from "../../components/Elements/Loading";
+import Navbar from "../components/Elements/navbar";
+import SidebarTwo from "../components/Elements/sidebartwo";
+import PaymentTabs from "../components/paymentTabs";
+import { Hotels } from "../utils";
+import Filter from "../components/Elements/Filter";
+import ErrorPage from "../components/Elements/Error";
+import LoadingItem from "../components/Elements/Loading";
 import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
@@ -18,8 +14,8 @@ const Payment = () => {
   const [hotelData, setHotelData] = useState([]);
   const [hotelOptions, setHotelOptions] = useState([]);
   const [trigger, setTrigger] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading] = useState(false);
+  const [error] = useState(false);
 
   const today = new Date();
 
@@ -54,13 +50,14 @@ const Payment = () => {
         label: i.charAt(0).toUpperCase() + i.slice(1),
       }));
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHotelOptions(formatted);
       setHotelData(formatted); // initialize selection
     }
-  }, []);
+  }, [navigate]);
 
   return (
-    <div className="accounts">
+    <div className="daan">
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">

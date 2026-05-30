@@ -6,7 +6,7 @@ const ReportRevenue = ({ data }) => {
   console.log("my daaaaa", data);
 
   return (
-    <table className="report-table">
+    <table className="daan-table">
       <tr>
         {data?.length != 0 ? (
           Object.keys(data[0]).map((key) => <th>{key}</th>)

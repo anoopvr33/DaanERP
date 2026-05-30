@@ -6,7 +6,7 @@ const AccountsHotel = ({ data }) => {
   console.log("my hotels ops", data);
 
   return (
-    <table className="accounts-table">
+    <table className="daan-table">
       <tr>
         <th>Category</th>
         <th>Sum of payments</th>

@@ -4,7 +4,7 @@ const AccountsTable = ({ data }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
   return (
-    <table className="accounts-table">
+    <table className="daan-table">
       <tr>
         <th>Date</th>
         <th>Category</th>

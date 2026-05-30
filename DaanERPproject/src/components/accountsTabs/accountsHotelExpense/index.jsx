@@ -111,7 +111,7 @@ const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
         ></FormItems>
         <Button onClick={GetHotel} child={"Filter"}></Button>
       </div>
-
+      <br />
       <AccountsHotel data={data1} />
     </div>
   );
