@@ -3,9 +3,9 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookingData } from "../../redux/bookingSlice";
 // import AddBookindCheck from "../bookingCheckAdd";/
-import AddBookindCheck from "../bookingCheckAdd";
+import AddBookindCheck from "../BookingCheckAdd";
 // import AddBookindCheck from "../BookingCheckAdd";
-import AddBookindCheckOut from "../bookingCheckAdd/checkout";
+import AddBookindCheckOut from "../BookingCheckAdd/checkout";
 import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
