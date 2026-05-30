@@ -5,7 +5,7 @@
   font-family: "Nunito", sans-serif;
 }
 body {
-  background: #ebf1ef;
+  background: #f3f7f6;
 }
 
 .app {
@@ -24,12 +24,13 @@ body {
   border-collapse: separate;
   width: 100%;
   border-spacing: 0px;
-  border-radius: 20px;
+  border-radius: 20px 20px 0px 0px;
   overflow: hidden;
+  border-right: 1px solid #a7dcc5cc;
 }
 .daan-table th,
 .daan-table td {
-  font-size: 13px;
+  /* font-size: 14px; */
   max-width: 200px;
   text-align: center;
   border-radius: 0px;
@@ -40,10 +41,12 @@ body {
   background: #386f74;
   color: #ffffff;
   padding: 15px;
+  font-size: 14px;
   /* #69af99,#386f74 */
 }
 
 .daan-table td {
+  font-size: 13px;
   border-bottom: 1px solid #a7dcc5cc;
   padding: 11px 10px;
   border-left: 1px solid #a7dcc5cc;
@@ -70,6 +73,9 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+.daan h2 {
+  font-weight: 700;
 }
 .daan .elements .h2-sub {
   color: #386f74;

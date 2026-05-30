@@ -67,20 +67,22 @@ const Filter = ({
       {disableFrom ? (
         ""
       ) : (
-        <FormItems
-          value={prevMonthDate}
-          labelData={"From Date"}
-          onChange={prevOnchange}
-          type={prevType}
-        ></FormItems>
-      )}
+        <>
+          <FormItems
+            value={prevMonthDate}
+            labelData={"From Date"}
+            onChange={prevOnchange}
+            type={prevType}
+          ></FormItems>
 
-      <FormItems
-        value={yesterday}
-        onChange={yesOnchange}
-        type={yesType}
-        labelData={"InTake Date"}
-      ></FormItems>
+          <FormItems
+            value={yesterday}
+            onChange={yesOnchange}
+            type={yesType}
+            labelData={"InTake Date"}
+          ></FormItems>
+        </>
+      )}
 
       {child && <Button onClick={onClick} child={child}></Button>}
     </div>

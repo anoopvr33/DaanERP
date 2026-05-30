@@ -56,14 +56,14 @@ export default function MarkOptimization({ data }) {
       <p
         style={{
           fontWeight: "bold",
-          fontSize: "13px",
+          fontSize: "15px",
           color: "#ffffff",
           textAlign: "center",
 
           padding: "10px 0px",
         }}
       >
-        <p> Daily Occupancy Data</p>
+        Daily Occupancy Data
       </p>
       <LineChart
         xAxis={[
@@ -79,15 +79,22 @@ export default function MarkOptimization({ data }) {
             barGapRatio: 2,
             ticks: yTicks,
             label: "Occupancy",
+            labelStyle: {
+              fill: "white",
+            },
           },
         ]}
-        series={[{ data: yData }]}
+        series={[{ data: yData, color: "rgb(85, 217, 149)" }]}
         // width={
         //   100 %
         //   -20 /* full width minus horizontal padding (10px on each side) */
         // }
         sx={{
           width: "100%",
+          "& .MuiChartsAxis-tickLabel": {
+            fill: "#f2f0f0",
+            fontSize: 12,
+          },
         }}
         height={280}
       />

@@ -12,6 +12,7 @@ import Select from "react-select";
 import LoadingItem from "../components/Elements/Loading";
 import ErrorPage from "../components/Elements/Error";
 import { useNavigate } from "react-router-dom";
+import Filter from "../components/Elements/Filter";
 
 const Customer = () => {
   const [count, setCount] = useState("");
@@ -78,7 +79,7 @@ const Customer = () => {
           <div className="h2-sub">
             <h2>Customer Management</h2>
             <div className="flex-1">
-              <Select
+              <Filter
                 onChange={(selected) => {
                   if (!selected || selected.length === 0) {
                     setForm({ ...form, hotels: Hotels() ? Hotels() : [] });
@@ -90,7 +91,8 @@ const Customer = () => {
                 className="custom-multi-select"
                 placeholder={"All Hotels"}
                 options={hotelOptions}
-              ></Select>
+                disableFrom={true}
+              ></Filter>
 
               <FormItems
                 onChange={(e) =>

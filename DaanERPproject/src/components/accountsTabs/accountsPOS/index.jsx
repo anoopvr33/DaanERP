@@ -71,6 +71,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         {/* <h3>Budget</h3> <br /> */}
         <div className="flex-1">
           <Button
+            className={openCat && "active-btn"}
             onClick={() => (
               setOpenCatSub(false),
               setOpen(false),
@@ -80,6 +81,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             child={"New Category +"}
           ></Button>
           <Button
+            className={openCatSub && "active-btn"}
             onClick={() => (
               setOpen(false),
               setOpenCat(false),
@@ -90,6 +92,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
           ></Button>
 
           <Button
+            className={list && "active-btn"}
             onClick={() => (
               setOpenCat(false),
               setOpenCatSub(false),
