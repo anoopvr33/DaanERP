@@ -244,6 +244,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
         <br />
         <b>Date : </b> {dateset}{" "}
       </p>
+      <br />
       <AccountsTable data={data}></AccountsTable>
     </div>
   );

@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
@@ -11,11 +8,9 @@ import UserLogin from "./Authentication/UserLogin";
 import Accounts from "./pages/accounts";
 import Reports from "./pages/reports";
 import Payment from "./pages/payment";
-import Employee from "./pages/Employe";
+import Employee from "./pages/employee";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="app">
       <ToastContainer></ToastContainer>

@@ -3,7 +3,7 @@ import "./style.css";
 const ReportTax = ({ data }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
   return (
-    <table style={{ width: "700px" }} className="report-table">
+    <table style={{ width: "700px" }} className="daan-table">
       <tr>
         <th>Guest Name</th>
         <th>Hotel</th>

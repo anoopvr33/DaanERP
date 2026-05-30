@@ -185,7 +185,7 @@ const BookingEdit = ({
           labelData={"phone_number"}
           value={data.phone_number}
           name="phone_number"
-          readOnly={true}
+          readOnly={IsSuper() === false}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -194,11 +194,11 @@ const BookingEdit = ({
               meal_plan: e.target.value,
             })
           }
-          disabled={true}
+          disabled={IsSuper() === false}
           value={data.meal_plan}
           className={`${IsSuper() === false && "normal-user"}`}
           element="select"
-          option={[`${data.meal_plan}`, "DEL", "STD", "Deluxe Room"]}
+          option={[`${data.meal_plan}`, "EP", "CP", "MAP"]}
           labelData={"meal_plan"}
           name="meal_plan"
         ></FormItems>
@@ -209,7 +209,7 @@ const BookingEdit = ({
               room_category: e.target.value,
             })
           }
-          disabled={true}
+          disabled={IsSuper() === false}
           element="select"
           option={[`${data.room_category}`, "DEL", "STD", "Deluxe Room"]}
           labelData={"room_category"}
@@ -226,7 +226,7 @@ const BookingEdit = ({
           labelData={"adults"}
           value={data.adults}
           className={`${IsSuper() === false && "normal-user"}`}
-          readOnly={true}
+          readOnly={IsSuper() === false}
           name="adults"
         ></FormItems>{" "}
         <FormItems
@@ -238,7 +238,7 @@ const BookingEdit = ({
           }
           labelData={"children"}
           className={`${IsSuper() === false && "normal-user"}`}
-          readOnly={true}
+          readOnly={IsSuper() === false}
           value={data.children}
           name="children"
         ></FormItems>{" "}
@@ -250,7 +250,7 @@ const BookingEdit = ({
             })
           }
           type="number"
-          readOnly={true}
+          readOnly={IsSuper() === false}
           className={`${IsSuper() === false && "normal-user"}`}
           labelData={"total_amount"}
           value={data.total_amount}
@@ -259,7 +259,7 @@ const BookingEdit = ({
         <FormItems
           onChange={OnChange}
           labelData={"checkin_date"}
-          readOnly={true}
+          readOnly={IsSuper() === false}
           type="datetime-local"
           className={`${IsSuper() === false && "normal-user"}`}
           value={data.checkin_date ? data.checkin_date : ""}
@@ -269,7 +269,7 @@ const BookingEdit = ({
           onChange={OnChange}
           value={data.checkout_date ? data.checkout_date : ""}
           labelData={"checkout_date"}
-          readOnly={true}
+          readOnly={IsSuper() === false}
           type="datetime-local"
           className={`${IsSuper() === false && "normal-user"}`}
           name="checkout_date"
@@ -284,7 +284,7 @@ const BookingEdit = ({
             })
           }
           element="select"
-          disabled={true}
+          disabled={IsSuper() === false}
           option={[`${data.payment_mode}`, ...PaymentModeOptions]}
           name={"paymentMode"}
         ></FormItems>

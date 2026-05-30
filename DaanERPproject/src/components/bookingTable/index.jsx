@@ -2,8 +2,10 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookingData } from "../../redux/bookingSlice";
-import AddBookindCheck from "../BookingCheckAdd";
-import AddBookindCheckOut from "../BookingCheckAdd/checkout";
+// import AddBookindCheck from "../bookingCheckAdd";/
+import AddBookindCheck from "../bookingCheckAdd";
+// import AddBookindCheck from "../BookingCheckAdd";
+import AddBookindCheckOut from "../bookingCheckAdd/checkout";
 import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
@@ -62,7 +64,7 @@ const BookingTable = ({ SortedDays }) => {
         Showing <b>{FilterData?.length}</b> results of{" "}
         <b>{SortedDays + 1 || 1}</b> Days
       </p>
-      <table className="booking-table" border={1}>
+      <table className="daan-table">
         <tr>
           <th>Date</th>
           <th>Booking ID</th>
@@ -227,7 +229,7 @@ const BookingTable = ({ SortedDays }) => {
                       colSpan={15}
                       style={{ backgroundColor: "", padding: "20px 10px" }}
                     >
-                      <div className="booking-expand">
+                      <div className="daan-expand">
                         <p>
                           <b>Adults</b> <span> {i.adults}</span>
                         </p>

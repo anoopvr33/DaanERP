@@ -66,7 +66,7 @@ const EmployeeTable = () => {
   }, [items]);
 
   return (
-    <table style={{ width: "900px" }} className="employee-table" border={1}>
+    <table style={{ width: "900px" }} className="daan-table">
       <tr>
         <th>ID</th>
         <th>Username</th>

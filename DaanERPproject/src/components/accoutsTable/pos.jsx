@@ -15,7 +15,7 @@ const AccountsPos = ({ data, type }) => {
   return (
     <table
       style={{ width: "900px", textAlign: "start" }}
-      className="accounts-table"
+      className="daan-table"
     >
       <tr>
         <th>{data.category}</th>

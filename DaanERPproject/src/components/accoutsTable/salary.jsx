@@ -30,7 +30,7 @@ const AccountsSalary = ({
   }, [trigger, department]);
 
   return (
-    <table className="accounts-table">
+    <table className="daan-table">
       <tr>
         <th>Name</th>
         <th>Departmemt</th>

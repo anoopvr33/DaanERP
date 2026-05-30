@@ -36,7 +36,7 @@ const CustomerTable = ({ count, items }) => {
   }, [sortedArray]);
 
   return (
-    <table className="customer-table">
+    <table className="daan-table">
       <tr>
         {/* <th>ID</th> */}
         <th>Fisrt Name</th>
