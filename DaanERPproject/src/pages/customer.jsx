@@ -3,72 +3,50 @@ import FormItems from "../components/Elements/formItems";
 
 import Navbar from "../components/Elements/navbar";
 import SidebarTwo from "../components/Elements/sidebartwo";
-import { useEffect, useState } from "react";
-import { Hotels } from "../utils";
+import { useEffect, useMemo, useState } from "react";
+import { formatHotel, Hotels } from "../utils";
 import CustomerTable from "../components/CustomerTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getCustomerData } from "../redux/customerSlice";
-import Select from "react-select";
 import LoadingItem from "../components/Elements/Loading";
 import ErrorPage from "../components/Elements/Error";
-import { useNavigate } from "react-router-dom";
 import Filter from "../components/Elements/Filter";
 
+const elect = [
+  { name: "Last 12 Months", value: 12 },
+  { name: "Last 6 Months", value: 6 },
+  { name: "Last 3 Months", value: 3 },
+];
+const Count = [
+  { name: "Default", value: "" },
+  { name: "More Count", value: "More Count" },
+  { name: "Less Count", value: "Less Count" },
+];
+const Operator = [
+  { name: "Equal", value: "Equal" },
+  { name: "Contain", value: "Contain" },
+  { name: "Not Contain", value: "Not Contain" },
+];
+
 const Customer = () => {
+  const formattedHotels = useMemo(() => formatHotel() || [], []);
+
   const [count, setCount] = useState("");
-  const [hotelOptions, setHotelOptions] = useState([]);
+  const [hotelOptions] = useState(formattedHotels);
   const [form, setForm] = useState({
-    hotels: Hotels() ? Hotels() : [],
+    hotels: formattedHotels.map((i) => i.value) || [],
     month: 12,
     value: null,
     operator: "Equal",
   });
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { items, error, loading } = useSelector((state) => state.customer);
-
-  const elect = [
-    { name: "Last 12 Months", value: 12 },
-    { name: "Last 6 Months", value: 6 },
-    { name: "Last 3 Months", value: 3 },
-  ];
-  const Count = [
-    { name: "Default", value: "" },
-    { name: "More Count", value: "More Count" },
-    { name: "Less Count", value: "Less Count" },
-  ];
-  const Operator = [
-    { name: "Equal", value: "Equal" },
-    { name: "Contain", value: "Contain" },
-    { name: "Not Contain", value: "Not Contain" },
-  ];
 
   useEffect(() => {
     dispatch(getCustomerData(form));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, hotelOptions]);
-
-  useEffect(() => {
-    const hotels = Hotels();
-    if (hotels.length === 0) {
-      navigate("/login");
-    }
-    console.log("hotelsss", hotels);
-
-    if (hotels && hotels.length > 0) {
-      const formatted = hotels.map((i) => ({
-        value: i,
-        label: i.charAt(0).toUpperCase() + i.slice(1),
-      }));
-
-      setHotelOptions(formatted); // initialize selection
-      setForm({ ...form, hotels: formatted.map((i) => i.value) });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
-
-  console.log("customer error", error);
 
   return (
     <div className="daan">

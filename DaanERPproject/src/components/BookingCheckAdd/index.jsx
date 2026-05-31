@@ -1,9 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
-import { API } from "../../utils/axios";
-import { AddBooking_CheckIn, AddBooking_CheckOut } from "../../api";
+import { AddBooking_CheckIn } from "../../api";
 
 const PaymentModeOptions = [
   {
@@ -40,14 +39,7 @@ const PaymentModeOptions = [
   },
 ];
 
-const AddBookindCheck = ({
-  setOpen,
-  hotelId,
-  customer,
-  bookid,
-  checkIn,
-  guest,
-}) => {
+const AddBookindCheck = ({ setOpen, hotelId, customer, bookid, guest }) => {
   const [data, setData] = useState({
     checkin: {
       guestName: customer,

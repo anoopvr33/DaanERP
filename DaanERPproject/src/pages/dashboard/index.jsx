@@ -1,18 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import DashboardFilter from "../../components/dashboardFilter";
 import Chart from "../../components/dashboardGraph";
 import DashboardPrev from "../../components/dashboardPrevious";
-// import BasicLineChart from "../../components/DashboardGraph";
 import DashResult from "../../components/dashboardResult";
 import Navbar from "../../components/Elements/navbar";
 import SidebarTwo from "../../components/Elements/sidebartwo";
-import Select from "react-select";
 import "./style.css";
-import { API, getCookie } from "../../utils/axios";
-import FormItems from "../../components/Elements/formItems";
-import Button from "../../components/Elements/button";
-import { formatHotel, Hotels } from "../../utils";
-import { useNavigate } from "react-router-dom";
+import { formatHotel } from "../../utils";
 import Filter from "../../components/Elements/Filter";
 import LoadingItem from "../../components/Elements/Loading";
 import ErrorPage from "../../components/Elements/Error";
@@ -25,15 +18,16 @@ import { FormattedMonths } from "../../components/Elements/yesterdayDate";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const formattedHotels = useMemo(() => formatHotel() || [], []);
+
+  const [hotelData, setHotelData] = useState(formattedHotels);
+  const [hotelOptions] = useState(formattedHotels);
+  const [trigger, setTrigger] = useState(false);
+
   const {
     items: data,
     loading,
     error,
   } = useSelector((state) => state.dashboard);
-
-  const [hotelData, setHotelData] = useState(formattedHotels);
-  const [hotelOptions] = useState(formattedHotels);
-  const [trigger, setTrigger] = useState(false);
 
   const { formattedYesterday, formattedPrevMonth } = FormattedMonths();
 
@@ -41,7 +35,7 @@ const Dashboard = () => {
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
-  useMemo(() => {
+  useEffect(() => {
     if (!hotelData.length) return;
 
     dispatch(
@@ -51,6 +45,7 @@ const Dashboard = () => {
         yesterdayDate,
       }),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hotelData, trigger]);
 
   return (

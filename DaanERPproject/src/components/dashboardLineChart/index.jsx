@@ -10,8 +10,8 @@ export default function MarkOptimization({ data }) {
 
   // map for chart
 
-  const xData = last10Days.map((item) => item.date);
-  const yData = last10Days.map((item) => item.occupancy);
+  const xData = last10Days?.map((item) => item.date);
+  const yData = last10Days?.map((item) => item.occupancy);
 
   if (!yData) {
     return;
@@ -78,6 +78,7 @@ export default function MarkOptimization({ data }) {
             max: roundedMax,
             barGapRatio: 2,
             ticks: yTicks,
+
             label: "Occupancy",
             labelStyle: {
               fill: "white",
@@ -91,6 +92,10 @@ export default function MarkOptimization({ data }) {
         // }
         sx={{
           width: "100%",
+          ticks: {
+            color: "red",
+          },
+
           "& .MuiChartsAxis-tickLabel": {
             fill: "#f2f0f0",
             fontSize: 12,

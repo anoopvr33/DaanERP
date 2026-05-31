@@ -1,24 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../components/Elements/button";
 import Navbar from "../components/Elements/navbar";
 import SidebarTwo from "../components/Elements/sidebartwo";
 import EmployeeAdd from "../components/EmployeAdd";
 import EmployeeTable from "../components/EmployeTable";
-import { Hotels } from "../utils";
+import { formatHotel, Hotels } from "../utils";
 import Select from "react-select";
 import LoadingItem from "../components/Elements/Loading";
 import ErrorPage from "../components/Elements/Error";
 
-const option2 = Hotels()
-  ? Hotels().map((i) => ({
-      value: i,
-      label: i.charAt(0).toUpperCase() + i.slice(1),
-    }))
-  : [];
-
 const Employee = () => {
+  const formattedHotels = useMemo(() => formatHotel() || [], []);
+
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState(option2);
+  const [data, setData] = useState(formattedHotels);
   const [loading] = useState(false);
   const [error] = useState(false);
 
@@ -45,13 +40,13 @@ const Employee = () => {
                 onChange={(selected) => {
                   // if (!selected) return setHotel([]);
                   if (!selected || selected.length === 0) {
-                    setData(option2);
+                    setData(data);
                     return;
                   }
                   setData(selected);
                 }}
                 placeholder={"All Hotels"}
-                options={option2}
+                options={data}
                 isMulti
                 className="custom-multi-select"
               ></Select>

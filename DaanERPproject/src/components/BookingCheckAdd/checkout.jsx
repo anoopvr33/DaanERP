@@ -45,7 +45,6 @@ const AddBookindCheckOut = ({
   hotelId,
   customer,
   bookid,
-  checkIn,
   guest,
 }) => {
   const [data, setData] = useState({
