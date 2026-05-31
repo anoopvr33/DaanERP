@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../components/Elements/button";
 import FormItems from "../components/Elements/formItems";
 import Navbar from "../components/Elements/navbar";
@@ -8,11 +8,11 @@ import BookingAdd from "../components/bookingAdd";
 import { useDispatch } from "react-redux";
 import { getBookingData } from "../redux/bookingSlice";
 import SidebarTwo from "../components/Elements/sidebartwo";
-import { Hotels } from "../utils";
+import { formatHotel, Hotels } from "../utils";
 import Filter from "../components/Elements/Filter";
 import LoadingItem from "../components/Elements/Loading";
 import ErrorPage from "../components/Elements/Error";
-import { useNavigate } from "react-router-dom";
+import { FormattedMonths } from "../components/Elements/yesterdayDate";
 
 const Booking = () => {
   const [loading] = useState(false);
@@ -22,33 +22,20 @@ const Booking = () => {
   const [dayData, setDaydata] = useState(null);
   const [sort] = useState("booking");
 
-  const navigate = useNavigate();
-  const [hotelOptions, setHotelOptions] = useState([]);
+  const formattedHotels = useMemo(() => formatHotel() || [], []);
+
+  const [hotelOptions] = useState(formattedHotels);
 
   const dispatch = useDispatch();
 
-  const today = new Date();
-
-  // Yesterday
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
-
-  // Same date previous month
-  const prevMonth = new Date(today);
-  prevMonth.setDate(today.getDate() - 7);
-
-  // Format function
-  const formatDate = (d) => d.toISOString().split("T")[0];
-
-  const formattedYesterday = formatDate(yesterday);
-  const formattedPrevMonth = formatDate(prevMonth);
+  const { formattedYesterday, formattedPrevMonth } = FormattedMonths();
 
   // React state example
   const [yesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate] = useState(formattedPrevMonth);
 
   const [data, setData] = useState({
-    hotels: [],
+    hotels: formattedHotels.map((i) => i.value) || [],
     from_date: prevMonthDate,
     to_date: yesterdayDate,
     filter_method: sort,
@@ -56,39 +43,15 @@ const Booking = () => {
 
   // Submit filter data
   const onFilter = () => {
-    console.log("booking datas", data);
-
     dispatch(getBookingData(data));
   };
 
   // get data by default
-
   useEffect(() => {
-    console.log("triggered");
     if (data?.hotels?.length === 0) return;
 
     dispatch(getBookingData(data));
   }, [data.hotels]);
-
-  // get hotels from login and store in useState
-
-  useEffect(() => {
-    const hotels = Hotels();
-    if (hotels.length === 0 || !hotels) {
-      navigate("/login");
-    }
-    console.log("hotelsss", hotels);
-
-    if (hotels && hotels.length > 0) {
-      const formatted = hotels.map((i) => ({
-        value: i,
-        label: i.charAt(0).toUpperCase() + i.slice(1),
-      }));
-
-      setHotelOptions(formatted); // initialize selection
-      setData({ ...data, hotels: formatted.map((i) => i.value) });
-    }
-  }, []);
 
   // find length of numbers between days
 
