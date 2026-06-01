@@ -113,13 +113,23 @@ const Booking = () => {
                 onClick={() => (onFilter(), setToggle(!toggle))}
                 child={"Filter"}
               ></Button>
-
-              <Button
-                onClick={() => setOpen(!open)}
-                className={"booking-add"}
-                child={open ? "Close" : "New Booking+"}
-              ></Button>
             </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "end",
+              justifyContent: "space-between",
+            }}
+          >
+            <p>
+              Showing results of <b>{dayData + 1 || 1}</b> Days
+            </p>
+            <Button
+              onClick={() => setOpen(!open)}
+              className={"booking-add"}
+              child={open ? "Close" : "New Booking +"}
+            ></Button>
           </div>
 
           {open && <BookingAdd></BookingAdd>}

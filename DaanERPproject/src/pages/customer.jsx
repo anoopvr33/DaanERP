@@ -18,7 +18,7 @@ const elect = [
   { name: "Last 3 Months", value: 3 },
 ];
 const Count = [
-  { name: "Default", value: "" },
+  { name: "Sort", value: "" },
   { name: "More Count", value: "More Count" },
   { name: "Less Count", value: "Less Count" },
 ];
@@ -106,13 +106,6 @@ const Customer = () => {
                 onClick={() => dispatch(getCustomerData(form))}
                 child={"Filter"}
               ></Button>
-
-              <FormItems
-                onChange={(e) => setCount(e.target.value)}
-                option={Count}
-                element="select"
-                labelData={"Sort"}
-              ></FormItems>
             </div>
           </div>
           {loading ? (
@@ -120,7 +113,16 @@ const Customer = () => {
           ) : error ? (
             <ErrorPage />
           ) : (
-            <CustomerTable items={items} count={count}></CustomerTable>
+            <>
+              <FormItems
+                onChange={(e) => setCount(e.target.value)}
+                option={Count}
+                element="select"
+                // className={'sort-input'}
+                // labelData={"Sort"}
+              ></FormItems>
+              <CustomerTable items={items} count={count}></CustomerTable>
+            </>
           )}
 
           {/* <CustomTabs date={date} count={count}></CustomTabs> */}

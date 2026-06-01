@@ -67,6 +67,7 @@ const Dashboard = () => {
                   setHotelData(selected);
                 }}
                 isMulti
+                placeholder={"All Hotels"}
                 options={hotelOptions}
                 prevMonthDate={prevMonthDate}
                 prevOnchange={(e) => setPrevMonthDate(e.target.value)}

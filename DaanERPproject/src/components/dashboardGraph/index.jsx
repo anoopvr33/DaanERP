@@ -38,8 +38,9 @@ const options = {
       display: true,
       text: "Monthly Sales Data",
       font: {
-        size: 16,
+        size: 14,
       },
+
       color: "#ffffff",
     },
   },
@@ -75,7 +76,7 @@ export default function Chart({ data }) {
       {
         label: "Sales",
         data: data?.slice(0, 6).map((i) => i.sales),
-        backgroundColor: "rgb(197, 233, 216)",
+        backgroundColor: " #5be1a7",
         // textColor: "red",
         barTickness: 30,
         borderRadius: 5,
@@ -90,7 +91,7 @@ export default function Chart({ data }) {
         width: "100%",
         minWidth: "300px",
         height: "320px",
-        backgroundImage: "linear-gradient(to right, #386f74)",
+        backgroundImage: "linear-gradient(to right, #004e5d)",
         boxShadow: "0px 5px 15px #386f747c",
         padding: "10px",
         borderRadius: "20px",

@@ -79,7 +79,8 @@ const UserLogin = () => {
           id="2"
         />
         <button onClick={OnLog}>Sign In</button>
-        <p>__________or__________</p>
+        <p>Forgot password?</p>
+        {/* <p>__________or__________</p> */}
         {/* <button onClick={'OnLogin'}>Sign In with Google</button> */}
       </div>
     </div>

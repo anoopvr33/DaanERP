@@ -16,6 +16,11 @@
 .dashboard .elements .h2-sub {
   color: #386f74;
   background: #ffffff;
+  border: 1px solid #026e7e;
+  /* border: 1px solid #b9d8dd; */
+
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+  border-bottom: 3px solid #026e7e;
   padding: 20px 20px;
   border-radius: 20px;
   display: flex;
