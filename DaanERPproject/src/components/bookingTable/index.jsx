@@ -11,7 +11,7 @@ import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
 import { IsSuper } from "../../utils";
 
-const BookingTable = ({ SortedDays }) => {
+const BookingTable = ({ setSort }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
   const [edit, setEdit] = useState(null);
@@ -60,10 +60,10 @@ const BookingTable = ({ SortedDays }) => {
 
   return (
     <>
-      <p>
+      {/* <p>
         Showing <b>{FilterData?.length}</b> results of{" "}
         <b>{SortedDays + 1 || 1}</b> Days
-      </p>
+      </p> */}
       <table className="daan-table">
         <tr>
           <th>Date</th>

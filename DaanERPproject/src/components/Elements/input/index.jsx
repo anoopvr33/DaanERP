@@ -16,7 +16,7 @@ const Input = ({
 }) => {
   return (
     <label className="custom-label" htmlFor="">
-      <p>{labelData}</p>
+      <p className="sort-label">{labelData}</p>
       <input
         // type=''
         type={type}

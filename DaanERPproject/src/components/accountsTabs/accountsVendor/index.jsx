@@ -13,6 +13,7 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
       <div className="flex-1">
         {/* <FormItems type="date"></FormItems>{" "} */}
         <p>
+          <br />
           <b>Date : </b> {dateset}
         </p>
         <Button
@@ -23,7 +24,6 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
       </div>
       {open && <AccountsVendorAdd></AccountsVendorAdd>}
       <br />
-
       <AccountsVendor
         yesterdate={dateset}
         trigger={trigger}

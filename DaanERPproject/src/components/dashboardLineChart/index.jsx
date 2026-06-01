@@ -46,7 +46,7 @@ export default function MarkOptimization({ data }) {
       style={{
         width: "100%",
         height: "320px",
-        backgroundImage: "linear-gradient(to right,  #69af99,#386f74 )",
+        backgroundImage: "linear-gradient(to right,  #026e7e, #002024 )",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",
@@ -70,6 +70,9 @@ export default function MarkOptimization({ data }) {
           {
             data: xData,
             scaleType: "point",
+            tickLabelStyle: {
+              fill: "white",
+            },
           },
         ]}
         yAxis={[
@@ -83,21 +86,17 @@ export default function MarkOptimization({ data }) {
             labelStyle: {
               fill: "white",
             },
+            tickLabelStyle: {
+              fill: "white",
+            },
           },
         ]}
         series={[{ data: yData, color: "rgb(85, 217, 149)" }]}
-        // width={
-        //   100 %
-        //   -20 /* full width minus horizontal padding (10px on each side) */
-        // }
         sx={{
           width: "100%",
-          ticks: {
-            color: "red",
-          },
 
           "& .MuiChartsAxis-tickLabel": {
-            fill: "#f2f0f0",
+            fill: "#f0e6e6",
             fontSize: 12,
           },
         }}

@@ -65,7 +65,7 @@ export default function ExpenseChart({ data }) {
       {
         label: "Expense",
         data: data?.slice(0, 6).map((i) => i.expense),
-        backgroundColor: "rgb(61, 185, 144)",
+        backgroundColor: "rgb(12, 207, 139)",
         barTickness: 30,
         borderRadius: 5,
         maxBarThickness: 50,
@@ -79,7 +79,8 @@ export default function ExpenseChart({ data }) {
         width: "100%",
         height: "320px",
         minWidth: "300px",
-        backgroundImage: "linear-gradient(to right, #d2e9e3)",
+        backgroundImage: "linear-gradient(to right, #dcedea)",
+        // border: "2px solid red",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",

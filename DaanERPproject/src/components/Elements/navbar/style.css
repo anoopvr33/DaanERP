@@ -23,7 +23,7 @@
   width: 70px;
   border-radius: 20px;
   color: #69af99;
-  background-color: #386f74;
+  background-image: linear-gradient(90deg, #004e5d, #026e7e);
   border-left: 1px solid white;
 }
 .navbar .nav-menu nav {

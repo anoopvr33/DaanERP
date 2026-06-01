@@ -8,7 +8,7 @@ const customStyles = {
   control: (provided) => ({
     ...provided,
     backgroundColor: "#ffffff", // main input background
-    border: "1px solid #69af99",
+    border: "1px solid #b1d2d7",
 
     borderRadius: "20px",
     paddingLeft: "15px",
