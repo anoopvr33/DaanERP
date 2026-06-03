@@ -153,6 +153,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
 
     // setLoading(false);
     try {
+      setLoading(true);
       const response = await API.post(
         "/reports/get_payment_report/",
         {

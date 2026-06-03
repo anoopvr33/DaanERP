@@ -8,12 +8,15 @@ export const IsSuper = () => {
   return JSON.parse(localStorage.getItem("isSuper"));
 };
 
+export const IsStaff = () => {
+  return JSON.parse(localStorage.getItem("isStaff"));
+};
+
 export const formatHotel = () => {
   const hotels = Hotels();
   if (hotels?.length === 0 || !hotels) {
     window.location.href = "/login";
   }
-  console.log("hotelsss", hotels);
 
   if (hotels && hotels.length > 0) {
     const formatted = hotels.map((i) => ({
@@ -22,8 +25,5 @@ export const formatHotel = () => {
     }));
 
     return formatted;
-
-    // setHotelOptions(formatted);
-    // setHotelData(formatted); // initialize selection
   }
 };

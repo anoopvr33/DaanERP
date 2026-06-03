@@ -20,6 +20,7 @@
   background-color: rgb(255, 255, 255);
   left: 15px;
   top: -15px;
+  z-index: 1;
   font-size: 13px;
-  padding: 0px 5px;
+  padding: 0px 7px;
 }

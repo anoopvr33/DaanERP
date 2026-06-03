@@ -16,7 +16,8 @@ const EmployeeAdd = () => {
     username: "",
     email: "",
     password: "",
-    is_superuser: false,
+    is_superuser: null,
+    is_staff: null,
     hotels: [],
   });
 
@@ -164,6 +165,25 @@ const EmployeeAdd = () => {
               { name: "no", value: false },
             ]}
             name={"is_superuser"}
+          ></FormItems>
+        </label>
+        <label htmlFor="">
+          <p>is_staff</p>
+          <FormItems
+            onChange={(e) =>
+              setData({
+                ...data,
+                is_staff: e.target.value === "true" ? true : false,
+              })
+            }
+            type="text"
+            element="select"
+            option={[
+              { name: "select option", value: "" },
+              { name: "yes", value: true },
+              { name: "no", value: false },
+            ]}
+            name={"is_staff"}
           ></FormItems>
         </label>
 

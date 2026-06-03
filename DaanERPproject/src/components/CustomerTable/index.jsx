@@ -69,14 +69,14 @@ const CustomerTable = ({ count, items }) => {
                 <td
                   onClick={() => setExpand({ row: index, open: !expand.open })}
                 >
-                  {expand.open && expand.row == index ? (
+                  {expand.open && expand.row === index ? (
                     <i class="fa-solid fa-angle-up"></i>
                   ) : (
                     <i class="fa-solid fa-angle-down"></i>
                   )}
                 </td>
               </tr>
-              {expand.row == index && expand.open && (
+              {expand.row === index && expand.open && (
                 <tr
                   style={{
                     padding: "30px",

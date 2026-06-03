@@ -9,9 +9,9 @@ import AddBookindCheckOut from "../BookingCheckAdd/checkout";
 import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
-import { IsSuper } from "../../utils";
+import { IsStaff, IsSuper } from "../../utils";
 
-const BookingTable = ({ setSort }) => {
+const BookingTable = ({ status, setLength }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
   const [edit, setEdit] = useState(null);
@@ -38,21 +38,28 @@ const BookingTable = ({ setSort }) => {
   const { inputValue } = useSelector((state) => state.search);
 
   const FilterData = useMemo(() => {
-    const filter = items?.data?.filter(
-      (i) =>
+    // console.log("my booking status", status);
+    return items?.data?.filter((i) => {
+      const searchMatch =
+        !inputValue ||
         i.name?.toLowerCase().includes(inputValue.toLowerCase()) ||
         i.booking_id?.toLowerCase().includes(inputValue.toLowerCase()) ||
-        i.phone?.toLowerCase().includes(inputValue.toLowerCase()),
-    );
+        i.phone?.toLowerCase().includes(inputValue.toLowerCase());
 
-    return filter;
-  }, [items, inputValue]);
+      const statusMatch =
+        !status || i.tag_status?.toLowerCase().includes(status?.toLowerCase());
+
+      return searchMatch && statusMatch;
+    });
+  }, [items, inputValue, status]);
 
   useEffect(() => {
-    console.log("my table content", items);
-    console.log("error detection", geterror);
+    // console.log("my table content", items);
+    // console.log("error detection", geterror);
     // console.log("search input",);
-  }, [items]);
+    setLength(FilterData?.length || 0);
+    console.log("my filter data", FilterData);
+  }, [FilterData, setLength]);
 
   if (loading && !geterror) {
     return <p className="loading">Loading...</p>;
@@ -202,6 +209,9 @@ const BookingTable = ({ setSort }) => {
                     ></i>{" "}
                     <i
                       onClick={() => Delete(i.id)}
+                      style={{
+                        display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                      }}
                       class="fa fa-trash"
                       aria-hidden="true"
                     ></i>{" "}
