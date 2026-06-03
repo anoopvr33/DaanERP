@@ -21,6 +21,8 @@ const Booking = () => {
   const [toggle, setToggle] = useState(false);
   const [dayData, setDaydata] = useState(null);
   const [sort] = useState("booking");
+  const [status, setStatus] = useState("");
+  const [length, setLength] = useState(0);
 
   const formattedHotels = useMemo(() => formatHotel() || [], []);
 
@@ -118,13 +120,32 @@ const Booking = () => {
           <div
             style={{
               display: "flex",
-              alignItems: "end",
-              justifyContent: "space-between",
+              justifyContent: "end",
+              position: "relative",
+              gap: "10px",
             }}
           >
-            <p>
-              Showing results of <b>{dayData + 1 || 1}</b> Days
+            <p
+              style={{
+                margin: "auto",
+                marginLeft: "0",
+                marginBottom: "0px",
+              }}
+            >
+              Showing {length} results of <b>{dayData + 1 || 1}</b> Days
             </p>
+            <FormItems
+              onChange={(e) => setStatus(e.target.value)}
+              className={"status-sort"}
+              option={[
+                { name: "Select Status", value: "" },
+                { name: "Confirmed", value: "Confirmed" },
+                { name: "Checked In", value: "Checked In" },
+                { name: "Checked Out", value: "Checked Out" },
+                { name: "Cancelled", value: "Cancelled" },
+              ]}
+              element="select"
+            ></FormItems>
             <Button
               onClick={() => setOpen(!open)}
               className={"booking-add"}
@@ -140,7 +161,11 @@ const Booking = () => {
           ) : (
             <>
               {/* <p>Showing {dayData} days result</p> */}
-              <BookingTable SortedDays={dayData}></BookingTable>
+              <BookingTable
+                setLength={setLength}
+                status={status}
+                SortedDays={dayData}
+              ></BookingTable>
             </>
           )}
         </div>

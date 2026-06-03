@@ -5,9 +5,10 @@ import AccDailyLog from "./accountDailyLog";
 import AccHotelExpense from "./accountsHotelExpense";
 import AccVendor from "./accountsVendor";
 import AccSalary from "./accountSalary";
+import { IsStaff } from "../../utils";
 
 const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(IsStaff() ? 1 : 0);
   const [open, setOpen] = useState(false);
 
   const POS = {
@@ -29,7 +30,6 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
 
   const Hotel = {
     borderRadius: "20px 20px 0px 0px",
-
     background: tab == 2 && "   hsl(0, 0%, 100%)",
     color: tab == 2 && "#69af99",
     borderBottomLeftRadius: tab + 1 == 2 && "20px",
@@ -38,7 +38,6 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
 
   const Vendor = {
     borderRadius: "20px 20px 0px 0px",
-
     background: tab == 3 && "  hsl(0, 0%, 100%)",
     color: tab == 3 && "#69af99",
     borderBottomLeftRadius: tab + 1 == 3 && "20px",
@@ -63,7 +62,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
   const TabArray = [
     {
       id: 0,
-      name: "Budget Actual",
+      name: !IsStaff() && " Budget Actual",
       link: "pos",
       style: POS,
     },
@@ -75,19 +74,19 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
     },
     {
       id: 2,
-      name: "Hotel Ops Expense",
+      name: !IsStaff() && "Hotel Ops Expense",
       link: "hotel",
       style: Hotel,
     },
     {
       id: 3,
-      name: "Vendor Payout",
+      name: !IsStaff() && "Vendor Payout",
       link: "vendor",
       style: Vendor,
     },
     {
       id: 4,
-      name: "Salary ",
+      name: !IsStaff() && "Salary ",
       link: "salary",
       style: Salary,
     },
@@ -108,7 +107,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
               borderBottomLeftRadius: tab + 1 === index ? "20px" : "0px",
               borderBottomRightRadius: tab - 1 === index ? "20px" : "0px",
             }}
-            onClick={() => setTab(index)}
+            onClick={() => IsStaff() || setTab(index)}
           >
             <text style={item?.style}>{item?.name}</text>
           </p>
@@ -118,7 +117,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {tab === 0 && (
+        {tab === 0 && !IsStaff() && (
           <AccPOS
             trigger={trigger}
             prevMonth={prevMonth}
@@ -134,14 +133,14 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
             hotels={hotels}
           ></AccDailyLog>
         )}
-        {tab === 2 && (
+        {tab === 2 && !IsStaff() && (
           <AccHotelExpense
             trigger={trigger}
             dateset={dateset}
             prevMonth={prevMonth}
           ></AccHotelExpense>
         )}
-        {tab === 3 && (
+        {tab === 3 && !IsStaff() && (
           <AccVendor
             prevMonth={prevMonth}
             dateset={dateset}
@@ -150,7 +149,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
             hotels={hotels}
           ></AccVendor>
         )}
-        {tab === 4 && (
+        {tab === 4 && !IsStaff() && (
           <AccSalary
             trigger={trigger}
             yesterdate={dateset}

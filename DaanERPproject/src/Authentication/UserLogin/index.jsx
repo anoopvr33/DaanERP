@@ -23,13 +23,19 @@ const UserLogin = () => {
         },
       });
 
+      console.log("mylog res", response);
+
       if (response.data.hotel) {
         localStorage.setItem("hotel", JSON.stringify(response.data.hotel));
-        (localStorage.setItem(
+        localStorage.setItem(
           "isSuper",
           JSON.stringify(response.data.is_superuser ? true : false),
-        ),
-          navigate("/"));
+        );
+        localStorage.setItem(
+          "isStaff",
+          JSON.stringify(response.data.is_staff ? true : false),
+        );
+        navigate("/");
       } else {
         throw new Error("something wrong");
       }

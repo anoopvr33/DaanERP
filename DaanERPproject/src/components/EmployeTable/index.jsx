@@ -38,16 +38,12 @@ const EmployeeTable = () => {
 
   const GetUsers = async () => {
     try {
-      const res = await API.get(
-        "/main/show_user/",
-        // "/main/profile/",
-        {
-          withCredentials: true,
-          headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
-          },
+      const res = await API.get("/main/show_user/", {
+        withCredentials: true,
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
         },
-      );
+      });
       console.log("res user", res);
       if (res.data) {
         setItems(res.data);
@@ -71,7 +67,7 @@ const EmployeeTable = () => {
         <th>ID</th>
         <th>Username</th>
         <th>Email </th>
-        <th>is_superuser</th>
+        <th>Position</th>
         <th>is_active</th>
         <th>last_login</th>
         <th>Hotels</th>
@@ -95,7 +91,11 @@ const EmployeeTable = () => {
                 <td>{i.id}</td>
                 <td>{i.username}</td>
                 <td>{i.email}</td>
-                <td>{i.is_superuser ? "Yes" : "No"}</td>
+                <td>
+                  {i.is_superuser ? "Admin" : i.is_staff ? "Staff" : "Manager"}
+                </td>
+                {/* <td>{i.is_superuser ? "Yes" : "No"}</td>
+                <td>{i.is_staff ? "Yes" : "No"}</td> */}
                 <td>{i.is_active ? "Yes" : "No"}</td>
                 <td style={{ fontWeight: "500", color: "#7070a3" }}>
                   {new Date(i.last_login).toLocaleDateString()}

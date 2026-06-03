@@ -8,7 +8,7 @@ import {
   AddBooking_CheckOut,
   EditBookingDataAPI,
 } from "../../api";
-import { IsSuper } from "../../utils";
+import { IsStaff, IsSuper } from "../../utils";
 
 const PaymentModeOptions = [
   {
@@ -145,6 +145,8 @@ const BookingEdit = ({
     setData({ ...data, [name]: value });
   };
 
+  const manager = false;
+
   useEffect(() => {
     console.log("booking edit data", data);
   }, [data]);
@@ -168,11 +170,11 @@ const BookingEdit = ({
               customer_name: e.target.value,
             })
           }
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
           labelData={"customer_name"}
           value={data.customer_name}
           name="customer_name"
-          readOnly={IsSuper() === false}
+          readOnly={IsSuper() === false && IsStaff() === true}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -181,11 +183,11 @@ const BookingEdit = ({
               phone_number: e.target.value,
             })
           }
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
           labelData={"phone_number"}
           value={data.phone_number}
           name="phone_number"
-          readOnly={IsSuper() === false}
+          readOnly={IsSuper() === false && IsStaff() === true}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -194,9 +196,9 @@ const BookingEdit = ({
               meal_plan: e.target.value,
             })
           }
-          disabled={IsSuper() === false}
+          disabled={IsSuper() === false && IsStaff() === true}
           value={data.meal_plan}
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
           element="select"
           option={[`${data.meal_plan}`, "EP", "CP", "MAP"]}
           labelData={"meal_plan"}
@@ -209,12 +211,12 @@ const BookingEdit = ({
               room_category: e.target.value,
             })
           }
-          disabled={IsSuper() === false}
+          disabled={IsSuper() === false && IsStaff() === true}
           element="select"
           option={[`${data.room_category}`, "DEL", "STD", "Deluxe Room"]}
           labelData={"room_category"}
           name="room_category"
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           onChange={(e) =>
@@ -225,8 +227,8 @@ const BookingEdit = ({
           }
           labelData={"adults"}
           value={data.adults}
-          className={`${IsSuper() === false && "normal-user"}`}
-          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
+          readOnly={IsSuper() === false && IsStaff() === true}
           name="adults"
         ></FormItems>{" "}
         <FormItems
@@ -237,8 +239,8 @@ const BookingEdit = ({
             })
           }
           labelData={"children"}
-          className={`${IsSuper() === false && "normal-user"}`}
-          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
+          readOnly={IsSuper() === false && IsStaff() === true}
           value={data.children}
           name="children"
         ></FormItems>{" "}
@@ -259,9 +261,9 @@ const BookingEdit = ({
         <FormItems
           onChange={OnChange}
           labelData={"checkin_date"}
-          readOnly={IsSuper() === false}
+          readOnly={IsSuper() === false && IsStaff() === true}
           type="datetime-local"
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
           value={data.checkin_date ? data.checkin_date : ""}
           name="checkin_date"
         ></FormItems>
@@ -269,14 +271,14 @@ const BookingEdit = ({
           onChange={OnChange}
           value={data.checkout_date ? data.checkout_date : ""}
           labelData={"checkout_date"}
-          readOnly={IsSuper() === false}
+          readOnly={IsSuper() === false && IsStaff() === true}
           type="datetime-local"
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
           name="checkout_date"
         ></FormItems>
         <FormItems
           labelData="Payment Mode"
-          className={`${IsSuper() === false && "normal-user"}`}
+          className={`${IsSuper() === false && IsStaff() === true ? "normal-user" : ""}`}
           onChange={(e) =>
             setData({
               ...data,
@@ -284,7 +286,7 @@ const BookingEdit = ({
             })
           }
           element="select"
-          disabled={IsSuper() === false}
+          disabled={IsSuper() === false && IsStaff() === true}
           option={[`${data.payment_mode}`, ...PaymentModeOptions]}
           name={"paymentMode"}
         ></FormItems>

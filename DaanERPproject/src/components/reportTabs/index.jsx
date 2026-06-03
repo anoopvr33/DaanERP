@@ -30,38 +30,29 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     borderBottomRightRadius: tab - 1 == 1 && "20px",
   };
 
-  const Hotel = {
+  const Vendor = {
     borderRadius: "20px 20px 0px 0px",
-
-    background: tab == 2 && "   hsl(0, 0%, 100%)",
+    // padding: " 0px 20px",
+    background: tab == 2 && "  hsl(0, 0%, 100%)",
     color: tab == 2 && "#69af99",
     borderBottomLeftRadius: tab + 1 == 2 && "20px",
     borderBottomRightRadius: tab - 1 == 2 && "20px",
   };
 
-  const Vendor = {
+  const Checkout = {
     borderRadius: "20px 20px 0px 0px",
-    // padding: " 0px 20px",
+    // padding: "  0px 20px",
     background: tab == 3 && "  hsl(0, 0%, 100%)",
     color: tab == 3 && "#69af99",
     borderBottomLeftRadius: tab + 1 == 3 && "20px",
     borderBottomRightRadius: tab - 1 == 3 && "20px",
   };
 
-  const Checkout = {
-    borderRadius: "20px 20px 0px 0px",
-    // padding: "  0px 20px",
-    background: tab == 4 && "  hsl(0, 0%, 100%)",
-    color: tab == 4 && "#69af99",
-    borderBottomLeftRadius: tab + 1 == 4 && "20px",
-    borderBottomRightRadius: tab - 1 == 4 && "20px",
-  };
-
   const None = {
     borderRadius: "20px 20px 0px 0px",
     background: "transparent",
-    borderBottomLeftRadius: tab + 1 == 5 && "20px",
-    borderBottomRightRadius: tab - 1 == 5 && "20px",
+    borderBottomLeftRadius: tab + 1 == 4 && "20px",
+    borderBottomRightRadius: tab - 1 == 4 && "20px",
   };
 
   const TabArray = [
@@ -79,12 +70,6 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     },
     {
       id: 2,
-      name: "",
-      link: "hotel",
-      style: Hotel,
-    },
-    {
-      id: 3,
       name: "Gst Bookings",
       link: "vendor",
       style: Vendor,
@@ -96,7 +81,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
       style: Checkout,
     },
     {
-      id: 5,
+      id: 4,
       name: null,
       link: null,
       style: None,
@@ -113,6 +98,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     if (hotel.length === 0) return setLoading(true);
 
     try {
+      setLoading(true);
       const response = await API.post(
         "/reports/get_nightaudit_report/",
         {
@@ -209,15 +195,14 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
           ></ReportAuditTab>
         )}
         {tab === 1 && <ReportRevenueTab revenue={revenue}></ReportRevenueTab>}
-        {tab === 2 && <ReportTotalTab></ReportTotalTab>}
-        {tab === 3 && (
+        {tab === 2 && (
           <ReportTaxTab
             hotel={hotel}
             prevmonth={prevmonth}
             yesterday={yesterday}
           ></ReportTaxTab>
         )}
-        {tab === 4 && (
+        {tab === 3 && (
           <ReportCheckoutTab checkout={checkout}></ReportCheckoutTab>
         )}
       </div>
