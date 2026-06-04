@@ -45,6 +45,7 @@ const AccountsDailyAdd = ({ formdate }) => {
   };
 
   const OnInput = (e) => {
+    if (!e) return;
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
@@ -178,8 +179,17 @@ const AccountsDailyAdd = ({ formdate }) => {
           ></FormItems>
         </label>
         <label htmlFor="">
-          <p>bank</p>
+          <p>Payment Mode</p>
           <FormItems
+            element="select"
+            option={[
+              "Select Mode",
+              "Cash",
+              "UPI Company",
+              "UPI Current",
+              "Bank Transfer",
+              "Credit",
+            ]}
             onChange={OnInput}
             type="text"
             name={"bank"}
