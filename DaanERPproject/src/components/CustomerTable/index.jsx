@@ -13,7 +13,6 @@ const CustomerTable = ({ count, items }) => {
   const [array, setArray] = useState(items.data || []);
 
   const sortedArray = useMemo(() => {
-    console.log("okkkkkk");
     if (!Array.isArray(array)) return [];
 
     if (count === "Less Count") {
@@ -21,7 +20,6 @@ const CustomerTable = ({ count, items }) => {
         (a, b) => a.total_booking_counts - b.total_booking_counts,
       );
     } else if (count === "More Count") {
-      console.log("finneee ok");
       return [...array].sort(
         (a, b) => b.total_booking_counts - a.total_booking_counts,
       );
