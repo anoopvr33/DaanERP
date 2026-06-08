@@ -43,7 +43,9 @@ export default function SidebarTwo() {
 
   useEffect(() => {}, [side]);
 
-  // useEffect(() => {}, [open]);
+  useEffect(() => {
+    console.log("open", open);
+  }, [open]);
 
   return (
     <aside className={`sidebar-3 ${open && "active"}`}>
@@ -62,13 +64,14 @@ export default function SidebarTwo() {
       <ul className={`menu ${open && "menu-active"}`}>
         {menuItems.map((item, index) => (
           <p
-            key={item}
+            key={index}
             style={{
               borderBottomRightRadius: `${ind - 1 == index ? "20px" : ""}`,
               borderTopRightRadius: `${ind + 1 == index ? "20px" : ""}`,
             }}
           >
             <li
+              key={index}
               onClick={() => navigate(`/${item}/?index=${index}`)}
               style={{
                 borderBottomRightRadius: `${ind - 1 == index ? "20px" : ""}`,

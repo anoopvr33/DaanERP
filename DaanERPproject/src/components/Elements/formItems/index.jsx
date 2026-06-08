@@ -19,6 +19,7 @@ const FormItems = ({
   max,
   min,
   labelData,
+  required,
   readOnly,
 }) => {
   let component = <></>;
@@ -28,6 +29,7 @@ const FormItems = ({
       <Input
         value={value}
         onChange={onChange}
+        required={required}
         type={type}
         readOnly={readOnly}
         max={max}
@@ -51,6 +53,7 @@ const FormItems = ({
         name={name}
         disabled={disabled}
         className={className}
+        required={required}
         onChange={onChange}
         labelData={labelData}
         multiple={multiple}

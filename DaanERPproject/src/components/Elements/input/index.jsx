@@ -10,6 +10,7 @@ const Input = ({
   className,
   defualt,
   labelData,
+  required,
   max,
   min,
   // disabled,
@@ -20,6 +21,7 @@ const Input = ({
       <input
         // type=''
         type={type}
+        required={required}
         // disabled
         defaultValue={defualt}
         onChange={onChange}

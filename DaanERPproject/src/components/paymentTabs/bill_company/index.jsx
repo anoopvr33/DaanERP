@@ -1,11 +1,16 @@
+import LoadingItem from "../../Elements/Loading";
 import BillCompany from "../../paymentTable/bill_company";
 
-const BillCompanyTab = ({ date, result }) => {
+const BillCompanyTab = ({ date, result, loading }) => {
   return (
     <div>
       <div className="flex-1"></div>
       {/* <ReportAudit></ReportAudit> */}
-      <BillCompany result={result} date={date}></BillCompany>
+      {loading ? (
+        <LoadingItem></LoadingItem>
+      ) : (
+        <BillCompany result={result} date={date}></BillCompany>
+      )}
     </div>
   );
 };

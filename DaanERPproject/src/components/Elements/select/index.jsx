@@ -8,6 +8,7 @@ const Select = ({
   onChange,
   multiple,
   labelData,
+  required,
   disabled,
   className,
 }) => {
@@ -17,6 +18,7 @@ const Select = ({
       <select
         value={value}
         name={name}
+        required={required}
         onChange={onChange}
         className={`custom_select ${className}`}
         id=""
@@ -25,7 +27,7 @@ const Select = ({
         // readOnly={readOnly}
       >
         {option?.map((i, idx) =>
-          i.name ? (
+          i.name === "" || i.name ? (
             <option value={i.value}>{i.name}</option>
           ) : (
             <option value={i}>{i}</option>

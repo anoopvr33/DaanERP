@@ -185,10 +185,11 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {loading ? <p>Loading...</p> : ""}
+        {/* {loading ? <p>Loading...</p> : ""} */}
         {/* <p>Loading</p> */}
         {tab === 0 && (
           <ReportAuditTab
+            loading={loading}
             yesterday={yesterday}
             prevmonth={prevmonth}
             audit={audit}

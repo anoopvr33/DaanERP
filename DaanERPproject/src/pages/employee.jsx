@@ -8,6 +8,7 @@ import { formatHotel, Hotels } from "../utils";
 import Select from "react-select";
 import LoadingItem from "../components/Elements/Loading";
 import ErrorPage from "../components/Elements/Error";
+import Filter from "../components/Elements/Filter";
 
 const Employee = () => {
   const formattedHotels = useMemo(() => formatHotel() || [], []);
@@ -36,7 +37,7 @@ const Employee = () => {
           <div className="h2-sub">
             <h2>User Management</h2>
             <div className="flex-1">
-              <Select
+              <Filter
                 onChange={(selected) => {
                   // if (!selected) return setHotel([]);
                   if (!selected || selected.length === 0) {
@@ -45,11 +46,12 @@ const Employee = () => {
                   }
                   setData(selected);
                 }}
+                disableFrom={true}
                 placeholder={"All Hotels"}
                 options={data}
                 isMulti
                 className="custom-multi-select"
-              ></Select>
+              ></Filter>
 
               <Button onClick={onFilter} child={"Filter"}></Button>
               <Button

@@ -10,6 +10,7 @@ import { IsStaff, IsSuper } from "../../utils";
 import Pagination from "@mui/material/Pagination";
 import { Pageination } from "../Elements/pagination";
 import { SearchFilter } from "../Elements/searchFilter";
+import LoadingItem from "../Elements/Loading";
 
 const BookingTable = ({ status, setLength }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
@@ -46,7 +47,7 @@ const BookingTable = ({ status, setLength }) => {
   }, [FilterData, setLength]);
 
   if (loading && !geterror) {
-    return <p className="loading">Loading...</p>;
+    return <LoadingItem></LoadingItem>;
   }
 
   return (
@@ -209,7 +210,10 @@ const BookingTable = ({ status, setLength }) => {
                       }
                     >
                       {expand.open && expand.row == index ? (
-                        <i class="fa-solid fa-angle-up"></i>
+                        <i
+                          style={{ background: "#eaf1ef" }}
+                          class="fa-solid fa-angle-up"
+                        ></i>
                       ) : (
                         <i class="fa-solid fa-angle-down"></i>
                       )}
@@ -219,13 +223,10 @@ const BookingTable = ({ status, setLength }) => {
                     <tr
                       style={{
                         padding: "30px",
-                        background: `${expand.row == index && expand.open ? "#e8f1ee" : ""}`,
+                        background: `${expand.row == index && expand.open ? "#ffffff00" : ""}`,
                       }}
                     >
-                      <td
-                        colSpan={15}
-                        style={{ backgroundColor: "", padding: "20px 10px" }}
-                      >
+                      <td colSpan={15} style={{ padding: "20px 10px" }}>
                         <div className="daan-expand">
                           <p>
                             <b>Adults</b> <span> {i.adults}</span>
