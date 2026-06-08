@@ -14,18 +14,20 @@ const BillCompany = ({ result }) => {
   return (
     <>
       <table className="daan-table">
-        <tr className="accounts-row">
-          <th>bookingId</th>
-          <th>bookedOn</th>
-          <th>paymentMode</th>
-          <th>debit/credit</th>
-          <th>amount</th>
-          <th>source</th>
-          <th>guest_name</th>
-          <th>checkin</th>
-          <th>checkout</th>
-          <th>room category</th>
-        </tr>
+        <thead>
+          <tr className="accounts-row">
+            <th>bookingId</th>
+            <th>bookedOn</th>
+            <th>paymentMode</th>
+            <th>debit/credit</th>
+            <th>amount</th>
+            <th>source</th>
+            <th>guest_name</th>
+            <th>checkin</th>
+            <th>checkout</th>
+            <th>room category</th>
+          </tr>
+        </thead>
 
         <tbody>
           {Array.isArray(result) && result.length > 0 ? (

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
-import { useDispatch } from "react-redux";
-import { addBookingThunk } from "../../redux/bookingSlice";
-import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
-// import Select from "../Elements/select";
+import Filter from "../Elements/Filter";
 
 const EmployeeAdd = () => {
   const [data, setData] = useState({
@@ -27,8 +24,6 @@ const EmployeeAdd = () => {
 
   const navigate = useNavigate();
   const [options, setHotelOptions] = useState([]);
-  const [hotelData, setHotelData] = useState([]);
-  const dispatch = useDispatch();
 
   const OnInput = (e) => {
     const { name, value } = e.target;
@@ -96,6 +91,7 @@ const EmployeeAdd = () => {
         label: i.charAt(0).toUpperCase() + i.slice(1),
       }));
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHotelOptions(formatted);
       setData((prev) => ({ ...prev, hotels: formatted.map((i) => i.value) })); // initialize selection
     }
@@ -104,88 +100,89 @@ const EmployeeAdd = () => {
   return (
     <div className="add-book-main">
       <form action="" onSubmit={OnSubmit}>
-        <label htmlFor="">
-          <p>Username</p>
-          <FormItems
-            // placeholder={"Hotel"}
-            onChange={OnInput}
-            name={"username"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Email</p>
-          <FormItems onChange={OnInput} name={"email"}></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Password</p>
-          <FormItems
-            onChange={OnInput}
-            type="password"
-            name={"password"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Select Hotels</p>
+        <FormItems
+          labelData="Username"
+          required={true}
+          // placeholder={"Hotel"}
+          onChange={OnInput}
+          name={"username"}
+        ></FormItems>
 
-          <Select
-            onChange={(selected) => {
-              // if (!selected) return setHotel([]);
-              if (!selected || selected.length === 0) {
-                setData((prev) => ({
-                  ...prev,
-                  hotels: options.map((i) => i.value),
-                }));
-                return;
-              }
+        <FormItems
+          readOnly={true}
+          labelData={"Email"}
+          onChange={OnInput}
+          name={"email"}
+        ></FormItems>
+
+        <FormItems
+          required={true}
+          labelData={"Password"}
+          onChange={OnInput}
+          type="password"
+          name={"password"}
+        ></FormItems>
+
+        <Filter
+          labelData={"Hotels"}
+          onChange={(selected) => {
+            // if (!selected) return setHotel([]);
+            if (!selected || selected.length === 0) {
               setData((prev) => ({
                 ...prev,
-                hotels: selected.map((i) => i.value),
+                hotels: options.map((i) => i.value),
               }));
-            }}
-            placeholder={"All Hotels"}
-            options={options}
-            isMulti
-            className="custom-multi-select"
-          ></Select>
-        </label>
-        <label htmlFor="">
-          <p>is_superuser</p>
-          <FormItems
-            onChange={(e) =>
-              setData({
-                ...data,
-                is_superuser: e.target.value === "true" ? true : false,
-              })
+              return;
             }
-            type="text"
-            element="select"
-            option={[
-              { name: "select option", value: "" },
-              { name: "yes", value: true },
-              { name: "no", value: false },
-            ]}
-            name={"is_superuser"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>is_staff</p>
-          <FormItems
-            onChange={(e) =>
-              setData({
-                ...data,
-                is_staff: e.target.value === "true" ? true : false,
-              })
-            }
-            type="text"
-            element="select"
-            option={[
-              { name: "select option", value: "" },
-              { name: "yes", value: true },
-              { name: "no", value: false },
-            ]}
-            name={"is_staff"}
-          ></FormItems>
-        </label>
+            setData((prev) => ({
+              ...prev,
+              hotels: selected.map((i) => i.value),
+            }));
+          }}
+          disableFrom={true}
+          placeholder={"All Hotels"}
+          options={options}
+          isMulti
+          className="custom-multi-select"
+        ></Filter>
+
+        <FormItems
+          required={true}
+          labelData={"Is Admin"}
+          onChange={(e) =>
+            setData({
+              ...data,
+              is_superuser: e.target.value === "true" ? true : false,
+            })
+          }
+          type="text"
+          element="select"
+          option={[
+            { name: "select option", value: "" },
+            { name: "yes", value: true },
+            { name: "no", value: false },
+          ]}
+          name={"is_superuser"}
+        ></FormItems>
+
+        <FormItems
+          required={true}
+          labelData={"Is Staff"}
+          onChange={(e) =>
+            setData({
+              ...data,
+              is_staff: e.target.value === "true" ? true : false,
+            })
+          }
+          type="text"
+          element="select"
+          option={[
+            { name: "select option", value: "" },
+            { name: "yes", value: true },
+            { name: "no", value: false },
+          ]}
+          name={"is_staff"}
+        ></FormItems>
 
         <Button type={"submit"} child={"Add Details"}></Button>
       </form>

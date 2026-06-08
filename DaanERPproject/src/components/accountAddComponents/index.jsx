@@ -64,6 +64,7 @@ const AccountsDailyAdd = ({ formdate }) => {
     console.log("add daily", response);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const CatOption = [
     { name: "Select Category", value: "" },
     ...category.map((i) => ({
@@ -71,6 +72,7 @@ const AccountsDailyAdd = ({ formdate }) => {
       value: i.id,
     })),
   ];
+
   const SubCatOption = [
     { name: "Select SubCategory", value: "" },
     ...subCat.map((i) => ({
@@ -93,10 +95,6 @@ const AccountsDailyAdd = ({ formdate }) => {
     console.log("laala", selectedSub);
     setData({ ...data, sub_category: selectedSub.sub_category });
   }, [selectedSub]);
-
-  useEffect(() => {
-    console.log("my data", data);
-  }, [data]);
 
   useEffect(() => {
     GetSubCat();
@@ -149,7 +147,6 @@ const AccountsDailyAdd = ({ formdate }) => {
               (setSelectedCat(category.find((i) => i.id == e.target.value)),
                 setSubId(e.target.value));
             }}
-            type="text"
             element="select"
             option={CatOption}
             name={"category"}
@@ -162,7 +159,6 @@ const AccountsDailyAdd = ({ formdate }) => {
             onChange={(e) =>
               setSelectedSub(subCat.find((i) => i.id == e.target.value))
             }
-            type="text"
             element="select"
             option={SubCatOption}
             name={"sub_category"}

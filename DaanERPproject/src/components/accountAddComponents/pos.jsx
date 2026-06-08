@@ -93,8 +93,8 @@ const AccountsPosAdd = ({ formdate, type }) => {
   }, [subId]);
 
   useEffect(() => {
-    console.log("my data", data);
-  }, [data]);
+    console.log("my data cat2", CatOption);
+  }, [CatOption]);
 
   return (
     <div className="add-account-main">

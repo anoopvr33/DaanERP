@@ -112,7 +112,7 @@ const BookingAdd = () => {
 
   const OnSubmit = async (e) => {
     e.preventDefault();
-    console.log("my check vdate", data);
+    // console.log("my check vdate", data);
     dispatch(addBookingThunk(data));
   };
 
@@ -125,6 +125,7 @@ const BookingAdd = () => {
       <form action="" onSubmit={OnSubmit}>
         <FormItems
           labelData="Booking Date"
+          required={true}
           // placeholder={"Hotel"}
           onChange={(e) => {
             const formattedDate = new Date(e.target.value)
@@ -140,6 +141,7 @@ const BookingAdd = () => {
 
         <FormItems
           labelData="Hotel"
+          required={true}
           // placeholder={"Hotel"}
           onChange={OnInput}
           name={"hotel_code"}
@@ -148,12 +150,14 @@ const BookingAdd = () => {
         ></FormItems>
 
         <FormItems
+          required={true}
           labelData="Customer Name"
           onChange={OnInput}
           name={"customer_name"}
         ></FormItems>
 
         <FormItems
+          required={true}
           labelData="Mob No."
           onChange={OnInput}
           type="number"
@@ -161,11 +165,12 @@ const BookingAdd = () => {
         ></FormItems>
 
         <FormItems
+          required={true}
           labelData="Email Address"
           onChange={OnInput}
           type="email"
           name={"email"}
-          required
+          // required
         ></FormItems>
 
         <FormItems
@@ -188,9 +193,11 @@ const BookingAdd = () => {
           onChange={OnInput}
           type="number"
           name={"adults"}
+          required={true}
         ></FormItems>
 
         <FormItems
+          required={true}
           labelData="Children"
           onChange={OnInput}
           type="number"
@@ -220,6 +227,7 @@ const BookingAdd = () => {
         ></FormItems>
 
         <FormItems
+          required={true}
           labelData="Booking Source"
           onChange={OnInput}
           name={"booking_source"}

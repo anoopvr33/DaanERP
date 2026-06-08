@@ -59,11 +59,12 @@ const AddSalary = () => {
             onChange={OnInput}
             type="date"
             name={"date"}
+            required
           ></FormItems>
         </label>
         <label htmlFor="">
           <p>Name</p>
-          <FormItems onChange={OnInput} name={"name"}></FormItems>
+          <FormItems required onChange={OnInput} name={"name"}></FormItems>
         </label>
         <label htmlFor="">
           <p>department</p>

@@ -147,7 +147,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   // const formatted = `${year}-${month}-${day}`;
 
   const GetPos = async () => {
-    console.log("payment format", prevmonth, yesterday, hotelsArray);
+    // console.log("payment format", prevmonth, yesterday, hotelsArray);
 
     if (hotelsArray.length === 0) return setLoading(true);
 
@@ -169,7 +169,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
           },
         },
       );
-      console.log("payemtn res", response);
+      // console.log("payemtn res", response);
       if (response.data.report) {
         setData(response.data.report);
       } else alert("some error");
@@ -191,6 +191,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
       <div className="acc-tabs-flex">
         {TabArray.map((item, index) => (
           <p
+            key={index}
             style={{
               borderBottomLeftRadius: tab + 1 === index ? "20px" : "0px",
               borderBottomRightRadius: tab - 1 === index ? "20px" : "0px",
@@ -205,10 +206,13 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {loading ? <p>Loading...</p> : ""}
+        {/* {loading ? <p>Loading...</p> : ""} */}
         {/* <p>Loading</p> */}
         {tab === 0 && (
-          <BillCompanyTab result={data?.bill_to_company}></BillCompanyTab>
+          <BillCompanyTab
+            loading={loading}
+            result={data?.bill_to_company}
+          ></BillCompanyTab>
         )}
         {tab === 1 && (
           <UpiCompanyTab result={data?.upi_company}></UpiCompanyTab>
