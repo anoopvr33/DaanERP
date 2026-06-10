@@ -1,118 +1,92 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
-// import AccountsAdd
-import AccountsTable from "../../accoutsTable";
 import AccountsHotel from "../../accoutsTable/hotel";
-import AccountsHotelAdd from "../../accountAddComponents/hotel";
-import { API } from "../../../utils/axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  gethotelOpsCategory,
+  gethotelOpsData,
+  gethotelOpsSub_Category,
+} from "../../../redux/hotelOpsExpenseSlice";
+import LoadingItem from "../../Elements/Loading";
 
 const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
-  const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState([]);
   const [form, setForm] = useState({
-    // date: dateset,
     from_date: prevMonth,
     to_date: dateset,
     category: "",
     sub_category: "",
   });
 
-  const [subcat, setSubCat] = useState([]);
-  const [data1, setData1] = useState([]);
+  const dispatch = useDispatch();
 
-  const GetHotel = async () => {
-    console.log("ops form", form);
+  const {
+    items,
+    loading,
+    error,
+    category,
+    categoryError,
+    sub_category,
+    subCategoryError,
+  } = useSelector((state) => state.hotelOps);
 
-    try {
-      const response = await API.post("/daybook/get_hotelexpense/", form);
-      console.log("hotel res", response);
-      if (response.data) {
-        setData1(response.data);
-      } else {
-        alert("something went wrong");
-      }
-    } catch (error) {
-      alert("something went wrong getting hotelops");
-    }
+  const onCategoryChange = (e) => {
+    const selected = category.find((i) => i.id === Number(e.target.value));
+    setForm({ ...form, category: selected?.category });
+    dispatch(gethotelOpsSub_Category(e.target.value));
   };
 
-  const GetCategory = async () => {
-    const res = await API.get("/daybook/get_categories/");
-    console.log("my hotelsops", res.data.data);
-    setCategory(res?.data?.data);
-  };
-
-  const GetSubCat = async (id) => {
-    if (!id) return;
-    console.log("my id", id);
-    const res = await API.post("/daybook/get_subcategories/", {
-      category_id: id,
+  const onSubCategoryChange = (e) => {
+    const selected = sub_category.find((i) => i.id === Number(e.target.value));
+    setForm({
+      ...form,
+      sub_category: selected?.sub_category, // 👈 name
     });
-    setSubCat(res.data.data);
-    console.log("sub arr", res);
   };
 
-  useEffect(() => {
-    GetHotel();
-    console.log("my date", dateset);
-    // eslint(react-hooks/set-state-in-effect)
-  }, [trigger]);
+  const categoryOptions = [
+    { value: "", name: "select category" },
+    ...category.map((i) => ({
+      value: i.id,
+      name: i.category,
+    })),
+  ];
+
+  const subCategoryOptions = [
+    { value: "", name: "select sub-category" },
+    ...sub_category.map((i) => ({ value: i.id, name: i.sub_category })),
+  ];
 
   useEffect(() => {
-    GetCategory();
-    GetSubCat();
-  }, []);
+    console.log("my hot form", form);
+    dispatch(gethotelOpsData(form));
+    dispatch(gethotelOpsCategory());
+  }, [form, trigger, dispatch]);
 
-  // useEffect(() => {}, [subcat]);
+  // if (loading) {
+  //   return <LoadingItem></LoadingItem>;
+  // }
 
   return (
     <div>
-      <div className="flex-1">
-        {/* <FormItems option={Count} element="select"></FormItems>{" "} */}
-        {/* <Button onClick={() => setOpen(!open)} child={"create +"}></Button> */}
-      </div>
-      {open && <AccountsHotelAdd formdate={dateset}></AccountsHotelAdd>}
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <FormItems
-          option={[
-            { value: "", name: "select category" },
-            ...category.map((i) => ({
-              value: i.id,
-              name: i.category,
-            })),
-          ]}
-          onChange={(e) => {
-            const selected = category.find(
-              (i) => i.id === Number(e.target.value),
-            );
-            (setForm({ ...form, category: selected?.category }),
-              GetSubCat(e.target.value));
-          }}
+          option={categoryOptions}
+          onChange={onCategoryChange}
           element="select"
         ></FormItems>
         <FormItems
-          option={[
-            { value: "", name: "select sub-category" },
-            ...subcat.map((i) => ({ value: i.id, name: i.sub_category })),
-          ]}
-          onChange={(e) => {
-            const selected = subcat.find(
-              (i) => i.id === Number(e.target.value),
-            );
-
-            setForm({
-              ...form,
-              sub_category: selected?.sub_category, // 👈 name
-              sub_category_id: selected?.id, // optional
-            });
-          }}
+          option={subCategoryOptions}
+          onChange={onSubCategoryChange}
           element="select"
         ></FormItems>
-        <Button onClick={GetHotel} child={"Filter"}></Button>
+        <Button
+          onClick={() => dispatch(gethotelOpsData(form))}
+          child={"Filter"}
+        ></Button>
       </div>
       <br />
-      <AccountsHotel data={data1} />
+      <AccountsHotel data={items} />
     </div>
   );
 };

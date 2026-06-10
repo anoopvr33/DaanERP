@@ -53,11 +53,10 @@
 /* /////////////////////////////////////////////////////////////////////////// */
 
 .acc-tabs-flex text {
-  background-color: #ebf1ef;
+  background-color: #edf1f1;
   width: 100%;
-  color: #96b7ac;
+  color: #026e7e;
   height: 35px;
-  /* height: 100%; */
   padding: 10px 20px;
 }
 .acc-tabs {

@@ -51,7 +51,7 @@ const options = {
         drawBorder: false, // removes axis border
       },
       ticks: {
-        color: "rgb(202, 202, 202)",
+        color: "rgb(255, 255, 255)",
       },
     },
     y: {
@@ -61,7 +61,7 @@ const options = {
       },
 
       ticks: {
-        color: "rgb(202, 202, 202)",
+        color: "rgb(255, 255, 255)",
         display: true, // hides y-axis labels
         beginAtZero: true, // starts y-axis at zero
       },

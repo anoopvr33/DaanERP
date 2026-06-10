@@ -18,63 +18,63 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const BillCompany = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 0 && "    hsl(0, 0%, 100%)",
-    color: tab == 0 && "#386f74",
+    color: tab == 0 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 0 && "20px",
     borderBottomLeftRadius: tab + 1 == 0 && "20px",
   };
   const UpiCom = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 1 && "    hsl(0, 0%, 100%)",
-    color: tab == 1 && "#386f74",
+    color: tab == 1 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 1 && "20px",
     borderBottomLeftRadius: tab + 1 == 1 && "20px",
   };
   const UpiCurent = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 2 && "    hsl(0, 0%, 100%)",
-    color: tab == 2 && "#386f74",
+    color: tab == 2 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 2 && "20px",
     borderBottomLeftRadius: tab + 1 == 2 && "20px",
   };
   const Cash = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 3 && "    hsl(0, 0%, 100%)",
-    color: tab == 3 && "#386f74",
+    color: tab == 3 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 3 && "20px",
     borderBottomLeftRadius: tab + 1 == 3 && "20px",
   };
   const bank_transfer = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 4 && "    hsl(0, 0%, 100%)",
-    color: tab == 4 && "#386f74",
+    color: tab == 4 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 4 && "20px",
     borderBottomLeftRadius: tab + 1 == 4 && "20px",
   };
   const outstanding = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 5 && "    hsl(0, 0%, 100%)",
-    color: tab == 5 && "#386f74",
+    color: tab == 5 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 5 && "20px",
     borderBottomLeftRadius: tab + 1 == 5 && "20px",
   };
   const complementary = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 6 && "    hsl(0, 0%, 100%)",
-    color: tab == 6 && "#386f74",
+    color: tab == 6 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 6 && "20px",
     borderBottomLeftRadius: tab + 1 == 6 && "20px",
   };
   const payment = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 7 && "    hsl(0, 0%, 100%)",
-    color: tab == 7 && "#386f74",
+    color: tab == 7 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 7 && "20px",
     borderBottomLeftRadius: tab + 1 == 7 && "20px",
   };
   const None = {
     borderRadius: "20px 20px 0px 0px",
     // background: tab == 0 && "    hsl(0, 0%, 100%)",
-    color: tab == 8 && "#386f74",
+    color: tab == 8 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 8 && "20px",
     borderBottomLeftRadius: tab + 1 == 8 && "20px",
   };
@@ -137,27 +137,14 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   ];
 
   const [data, setData] = useState([]);
-  // const d = new Date(setDat);
-  // const first = new Date(d.getFullYear(), d.getMonth(), 1);
-
-  // const year = first.getFullYear();
-  // const month = String(first.getMonth() + 1).padStart(2, "0");
-  // const day = "01";
-
-  // const formatted = `${year}-${month}-${day}`;
-
   const GetPos = async () => {
-    // console.log("payment format", prevmonth, yesterday, hotelsArray);
-
     if (hotelsArray.length === 0) return setLoading(true);
 
-    // setLoading(false);
     try {
       setLoading(true);
       const response = await API.post(
         "/reports/get_payment_report/",
         {
-          // date: formattedDate,
           hotels: hotelsArray,
           from_date: prevmonth,
           to_date: yesterday,
@@ -182,13 +169,11 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
 
   useEffect(() => {
     GetPos();
-    // console.log("fate", formattedDate);
-    // eslint(react-hooks/set-state-in-effect)
   }, [trigger, hotelsArray]);
 
   return (
-    <div className="acc-tabs">
-      <div className="acc-tabs-flex">
+    <div className="payment-tabs">
+      <div className="payment-tabs-flex">
         {TabArray.map((item, index) => (
           <p
             key={index}
@@ -204,10 +189,8 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
       </div>
       <div
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
-        className="acc-tabs-container"
+        className="payment-tabs-container"
       >
-        {/* {loading ? <p>Loading...</p> : ""} */}
-        {/* <p>Loading</p> */}
         {tab === 0 && (
           <BillCompanyTab
             loading={loading}
@@ -236,7 +219,7 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
       </div>
       <br />
 
-      <div className="acc-tabs-container">
+      <div className="payment-tabs-container">
         <h3>Total Amounts</h3> <br />
         <p>
           <b>bill_to_company</b>: {data?.total_amount?.bill_to_company}

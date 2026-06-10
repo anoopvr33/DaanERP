@@ -103,20 +103,22 @@ const EmployeeAdd = () => {
         <FormItems
           labelData="Username"
           required={true}
-          // placeholder={"Hotel"}
+          placeholder={"daanhotel_123"}
           onChange={OnInput}
           name={"username"}
         ></FormItems>
 
         <FormItems
-          readOnly={true}
+          required={true}
           labelData={"Email"}
+          placeholder={"daan@gmail.com"}
           onChange={OnInput}
           name={"email"}
         ></FormItems>
 
         <FormItems
           required={true}
+          placeholder={"* * * * * *"}
           labelData={"Password"}
           onChange={OnInput}
           type="password"

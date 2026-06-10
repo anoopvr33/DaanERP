@@ -14,7 +14,7 @@ const AccountsPos = ({ data, type }) => {
 
   return (
     <table
-      style={{ width: "900px", textAlign: "start" }}
+      style={{ width: "900px", textAlign: "start", marginBottom: "20px" }}
       className="daan-table"
     >
       <tr>
