@@ -219,34 +219,31 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
       </div>
       <br />
 
-      <div className="payment-tabs-container">
+      <div className="payment-tabs-container-2">
         <h3>Total Amounts</h3> <br />
         <p>
-          <b>bill_to_company</b>: {data?.total_amount?.bill_to_company}
+          <b>Bill to Company</b> : {data?.total_amount?.bill_to_company}
         </p>{" "}
-        <br />
         <p>
-          <b>upi_current</b>: {data?.total_amount?.upi_current}
+          <b>UPI Current</b> : {data?.total_amount?.upi_current}
         </p>{" "}
-        <br />
         <p>
-          <b>upi_company</b>: {data?.total_amount?.upi_company}
+          <b>UPI Company</b> : {data?.total_amount?.upi_company}
         </p>{" "}
-        <br />
         <p>
-          <b>cash</b>: {data?.total_amount?.cash}
+          <b>Cash</b> : {data?.total_amount?.cash}
         </p>
         <p>
-          <b>bank_transfer</b>: {data?.total_amount?.bank_transfer}
+          <b>Bank Transfer</b> : {data?.total_amount?.bank_transfer}
         </p>{" "}
         <p>
-          <b>outstanding</b>: {data?.total_amount?.outstanding}
+          <b>Outstanding</b> : {data?.total_amount?.outstanding}
         </p>{" "}
         <p>
-          <b>complementary</b>: {data?.total_amount?.complementary}
+          <b>Complementary</b> : {data?.total_amount?.complementary}
         </p>
         <p>
-          <b>payment_link_mode</b>: {data?.total_amount?.payment_link_mode}
+          <b>Payment Link Mode</b> : {data?.total_amount?.payment_link_mode}
         </p>
       </div>
     </div>

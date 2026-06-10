@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
 import AddBookindCheck from "../BookingCheckAdd";
@@ -7,13 +7,11 @@ import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
 import { IsStaff, IsSuper } from "../../utils";
-import Pagination from "@mui/material/Pagination";
-import { Pageination } from "../Elements/pagination";
 import { SearchFilter } from "../Elements/searchFilter";
 import LoadingItem from "../Elements/Loading";
 import Button from "../Elements/button";
 
-const BookingTable = ({ status, setPage, setSize, page }) => {
+const BookingTable = ({ status, setPage, page }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
   const [edit, setEdit] = useState(null);
@@ -190,10 +188,10 @@ const BookingTable = ({ status, setPage, setSize, page }) => {
                   </td>
                   <td
                     onClick={() =>
-                      setExpand({ row: index, open: !expand.open })
+                      setExpand({ row: expand.row == index ? null : index })
                     }
                   >
-                    {expand.open && expand.row == index ? (
+                    {expand.row == index ? (
                       <i
                         style={{ background: "#eaf1ef" }}
                         class="fa-solid fa-angle-up"
@@ -203,11 +201,11 @@ const BookingTable = ({ status, setPage, setSize, page }) => {
                     )}
                   </td>
                 </tr>
-                {expand.row == index && expand.open && (
+                {expand.row == index && (
                   <tr
                     style={{
                       padding: "30px",
-                      background: `${expand.row == index && expand.open ? "#ffffff00" : ""}`,
+                      background: `${expand.row == index ? "#ffffff00" : ""}`,
                     }}
                   >
                     <td colSpan={15} style={{ padding: "20px 10px" }}>
@@ -269,7 +267,7 @@ const BookingTable = ({ status, setPage, setSize, page }) => {
                   </tr>
                 )}
               </Fragment>
-            )).reverse()
+            ))
           )}
         </tbody>
       </table>
@@ -283,17 +281,30 @@ const BookingTable = ({ status, setPage, setSize, page }) => {
           marginTop: "20px",
         }}
       >
-        <Button
+        <a
+          style={{
+            textDecoration: "underline",
+            fontStyle: "italic",
+            color: "#026e7e",
+          }}
           child={"Prev"}
           onClick={() => setPage(page === 1 ? 1 : page - 1)}
         >
-          prev
-        </Button>
+          Prev page
+        </a>
 
         {page}
-        <Button child={"Next"} onClick={() => setPage(page + 1)}>
-          next
-        </Button>
+        <a
+          style={{
+            textDecoration: "underline",
+            fontStyle: "italic",
+            color: "#026e7e",
+          }}
+          child={"Next"}
+          onClick={() => setPage(page + 1)}
+        >
+          Next page
+        </a>
       </div>
       <br />
       <br />

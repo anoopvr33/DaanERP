@@ -23,7 +23,7 @@ const Booking = () => {
   const [sort] = useState("booking");
 
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(40);
+  const [size, setSize] = useState(50);
 
   const formattedHotels = useMemo(() => formatHotel() || [], []);
 
