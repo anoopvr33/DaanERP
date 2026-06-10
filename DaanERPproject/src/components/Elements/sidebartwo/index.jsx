@@ -96,7 +96,8 @@ export default function SidebarTwo() {
               (window.location.href = "/login")
             )}
           >
-            {!open && "Logout"} <i class="fa-solid fa-right-from-bracket"></i>
+            <i class="fa-solid fa-right-from-bracket"></i> <span> </span>
+            {!open && "Logout"}
           </p>
         )}
       </div>

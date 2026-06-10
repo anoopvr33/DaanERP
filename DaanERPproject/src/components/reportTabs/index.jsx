@@ -16,7 +16,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const POS = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 0 && "    hsl(0, 0%, 100%)",
-    color: tab == 0 && "#386f74",
+    color: tab == 0 && "#026e7e",
     borderBottomRightRadius: tab - 1 == 0 && "20px",
     borderBottomLeftRadius: tab + 1 == 0 && "20px",
   };
@@ -25,7 +25,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     borderRadius: "20px 20px 0px 0px",
 
     background: tab == 1 && "    hsl(0, 0%, 100%)",
-    color: tab == 1 && "#69af99",
+    color: tab == 1 && "#026e7e",
     borderBottomLeftRadius: tab + 1 == 1 && "20px",
     borderBottomRightRadius: tab - 1 == 1 && "20px",
   };
@@ -34,7 +34,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     borderRadius: "20px 20px 0px 0px",
     // padding: " 0px 20px",
     background: tab == 2 && "  hsl(0, 0%, 100%)",
-    color: tab == 2 && "#69af99",
+    color: tab == 2 && "#026e7e",
     borderBottomLeftRadius: tab + 1 == 2 && "20px",
     borderBottomRightRadius: tab - 1 == 2 && "20px",
   };
@@ -43,7 +43,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
     borderRadius: "20px 20px 0px 0px",
     // padding: "  0px 20px",
     background: tab == 3 && "  hsl(0, 0%, 100%)",
-    color: tab == 3 && "#69af99",
+    color: tab == 3 && "#026e7e",
     borderBottomLeftRadius: tab + 1 == 3 && "20px",
     borderBottomRightRadius: tab - 1 == 3 && "20px",
   };

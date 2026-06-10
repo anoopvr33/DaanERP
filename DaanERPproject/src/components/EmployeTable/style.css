@@ -3,13 +3,12 @@
   /* left: 10px; */
   width: 200px;
   z-index: 3;
-  right: 200px;
+  left: 70%;
+  /* transform: translateX(-300%, 400%); */
   display: none;
   padding: 10px;
   top: 400px;
-  /* margin-top: -20px; */
-  /* display: grid; */
-  gap: 10px;
+
   background-color: #ffffff;
 }
 .daan-table .hotel-data:hover .hotel-hover {

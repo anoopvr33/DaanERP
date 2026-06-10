@@ -59,7 +59,7 @@ const BillCompany = ({ result }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "20px",
+          margin: "20px",
         }}
       >
         <Pagination

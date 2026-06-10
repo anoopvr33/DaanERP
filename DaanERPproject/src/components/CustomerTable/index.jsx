@@ -138,7 +138,7 @@ const CustomerTable = ({ count, items }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "20px",
+          margin: "20px",
         }}
       >
         <Pagination
