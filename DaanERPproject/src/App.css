@@ -5,7 +5,7 @@
   font-family: "Nunito", sans-serif;
 }
 body {
-  background: #f3f7f6;
+  background: #edf1f1;
 }
 
 .app {
@@ -14,10 +14,10 @@ body {
 }
 
 .common-flex {
-  background-color: #f3f7f6;
+  background-color: #edf1f1;
 }
 .common-element {
-  background-color: #f3f7f6;
+  background-color: #edf1f1;
 }
 
 .daan-table {

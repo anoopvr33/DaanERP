@@ -11,12 +11,12 @@ import Pagination from "@mui/material/Pagination";
 import { Pageination } from "../Elements/pagination";
 import { SearchFilter } from "../Elements/searchFilter";
 import LoadingItem from "../Elements/Loading";
+import Button from "../Elements/button";
 
-const BookingTable = ({ status, setLength }) => {
+const BookingTable = ({ status, setPage, setSize, page }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
   const [open, setOpen] = useState({ index: null, check: null });
   const [edit, setEdit] = useState(null);
-  const [page, setPage] = useState(1);
 
   const Delete = async (id) => {
     const confirmed = window.confirm(
@@ -40,22 +40,12 @@ const BookingTable = ({ status, setLength }) => {
 
   const { FilterData } = SearchFilter(items, inputValue, status);
 
-  const { paginatedData, totalPages } = Pageination(FilterData, page);
-
-  useEffect(() => {
-    setLength(FilterData?.length || 0);
-  }, [FilterData, setLength]);
-
   if (loading && !geterror) {
     return <LoadingItem></LoadingItem>;
   }
 
   return (
     <>
-      {/* <p>
-        Showing <b>{FilterData?.length}</b> results of{" "}
-        <b>{SortedDays + 1 || 1}</b> Days
-      </p> */}
       <table className="daan-table">
         <tr>
           <th>Date</th>
@@ -70,7 +60,6 @@ const BookingTable = ({ status, setLength }) => {
           <th>Amount</th>
           <th>Payment</th>
           <th>Status</th>
-          {/* <th>Meal Plan</th> */}
           <th>Action</th>
           <th></th>
         </tr>
@@ -78,220 +67,209 @@ const BookingTable = ({ status, setLength }) => {
           {!items || geterror ? (
             <tr>
               <td colSpan={15} style={{ padding: "20px 0px" }}>
-                {" "}
-                <ErrorPage></ErrorPage>{" "}
-              </td>{" "}
+                <ErrorPage></ErrorPage>
+              </td>
             </tr>
-          ) : paginatedData?.length === 0 ? (
+          ) : FilterData?.length === 0 ? (
             <tr>
               <td colSpan={13}> Empty Data </td>
             </tr>
           ) : (
-            paginatedData
-              ?.map((i, index) => (
-                <Fragment>
-                  {open.index === index &&
-                    (!open.check && open.check === false ? (
-                      <AddBookindCheck
-                        customer={i.name}
-                        bookid={i.booking_id}
-                        hotelId={i.hotel_code}
-                        checkIn={i.checkin_date}
-                        guest={i.adults + i.children}
-                        setOpen={setOpen}
-                      ></AddBookindCheck>
-                    ) : (
-                      <AddBookindCheckOut
-                        customer={i.name}
-                        bookid={i.booking_id}
-                        hotelId={i.hotel_code}
-                        guest={i.adults + i.children}
-                        setOpen={setOpen}
-                      />
-                    ))}
-                  {edit === index && (
-                    <BookingEdit
-                      phone={i.phone}
+            FilterData?.map((i, index) => (
+              <Fragment>
+                {open.index === index &&
+                  (!open.check && open.check === false ? (
+                    <AddBookindCheck
                       customer={i.name}
+                      bookid={i.booking_id}
+                      hotelId={i.hotel_code}
                       checkIn={i.checkin_date}
-                      adult={i.adults}
-                      child={i.children}
-                      payment={i.paymentMode}
-                      meal={i.meal_plan}
-                      room={i.room_category}
-                      total={i.total_amount}
-                      checkout={i.checkout_date}
-                      status={i.tag_status}
-                      id={i.id}
-                      gstno={i.gst_number}
-                      setEdit={setEdit}
+                      guest={i.adults + i.children}
+                      setOpen={setOpen}
+                    ></AddBookindCheck>
+                  ) : (
+                    <AddBookindCheckOut
+                      customer={i.name}
+                      bookid={i.booking_id}
+                      hotelId={i.hotel_code}
+                      guest={i.adults + i.children}
+                      setOpen={setOpen}
                     />
-                  )}
-                  <tr
-                    className="booking-row"
+                  ))}
+                {edit === index && (
+                  <BookingEdit
+                    phone={i.phone}
+                    customer={i.name}
+                    checkIn={i.checkin_date}
+                    adult={i.adults}
+                    child={i.children}
+                    payment={i.paymentMode}
+                    meal={i.meal_plan}
+                    room={i.room_category}
+                    total={i.total_amount}
+                    checkout={i.checkout_date}
+                    status={i.tag_status}
+                    id={i.id}
+                    gstno={i.gst_number}
+                    setEdit={setEdit}
+                  />
+                )}
+                <tr
+                  className="booking-row"
+                  style={{
+                    background: `${expand.row == index && expand.open ? "#ffffff" : ""}`,
+                  }}
+                >
+                  <td>{i?.booking_date}</td>
+                  <td>{i?.booking_id}</td>
+                  <td style={{ fontWeight: "500", color: "#7070a3" }}>
+                    {i.booking_source}
+                  </td>
+                  <td>{i.name}</td>
+                  <td>{i.phone}</td>
+                  <td>{i.room_number || "_"}</td>
+                  <td>{i.rateplanCode || "_"}</td>
+                  <td>
+                    {i.checkin_date === "" || !i.checkin_date ? (
+                      <button
+                        disabled={IsSuper() === false}
+                        style={{ padding: "2px 10px", fontSize: "12px" }}
+                        onClick={() => setOpen({ index: index, check: false })}
+                      >
+                        Add
+                      </button>
+                    ) : (
+                      i.checkin_date
+                    )}
+                  </td>
+                  <td>
+                    {i.checkout_date === "" || !i.checkout_date ? (
+                      <button
+                        disabled={IsSuper() === false}
+                        style={{ padding: "2px 10px", fontSize: "12px" }}
+                        onClick={() => setOpen({ index: index, check: true })}
+                      >
+                        Add
+                      </button>
+                    ) : (
+                      i.checkout_date
+                    )}
+                  </td>
+
+                  <td>{i?.total_amount?.toFixed(2)}</td>
+                  <td>{i.paymentMode || "-"}</td>
+                  <td
                     style={{
-                      background: `${expand.row == index && expand.open ? "#ffffff" : ""}`,
+                      color:
+                        i.tag_status === "Cancelled"
+                          ? "red"
+                          : i.tag_status === "Confirmed"
+                            ? "rgb(74, 194, 74)"
+                            : i.tag_status === "Checked Out"
+                              ? "rgb(24, 124, 255)"
+                              : "",
                     }}
                   >
-                    <td>{i?.booking_date}</td>
-                    <td>{i?.booking_id}</td>
-                    <td style={{ fontWeight: "500", color: "#7070a3" }}>
-                      {i.booking_source}
-                    </td>
-                    <td>{i.name}</td>
-                    <td>{i.phone}</td>
-                    <td>{i.room_number || "_"}</td>
-                    <td>{i.rateplanCode || "_"}</td>
-                    <td>
-                      {i.checkin_date === "" || !i.checkin_date ? (
-                        <button
-                          disabled={IsSuper() === false}
-                          style={{ padding: "2px 10px", fontSize: "12px" }}
-                          onClick={() =>
-                            setOpen({ index: index, check: false })
-                          }
-                        >
-                          Add
-                        </button>
-                      ) : (
-                        i.checkin_date
-                      )}
-                    </td>
-                    <td>
-                      {i.checkout_date === "" || !i.checkout_date ? (
-                        <button
-                          disabled={IsSuper() === false}
-                          style={{ padding: "2px 10px", fontSize: "12px" }}
-                          onClick={() => setOpen({ index: index, check: true })}
-                        >
-                          Add
-                        </button>
-                      ) : (
-                        i.checkout_date
-                      )}
-                    </td>
-                    {/* <td>{i.paymentMode}</td> */}
-                    <td>{i?.total_amount?.toFixed(2)}</td>
-                    <td>{i.paymentMode || "-"}</td>
-                    <td
-                      style={{
-                        color:
-                          i.tag_status === "Cancelled"
-                            ? "red"
-                            : i.tag_status === "Confirmed"
-                              ? "rgb(74, 194, 74)"
-                              : i.tag_status === "Checked Out"
-                                ? "rgb(24, 124, 255)"
-                                : "",
-                      }}
-                    >
-                      {i.tag_status}
-                    </td>
-                    {/* <td>{i.meal_plan || "-"}</td> */}
+                    {i.tag_status}
+                  </td>
 
-                    <td>
+                  <td>
+                    <i
+                      onClick={() => setEdit(index)}
+                      class="fa fa-edit"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      onClick={() => Delete(i.id)}
+                      style={{
+                        display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                      }}
+                      class="fa fa-trash"
+                      aria-hidden="true"
+                    ></i>
+                  </td>
+                  <td
+                    onClick={() =>
+                      setExpand({ row: index, open: !expand.open })
+                    }
+                  >
+                    {expand.open && expand.row == index ? (
                       <i
-                        onClick={() => setEdit(index)}
-                        class="fa fa-edit"
-                        aria-hidden="true"
-                      ></i>{" "}
-                      <i
-                        onClick={() => Delete(i.id)}
-                        style={{
-                          display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-                        }}
-                        class="fa fa-trash"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </td>
-                    <td
-                      onClick={() =>
-                        setExpand({ row: index, open: !expand.open })
-                      }
-                    >
-                      {expand.open && expand.row == index ? (
-                        <i
-                          style={{ background: "#eaf1ef" }}
-                          class="fa-solid fa-angle-up"
-                        ></i>
-                      ) : (
-                        <i class="fa-solid fa-angle-down"></i>
-                      )}
+                        style={{ background: "#eaf1ef" }}
+                        class="fa-solid fa-angle-up"
+                      ></i>
+                    ) : (
+                      <i class="fa-solid fa-angle-down"></i>
+                    )}
+                  </td>
+                </tr>
+                {expand.row == index && expand.open && (
+                  <tr
+                    style={{
+                      padding: "30px",
+                      background: `${expand.row == index && expand.open ? "#ffffff00" : ""}`,
+                    }}
+                  >
+                    <td colSpan={15} style={{ padding: "20px 10px" }}>
+                      <div className="daan-expand">
+                        <p>
+                          <b>Adults</b> <span> {i.adults}</span>
+                        </p>
+                        <p>
+                          <b>Children</b> <span> {i.children}</span>
+                        </p>
+                        <p>
+                          <b>
+                            room_category <span>{i.room_category}</span>
+                          </b>
+                        </p>
+
+                        <p>
+                          <b>
+                            room_count <span>{i.room_count}</span>
+                          </b>
+                        </p>
+                        <p>
+                          <b>
+                            Hotel Code <span>{i.hotel_code}</span>
+                          </b>
+                        </p>
+
+                        <p>
+                          <b>
+                            pah
+                            <span>
+                              {i.pah === false ? "completed" : "pending"}
+                            </span>
+                          </b>
+                        </p>
+                        <p>
+                          <b>
+                            GST No. <span>{i.gst_number || "_"}</span>
+                          </b>
+                        </p>
+                        <p>
+                          <b>Invoice</b>
+                          <span>
+                            {i.invoice_pdf ? (
+                              <a
+                                href={i.invoice_pdf}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                view file
+                              </a>
+                            ) : (
+                              "Null"
+                            )}
+                          </span>
+                        </p>
+                      </div>
                     </td>
                   </tr>
-                  {expand.row == index && expand.open && (
-                    <tr
-                      style={{
-                        padding: "30px",
-                        background: `${expand.row == index && expand.open ? "#ffffff00" : ""}`,
-                      }}
-                    >
-                      <td colSpan={15} style={{ padding: "20px 10px" }}>
-                        <div className="daan-expand">
-                          <p>
-                            <b>Adults</b> <span> {i.adults}</span>
-                          </p>
-                          <p>
-                            <b>Children</b> <span> {i.children}</span>
-                          </p>
-                          <p>
-                            <b>
-                              room_category <span>{i.room_category}</span>
-                            </b>
-                          </p>
-
-                          <p>
-                            <b>
-                              room_count <span>{i.room_count}</span>
-                            </b>
-                          </p>
-                          <p>
-                            <b>
-                              Hotel Code <span>{i.hotel_code}</span>
-                            </b>
-                          </p>
-
-                          <p>
-                            <b>
-                              pah
-                              <span>
-                                {i.pah === false ? "completed" : "pending"}
-                              </span>
-                            </b>
-                          </p>
-                          <p>
-                            <b>
-                              GST No. <span>{i.gst_number || "_"}</span>
-                            </b>
-                          </p>
-                          <p>
-                            <b>Invoice</b>{" "}
-                            <span>
-                              {i.invoice_pdf ? (
-                                <a
-                                  href={i.invoice_pdf}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  view file
-                                </a>
-                              ) : (
-                                "Null"
-                              )}
-                            </span>
-                          </p>
-                          {/* <p>
-                        <b>
-                          specialRequests <span>{i.specialRequests}</span>
-                        </b>
-                      </p> */}
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </Fragment>
-              ))
-              .reverse()
+                )}
+              </Fragment>
+            )).reverse()
           )}
         </tbody>
       </table>
@@ -299,15 +277,23 @@ const BookingTable = ({ status, setLength }) => {
       <div
         style={{
           display: "flex",
+          alignItems: "center",
+          gap: "10px",
           justifyContent: "center",
           marginTop: "20px",
         }}
       >
-        <Pagination
-          count={totalPages}
-          page={page}
-          onChange={(event, value) => setPage(value)}
-        />
+        <Button
+          child={"Prev"}
+          onClick={() => setPage(page === 1 ? 1 : page - 1)}
+        >
+          prev
+        </Button>
+
+        {page}
+        <Button child={"Next"} onClick={() => setPage(page + 1)}>
+          next
+        </Button>
       </div>
       <br />
       <br />

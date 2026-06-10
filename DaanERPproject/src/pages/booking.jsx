@@ -21,8 +21,9 @@ const Booking = () => {
   const [toggle, setToggle] = useState(false);
   const [dayData, setDaydata] = useState(null);
   const [sort] = useState("booking");
-  const [status, setStatus] = useState("");
-  const [length, setLength] = useState(0);
+
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(40);
 
   const formattedHotels = useMemo(() => formatHotel() || [], []);
 
@@ -41,6 +42,10 @@ const Booking = () => {
     from_date: prevMonthDate,
     to_date: yesterdayDate,
     filter_method: sort,
+    status: "",
+    sort_order: "",
+    page: page,
+    page_size: size,
   });
 
   // Submit filter data
@@ -53,7 +58,7 @@ const Booking = () => {
     if (data?.hotels?.length === 0) return;
 
     dispatch(getBookingData(data));
-  }, [data.hotels]);
+  }, [data.hotels, data.page, data.status, data.sort_order]);
 
   // find length of numbers between days
 
@@ -132,10 +137,16 @@ const Booking = () => {
                 marginBottom: "0px",
               }}
             >
-              Showing {length} results of <b>{dayData + 1 || 1}</b> Days
+              Showing results of <b>{dayData + 1 || 1}</b> Days
             </p>
             <FormItems
-              onChange={(e) => setStatus(e.target.value)}
+              onChange={(e) => setData({ ...data, sort_order: e.target.value })}
+              className={"status-sort"}
+              option={["Sort Order", "asc", "desc"]}
+              element="select"
+            ></FormItems>
+            <FormItems
+              onChange={(e) => setData({ ...data, status: e.target.value })}
               className={"status-sort"}
               option={[
                 { name: "Select Status", value: "" },
@@ -162,9 +173,13 @@ const Booking = () => {
             <>
               {/* <p>Showing {dayData} days result</p> */}
               <BookingTable
-                setLength={setLength}
-                status={status}
                 SortedDays={dayData}
+                setPage={(num) => {
+                  setData({ ...data, page: num });
+                  setPage(num);
+                }}
+                setSize={setSize}
+                page={page}
               ></BookingTable>
             </>
           )}

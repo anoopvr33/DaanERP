@@ -41,6 +41,9 @@ const options = {
         drawBorder: false, // removes axis border
         // length: "100px",
       },
+      ticks: {
+        color: "#026e7e",
+      },
     },
     y: {
       grid: {
@@ -48,7 +51,7 @@ const options = {
         drawBorder: false,
       },
       ticks: {
-        // color: "rgb(0, 0, 0)", // sets y-axis label color
+        color: "#026e7e", // sets y-axis label color
         display: true, // hides y-axis labels
         beginAtZero: true, // starts y-axis at zero
       },
@@ -65,7 +68,7 @@ export default function ExpenseChart({ data }) {
       {
         label: "Expense",
         data: data?.slice(0, 6).map((i) => i.expense),
-        backgroundColor: "rgb(12, 207, 139)",
+        backgroundColor: "#026e7e",
         barTickness: 30,
         borderRadius: 5,
         maxBarThickness: 50,
@@ -79,8 +82,8 @@ export default function ExpenseChart({ data }) {
         width: "100%",
         height: "320px",
         minWidth: "300px",
-        backgroundImage: "linear-gradient(to right, #dcedea)",
-        // border: "2px solid red",
+        backgroundImage: "linear-gradient(to top,  #ffffff)",
+        // border: "2px solid #026e7e",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",

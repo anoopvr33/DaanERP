@@ -161,8 +161,8 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   }, [audit, revenue, checkout, hotel]);
 
   return (
-    <div className="acc-tabs">
-      <div className="acc-tabs-flex">
+    <div className="report-tabs">
+      <div className="report-tabs-flex">
         {TabArray.map((item, index) => (
           <p
             style={{
@@ -183,7 +183,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
       <div
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
-        className="acc-tabs-container"
+        className="report-tabs-container"
       >
         {/* {loading ? <p>Loading...</p> : ""} */}
         {/* <p>Loading</p> */}
