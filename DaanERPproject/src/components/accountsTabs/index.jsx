@@ -14,7 +14,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
   const POS = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 0 && "    hsl(0, 0%, 100%)",
-    color: tab == 0 && "#026e7e",
+    color: tab == 0 && "#004e5d",
     borderBottomRightRadius: tab - 1 == 0 && "20px",
     borderBottomLeftRadius: tab + 1 == 0 && "20px",
   };
@@ -23,7 +23,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
     borderRadius: "20px 20px 0px 0px",
 
     background: tab == 1 && "    hsl(0, 0%, 100%)",
-    color: tab == 1 && "#026e7e",
+    color: tab == 1 && "#004e5d",
     borderBottomLeftRadius: tab + 1 == 1 && "20px",
     borderBottomRightRadius: tab - 1 == 1 && "20px",
   };
@@ -31,7 +31,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
   const Hotel = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 2 && "   hsl(0, 0%, 100%)",
-    color: tab == 2 && "#026e7e",
+    color: tab == 2 && "#004e5d",
     borderBottomLeftRadius: tab + 1 == 2 && "20px",
     borderBottomRightRadius: tab - 1 == 2 && "20px",
   };
@@ -39,7 +39,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
   const Vendor = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 3 && "  hsl(0, 0%, 100%)",
-    color: tab == 3 && "#026e7e",
+    color: tab == 3 && "#004e5d",
     borderBottomLeftRadius: tab + 1 == 3 && "20px",
     borderBottomRightRadius: tab - 1 == 3 && "20px",
   };
@@ -47,7 +47,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
   const Salary = {
     borderRadius: "20px 20px 0px 0px",
     background: tab == 4 && "  hsl(0, 0%, 100%)",
-    color: tab == 4 && "#026e7e",
+    color: tab == 4 && "#004e5d",
     borderBottomLeftRadius: tab + 1 == 4 && "20px",
     borderBottomRightRadius: tab - 1 == 4 && "20px",
   };

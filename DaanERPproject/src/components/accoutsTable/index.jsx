@@ -1,7 +1,10 @@
+import { useState } from "react";
+import { IsStaff, IsSuper } from "../../utils";
 import "./style.css";
+import DailyLogEdit from "../accountsEdit/dailyLogEdit";
 
 const AccountsTable = ({ data }) => {
-  // const head = data.length > 0 ? Object.keys(data[0]) : [];
+  const [edit, setEdit] = useState(false);
 
   return (
     <table className="daan-table">
@@ -15,17 +18,11 @@ const AccountsTable = ({ data }) => {
         <th>Payments</th>
         <th>Balance</th>
         <th>Hotel</th>
-        {/* {head.map((i) => (
-          <th key={i}>{i}</th>
-        ))} */}
+        <th>Action</th>
       </tr>
 
       <tbody>
-        {/* <td>1</td>
-        <td>rent</td>
-        <td>344</td>
-        <td>Expense</td>
-        <td>null</td> */}
+        {edit && <DailyLogEdit setEdit={setEdit}></DailyLogEdit>}
         {data.length > 0 ? (
           data
             .map((item) => (
@@ -39,6 +36,22 @@ const AccountsTable = ({ data }) => {
                 <td>{item.payments}</td>
                 <td>{item.balance}</td>
                 <td>{item.hotel}</td>
+                <td>
+                  <i
+                    onClick={() => setEdit(!edit)}
+                    class="fa fa-edit"
+                    aria-hidden="true"
+                  ></i>{" "}
+                  <br />
+                  <i
+                    // onClick={() => Delete(i.id)}
+                    style={{
+                      display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                    }}
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                  ></i>
+                </td>
               </tr>
             ))
             .reverse()

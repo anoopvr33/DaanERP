@@ -6,7 +6,7 @@ const AccountsHotel = ({ data }) => {
   console.log("my hotels ops", data);
 
   return (
-    <table className="daan-table">
+    <table style={{ width: "700px" }} className="daan-table">
       <tr>
         <th>Category</th>
         <th>Sum of payments</th>
@@ -17,6 +17,7 @@ const AccountsHotel = ({ data }) => {
       </tr>
 
       <tbody>
+      
         {/* <td>1</td>
         <td>rent</td>
         <td>344</td>

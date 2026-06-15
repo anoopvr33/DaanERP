@@ -7,6 +7,7 @@ import { addBookingThunk } from "../../redux/bookingSlice";
 import axios from "axios";
 import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
+import { add_vendor_thunk } from "../../redux/vendorSlice";
 
 const AccountsVendorAdd = ({ formdate }) => {
   const [data, setData] = useState({
@@ -65,19 +66,7 @@ const AccountsVendorAdd = ({ formdate }) => {
       console.log(key, value);
     }
 
-    const response = await API.post("/daybook/add_vendor_payout/", formData, {
-      withCredentials: true,
-      headers: {
-        "X-CSRFToken": getCookie("csrftoken"),
-        "Content-Type": "multipart/form-data", // 👈 add this
-      },
-      transformRequest: [(data) => data], // 👈 bypass JSON transform
-    });
-    console.log("add vendor", response);
-    if (response.data.status) {
-      alert("addedd successfully");
-    }
-    console.log("add vemdor", response);
+    dispatch(add_vendor_thunk(formData));
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
 import AddBookindCheck from "../BookingCheckAdd";
@@ -37,6 +37,10 @@ const BookingTable = ({ status, setPage, page }) => {
   const { inputValue } = useSelector((state) => state.search);
 
   const { FilterData } = SearchFilter(items, inputValue, status);
+
+  useEffect(() => {
+    console.log("booking data", FilterData);
+  }, [FilterData]);
 
   if (loading && !geterror) {
     return <LoadingItem></LoadingItem>;

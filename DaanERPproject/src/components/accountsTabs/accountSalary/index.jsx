@@ -23,7 +23,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
           <Button
             onClick={() => setOpen(!open)}
             child={"New Salary +"}
-            className={"add-salary"}
+            className={"add-dailylog"}
           ></Button>
         </span>
       </div>

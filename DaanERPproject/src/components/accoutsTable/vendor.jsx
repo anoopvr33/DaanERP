@@ -1,44 +1,29 @@
 import { useEffect, useState } from "react";
 import { API } from "../../utils/axios";
 import "./style.css";
+import { IsStaff, IsSuper } from "../../utils";
+import VendorEdit from "../accountsEdit/vendorEdit";
 
-const AccountsVendor = ({ yesterdate, trigger, prevMonth, hotels }) => {
-  // const head = data.length > 0 ? Object.keys(data[0]) : [];
-
-  const [vendor, setVendor] = useState([]);
-
-  const GetVendor = async () => {
-    console.log("vendor date", yesterdate, prevMonth, hotels);
-    const res = await API.post("/daybook/get_vendor_payout/", {
-      from_date: prevMonth,
-      to_date: yesterdate,
-      hotel: hotels,
-    });
-    console.log("vendor", res);
-    setVendor(res?.data?.data);
-  };
-
-  useEffect(() => {
-    GetVendor();
-  }, [trigger]);
-
+const AccountsVendor = ({ vendor }) => {
+  // const [vendor, setVendor] = useState([]);
+  const [edit, setEdit] = useState(false);
   return (
     <table className="daan-table">
       <tr>
         <th>Name</th>
         <th>Bill No</th>
         <th>Bill Date</th>
-        {/* <th>Vendor Name</th> */}
         <th>Amount</th>
         <th>Remark</th>
         <th>Payment Date</th>
         <th>Due Date</th>
         <th>Hotel</th>
         <th>File</th>
-        {/* <th>Invoice</th>  */}
+        <th>Action</th>
       </tr>
 
       <tbody>
+        {edit && <VendorEdit setEdit={setEdit}></VendorEdit>}
         {vendor.length > 0 ? (
           vendor.map((item) => (
             <tr className="accounts-row">
@@ -63,15 +48,27 @@ const AccountsVendor = ({ yesterdate, trigger, prevMonth, hotels }) => {
                   "_"
                 )}
               </td>
-              {/* <td>{item?.transaction_type == "EX" ? item.amount : "_"}</td>
-              <td>{item?.transaction_type == "IN" ? item.amount : "_"}</td> */}
-              {/* <td>{item.remarks}</td> */}
+              <td>
+                <i
+                  onClick={() => setEdit(!edit)}
+                  class="fa fa-edit"
+                  aria-hidden="true"
+                ></i>{" "}
+                <br />
+                <i
+                  // onClick={() => Delete(i.id)}
+                  style={{
+                    display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                  }}
+                  class="fa fa-trash"
+                  aria-hidden="true"
+                ></i>
+              </td>
             </tr>
           ))
         ) : (
           <tr>
-            {" "}
-            <td colSpan={9}> Empty Data </td>{" "}
+            <td colSpan={9}> Empty Data </td>
           </tr>
         )}
       </tbody>

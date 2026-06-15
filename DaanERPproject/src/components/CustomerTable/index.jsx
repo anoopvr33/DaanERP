@@ -6,16 +6,16 @@ import Pagination from "@mui/material/Pagination";
 import { Pageination } from "../Elements/pagination";
 
 const CustomerTable = ({ count, items }) => {
-  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [expand, setExpand] = useState({ row: null, open: false });
 
-  const [array, setArray] = useState(items.data || []);
+  const [array] = useState(items.data || []);
 
   const sortedArray = useMemo(() => {
     if (!Array.isArray(array)) return [];
-
-    if (count === "Less Count") {
+    if (count === "") {
+      return items.data;
+    } else if (count === "Less Count") {
       return [...array].sort(
         (a, b) => a.total_booking_counts - b.total_booking_counts,
       );
@@ -23,19 +23,12 @@ const CustomerTable = ({ count, items }) => {
       return [...array].sort(
         (a, b) => b.total_booking_counts - a.total_booking_counts,
       );
-    } else if (count === "") {
-      return items.data;
     }
 
     return array;
-  }, [count]);
+  }, [count, items]);
 
-  const { paginatedData, totalPages } = Pageination(array, page);
-
-  useEffect(() => {
-    console.log("sorted arra", sortedArray);
-    setArray(sortedArray);
-  }, [sortedArray]);
+  const { paginatedData, totalPages } = Pageination(sortedArray, page);
 
   return (
     <>
@@ -53,8 +46,8 @@ const CustomerTable = ({ count, items }) => {
         </tr>
 
         <tbody>
-          {paginatedData.length > 0 ? (
-            paginatedData.map((i, index) => (
+          {paginatedData?.length > 0 ? (
+            paginatedData?.map((i, index) => (
               <Fragment key={`${i.email}-${i.phone}-${i.last_booking_date}`}>
                 <tr
                   style={{

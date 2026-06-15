@@ -16,10 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Get_Budget_CatSub } from "../../../api/accountsServices";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
-  const [open, setOpen] = useState(false);
-  const [list, setList] = useState(false);
-  const [openCat, setOpenCat] = useState(false);
-  const [openCatSub, setOpenCatSub] = useState(false);
+  const [open, setOpen] = useState(null);
   const [newCat, setNewCat] = useState("");
   const [catSub, setCatSub] = useState({});
   const [newSub, setNewSub] = useState({
@@ -32,73 +29,44 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
     (state) => state.budget,
   );
 
-  const AddCategory = async (e) => {
-    e.preventDefault();
-    dispatch(addBudgetCategoryThunk({ budget_category: newCat }));
-  };
-
-  const AddSubCat = async (e) => {
-    e.preventDefault();
-    dispatch(addBudgetSub_CategoryThunk(newSub));
-  };
-
   const CatOption = [
-    // { name: categoryLoading ? "loading" : "", value: "" },
     { name: "select category", value: "" },
     ...category.map((i) => ({ name: i.category, value: i.id })),
   ];
 
   useEffect(() => {
-    dispatch(getBudgetCategory());
-  }, [dispatch]);
-
-  useEffect(() => {
     Get_Budget_CatSub().then((res) => {
-      console.log("bud cat sub", res);
       if (res.data) setCatSub(res.data);
     });
   }, []);
 
   useEffect(() => {
-    const data = { from_date: prevMonth, to_date: dateset, hotel: hotels };
     if (hotels?.length === 0) return;
-    dispatch(getBudgetData(data));
+    dispatch(
+      getBudgetData({ from_date: prevMonth, to_date: dateset, hotel: hotels }),
+    );
+    dispatch(getBudgetCategory());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger, hotels, dispatch]);
 
   return (
     <div className="acc-pos">
       <div>
-        {/* <h3>Budget</h3> <br /> */}
         <div className="flex-1">
           <Button
-            className={openCat && "active-btn"}
-            onClick={() => (
-              setOpenCatSub(false),
-              setOpen(false),
-              setOpenCat(!openCat),
-              setList(false)
-            )}
+            className={open === 1 && "active-btn"}
+            onClick={() => setOpen(open === 1 ? null : 1)}
             child={"New Category +"}
           ></Button>
           <Button
-            className={openCatSub && "active-btn"}
-            onClick={() => (
-              setOpen(false),
-              setOpenCat(false),
-              setOpenCatSub(!openCatSub),
-              setList(false)
-            )}
+            className={open === 2 && "active-btn"}
+            onClick={() => setOpen(open === 2 ? null : 2)}
             child={"New Subcategory +"}
           ></Button>
 
           <Button
-            className={list && "active-btn"}
-            onClick={() => (
-              setOpenCat(false),
-              setOpenCatSub(false),
-              setOpen(false),
-              setList(!list)
-            )}
+            className={open === 3 && "active-btn"}
+            onClick={() => setOpen(open === 3 ? null : 3)}
             child={
               <>
                 List Categories
@@ -108,29 +76,29 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
           />
 
           <Button
-            onClick={() => (
-              setOpenCat(false),
-              setOpenCatSub(false),
-              setOpen(!open),
-              setList(false)
-            )}
+            onClick={() => setOpen(open === 4 ? null : 4)}
             className={"add-budget"}
             child={"New Budget +"}
           />
         </div>
-        {open && <AccountsPosAdd type={"IN"} formdate={dateset} />}
-        {openCat && (
+        {open === 4 && <AccountsPosAdd type={"IN"} formdate={dateset} />}
+        {open === 1 && (
           <div style={{ width: "fit-content" }} className="add-account-main">
             <form action="">
               <FormItems
                 onChange={(e) => setNewCat(e.target.value)}
                 placeholder={"Enter Category"}
               ></FormItems>
-              <Button onClick={AddCategory} child={"Add"}></Button>
+              <Button
+                onClick={() =>
+                  dispatch(addBudgetCategoryThunk({ budget_category: newCat }))
+                }
+                child={"Add"}
+              ></Button>
             </form>
           </div>
         )}
-        {openCatSub && (
+        {open === 2 && (
           <div style={{ width: "fit-content" }} className="add-account-main">
             <form action="">
               <FormItems
@@ -149,12 +117,15 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
                 }
                 placeholder={"Enter Subcategory"}
               ></FormItems>
-              <Button onClick={AddSubCat} child={"Add"}></Button>
+              <Button
+                onClick={() => dispatch(addBudgetSub_CategoryThunk(newSub))}
+                child={"Add"}
+              ></Button>
             </form>
           </div>
         )}
 
-        {list && (
+        {open === 3 && (
           <div
             style={{
               width: "500px",
