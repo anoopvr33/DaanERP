@@ -5,6 +5,8 @@ import SearchReducer from "./SearchSlice";
 import budgetActual from "./budgetActualSlice";
 import dashboardReducer from "./dashboardSlice";
 import hotelOpsReducer from "./hotelOpsExpenseSlice";
+import dailyLogReducer from "./dailyLogSlice";
+import vendorReducer from "./vendorSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +16,7 @@ export const store = configureStore({
     budget: budgetActual,
     dashboard: dashboardReducer,
     hotelOps: hotelOpsReducer,
+    dailylog: dailyLogReducer,
+    vendor: vendorReducer,
   },
 });

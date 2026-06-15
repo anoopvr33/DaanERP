@@ -15,7 +15,7 @@
   background-size: cover; */
   background: hsl(0, 0%, 100%);
   /* border: 1px solid #b1d2d7; */
-  box-shadow: 0px 4px 6px rgba(8, 97, 79, 0.1);
+  box-shadow: 0px 8px 6px rgba(8, 97, 79, 0.052);
   /* border-bottom: 3px solid #026e7e; */
   display: flex;
   /* flex-direction: column; */
@@ -26,12 +26,14 @@
   gap: 15px;
   transition: 0.6s;
   /* border: 1px solid hsl(243, 37%, 52%); */
-  /* border-bottom: 3px solid hsl(243, 37%, 52%); */
-  color: #88a0a4;
+  /* border-bottom: 3px solid #00667b; */
+  color: #00b19c;
 }
 .dash-result div:hover {
   background-color: #004e5d;
   border-bottom: 5px solid #36dc84;
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.229); */
+
   color: rgb(54, 220, 132);
 }
 .dash-result h1 {
@@ -53,6 +55,7 @@
   /* flex-shrink: 0; */
   /* color: rgb(54, 220, 132); */
 }
+
 .dash-result div:nth-child(even) {
   /* background: white; */
 }

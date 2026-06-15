@@ -54,11 +54,13 @@ export const Get_DailyLog_CatSub = async () => {
   return await API.get("/daybook/get_dailyLog_catsub/");
 };
 
-export const Get_DailyLog_Category = async () => {
+export const Get_DailyLog_CategoryAPI = async () => {
   return await API.get("/daybook/get_categories/");
 };
 
-export const Add_DailyLog_Category = async (data) => {
+export const Add_DailyLog_CategoryAPI = async (data) => {
+  console.log("api area categ", data);
+
   return await API.post(
     "/daybook/create_category/",
     {
@@ -95,7 +97,7 @@ export const Add_HotelOps = async (data) => {
 
 ////////////////////////////////////////////// Vendor Payout
 
-export const Get_Vendor = async (data) => {
+export const Get_Vendor_API = async (data) => {
   return await API.post("/daybook/get_vendor_payout/", {
     from_date: data.prevMonth,
     to_date: data.yesterdate,
@@ -103,17 +105,18 @@ export const Get_Vendor = async (data) => {
   });
 };
 
-export const Add_Vendor = async (dataa) => {
+export const Add_Vendor_API = async (dataa) => {
   return await API.post("/daybook/add_vendor_payout/", dataa, {
     withCredentials: true,
     headers: {
       "X-CSRFToken": getCookie("csrftoken"),
-      "Content-Type": "multipart/form-data", // 👈 add this
+      "Content-Type": "multipart/form-data",
     },
-    transformRequest: [(data) => data], // 👈 bypass JSON transform
+    transformRequest: [(data) => data], //  bypass JSON transform
   });
 };
 
+//////////////////////////////////////////////// salary
 export const Get_Salary = async (data) => {
   return await API.post("/daybook/get_salary/", {
     from_date: data.prevMonth,

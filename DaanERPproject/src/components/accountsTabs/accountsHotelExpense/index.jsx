@@ -9,6 +9,7 @@ import {
   gethotelOpsSub_Category,
 } from "../../../redux/hotelOpsExpenseSlice";
 import LoadingItem from "../../Elements/Loading";
+import ErrorPage from "../../Elements/Error";
 
 const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
   const [form, setForm] = useState({
@@ -20,15 +21,9 @@ const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
 
   const dispatch = useDispatch();
 
-  const {
-    items,
-    loading,
-    error,
-    category,
-    categoryError,
-    sub_category,
-    subCategoryError,
-  } = useSelector((state) => state.hotelOps);
+  const { items, loading, error, category, sub_category } = useSelector(
+    (state) => state.hotelOps,
+  );
 
   const onCategoryChange = (e) => {
     const selected = category.find((i) => i.id === Number(e.target.value));
@@ -40,7 +35,7 @@ const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
     const selected = sub_category.find((i) => i.id === Number(e.target.value));
     setForm({
       ...form,
-      sub_category: selected?.sub_category, // 👈 name
+      sub_category: selected?.sub_category,
     });
   };
 
@@ -58,14 +53,17 @@ const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
   ];
 
   useEffect(() => {
-    console.log("my hot form", form);
     dispatch(gethotelOpsData(form));
     dispatch(gethotelOpsCategory());
   }, [form, trigger, dispatch]);
 
-  // if (loading) {
-  //   return <LoadingItem></LoadingItem>;
-  // }
+  if (loading) {
+    return <LoadingItem></LoadingItem>;
+  }
+
+  if (error) {
+    return <ErrorPage></ErrorPage>;
+  }
 
   return (
     <div>
