@@ -3,6 +3,7 @@ import FormItems from "../Elements/formItems";
 import "./style.css";
 import { Edit_Budget } from "../../api/accountsServices";
 import Button from "../Elements/button";
+import { IsSuper } from "../../utils";
 
 const BudgetEdit = ({
   setEdit,
@@ -54,7 +55,7 @@ const BudgetEdit = ({
           onChange={onChange}
           name="category"
           value={form.category}
-        ></FormItems>{" "}
+        ></FormItems>
         <FormItems
           type="text"
           labelData={"Subcategory"}
@@ -74,6 +75,8 @@ const BudgetEdit = ({
           labelData={"Budget Amt"}
           name="budget_amount"
           onChange={onChange}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
           value={form.budget_amount}
         ></FormItems>
         <FormItems
@@ -82,6 +85,8 @@ const BudgetEdit = ({
           name="actual_amount"
           onChange={onChange}
           value={form.actual_amount}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={IsSuper() === false}
         ></FormItems>
         <Button onClick={onSubmit} child={"Submit"}></Button>
       </div>

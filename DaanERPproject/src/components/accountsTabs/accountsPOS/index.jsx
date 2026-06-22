@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Get_Budget_CatSub } from "../../../api/accountsServices";
 import CustomParagraph from "../../Elements/customParagraph";
+import { IsStaff, IsSuper } from "../../../utils";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(null);
@@ -57,9 +58,15 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
           <Button
             className={open === 1 && "active-btn"}
             onClick={() => setOpen(open === 1 ? null : 1)}
+            style={{
+              display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+            }}
             child={"New Category +"}
           ></Button>
           <Button
+            style={{
+              display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+            }}
             className={open === 2 && "active-btn"}
             onClick={() => setOpen(open === 2 ? null : 2)}
             child={"New Subcategory +"}
@@ -179,7 +186,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             </>
           }
         ></CustomParagraph>
-
+        {/* <span style={{height:"2px"}}>_</span> */}
         {loading ? (
           <LoadingItem></LoadingItem>
         ) : geterror ? (

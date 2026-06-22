@@ -10,7 +10,7 @@ import {
   getDailyLogCategory,
 } from "../../redux/dailyLogSlice";
 
-const AccountsDailyAdd = () => {
+const AccountsDailyAdd = ({ setOpen }) => {
   const [selectedCat, setSelectedCat] = useState({});
   const [selectedSub, setSelectedSub] = useState("");
   const [data, setData] = useState({
@@ -78,6 +78,10 @@ const AccountsDailyAdd = () => {
 
   return (
     <div className="add-account-main">
+      <h4>
+        Add new DailyLog
+        <i onClick={() => setOpen(null)} class="fa-regular fa-circle-xmark"></i>
+      </h4>
       <form action="" onSubmit={() => dispatch(addDailyLogThunk(data))}>
         <FormItems
           labelData={"Date"}

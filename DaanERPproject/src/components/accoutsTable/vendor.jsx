@@ -3,6 +3,7 @@ import { API } from "../../utils/axios";
 import "./style.css";
 import { IsStaff, IsSuper } from "../../utils";
 import VendorEdit from "../accountsEdit/vendorEdit";
+import { deleteAccount } from "../../api/accountsServices";
 
 const AccountsVendor = ({ vendor }) => {
   // const [vendor, setVendor] = useState([]);
@@ -51,12 +52,17 @@ const AccountsVendor = ({ vendor }) => {
                 <td>
                   <i
                     onClick={() => setEdit(index)}
+                    style={{
+                      display: `${IsStaff() === true ? "none" : ""}`,
+                    }}
                     class="fa fa-edit"
                     aria-hidden="true"
-                  ></i>{" "}
+                  ></i>
                   <br />
                   <i
-                    // onClick={() => Delete(i.id)}
+                    onClick={() =>
+                      deleteAccount("/daybook/delete_vendor_payout/", item.id)
+                    }
                     style={{
                       display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
                     }}
@@ -64,7 +70,7 @@ const AccountsVendor = ({ vendor }) => {
                     aria-hidden="true"
                   ></i>
                 </td>
-              </tr>{" "}
+              </tr>
               {edit === index && (
                 <VendorEdit
                   _id={item.id}

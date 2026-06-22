@@ -44,10 +44,6 @@ const AccountsVendorAdd = ({ setOpen }) => {
 
     const formData = new FormData();
 
-    // Object.keys(data).forEach((key) => {
-    //   formData.append(key, data[key]);
-    // });
-
     formData.append("amount", data.amount);
     formData.append("bill_no", data.bill_no);
     formData.append("date", data.date);
@@ -57,8 +53,8 @@ const AccountsVendorAdd = ({ setOpen }) => {
     formData.append("payment_date", data.payment_date);
     formData.append("remarks", data.remarks);
     formData.append("hotel", data.hotel);
-    console.log("FINAL file:", data.file_path);
-    console.log("isFile:", data.file_path instanceof File);
+    // console.log("FINAL file:", data.file_path);
+    // console.log("isFile:", data.file_path instanceof File);
 
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
@@ -67,9 +63,6 @@ const AccountsVendorAdd = ({ setOpen }) => {
     dispatch(add_vendor_thunk(formData));
   };
 
-  useEffect(() => {
-    console.log("my data", data);
-  }, [data]);
 
   return (
     <div className="add-account-main">

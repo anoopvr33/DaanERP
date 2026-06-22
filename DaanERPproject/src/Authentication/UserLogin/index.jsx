@@ -23,8 +23,6 @@ const UserLogin = () => {
         },
       });
 
-      console.log("mylog res", response);
-
       if (response.data.hotel) {
         localStorage.setItem("hotel", JSON.stringify(response.data.hotel));
         localStorage.setItem(
@@ -35,6 +33,9 @@ const UserLogin = () => {
           "isStaff",
           JSON.stringify(response.data.is_staff ? true : false),
         );
+        if (response.data.is_staff === true) {
+          return navigate("/Booking/?index=2");
+        }
         navigate("/");
       } else {
         throw new Error("something wrong");

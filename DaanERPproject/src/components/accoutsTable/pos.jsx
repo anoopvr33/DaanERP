@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./style.css";
 import { IsStaff, IsSuper } from "../../utils";
 import BudgetEdit from "../accountsEdit/budgetEdit";
+import { deleteAccount } from "../../api/accountsServices";
 
 const AccountsPos = ({ data }) => {
   const [edit, setEdit] = useState(null);
@@ -26,7 +27,7 @@ const AccountsPos = ({ data }) => {
           <>
             {data?.data
               .map((item, index) => (
-                <>
+                <Fragment key={index}>
                   <tr className="accounts-row">
                     <td>{item.sub_category}</td>
                     <td>{item.hotel ? item.hotel : "_"}</td>
@@ -35,12 +36,17 @@ const AccountsPos = ({ data }) => {
                     <td>
                       <i
                         onClick={() => setEdit(index)}
+                        style={{
+                          display: `${IsStaff() === true ? "none" : ""}`,
+                        }}
                         class="fa fa-edit"
                         aria-hidden="true"
-                      ></i>{" "}
+                      ></i>
                       <br />
                       <i
-                        // onClick={() => Delete(i.id)}
+                        onClick={() =>
+                          deleteAccount("/daybook/delete_budget/", item.id)
+                        }
                         style={{
                           display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
                         }}
@@ -60,7 +66,7 @@ const AccountsPos = ({ data }) => {
                       setEdit={setEdit}
                     ></BudgetEdit>
                   )}
-                </>
+                </Fragment>
               ))
               .reverse()}
             <tr>

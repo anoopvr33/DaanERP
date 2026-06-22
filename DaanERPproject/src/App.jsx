@@ -9,6 +9,7 @@ import Accounts from "./pages/accounts";
 import Reports from "./pages/reports";
 import Payment from "./pages/payment";
 import Employee from "./pages/employee";
+import ProtectedRoute from "./components/Elements/ProtectedRoute";
 
 function App() {
   return (
@@ -17,17 +18,21 @@ function App() {
 
       <Routes>
         <Route path="/login" element={<UserLogin />}></Route>
-        <Route
-          path="/"
-          element={<Navigate to="/dashboard?index=1" replace />}
-        />
-        <Route path="/dashboard" element={<Dashboard />}></Route>
+
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/"
+            element={<Navigate to="/dashboard?index=1" replace />}
+          />
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/reports" element={<Reports />}></Route>
+          <Route path="/payment" element={<Payment />}></Route>
+          <Route path="/employees" element={<Employee />}></Route>
+        </Route>
+
         <Route path="/customer" element={<Customer />}></Route>
         <Route path="/booking" element={<Booking />}></Route>
         <Route path="/accounts" element={<Accounts />}></Route>
-        <Route path="/reports" element={<Reports />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
-        <Route path="/employees" element={<Employee />}></Route>
       </Routes>
     </div>
   );

@@ -11,6 +11,15 @@ const credentials = {
 //       date: dateset,
 //     });
 
+export const deleteAccount = async (URL, _id) => {
+  const confirmed = window.confirm("Are you sure want to delete this data?");
+
+  if (!confirmed) return;
+  return await API.post(URL, { id: _id })
+    .then((res) => alert(res.data.status))
+    .catch((err) => alert(err));
+};
+
 export const CreateBudgetAPI = async (form) => {
   return await API.post("/daybook/create_budget/", form, credentials);
 };

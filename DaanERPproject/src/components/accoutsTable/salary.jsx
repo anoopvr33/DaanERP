@@ -4,7 +4,7 @@ import "./style.css";
 import { IsStaff, IsSuper } from "../../utils";
 import VendorEdit from "../accountsEdit/vendorEdit";
 import SalaryEdit from "../accountsEdit/salaryEdit";
-import { Get_Salary } from "../../api/accountsServices";
+import { deleteAccount, Get_Salary } from "../../api/accountsServices";
 
 const AccountsSalary = ({
   yesterdate,
@@ -37,7 +37,6 @@ const AccountsSalary = ({
         <th>Name</th>
         <th>Departmemt</th>
         <th>Hotel</th>
-        {/* <th>Vendor Name</th> */}
         <th>DOJ</th>
         <th>Basic Salary</th>
         <th>Month Days</th>
@@ -46,7 +45,6 @@ const AccountsSalary = ({
         <th>Salary Advance</th>
         <th>Net Salary</th>
         <th>Action</th>
-        {/* <th>Invoice</th>  */}
       </tr>
 
       <tbody>
@@ -66,13 +64,18 @@ const AccountsSalary = ({
                 <td>{item.net_salary}</td>
                 <td>
                   <i
+                    style={{
+                      display: `${IsStaff() === true ? "none" : ""}`,
+                    }}
                     onClick={() => setEdit(index)}
                     class="fa fa-edit"
                     aria-hidden="true"
                   ></i>{" "}
                   <br />
                   <i
-                    // onClick={() => Delete(i.id)}
+                    onClick={() =>
+                      deleteAccount("/daybook/delete_salary/", item.id)
+                    }
                     style={{
                       display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
                     }}
@@ -101,8 +104,7 @@ const AccountsSalary = ({
           ))
         ) : (
           <tr>
-            {" "}
-            <td colSpan={9}> Empty Data </td>{" "}
+            <td colSpan={9}> Empty Data </td>
           </tr>
         )}
       </tbody>

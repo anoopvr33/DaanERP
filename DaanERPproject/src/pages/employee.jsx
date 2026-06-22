@@ -18,12 +18,6 @@ const Employee = () => {
   const [loading] = useState(false);
   const [error] = useState(false);
 
-  const onFilter = () => {
-    console.log("jjkkkjk", data);
-
-    // dispatch(getBookingData(data));
-  };
-
   useEffect(() => {
     // dispatch(getBookingData(data));
   }, []);
@@ -53,7 +47,7 @@ const Employee = () => {
                 className="custom-multi-select"
               ></Filter>
 
-              <Button onClick={onFilter} child={"Filter"}></Button>
+              <Button onClick={{}} child={"Filter"}></Button>
               <Button
                 onClick={() => setOpen(!open)}
                 className={"booking-add"}

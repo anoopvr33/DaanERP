@@ -3,6 +3,7 @@ import FormItems from "../Elements/formItems";
 import "./style.css";
 import { Edit_Salary } from "../../api/accountsServices";
 import Button from "../Elements/button";
+import { IsSuper } from "../../utils";
 
 const SalaryEdit = ({
   setEdit,
@@ -91,6 +92,8 @@ const SalaryEdit = ({
           name="basic_salary"
           value={form.basic_salary}
           onChange={onChange}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -113,6 +116,8 @@ const SalaryEdit = ({
           name="earning_salary"
           value={form.earning_salary}
           onChange={onChange}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -120,6 +125,8 @@ const SalaryEdit = ({
           name="salary_advance"
           value={form.salary_advance}
           onChange={onChange}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
 
         <FormItems
@@ -128,6 +135,8 @@ const SalaryEdit = ({
           name="net_salary"
           value={form.net_salary}
           onChange={onChange}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <Button onClick={onSubmit} child={"submit"}></Button>
       </div>

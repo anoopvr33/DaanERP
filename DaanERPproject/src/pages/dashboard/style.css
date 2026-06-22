@@ -3,7 +3,9 @@
   flex-direction: column;
   height: 100vh;
 }
-
+.dashboard .elements{
+  /* margin-bottom: 0px; */
+}
 .dashboard .flex {
   display: flex;
   justify-content: start;
