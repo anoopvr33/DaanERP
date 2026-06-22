@@ -9,36 +9,24 @@
 .dash-result div {
   width: 100%;
   height: 100px;
-  /* background-image: url("/download.jpg");
-  background-position: end;
-  background-repeat: no-repeat;
-  background-size: cover; */
   background: hsl(0, 0%, 100%);
-  /* border: 1px solid #b1d2d7; */
-  box-shadow: 0px 8px 6px rgba(8, 97, 79, 0.052);
-  /* border-bottom: 3px solid #026e7e; */
+  box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.052);
   display: flex;
-  /* flex-direction: column; */
   align-items: start;
   justify-content: start;
   padding: 20px;
   border-radius: 10px;
   gap: 15px;
   transition: 0.6s;
-  /* border: 1px solid hsl(243, 37%, 52%); */
-  /* border-bottom: 3px solid #00667b; */
   color: #00b19c;
 }
 .dash-result div:hover {
   background-color: #004e5d;
   border-bottom: 5px solid #36dc84;
-  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.229); */
-
   color: rgb(54, 220, 132);
 }
 .dash-result h1 {
   font-size: 25px;
-  /* margin-top: 0px; */
   color: #026e7e;
 }
 .dash-result div:hover h1 {
@@ -51,18 +39,9 @@
   height: 55px;
   place-content: center;
   border-radius: 5px;
-  /* padding: 20px; */
-  /* flex-shrink: 0; */
-  /* color: rgb(54, 220, 132); */
 }
 
-.dash-result div:nth-child(even) {
-  /* background: white; */
-}
 .dash-result div:hover {
   transform: translateY(-6px);
   transition: 0.3s;
-
-  /* color: rgb(255, 255, 255); */
-  /* background: hsl(243, 37%, 52%); */
 }

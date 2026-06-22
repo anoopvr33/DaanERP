@@ -35,7 +35,7 @@ const AccountsPosAdd = ({ formdate, setOpen }) => {
   // assign category and fetch subcategory
   const setCategoryValue = async (e) => {
     if (!e) return;
-    const catValue = category.find((i) => i.id == e.target.value || {});
+    const catValue = category.find((i) => i.id == e.target.value);
     setData({
       ...data,
       category: catValue?.category ? catValue.category : "",
@@ -80,7 +80,13 @@ const AccountsPosAdd = ({ formdate, setOpen }) => {
         Add new Budget
         <i onClick={() => setOpen(null)} class="fa-regular fa-circle-xmark"></i>
       </h4>
-      <form action="" onSubmit={() => dispatch(addBudgetThunk(data))}>
+      <form
+        action=""
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(addBudgetThunk(data));
+        }}
+      >
         <FormItems
           labelData={"Date"}
           onChange={OnInput}

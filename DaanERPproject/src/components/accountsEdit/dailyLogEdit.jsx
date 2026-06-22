@@ -3,6 +3,7 @@ import FormItems from "../Elements/formItems";
 import "./style.css";
 import Button from "../Elements/button";
 import { Edit_DailyLog } from "../../api/accountsServices";
+import { IsSuper } from "../../utils";
 
 const DailyLogEdit = ({
   setEdit,
@@ -74,6 +75,8 @@ const DailyLogEdit = ({
           name="receipts"
           onChange={onChange}
           value={form.receipts}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -81,6 +84,8 @@ const DailyLogEdit = ({
           name="payments"
           onChange={onChange}
           value={form.payments}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -88,6 +93,8 @@ const DailyLogEdit = ({
           name="balance"
           onChange={onChange}
           value={form.balance}
+          readOnly={IsSuper() === false}
+          className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="text"

@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
-import { useDispatch } from "react-redux";
-import { addBookingThunk } from "../../redux/bookingSlice";
-import axios from "axios";
 import { API } from "../../utils/axios";
 
 const AccountsHotelAdd = ({ formdate }) => {
@@ -14,7 +11,6 @@ const AccountsHotelAdd = ({ formdate }) => {
     details: "",
     remarks: "",
   });
-  const dispatch = useDispatch();
 
   const OnInput = (e) => {
     const { name, value } = e.target;
@@ -24,18 +20,11 @@ const AccountsHotelAdd = ({ formdate }) => {
   const OnSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("hotel data", data);
-
     const response = await API.post("/daybook/add_hotelops/", data);
-    console.log("add res", response);
     if (response.data.msg) {
       alert("success");
     }
   };
-
-  useEffect(() => {
-    console.log("my data", data);
-  }, [data]);
 
   return (
     <div className="add-account-main">

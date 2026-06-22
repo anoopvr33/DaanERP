@@ -7,6 +7,7 @@ import Button from "../../Elements/button";
 import AccountsSalary from "../../accoutsTable/salary";
 import AddSalary from "../../accountAddComponents/salary";
 import CustomParagraph from "../../Elements/customParagraph";
+import { IsStaff, IsSuper } from "../../../utils";
 
 const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(null);
@@ -22,6 +23,9 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
         ></FormItems>
 
         <i
+         style={{
+                              display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                            }}
           onClick={() => setOpen(open == 2 ? null : 2)}
           class="fa fa-plus"
           aria-hidden="true"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IsStaff, IsSuper } from "../../utils";
 import "./style.css";
 import DailyLogEdit from "../accountsEdit/dailyLogEdit";
+import { deleteAccount } from "../../api/accountsServices";
 
 const AccountsTable = ({ data }) => {
   const [edit, setEdit] = useState(null);
@@ -39,12 +40,17 @@ const AccountsTable = ({ data }) => {
                   <td>
                     <i
                       onClick={() => setEdit(index)}
+                      style={{
+                        display: `${IsStaff() === true ? "none" : ""}`,
+                      }}
                       class="fa fa-edit"
                       aria-hidden="true"
                     ></i>{" "}
                     <br />
                     <i
-                      // onClick={() => Delete(i.id)}
+                      onClick={() =>
+                        deleteAccount("/daybook/delete_daybook_log/", item.id)
+                      }
                       style={{
                         display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
                       }}

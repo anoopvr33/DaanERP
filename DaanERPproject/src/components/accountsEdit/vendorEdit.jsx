@@ -3,6 +3,7 @@ import FormItems from "../Elements/formItems";
 import "./style.css";
 import { Edit_Vendor } from "../../api/accountsServices";
 import Button from "../Elements/button";
+import { IsSuper } from "../../utils";
 
 const VendorEdit = ({
   setEdit,
@@ -72,6 +73,8 @@ const VendorEdit = ({
           name="amount"
           value={form.amount}
           onChange={onChange}
+            readOnly={IsSuper() === false}
+                    className={`${IsSuper() === false ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="text"

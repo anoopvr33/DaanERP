@@ -12,6 +12,7 @@ import {
   getDailyLogData,
 } from "../../../redux/dailyLogSlice";
 import CustomParagraph from "../../Elements/customParagraph";
+import { IsStaff, IsSuper } from "../../../utils";
 
 const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(null);
@@ -46,12 +47,18 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
     <div>
       <div className="flex-1">
         <Button
+          style={{
+            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+          }}
           className={open === 1 && "active-btn"}
           onClick={() => setOpen(open === 1 ? null : 1)}
           child={"New Category +"}
         ></Button>
         <Button
           className={open === 2 && "active-btn"}
+          style={{
+            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+          }}
           onClick={() => {
             setOpen(open === 2 ? null : 2);
             dispatch(getDailyLogCategory());
@@ -78,7 +85,12 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
           className={"add-dailylog"}
         />
       </div>
-      {open === 4 && <AccountsDailyAdd formdate={dateset}></AccountsDailyAdd>}
+      {open === 4 && (
+        <AccountsDailyAdd
+          setOpen={setOpen}
+          formdate={dateset}
+        ></AccountsDailyAdd>
+      )}
       {open === 1 && (
         <div style={{ width: "fit-content" }} className="add-account-main">
           <h4>

@@ -39,7 +39,6 @@ const AddSalary = ({ setOpen }) => {
           // "Content-Type": "multipart/form-data", // 👈 add this
         },
       });
-      console.log("salary", response);
       if (response.data) {
         alert("success");
       } else alert("something went wrong");
