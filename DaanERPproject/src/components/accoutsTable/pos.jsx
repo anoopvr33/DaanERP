@@ -59,6 +59,7 @@ const AccountsPos = ({ data }) => {
                     <BudgetEdit
                       _id={item.id}
                       hotel={item.hotel}
+
                       category={data.category}
                       sub_cat={item.sub_category}
                       budget={item.budget_amount}

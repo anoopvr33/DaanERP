@@ -6,72 +6,75 @@ import AccHotelExpense from "./accountsHotelExpense";
 import AccVendor from "./accountsVendor";
 import AccSalary from "./accountSalary";
 import { IsStaff } from "../../utils";
+import { useLocation } from "react-router-dom";
 
 const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
-  const [tab, setTab] = useState(IsStaff() ? 1 : 0);
-  const [open, setOpen] = useState(false);
-
-  const POS = {
-    borderRadius: "20px 20px 0px 0px",
-    background: tab == 0 && "    hsl(0, 0%, 100%)",
-    color: tab == 0 && "#004e5d",
-    borderBottomRightRadius: tab - 1 == 0 && "20px",
-    borderBottomLeftRadius: tab + 1 == 0 && "20px",
-  };
+  const { hash } = useLocation();
+  // const hash = location.hash ? location.hash.slice(1) : null;
+  const loc = hash ? Number(hash.replace("#tab", "")) : 0;
 
   const Daily = {
     borderRadius: "20px 20px 0px 0px",
+    background: (loc == 0 || !loc) && "    hsl(0, 0%, 100%)",
+    color: (loc == 0 || !loc) && "#004e5d",
+    borderBottomRightRadius: loc - 1 == 0 && "20px",
+    borderBottomLeftRadius: loc + 1 == 0 && "20px",
+  };
 
-    background: tab == 1 && "    hsl(0, 0%, 100%)",
-    color: tab == 1 && "#004e5d",
-    borderBottomLeftRadius: tab + 1 == 1 && "20px",
-    borderBottomRightRadius: tab - 1 == 1 && "20px",
+  const POS = {
+    borderRadius: "20px 20px 0px 0px",
+
+    background: loc == 1 && "    hsl(0, 0%, 100%)",
+    color: loc == 1 && "#004e5d",
+    borderBottomLeftRadius: loc + 1 == 1 && "20px",
+    borderBottomRightRadius: loc - 1 == 1 && "20px",
   };
 
   const Hotel = {
     borderRadius: "20px 20px 0px 0px",
-    background: tab == 2 && "   hsl(0, 0%, 100%)",
-    color: tab == 2 && "#004e5d",
-    borderBottomLeftRadius: tab + 1 == 2 && "20px",
-    borderBottomRightRadius: tab - 1 == 2 && "20px",
+    background: loc == 2 && "   hsl(0, 0%, 100%)",
+    color: loc == 2 && "#004e5d",
+    borderBottomLeftRadius: loc + 1 == 2 && "20px",
+    borderBottomRightRadius: loc - 1 == 2 && "20px",
   };
 
   const Vendor = {
     borderRadius: "20px 20px 0px 0px",
-    background: tab == 3 && "  hsl(0, 0%, 100%)",
-    color: tab == 3 && "#004e5d",
-    borderBottomLeftRadius: tab + 1 == 3 && "20px",
-    borderBottomRightRadius: tab - 1 == 3 && "20px",
+    background: loc == 3 && "  hsl(0, 0%, 100%)",
+    color: loc == 3 && "#004e5d",
+    borderBottomLeftRadius: loc + 1 == 3 && "20px",
+    borderBottomRightRadius: loc - 1 == 3 && "20px",
   };
 
   const Salary = {
     borderRadius: "20px 20px 0px 0px",
-    background: tab == 4 && "  hsl(0, 0%, 100%)",
-    color: tab == 4 && "#004e5d",
-    borderBottomLeftRadius: tab + 1 == 4 && "20px",
-    borderBottomRightRadius: tab - 1 == 4 && "20px",
+    background: loc == 4 && "  hsl(0, 0%, 100%)",
+    color: loc == 4 && "#004e5d",
+    borderBottomLeftRadius: loc + 1 == 4 && "20px",
+    borderBottomRightRadius: loc - 1 == 4 && "20px",
   };
 
   const None = {
     borderRadius: "20px 20px 0px 0px",
     background: "transparent",
-    borderBottomLeftRadius: tab + 1 == 5 && "20px",
-    borderBottomRightRadius: tab - 1 == 5 && "20px",
+    borderBottomLeftRadius: loc + 1 == 5 && "20px",
+    borderBottomRightRadius: loc - 1 == 5 && "20px",
   };
 
   const TabArray = [
     {
       id: 0,
-      name: !IsStaff() && " Budget Actual",
-      link: "pos",
-      style: POS,
-    },
-    {
-      id: 1,
       name: "Daily Log Book",
       link: "daily",
       style: Daily,
     },
+    {
+      id: 1,
+      name: !IsStaff() && " Budget Actual",
+      link: "pos",
+      style: POS,
+    },
+
     {
       id: 2,
       name: !IsStaff() && "Hotel Ops Expense",
@@ -104,28 +107,24 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
         {TabArray.map((item, index) => (
           <p
             style={{
-              borderBottomLeftRadius: tab + 1 === index ? "20px" : "0px",
-              borderBottomRightRadius: tab - 1 === index ? "20px" : "0px",
+              userSelect: "none",
+              borderBottomLeftRadius: loc + 1 === index ? "20px" : "0px",
+              borderBottomRightRadius: loc - 1 === index ? "20px" : "0px",
             }}
-            onClick={() => IsStaff() || setTab(index)}
+            aria-disabled
+            onClick={() => {
+              IsStaff() === true ? "" : (window.location.href = `#tab${index}`);
+            }}
           >
             <text style={item?.style}>{item?.name}</text>
           </p>
         ))}
       </div>
       <div
-        style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
+        style={{ borderRadius: (loc === 0 || !loc) && "0px 20px 20px 20px" }}
         className="acc-tabs-container"
       >
-        {tab === 0 && !IsStaff() && (
-          <AccPOS
-            trigger={trigger}
-            prevMonth={prevMonth}
-            dateset={dateset}
-            hotels={hotels}
-          ></AccPOS>
-        )}
-        {tab === 1 && (
+        {(loc === 0 || !loc) && (
           <AccDailyLog
             trigger={trigger}
             dateset={dateset}
@@ -133,14 +132,22 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
             hotels={hotels}
           ></AccDailyLog>
         )}
-        {tab === 2 && !IsStaff() && (
+        {loc === 1 && !IsStaff() && (
+          <AccPOS
+            trigger={trigger}
+            prevMonth={prevMonth}
+            dateset={dateset}
+            hotels={hotels}
+          />
+        )}
+        {loc === 2 && !IsStaff() && (
           <AccHotelExpense
             trigger={trigger}
             dateset={dateset}
             prevMonth={prevMonth}
           ></AccHotelExpense>
         )}
-        {tab === 3 && !IsStaff() && (
+        {loc === 3 && !IsStaff() && (
           <AccVendor
             prevMonth={prevMonth}
             dateset={dateset}
@@ -149,7 +156,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
             hotels={hotels}
           ></AccVendor>
         )}
-        {tab === 4 && !IsStaff() && (
+        {loc === 4 && !IsStaff() && (
           <AccSalary
             trigger={trigger}
             yesterdate={dateset}

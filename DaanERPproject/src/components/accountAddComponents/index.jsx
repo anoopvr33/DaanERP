@@ -82,7 +82,13 @@ const AccountsDailyAdd = ({ setOpen }) => {
         Add new DailyLog
         <i onClick={() => setOpen(null)} class="fa-regular fa-circle-xmark"></i>
       </h4>
-      <form action="" onSubmit={() => dispatch(addDailyLogThunk(data))}>
+      <form
+        action=""
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(addDailyLogThunk(data));
+        }}
+      >
         <FormItems
           labelData={"Date"}
           type="date"
@@ -95,7 +101,7 @@ const AccountsDailyAdd = ({ setOpen }) => {
             setData({ ...data, receipts: Number(e.target.value) })
           }
           labelData={"receipts"}
-          type="number"
+          type="text"
           name={"receipts"}
           required
         ></FormItems>
