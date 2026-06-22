@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import FormItems from "../Elements/formItems";
 import "./style.css";
+import { Edit_Budget } from "../../api/accountsServices";
+import Button from "../Elements/button";
 
-const BudgetEdit = ({ setEdit }) => {
+const BudgetEdit = ({
+  setEdit,
+  _id,
+  hotel,
+  category,
+  sub_cat,
+  budget,
+  actual,
+}) => {
+  const [form, setForm] = useState({
+    id: _id,
+    // date: "2026-06-15",
+    hotel: hotel,
+    category: category,
+    sub_category: sub_cat,
+    budget_amount: budget,
+    actual_amount: actual,
+  });
+
+  const onChange = (e) => {
+    if (!e) return;
+
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const onSubmit = async () => {
+    await Edit_Budget(form)
+      .then((res) => {
+        alert(res?.data?.message);
+      })
+      .catch((err) => alert(err));
+  };
+
   return (
     <div className="account-edit">
       <i
@@ -10,34 +45,45 @@ const BudgetEdit = ({ setEdit }) => {
         style={{ margin: "auto", marginRight: "0px" }}
         class="fa-regular fa-circle-xmark"
       ></i>
-      {<h2>Edit Booking</h2>}
-      {/* <p>Customer : {customer}</p> */}
-      <p>Booking ID :</p> <br />
+      <h2>Edit Budget</h2>
+      <p> ID :{_id}</p> <br />
       <div>
         <FormItems
           type="text"
-          labelData={"subCategory"}
-          name="sub_category"
-          value={"jas"}
+          labelData={"Category"}
+          onChange={onChange}
+          name="category"
+          value={form.category}
         ></FormItems>{" "}
+        <FormItems
+          type="text"
+          labelData={"Subcategory"}
+          onChange={onChange}
+          name="sub_category"
+          value={form.sub_category}
+        ></FormItems>
         <FormItems
           type="text"
           labelData={"Hotel"}
-          name="Hotel"
-          value={"jas"}
-        ></FormItems>{" "}
+          name="hotel"
+          onChange={onChange}
+          value={form.hotel}
+        ></FormItems>
         <FormItems
-          type="text"
+          type="number"
           labelData={"Budget Amt"}
-          name="Budget Amt"
-          value={"jas"}
-        ></FormItems>{" "}
+          name="budget_amount"
+          onChange={onChange}
+          value={form.budget_amount}
+        ></FormItems>
         <FormItems
-          type="text"
+          type="number"
           labelData={"Actual Amt"}
-          name="Actual Amt"
-          value={"jas"}
-        ></FormItems>{" "}
+          name="actual_amount"
+          onChange={onChange}
+          value={form.actual_amount}
+        ></FormItems>
+        <Button onClick={onSubmit} child={"Submit"}></Button>
       </div>
     </div>
   );

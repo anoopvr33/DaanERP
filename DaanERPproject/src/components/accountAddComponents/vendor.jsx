@@ -3,13 +3,11 @@ import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
 import { useDispatch } from "react-redux";
-import { addBookingThunk } from "../../redux/bookingSlice";
-import axios from "axios";
-import { API, getCookie } from "../../utils/axios";
+import { API } from "../../utils/axios";
 import { Hotels } from "../../utils";
 import { add_vendor_thunk } from "../../redux/vendorSlice";
 
-const AccountsVendorAdd = ({ formdate }) => {
+const AccountsVendorAdd = ({ setOpen }) => {
   const [data, setData] = useState({
     name: " ",
     date: "",
@@ -75,85 +73,84 @@ const AccountsVendorAdd = ({ formdate }) => {
 
   return (
     <div className="add-account-main">
+      <h4>
+        Add new Vendor
+        <i
+          onClick={() => setOpen(false)}
+          class="fa-regular fa-circle-xmark"
+        ></i>
+      </h4>
       <form action="" onSubmit={OnSubmit}>
-        <label htmlFor="">
-          <p>Name</p>
-          <FormItems onChange={OnInput} name={"name"}></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>date</p>
-          <FormItems
-            // element="select"
-            // option={["select", "IN", "EX"]}
-            onChange={OnInput}
-            type="date"
-            name={"date"}
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>bill_no</p>
-          <FormItems
-            onChange={OnInput}
-            type="text"
-            name={"bill_no"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>amount</p>
-          <FormItems
-            onChange={OnInput}
-            type="text"
-            name={"amount"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>remarks</p>
-          <FormItems
-            onChange={OnInput}
-            type="text"
-            name={"remarks"}
-            required
-          ></FormItems>
-        </label>{" "}
-        <label htmlFor="">
-          <p>payment_date</p>
-          <FormItems
-            onChange={OnInput}
-            type="date"
-            name={"payment_date"}
-            required
-          ></FormItems>
-        </label>{" "}
-        <label htmlFor="">
-          <p>due_date</p>
-          <FormItems
-            onChange={OnInput}
-            type="date"
-            name={"due_date"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>file_path</p>
-          <FormItems
-            onChange={OnInput}
-            type="file"
-            name={"file_path"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Select Hotel</p>
-          <FormItems
-            onChange={OnInput}
-            element="select"
-            option={["select hotel", ...Hotels()]}
-            name={"hotel"}
-            required
-          ></FormItems>
-        </label>
+        <FormItems
+          labelData={"Name"}
+          onChange={OnInput}
+          name={"name"}
+        ></FormItems>
+
+        <FormItems
+          labelData={"date"}
+          onChange={OnInput}
+          type="date"
+          name={"date"}
+        ></FormItems>
+
+        <FormItems
+          labelData={"bill_no"}
+          onChange={OnInput}
+          type="text"
+          name={"bill_no"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"amount"}
+          onChange={OnInput}
+          type="text"
+          name={"amount"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"remarks"}
+          onChange={OnInput}
+          type="text"
+          name={"remarks"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"payment_date"}
+          onChange={OnInput}
+          type="date"
+          name={"payment_date"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"due_date"}
+          onChange={OnInput}
+          type="date"
+          name={"due_date"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"file_path"}
+          onChange={OnInput}
+          type="file"
+          name={"file_path"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"Select Hotel"}
+          onChange={OnInput}
+          element="select"
+          option={["select hotel", ...Hotels()]}
+          name={"hotel"}
+          required
+        ></FormItems>
+
         <Button type={"submit"} child={"Add Details"}></Button>
       </form>
     </div>

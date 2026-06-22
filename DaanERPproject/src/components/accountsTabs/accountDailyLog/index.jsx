@@ -11,6 +11,7 @@ import {
   getDailyLogCategory,
   getDailyLogData,
 } from "../../../redux/dailyLogSlice";
+import CustomParagraph from "../../Elements/customParagraph";
 
 const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(null);
@@ -45,10 +46,12 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
     <div>
       <div className="flex-1">
         <Button
+          className={open === 1 && "active-btn"}
           onClick={() => setOpen(open === 1 ? null : 1)}
           child={"New Category +"}
         ></Button>
         <Button
+          className={open === 2 && "active-btn"}
           onClick={() => {
             setOpen(open === 2 ? null : 2);
             dispatch(getDailyLogCategory());
@@ -57,6 +60,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
         ></Button>
 
         <Button
+          className={open === 3 && "active-btn"}
           onClick={() => {
             setOpen(open === 3 ? null : 3);
             dispatch(getDailyLogCate_Sub());
@@ -77,6 +81,13 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
       {open === 4 && <AccountsDailyAdd formdate={dateset}></AccountsDailyAdd>}
       {open === 1 && (
         <div style={{ width: "fit-content" }} className="add-account-main">
+          <h4>
+            Add new category
+            <i
+              onClick={() => setOpen(null)}
+              class="fa-regular fa-circle-xmark"
+            ></i>
+          </h4>
           <form action="">
             <FormItems
               onChange={(e) => setNewcat(e.target.value)}
@@ -94,6 +105,13 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
       )}
       {open === 2 && (
         <div style={{ width: "fit-content" }} className="add-account-main">
+          <h4>
+            Add new subcategory
+            <i
+              onClick={() => setOpen(null)}
+              class="fa-regular fa-circle-xmark"
+            ></i>
+          </h4>
           <form action="">
             <FormItems
               element="select"
@@ -131,7 +149,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
           }}
           className="add-account-main"
         >
-          <h1>Category & Subcategory</h1>
+          <h3>Category & Subcategory</h3>
           <br />
           <div>
             {Object.entries(catsub).map(([key, values]) => (
@@ -151,12 +169,15 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
           </div>
         </div>
       )}
-
-      <p>
-        <br />
-        <b>Date : </b> {dateset}
-      </p>
       <br />
+      <CustomParagraph
+        child={
+          <>
+            <b>Date: </b> {dateset}
+          </>
+        }
+      ></CustomParagraph>
+
       <AccountsTable data={items}></AccountsTable>
     </div>
   );

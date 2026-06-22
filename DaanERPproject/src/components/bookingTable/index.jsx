@@ -236,7 +236,11 @@ const BookingTable = ({ status, setPage, page }) => {
                             Hotel Code <span>{i.hotel_code}</span>
                           </b>
                         </p>
-
+  <p>
+                          <b>
+                            Hotel Name <span>{i.hotel_name}</span>
+                          </b>
+                        </p>
                         <p>
                           <b>
                             pah

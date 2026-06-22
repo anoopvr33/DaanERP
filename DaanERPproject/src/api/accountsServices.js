@@ -15,6 +15,10 @@ export const CreateBudgetAPI = async (form) => {
   return await API.post("/daybook/create_budget/", form, credentials);
 };
 
+export const Edit_Budget = async (data) => {
+  return await API.post("/daybook/update_budget/", data, credentials);
+};
+
 export const Get_Budget_CatSub = async () => {
   return await API.get("/daybook/get_budget_catsub/");
 };
@@ -48,6 +52,10 @@ export const GetBudgetSub_Category = async (data) => {
 ///////////////////////////////////////////////////////// daily log
 export const Get_DailyLog = async (data) => {
   return await API.post("daybook/get_daybook_log/", data);
+};
+
+export const Edit_DailyLog = async (data) => {
+  return await API.post("/daybook/update_daybook_log/", data, credentials);
 };
 
 export const Get_DailyLog_CatSub = async () => {
@@ -105,6 +113,10 @@ export const Get_Vendor_API = async (data) => {
   });
 };
 
+export const Edit_Vendor = async (data) => {
+  return await API.post("/daybook/update_vendor_payout/", data, credentials);
+};
+
 export const Add_Vendor_API = async (dataa) => {
   return await API.post("/daybook/add_vendor_payout/", dataa, {
     withCredentials: true,
@@ -124,6 +136,9 @@ export const Get_Salary = async (data) => {
     hotels: data.hotels,
     departmemt: data.department,
   });
+};
+export const Edit_Salary = async (data) => {
+  return await API.post("/daybook/update_salary/", data, credentials);
 };
 
 export const Add_Salary = async (data) => {
