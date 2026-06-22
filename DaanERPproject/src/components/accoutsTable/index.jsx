@@ -4,7 +4,7 @@ import "./style.css";
 import DailyLogEdit from "../accountsEdit/dailyLogEdit";
 
 const AccountsTable = ({ data }) => {
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(null);
 
   return (
     <table className="daan-table">
@@ -22,37 +22,52 @@ const AccountsTable = ({ data }) => {
       </tr>
 
       <tbody>
-        {edit && <DailyLogEdit setEdit={setEdit}></DailyLogEdit>}
         {data.length > 0 ? (
           data
-            .map((item) => (
-              <tr className="accounts-row">
-                <td>{item.date}</td>
-                <td>{item.category}</td>
-                <td>{item.sub_category}</td>
-                <td>{item.bank}</td>
-                <td>{item.description}</td>
-                <td>{item.receipts}</td>
-                <td>{item.payments}</td>
-                <td>{item.balance}</td>
-                <td>{item.hotel}</td>
-                <td>
-                  <i
-                    onClick={() => setEdit(!edit)}
-                    class="fa fa-edit"
-                    aria-hidden="true"
-                  ></i>{" "}
-                  <br />
-                  <i
-                    // onClick={() => Delete(i.id)}
-                    style={{
-                      display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-                    }}
-                    class="fa fa-trash"
-                    aria-hidden="true"
-                  ></i>
-                </td>
-              </tr>
+            .map((item, index) => (
+              <>
+                <tr className="accounts-row">
+                  <td>{item.date}</td>
+                  <td>{item.category}</td>
+                  <td>{item.sub_category}</td>
+                  <td>{item.bank}</td>
+                  <td>{item.description}</td>
+                  <td>{item.receipts}</td>
+                  <td>{item.payments}</td>
+                  <td>{item.balance}</td>
+                  <td>{item.hotel}</td>
+                  <td>
+                    <i
+                      onClick={() => setEdit(index)}
+                      class="fa fa-edit"
+                      aria-hidden="true"
+                    ></i>{" "}
+                    <br />
+                    <i
+                      // onClick={() => Delete(i.id)}
+                      style={{
+                        display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                      }}
+                      class="fa fa-trash"
+                      aria-hidden="true"
+                    ></i>
+                  </td>
+                </tr>
+                {edit === index && (
+                  <DailyLogEdit
+                    _id={item.id}
+                    category={item.category}
+                    sub_cat={item.sub_category}
+                    receipt={item.receipts}
+                    payment={item.payments}
+                    balance={item.balance}
+                    hotel={item.hotel}
+                    desc={item.description}
+                    bank={item.bank}
+                    setEdit={setEdit}
+                  ></DailyLogEdit>
+                )}
+              </>
             ))
             .reverse()
         ) : (

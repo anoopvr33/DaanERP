@@ -4,6 +4,7 @@ import AccountsVendor from "../../accoutsTable/vendor";
 import Button from "../../Elements/button";
 import { get_vendor_thunk } from "../../../redux/vendorSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CustomParagraph from "../../Elements/customParagraph";
 
 const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(false);
@@ -25,18 +26,23 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
   return (
     <div>
       <div className="flex-1">
-        <p>
-          <br />
-          <b>Date : </b> {dateset}
-        </p>
         <Button
           onClick={() => setOpen(!open)}
           className={"add-dailylog"}
           child={"New Vendor +"}
         ></Button>
       </div>
-      {open && <AccountsVendorAdd></AccountsVendorAdd>}
+
+      {open && <AccountsVendorAdd setOpen={setOpen}></AccountsVendorAdd>}
       <br />
+      <CustomParagraph
+        child={
+          <>
+            {" "}
+            <b>Date : </b> {dateset}
+          </>
+        }
+      ></CustomParagraph>
       <AccountsVendor vendor={items}></AccountsVendor>
     </div>
   );

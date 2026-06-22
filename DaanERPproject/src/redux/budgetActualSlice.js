@@ -91,7 +91,6 @@ const budgetSlice = createSlice({
     adderror: null,
     geterror: null,
     category: [],
-
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -100,7 +99,6 @@ const budgetSlice = createSlice({
         state.loading = true;
       })
       .addCase(addBudgetThunk.fulfilled, (state) => {
-        // state.items = action.payload;
         state.loading = false;
         toast.success("Successfully added");
       })
@@ -154,11 +152,10 @@ const budgetSlice = createSlice({
         toast.error(action.geterror);
       });
 
-    builder
-      .addCase(getBudgetCategory.fulfilled, (state, action) => {
-        state.category = action.payload;
-        state.catgoryLoading = false;
-      })
+    builder.addCase(getBudgetCategory.fulfilled, (state, action) => {
+      state.category = action.payload;
+      state.catgoryLoading = false;
+    });
   },
 });
 

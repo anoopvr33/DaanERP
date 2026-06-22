@@ -10,19 +10,9 @@ const AccountsHotel = ({ data }) => {
       <tr>
         <th>Category</th>
         <th>Sum of payments</th>
-
-        {/* {head.map((i) => (
-          <th key={i}>{i}</th>
-        ))} */}
       </tr>
 
       <tbody>
-      
-        {/* <td>1</td>
-        <td>rent</td>
-        <td>344</td>
-        <td>Expense</td>
-        <td>null</td> */}
         {data?.data?.length > 0 ? (
           <>
             {data?.data?.map((item) => (
@@ -36,8 +26,7 @@ const AccountsHotel = ({ data }) => {
                 <b>Grand Total</b>
               </td>
               <td>
-                {" "}
-                <b>{data?.grand_total}</b>{" "}
+                <b>{data?.grand_total}</b>
               </td>
             </tr>
           </>

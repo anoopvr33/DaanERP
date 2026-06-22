@@ -49,7 +49,7 @@ const Dashboard = () => {
   }, [hotelData, trigger]);
 
   return (
-    <div className="dashboard">
+    <div className="dashboard daan">
       <div className="flex common-flex">
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">

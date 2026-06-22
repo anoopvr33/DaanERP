@@ -10,6 +10,7 @@ import BankTransferTab from "./bank_transfer";
 import OutstandingTab from "./out_standing";
 import ComplementaryTab from "./complementary";
 import PaymentLink from "./paymentLink";
+// import AnimatedBarWidthExample from "./paymentGraph";
 
 const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const [tab, setTab] = useState(0);

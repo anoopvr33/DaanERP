@@ -4,7 +4,7 @@ import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import { Hotels } from "../../utils/index";
 
-const AddSalary = () => {
+const AddSalary = ({ setOpen }) => {
   const [form, setForm] = useState({
     date: "",
     name: "",
@@ -50,105 +50,100 @@ const AddSalary = () => {
 
   return (
     <div className="add-account-main">
+      <h4>
+        Add new Budget
+        <i onClick={() => setOpen(null)} class="fa-regular fa-circle-xmark"></i>
+      </h4>
       <form action="" onSubmit={OnSubmit}>
-        <label htmlFor="">
-          <p>date</p>
-          <FormItems
-            // element="select"
-            // option={["select", "IN", "EX"]}
-            onChange={OnInput}
-            type="date"
-            name={"date"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>Name</p>
-          <FormItems required onChange={OnInput} name={"name"}></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>department</p>
-          <FormItems
-            onChange={OnInput}
-            option={["select Department", "Housekeeping"]}
-            element="select"
-            name={"department"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>hotel</p>
-          <FormItems
-            onChange={OnInput}
-            element="select"
-            option={["select hotel", ...Hotels()]}
-            name={"hotel"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>doj</p>
-          <FormItems
-            onChange={OnInput}
-            type="date"
-            name={"doj"}
-            required
-          ></FormItems>
-        </label>{" "}
-        <label htmlFor="">
-          <p>basic_salary</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"basic_salary"}
-            required
-          ></FormItems>
-        </label>{" "}
-        <label htmlFor="">
-          <p>month_days</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"month_days"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>working_days</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"working_days"}
-            required
-          ></FormItems>
-        </label>
-        <label htmlFor="">
-          <p>earning_salary</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"earning_salary"}
-            required
-          ></FormItems>
-        </label>{" "}
-        <label htmlFor="">
-          <p>salary_advance</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"salary_advance"}
-            required
-          ></FormItems>
-        </label>{" "}
-        <label htmlFor="">
-          <p>net_salary</p>
-          <FormItems
-            onChange={OnInput}
-            type="number"
-            name={"net_salary"}
-            required
-          ></FormItems>
-        </label>
+        <FormItems
+          labelData={"date"}
+          onChange={OnInput}
+          type="date"
+          name={"date"}
+          required
+        ></FormItems>
+
+        <FormItems
+          required
+          labelData={"Name"}
+          onChange={OnInput}
+          name={"name"}
+        ></FormItems>
+
+        <FormItems
+          labelData={"department"}
+          onChange={OnInput}
+          option={["select Department", "Housekeeping"]}
+          element="select"
+          name={"department"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"hotel"}
+          onChange={OnInput}
+          element="select"
+          option={["select hotel", ...Hotels()]}
+          name={"hotel"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"doj"}
+          onChange={OnInput}
+          type="date"
+          name={"doj"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"basic_salary"}
+          onChange={OnInput}
+          type="number"
+          name={"basic_salary"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"month_days"}
+          onChange={OnInput}
+          type="number"
+          name={"month_days"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"working_days"}
+          onChange={OnInput}
+          type="number"
+          name={"working_days"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"earning_salary"}
+          onChange={OnInput}
+          type="number"
+          name={"earning_salary"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"salary_advance"}
+          onChange={OnInput}
+          type="number"
+          name={"salary_advance"}
+          required
+        ></FormItems>
+
+        <FormItems
+          labelData={"net_salary"}
+          onChange={OnInput}
+          type="number"
+          name={"net_salary"}
+          required
+        ></FormItems>
+
         <Button type={"submit"} child={"Add Details"}></Button>
       </form>
     </div>

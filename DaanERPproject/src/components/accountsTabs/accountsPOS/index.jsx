@@ -14,6 +14,7 @@ import {
 } from "../../../redux/budgetActualSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Get_Budget_CatSub } from "../../../api/accountsServices";
+import CustomParagraph from "../../Elements/customParagraph";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(null);
@@ -81,9 +82,16 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             child={"New Budget +"}
           />
         </div>
-        {open === 4 && <AccountsPosAdd type={"IN"} formdate={dateset} />}
+        {open === 4 && <AccountsPosAdd setOpen={setOpen} formdate={dateset} />}
         {open === 1 && (
           <div style={{ width: "fit-content" }} className="add-account-main">
+            <h4>
+              Add new category
+              <i
+                onClick={() => setOpen(null)}
+                class="fa-regular fa-circle-xmark"
+              ></i>
+            </h4>
             <form action="">
               <FormItems
                 onChange={(e) => setNewCat(e.target.value)}
@@ -100,6 +108,13 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         )}
         {open === 2 && (
           <div style={{ width: "fit-content" }} className="add-account-main">
+            <h4>
+              Add new subcategory
+              <i
+                onClick={() => setOpen(null)}
+                class="fa-regular fa-circle-xmark"
+              ></i>
+            </h4>
             <form action="">
               <FormItems
                 onChange={(e) =>
@@ -138,7 +153,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             }}
             className="add-account-main"
           >
-            <h2>Category and Subcategory</h2> <br />
+            <h3>Category and Subcategory</h3> <br />
             {Object.entries(catSub).map(([key, values]) => (
               <div key={key}>
                 <h4 style={{ textDecoration: "underline" }}>{key}</h4>
@@ -157,10 +172,14 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         )}
 
         <br />
-        <p>
-          <b>Date</b>: {dateset}
-        </p>
-        <br />
+        <CustomParagraph
+          child={
+            <>
+              <b>Date</b>: {dateset}
+            </>
+          }
+        ></CustomParagraph>
+
         {loading ? (
           <LoadingItem></LoadingItem>
         ) : geterror ? (

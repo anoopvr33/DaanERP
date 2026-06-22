@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import {
+  Add_DailyLog,
   Add_DailyLog_CategoryAPI,
   Add_DailyLog_SubCategory,
   AddBudget_Category,
@@ -13,11 +14,11 @@ import {
   GetBudgetAPI,
 } from "../api/accountsServices";
 
-export const addBudgetThunk = createAsyncThunk(
+export const addDailyLogThunk = createAsyncThunk(
   "dailylog/additem",
   async (data, thunkAPI) => {
     try {
-      const res = await CreateBudgetAPI(data);
+      const res = await Add_DailyLog(data);
       if (res?.data?.status === "success") return res.data;
       return thunkAPI.rejectWithValue(
         res?.data?.status || "something went wrong",
@@ -33,7 +34,6 @@ export const addDailyLog_CategoryThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await Add_DailyLog_CategoryAPI(data);
-      console.log("cat add error", res);
       if (res?.data?.id) return res.data.message;
       return thunkAPI.rejectWithValue(
         res?.data?.status || "something went wrong",
@@ -120,15 +120,15 @@ const dailyLogSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addBudgetThunk.pending, (state) => {
+      .addCase(addDailyLogThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addBudgetThunk.fulfilled, (state) => {
+      .addCase(addDailyLogThunk.fulfilled, (state) => {
         // state.items = action.payload;
         state.loading = false;
         toast.success("Successfully added");
       })
-      .addCase(addBudgetThunk.rejected, (state, action) => {
+      .addCase(addDailyLogThunk.rejected, (state, action) => {
         state.loading = false;
         state.adderror = action.error;
         toast.error("Error occured");

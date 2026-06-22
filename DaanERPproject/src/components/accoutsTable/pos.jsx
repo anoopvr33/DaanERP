@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./style.css";
 import { IsStaff, IsSuper } from "../../utils";
 import BudgetEdit from "../accountsEdit/budgetEdit";
 
-const AccountsPos = ({ data, type }) => {
-  const head = data.length > 0 ? Object.keys(data[0]) : [];
-
-  const [edit, setEdit] = useState(false);
-  // if (data.length === 0) {
-  //   return <p>Loading...</p>;
-
-  // }
-  useEffect(() => {
-    console.log("daa", data);
-  }, [data]);
+const AccountsPos = ({ data }) => {
+  const [edit, setEdit] = useState(null);
 
   return (
     <table
@@ -31,34 +22,45 @@ const AccountsPos = ({ data, type }) => {
       </thead>
 
       <tbody>
-        {edit && <BudgetEdit setEdit={setEdit}></BudgetEdit>}
-
         {data.data.length > 0 ? (
           <>
-            {data.data
-              .map((item) => (
-                <tr className="accounts-row">
-                  <td>{item.sub_category}</td>
-                  <td>{item.hotel ? item.hotel : "_"}</td>
-                  <td>{item.budget_amount}</td>
-                  <td>{item.actual_amount}</td>
-                  <td>
-                    <i
-                      onClick={() => setEdit(!edit)}
-                      class="fa fa-edit"
-                      aria-hidden="true"
-                    ></i>{" "}
-                    <br />
-                    <i
-                      // onClick={() => Delete(i.id)}
-                      style={{
-                        display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-                      }}
-                      class="fa fa-trash"
-                      aria-hidden="true"
-                    ></i>
-                  </td>
-                </tr>
+            {data?.data
+              .map((item, index) => (
+                <>
+                  <tr className="accounts-row">
+                    <td>{item.sub_category}</td>
+                    <td>{item.hotel ? item.hotel : "_"}</td>
+                    <td>{item.budget_amount}</td>
+                    <td>{item.actual_amount}</td>
+                    <td>
+                      <i
+                        onClick={() => setEdit(index)}
+                        class="fa fa-edit"
+                        aria-hidden="true"
+                      ></i>{" "}
+                      <br />
+                      <i
+                        // onClick={() => Delete(i.id)}
+                        style={{
+                          display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                        }}
+                        class="fa fa-trash"
+                        aria-hidden="true"
+                      ></i>
+                    </td>
+                  </tr>
+                  {edit === index && (
+                    <BudgetEdit
+                      _id={item.id}
+                      hotel={item.hotel}
+                      category={data.category}
+                      sub_cat={item.sub_category}
+                      budget={item.budget_amount}
+                      actual={item.actual_amount}
+                      setEdit={setEdit}
+                    ></BudgetEdit>
+                  )}
+                </>
               ))
               .reverse()}
             <tr>
