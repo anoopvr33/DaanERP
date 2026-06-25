@@ -192,7 +192,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         ) : geterror ? (
           <ErrorPage></ErrorPage>
         ) : items?.length > 0 ? (
-          items?.map((i) => <AccountsPos data={i} />)
+          items?.map((i) => <AccountsPos  data={i} />)
         ) : (
           <p style={{ textAlign: "center", margin: "10px 10px" }}>Empty Data</p>
         )}

@@ -6,7 +6,7 @@ export const FormattedMonths = () => {
   yesterday.setDate(today.getDate() - 1);
 
   // Same date previous month
-  const prevMonth = new Date(today);
+  const prevMonth = new Date(yesterday);
   prevMonth.setMonth(today.getMonth() - 1);
 
   // Format function
