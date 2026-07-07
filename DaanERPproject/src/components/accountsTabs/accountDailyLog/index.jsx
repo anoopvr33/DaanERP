@@ -108,7 +108,10 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
 
             <Button
               child={"Add"}
-              onClick={() => dispatch(addDailyLog_CategoryThunk(newcat))}
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(addDailyLog_CategoryThunk(newcat));
+              }}
             >
               Add
             </Button>
@@ -142,7 +145,10 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
 
             <Button
               child={"Add"}
-              onClick={() => dispatch(addDailySub_CategoryThunk(subcat))}
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(addDailySub_CategoryThunk(subcat));
+              }}
             ></Button>
           </form>
         </div>

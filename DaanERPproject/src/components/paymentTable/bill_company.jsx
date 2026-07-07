@@ -7,7 +7,6 @@ const BillCompany = ({ result }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
   const [page, setPage] = useState(1);
 
-  console.log("rsssult", result);
 
   const { paginatedData, totalPages } = Pageination(result, page);
 

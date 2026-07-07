@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";
 import "./style.css";
-import { Edit_Budget } from "../../api/accountsServices";
+import {
+  Edit_Budget,
+  GetBudget_CategoryAPI,
+  GetBudgetSub_Category,
+} from "../../api/accountsServices";
 import Button from "../Elements/button";
-import { IsSuper } from "../../utils";
+import { Hotels, IsSuper } from "../../utils";
 
 const BudgetEdit = ({
   setEdit,
@@ -14,6 +18,7 @@ const BudgetEdit = ({
   budget,
   actual,
 }) => {
+  const [categoryyy, setCategory] = useState([]);
   const [form, setForm] = useState({
     id: _id,
     // date: "2026-06-15",
@@ -23,6 +28,7 @@ const BudgetEdit = ({
     budget_amount: budget,
     actual_amount: actual,
   });
+  const [subCat, setSubCat] = useState([{ sub_category: sub_cat }]);
 
   const onChange = (e) => {
     if (!e) return;
@@ -39,6 +45,58 @@ const BudgetEdit = ({
       .catch((err) => alert(err));
   };
 
+  const setCategoryValue = async (e) => {
+
+    if (!e) return;
+    if (e.target.value === "") return;
+    const catValue = categoryyy.find((i) => i.category == e.target.value);
+    setForm({
+      ...form,
+      category: catValue?.category ? catValue.category : "",
+    });
+
+    if (!catValue) return;
+    getSubcat(catValue.id);
+  };
+
+  const getSubcat = async (catValue) => {
+    await GetBudgetSub_Category(catValue).then((res) =>
+      setSubCat(res?.data?.data),
+    );
+  };
+
+  const setSubcategoryValue = (e) => {
+    const subValue = subCat?.find((i) => i.sub_category == e.target.value);
+    setForm({
+      ...form,
+      sub_category: subValue?.sub_category ? subValue.sub_category : "",
+    });
+  };
+
+  const subcategoryOptions = [
+    // { name: sub_cat, value: "" },
+    { name: "Select subcategory", value: "" },
+    ...subCat.map((i) => ({
+      name: i.sub_category,
+      value: i.sub_category,
+    })),
+  ];
+  const categoryOptions = [
+    // { name: category, value: "" },
+    { name: "select Category", value: "" },
+    ...categoryyy.map((i) => ({ name: i.category, value: i.category })),
+  ];
+
+  useEffect(() => {
+    const selecteded = categoryyy.find((i) => i.category === category)?.id;
+    if (!selecteded) return;
+    getSubcat(selecteded);
+  }, [categoryyy]);
+
+  useEffect(() => {
+    GetBudget_CategoryAPI().then((res) => setCategory(res?.data?.data));
+  }, []);
+
   return (
     <div className="account-edit">
       <i
@@ -50,25 +108,34 @@ const BudgetEdit = ({
       <p> ID :{_id}</p> <br />
       <div>
         <FormItems
-          type="text"
           labelData={"Category"}
-          onChange={onChange}
-          name="category"
+          required
+          element="select"
+          onChange={(e) => setCategoryValue(e)}
+          option={categoryOptions}
           value={form.category}
+          // value={form?.category?form.category:"none"}
+          name={"category"}
         ></FormItems>
         <FormItems
+          labelData={"Sub-Category"}
+          onChange={(e) => setSubcategoryValue(e)}
           type="text"
-          labelData={"Subcategory"}
-          onChange={onChange}
-          name="sub_category"
+          name={"sub_category"}
+          element="select"
+          option={subcategoryOptions}
           value={form.sub_category}
+          required
         ></FormItems>
         <FormItems
-          type="text"
           labelData={"Hotel"}
-          name="hotel"
-          onChange={onChange}
+          onChange={(e) => setForm({ ...form, hotel: e.target.value })}
+          option={["Select Hotel", ...Hotels()]}
           value={form.hotel}
+          element="select"
+          type="text"
+          name={"hotel"}
+          required
         ></FormItems>
         <FormItems
           type="number"

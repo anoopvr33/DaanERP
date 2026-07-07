@@ -9,7 +9,6 @@ import ReportCheckout from "../../reportTable/checkout";
 const ReportCheckoutTab = ({ checkout }) => {
   const [open, setOpen] = useState(false);
 
-  console.log("checkout in tab", checkout);
 
   return (
     <div>

@@ -38,9 +38,7 @@ const BookingTable = ({ status, setPage, page }) => {
 
   const { FilterData } = SearchFilter(items, inputValue, status);
 
-  useEffect(() => {
-    console.log("booking data", FilterData);
-  }, [FilterData]);
+;
 
   if (loading && !geterror) {
     return <LoadingItem></LoadingItem>;

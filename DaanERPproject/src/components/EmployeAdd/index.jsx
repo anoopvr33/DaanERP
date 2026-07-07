@@ -33,7 +33,6 @@ const EmployeeAdd = () => {
   const OnSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("add user", data);
 
     const res = await API.post("/main/create_user/", data, {
       withCredentials: true,
@@ -41,7 +40,7 @@ const EmployeeAdd = () => {
         "X-CSRFToken": getCookie("csrftoken"),
       },
     });
-    console.log("user add", res);
+  
     if (res.data.status === "success") {
       alert("successfully added");
     } else alert("something went wrong");
@@ -68,22 +67,13 @@ const EmployeeAdd = () => {
     //   });
   };
 
-  //   username
-  // email
-  // is_superuser
-  // is_active
-  // hotel_name
-
-  useEffect(() => {
-    console.log("my data", data);
-  }, [data]);
+  
 
   useEffect(() => {
     const hotels = Hotels();
     if (hotels?.length === 0 || !hotels) {
       navigate("/login");
     }
-    console.log("hotelsss", hotels);
 
     if (hotels && hotels.length > 0) {
       const formatted = hotels.map((i) => ({

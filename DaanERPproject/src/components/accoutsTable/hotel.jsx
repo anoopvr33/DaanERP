@@ -3,7 +3,7 @@ import "./style.css";
 const AccountsHotel = ({ data }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
-  console.log("my hotels ops", data);
+  // console.log("my hotels ops", data);
 
   return (
     <table style={{ width: "700px" }} className="daan-table">

@@ -23,9 +23,9 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
         ></FormItems>
 
         <i
-         style={{
-                              display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-                            }}
+          style={{
+            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+          }}
           onClick={() => setOpen(open == 2 ? null : 2)}
           class="fa fa-plus"
           aria-hidden="true"
@@ -51,15 +51,12 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
             ></i>
           </h4>
           <form action="">
-            <FormItems
-              // onChange={(e) => setNewCat(e.target.value)}
-              placeholder={"Enter department"}
-            ></FormItems>
+            <FormItems placeholder={"Enter department"}></FormItems>
             <Button
-              onClick={
-                () => ""
-                // dispatch(addBudgetCategoryThunk({ budget_category: newCat }))
-              }
+              onClick={(e) => {
+                e.preventDefault();
+                alert("currently unavailable");
+              }}
               child={"Add"}
             ></Button>
           </form>

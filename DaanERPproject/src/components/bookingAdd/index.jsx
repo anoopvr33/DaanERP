@@ -116,9 +116,7 @@ const BookingAdd = () => {
     dispatch(addBookingThunk(data));
   };
 
-  useEffect(() => {
-    console.log("my data", data);
-  }, [data]);
+
 
   return (
     <div className="add-book-main">

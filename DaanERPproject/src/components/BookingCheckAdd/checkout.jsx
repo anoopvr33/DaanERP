@@ -72,10 +72,10 @@ const AddBookindCheckOut = ({
   });
 
   const OnSubmit = async () => {
-    console.log("checkout data", data);
+   
     try {
       const response = await AddBooking_CheckOut(data);
-      console.log("checkout respose", response);
+  
 
       if (response.data.success === true) {
         return alert("successfully updated");
@@ -109,10 +109,7 @@ const AddBookindCheckOut = ({
     setData({ ...data, [name]: value });
   };
 
-  useEffect(() => {
-    console.log("checkout console data", data);
-  }, [data]);
-
+ 
   return (
     <div className="booking-check">
       <i

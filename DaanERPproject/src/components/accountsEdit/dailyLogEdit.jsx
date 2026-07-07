@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";
 import "./style.css";
 import Button from "../Elements/button";
 import { Edit_DailyLog } from "../../api/accountsServices";
-import { IsSuper } from "../../utils";
+import { Hotels, IsSuper } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { API } from "../../utils/axios";
+import { getDailyLogCategory } from "../../redux/dailyLogSlice";
 
 const DailyLogEdit = ({
   setEdit,
@@ -29,6 +32,13 @@ const DailyLogEdit = ({
     description: desc,
     bank: bank,
   });
+  const [selectedCat, setSelectedCat] = useState({});
+  const [selectedSub, setSelectedSub] = useState("");
+
+  const [subCat, setSubCat] = useState([{ sub_category: sub_cat }]);
+
+  const dispatch = useDispatch();
+
   const onChange = (e) => {
     if (!e) return;
 
@@ -36,13 +46,74 @@ const DailyLogEdit = ({
     setForm({ ...form, [name]: value });
   };
 
+  const {
+    items,
+    category: statecate,
+    catsub,
+  } = useSelector((state) => state.dailylog);
+
+  const selecteded = statecate.find((i) => i.category === category)?.id;
+
+  const [subId, setSubId] = useState(selecteded);
+
+  const CatOption = [
+    // { name: category, value: "" },
+    { name: "Select Category", value: "" },
+    ...statecate.map((i) => ({
+      name: i.category,
+      value: i.category,
+    })),
+  ];
+
+  const SubCatOption = [
+    // { name: sub_cat, value: "" },
+    { name: "Select SubCategory", value: "" },
+    ...subCat.map((i) => ({
+      name: i.sub_category,
+      value: i.sub_category,
+    })),
+  ];
+  const GetSubCat = async () => {
+    if (subId === null) return;
+
+    const res = await API.post("/daybook/get_subcategories/", {
+      category_id: subId,
+    });
+  
+    setSubCat(res.data.data);
+  };
+
   const onSubmit = async () => {
+    // console.log("my form", form);
     await Edit_DailyLog(form)
       .then((res) => {
         alert(res?.data?.message);
       })
       .catch((err) => alert(err));
   };
+
+  const CatChange = (e) => {
+    const selected = statecate.find((i) => i.category === e.target.value);
+
+    setSelectedCat(selected);
+    setSubId(selected?.id);
+  };
+
+  useEffect(() => {
+    dispatch(getDailyLogCategory());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setForm({ ...form, category: selectedCat?.category });
+  }, [selectedCat]);
+
+  useEffect(() => {
+    setForm({ ...form, sub_category: selectedSub?.sub_category });
+  }, [selectedSub]);
+
+  useEffect(() => {
+    GetSubCat();
+  }, [subId]);
 
   return (
     <div className="account-edit">
@@ -54,20 +125,30 @@ const DailyLogEdit = ({
       {<h2>Edit DailyLog</h2>}
       {/* <p>Customer : {customer}</p> */}
       <p> ID : {_id}</p> <br />
+      {/* <select value={form.category}  name="" id="">
+        <option value="">aa</option>
+        <option value="">avva</option>
+      </select> */}
       <div>
         <FormItems
           type="text"
           labelData={"category"}
           name="category"
-          onChange={onChange}
+          element="select"
+          option={CatOption}
+          onChange={CatChange}
           value={form.category}
         ></FormItems>
         <FormItems
-          type="text"
+          onChange={(e) =>
+            setSelectedSub(subCat.find((i) => i.sub_category == e.target.value))
+          }
+          element="select"
           labelData={"sub_category"}
-          name="sub_category"
-          onChange={onChange}
-          value={form.sub_category}
+          option={SubCatOption}
+          value={form?.sub_category}
+          name={"sub_category"}
+          required
         ></FormItems>
         <FormItems
           type="number"
@@ -100,7 +181,9 @@ const DailyLogEdit = ({
           type="text"
           labelData={"hotel"}
           name="hotel"
-          onChange={onChange}
+          element="select"
+          onChange={(e) => setForm({ ...form, hotel: e.target.value })}
+          option={["Select Hotel", ...Hotels()]}
           value={form.hotel}
         ></FormItems>
         <FormItems

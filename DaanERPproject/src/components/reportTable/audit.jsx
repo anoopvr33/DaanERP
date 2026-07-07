@@ -3,8 +3,6 @@ import "./style.css";
 const ReportAudit = ({ data, yesterday, prevmonth }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
-  console.log("audit data", data);
-
   return (
     <table style={{ width: "600px" }} className="daan-table">
       <tr>
