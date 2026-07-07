@@ -7,12 +7,6 @@ import LoadingItem from "../../Elements/Loading";
 const ReportAuditTab = ({ audit, yesterday, prevmonth, loading }) => {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("maiaajisjdd", audit);
-  }, [audit]);
-
-  console.log("maiamimd", audit);
-
   return (
     <div>
       <div className="flex-1">

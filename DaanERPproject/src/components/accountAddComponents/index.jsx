@@ -97,9 +97,7 @@ const AccountsDailyAdd = ({ setOpen }) => {
         ></FormItems>
 
         <FormItems
-          onChange={(e) =>
-            setData({ ...data, receipts: Number(e.target.value) })
-          }
+          onChange={(e) => setData({ ...data, receipts: e.target.value })}
           labelData={"receipts"}
           type="text"
           name={"receipts"}

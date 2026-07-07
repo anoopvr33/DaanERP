@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
@@ -25,8 +25,6 @@ const AccountsVendorAdd = ({ setOpen }) => {
     const { name, files, value } = e.target;
 
     if (name === "file_path") {
-      console.log("files:", files);
-      console.log("file[0]:", files?.[0]);
       setData((prev) => ({
         ...prev,
         [name]: files[0],
@@ -53,12 +51,10 @@ const AccountsVendorAdd = ({ setOpen }) => {
     formData.append("payment_date", data.payment_date);
     formData.append("remarks", data.remarks);
     formData.append("hotel", data.hotel);
-    // console.log("FINAL file:", data.file_path);
-    // console.log("isFile:", data.file_path instanceof File);
-
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
+  
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
 
     dispatch(add_vendor_thunk(formData));
   };

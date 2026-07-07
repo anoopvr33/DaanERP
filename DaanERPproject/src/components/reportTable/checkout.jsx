@@ -8,8 +8,7 @@ const ReportCheckout = ({ data }) => {
 
   const [page, setPage] = useState(1);
 
-  console.log("account checkout", data);
-
+ 
   const { paginatedData, totalPages } = Pageination(data, page);
 
   return (

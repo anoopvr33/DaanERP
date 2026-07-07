@@ -7,6 +7,8 @@ import { deleteAccount } from "../../api/accountsServices";
 const AccountsTable = ({ data }) => {
   const [edit, setEdit] = useState(null);
 
+  // console.log("my daily log",data)
+
   return (
     <table className="daan-table">
       <tr>

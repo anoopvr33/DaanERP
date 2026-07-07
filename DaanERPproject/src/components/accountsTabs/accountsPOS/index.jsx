@@ -105,9 +105,10 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
                 placeholder={"Enter Category"}
               ></FormItems>
               <Button
-                onClick={() =>
-                  dispatch(addBudgetCategoryThunk({ budget_category: newCat }))
-                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(addBudgetCategoryThunk({ budget_category: newCat }));
+                }}
                 child={"Add"}
               ></Button>
             </form>
@@ -140,7 +141,10 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
                 placeholder={"Enter Subcategory"}
               ></FormItems>
               <Button
-                onClick={() => dispatch(addBudgetSub_CategoryThunk(newSub))}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(addBudgetSub_CategoryThunk(newSub));
+                }}
                 child={"Add"}
               ></Button>
             </form>
@@ -192,7 +196,7 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
         ) : geterror ? (
           <ErrorPage></ErrorPage>
         ) : items?.length > 0 ? (
-          items?.map((i) => <AccountsPos  data={i} />)
+          items?.map((i) => <AccountsPos data={i} />)
         ) : (
           <p style={{ textAlign: "center", margin: "10px 10px" }}>Empty Data</p>
         )}

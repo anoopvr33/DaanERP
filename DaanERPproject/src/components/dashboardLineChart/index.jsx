@@ -1,7 +1,6 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
 export default function MarkOptimization({ data }) {
-  console.log("my line cart", data);
 
   const Occupancy = data?.map((i) => i.occupancy);
 
@@ -39,7 +38,6 @@ export default function MarkOptimization({ data }) {
   // generate ticks
   const yTicks = Array.from({ length: tickCount }, (_, i) => i * niceStep);
 
-  console.log("line occupancy", Occupancy);
 
   return (
     <div

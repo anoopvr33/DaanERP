@@ -10,7 +10,6 @@ const ReportRevenue = ({ data }) => {
 
   const { paginatedData, totalPages } = Pageination(data, page);
 
-  console.log("my daaaaa", data);
 
   return (
     <>

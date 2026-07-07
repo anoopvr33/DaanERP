@@ -26,7 +26,7 @@ const EmployeeTable = () => {
           },
         },
       );
-      console.log("res user", res);
+  
       if (res.data.status === "success") {
         alert("successflly deleted");
         // setItems(res.data);
@@ -44,7 +44,7 @@ const EmployeeTable = () => {
           "X-CSRFToken": getCookie("csrftoken"),
         },
       });
-      console.log("res user", res);
+  
       if (res.data) {
         setItems(res.data);
       } else alert("please login");
@@ -57,10 +57,7 @@ const EmployeeTable = () => {
     GetUsers();
   }, []);
 
-  useEffect(() => {
-    console.log("register", items);
-  }, [items]);
-
+ 
   return (
     <table style={{ width: "900px" }} className="daan-table">
       <tr>

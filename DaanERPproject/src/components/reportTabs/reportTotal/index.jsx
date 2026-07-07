@@ -28,14 +28,8 @@ const ReportTotalTab = ({ formattedDate }) => {
     const response = await API.post("/daybook/get_hotelops/", {
       date: formattedDate,
     });
-    console.log("hotel res", response);
     setData1(response.data.hotelops);
   };
-
-  useEffect(() => {
-    // GetHotel();
-    // eslint(react-hooks/set-state-in-effect)
-  }, [formattedDate]);
 
   return (
     <div>

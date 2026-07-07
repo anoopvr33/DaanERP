@@ -30,7 +30,6 @@ const AddSalary = ({ setOpen }) => {
 
   const OnSubmit = async (e) => {
     e.preventDefault();
-    console.log("salary from", form);
     try {
       const response = await API.post("/daybook/add_salary/", form, {
         withCredentials: true,

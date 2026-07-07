@@ -3,7 +3,7 @@ import FormItems from "../Elements/formItems";
 import "./style.css";
 import { Edit_Salary } from "../../api/accountsServices";
 import Button from "../Elements/button";
-import { IsSuper } from "../../utils";
+import { Hotels, IsSuper } from "../../utils";
 
 const SalaryEdit = ({
   setEdit,
@@ -75,7 +75,9 @@ const SalaryEdit = ({
         <FormItems
           type="text"
           labelData={"hotel"}
+          element="select"
           name="hotel"
+          option={["select hotel", ...Hotels()]}
           value={form.hotel}
           onChange={onChange}
         ></FormItems>

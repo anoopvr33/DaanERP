@@ -99,7 +99,7 @@ const BookingEdit = ({
     // console.log("booking edit data final", data);
     try {
       const response = await EditBookingDataAPI(data, id);
-      console.log("book edit respose", response);
+
 
       if (response.data.success === true) {
         return alert("successfully updated");
