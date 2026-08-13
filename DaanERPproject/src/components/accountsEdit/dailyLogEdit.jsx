@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import FormItems from "../Elements/formItems";
 import "./style.css";
 import Button from "../Elements/button";
@@ -20,25 +20,23 @@ const DailyLogEdit = ({
   desc,
   bank,
 }) => {
-  const [form, setForm] = useState({
-    id: _id,
-    // date: "2026-06-15",
-    category: category,
-    sub_category: sub_cat,
-    receipts: receipt,
-    payments: payment,
-    balance: balance,
-    hotel: hotel,
-    description: desc,
-    bank: bank,
-  });
-  const [selectedCat, setSelectedCat] = useState({});
-  const [selectedSub, setSelectedSub] = useState("");
-
-  const [subCat, setSubCat] = useState([{ sub_category: sub_cat }]);
-
+const [form, setForm] = useState({
+  id: _id,
+  category,
+  sub_category: sub_cat,
+  receipts: receipt,
+  payments: payment,
+  balance,
+  hotel,
+  description: desc,
+  bank,
+});
   const dispatch = useDispatch();
 
+  const [subCat, setSubCat] = useState([{ sub_category: sub_cat }]);
+  const { category: statecate } = useSelector((state) => state.dailylog);
+
+  // input value
   const onChange = (e) => {
     if (!e) return;
 
@@ -46,18 +44,28 @@ const DailyLogEdit = ({
     setForm({ ...form, [name]: value });
   };
 
-  const {
-    items,
-    category: statecate,
-    catsub,
-  } = useSelector((state) => state.dailylog);
+  // submit edited values
+  const onSubmit = async () => {
+    await Edit_DailyLog(form)
+      .then((res) => {
+        alert(res?.data?.message);
+      })
+      .catch((err) => alert(err));
+  };
 
-  const selecteded = statecate.find((i) => i.category === category)?.id;
+  // category input value
+  const CatChange = (e) => {
+    const value = e.target.value;
 
-  const [subId, setSubId] = useState(selecteded);
+    setForm((prev) => ({
+      ...prev,
+      category: value,
+      sub_category: "", // reset only when category changes
+    }));
+  };
 
+  // category & sub_category select options
   const CatOption = [
-    // { name: category, value: "" },
     { name: "Select Category", value: "" },
     ...statecate.map((i) => ({
       name: i.category,
@@ -66,54 +74,44 @@ const DailyLogEdit = ({
   ];
 
   const SubCatOption = [
-    // { name: sub_cat, value: "" },
     { name: "Select SubCategory", value: "" },
     ...subCat.map((i) => ({
       name: i.sub_category,
       value: i.sub_category,
     })),
   ];
-  const GetSubCat = async () => {
-    if (subId === null) return;
 
-    const res = await API.post("/daybook/get_subcategories/", {
-      category_id: subId,
-    });
-  
-    setSubCat(res.data.data);
-  };
+  const subId = useMemo(() => {
+    if (!statecate) return;
+    return statecate.find((i) => i.category === form.category)?.id;
+  }, [form.category, statecate]);
 
-  const onSubmit = async () => {
-    // console.log("my form", form);
-    await Edit_DailyLog(form)
-      .then((res) => {
-        alert(res?.data?.message);
-      })
-      .catch((err) => alert(err));
-  };
+  useEffect(() => {
+    if (!subId) return;
 
-  const CatChange = (e) => {
-    const selected = statecate.find((i) => i.category === e.target.value);
+    const load = async () => {
+      const res = await API.post("/daybook/get_subcategories/", {
+        category_id: subId,
+      });
 
-    setSelectedCat(selected);
-    setSubId(selected?.id);
-  };
+      setSubCat(res.data.data);
+
+      // Keep current subcategory if it exists
+      if (!res.data.data.some((i) => i.sub_category === form.sub_category)) {
+        setForm((prev) => ({
+          ...prev,
+          sub_category: "",
+        }));
+      }
+    };
+
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subId]);
 
   useEffect(() => {
     dispatch(getDailyLogCategory());
   }, [dispatch]);
-
-  useEffect(() => {
-    setForm({ ...form, category: selectedCat?.category });
-  }, [selectedCat]);
-
-  useEffect(() => {
-    setForm({ ...form, sub_category: selectedSub?.sub_category });
-  }, [selectedSub]);
-
-  useEffect(() => {
-    GetSubCat();
-  }, [subId]);
 
   return (
     <div className="account-edit">
@@ -123,12 +121,7 @@ const DailyLogEdit = ({
         class="fa-regular fa-circle-xmark"
       ></i>
       {<h2>Edit DailyLog</h2>}
-      {/* <p>Customer : {customer}</p> */}
       <p> ID : {_id}</p> <br />
-      {/* <select value={form.category}  name="" id="">
-        <option value="">aa</option>
-        <option value="">avva</option>
-      </select> */}
       <div>
         <FormItems
           type="text"
@@ -141,7 +134,10 @@ const DailyLogEdit = ({
         ></FormItems>
         <FormItems
           onChange={(e) =>
-            setSelectedSub(subCat.find((i) => i.sub_category == e.target.value))
+            setForm((prev) => ({
+              ...prev,
+              sub_category: e.target.value,
+            }))
           }
           element="select"
           labelData={"sub_category"}

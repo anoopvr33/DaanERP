@@ -47,6 +47,7 @@ const SalaryEdit = ({
       })
       .catch((err) => alert(err));
   };
+
   return (
     <div className="account-edit">
       <i

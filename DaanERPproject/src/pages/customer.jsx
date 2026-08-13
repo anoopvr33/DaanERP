@@ -114,13 +114,34 @@ const Customer = () => {
             <ErrorPage />
           ) : (
             <>
-              <FormItems
-                onChange={(e) => setCount(e.target.value)}
-                option={Count}
-                element="select"
-                // className={'sort-input'}
-                // labelData={"Sort"}
-              ></FormItems>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  position: "relative",
+                  gap: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    margin: "auto",
+                    marginLeft: "0",
+                    marginBottom: "0px",
+                  }}
+                >
+                  Showing <b>{items?.data?.length}</b> results
+                  {/* of <b>{form?.month || 12}</b> Months */}
+                </p>
+
+                <FormItems
+                  onChange={(e) => setCount(e?.target?.value)}
+                  option={Count}
+                  element="select"
+                  className={"sort-input"}
+                  // labelData={"Sort"}
+                ></FormItems>
+              </div>
+
               <CustomerTable items={items} count={count}></CustomerTable>
             </>
           )}

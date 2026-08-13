@@ -84,7 +84,6 @@ const AccountsPosAdd = ({ formdate, setOpen }) => {
         action=""
         onSubmit={(e) => {
           e.preventDefault();
-     
           dispatch(addBudgetThunk(data));
         }}
       >
