@@ -50,11 +50,11 @@
   /* text-decoration: underline; */
 }
 .dash-prev .sub-1 span {
-  font-size: 150%;
+  font-size: 100%;
   line-break: anywhere;
   /* margin-bottom: 20px; */
   /* padding-bottom: 20px; */
   /* padding: 20px; */
   font-weight: bold;
-  color: #36dc84;
+  color: #00c8a0;
 }

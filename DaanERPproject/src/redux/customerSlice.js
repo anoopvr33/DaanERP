@@ -33,7 +33,7 @@ export const getCustomerData = createAsyncThunk(
     }
   },
 );
-  
+
 const customerSlice = createSlice({
   name: "customer",
   initialState: {

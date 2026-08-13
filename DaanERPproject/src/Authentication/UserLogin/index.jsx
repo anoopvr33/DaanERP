@@ -23,17 +23,17 @@ const UserLogin = () => {
         },
       });
 
-      if (response.data.hotel) {
-        localStorage.setItem("hotel", JSON.stringify(response.data.hotel));
+      if (response?.data?.hotel) {
+        localStorage.setItem("hotel", JSON.stringify(response?.data?.hotel));
         localStorage.setItem(
           "isSuper",
-          JSON.stringify(response.data.is_superuser ? true : false),
+          JSON.stringify(response?.data?.is_superuser ? true : false),
         );
         localStorage.setItem(
           "isStaff",
-          JSON.stringify(response.data.is_staff ? true : false),
+          JSON.stringify(response?.data?.is_staff ? true : false),
         );
-        if (response.data.is_staff === true) {
+        if (response?.data?.is_staff === true) {
           return navigate("/Booking/?index=2");
         }
         navigate("/");

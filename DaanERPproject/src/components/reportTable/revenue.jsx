@@ -6,10 +6,9 @@ import Pagination from "@mui/material/Pagination";
 const ReportRevenue = ({ data }) => {
   const [page, setPage] = useState(1);
 
-  const head = data?.length > 0 ? Object.keys(data[0]) : [];
+  // const head = data?.length > 0 ? Object.keys(data[0]) : [];
 
   const { paginatedData, totalPages } = Pageination(data, page);
-
 
   return (
     <>

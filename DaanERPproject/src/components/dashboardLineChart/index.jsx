@@ -1,7 +1,6 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
 export default function MarkOptimization({ data }) {
-
   const Occupancy = data?.map((i) => i.occupancy);
 
   // last 10 days
@@ -38,13 +37,12 @@ export default function MarkOptimization({ data }) {
   // generate ticks
   const yTicks = Array.from({ length: tickCount }, (_, i) => i * niceStep);
 
-
   return (
     <div
       style={{
         width: "100%",
         height: "320px",
-        backgroundImage: "linear-gradient(to right,  #026e7e, #02151d )",
+        backgroundImage: "linear-gradient(to right,#02151d,  #004e5d  )",
         padding: "10px",
         borderRadius: "20px",
         margin: "0px 0px",

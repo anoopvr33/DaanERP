@@ -46,7 +46,6 @@ const BudgetEdit = ({
   };
 
   const setCategoryValue = async (e) => {
-
     if (!e) return;
     if (e.target.value === "") return;
     const catValue = categoryyy.find((i) => i.category == e.target.value);
@@ -60,9 +59,9 @@ const BudgetEdit = ({
   };
 
   const getSubcat = async (catValue) => {
-    await GetBudgetSub_Category(catValue).then((res) =>
-      setSubCat(res?.data?.data),
-    );
+    await GetBudgetSub_Category(catValue)
+      .then((res) => setSubCat(res?.data?.data))
+      .catch(() => setSubCat([]));
   };
 
   const setSubcategoryValue = (e) => {

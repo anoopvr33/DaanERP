@@ -76,7 +76,7 @@ export default function Chart({ data }) {
       {
         label: "Sales",
         data: data?.slice(0, 6).map((i) => i.sales),
-        backgroundColor: " #5be1a7",
+        backgroundColor: " #00c8a0",
         // textColor: "red",
         barTickness: 30,
         borderRadius: 5,
@@ -91,8 +91,9 @@ export default function Chart({ data }) {
         width: "100%",
         minWidth: "300px",
         height: "320px",
-        backgroundImage: "linear-gradient(to right, #004e5d)",
-        boxShadow: "0px 5px 15px #386f747c",
+        // background-image: linear-gradient(90deg, #004e5d, #026e7e);
+        backgroundImage: "linear-gradient(90deg, #004e5d, #026e7e)",
+        boxShadow: "0px 10px 25px #026d7e69",
         padding: "10px",
         borderRadius: "20px",
         position: "relative",

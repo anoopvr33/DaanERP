@@ -12,10 +12,11 @@ API.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       // Unauthorized
-      console.log("Unauthorized - redirecting");
+      // console.log("Unauthorized - redirecting");
 
       localStorage.removeItem("hotel");
       localStorage.removeItem("isSuper");
+      localStorage.removeItem("isStaff");
 
       // redirect to login
       window.location.href = "/login";

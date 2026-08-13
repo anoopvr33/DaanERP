@@ -88,7 +88,12 @@ const budgetSlice = createSlice({
   initialState: {
     items: [],
     loading: false,
+    addloading: false,
+    catloading: false,
+    subloading: false,
     adderror: null,
+    caterror: null,
+    suberror: null,
     geterror: null,
     category: [],
   },
@@ -96,45 +101,45 @@ const budgetSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addBudgetThunk.pending, (state) => {
-        state.loading = true;
+        state.addloading = true;
       })
       .addCase(addBudgetThunk.fulfilled, (state) => {
-        state.loading = false;
+        state.addloading = false;
         toast.success("Successfully added");
       })
       .addCase(addBudgetThunk.rejected, (state, action) => {
-        state.loading = false;
+        state.addloading = false;
         state.adderror = action.error;
         toast.error("Error occured");
       });
 
     builder
       .addCase(addBudgetCategoryThunk.pending, (state) => {
-        state.loading = true;
+        state.catloading = true;
       })
       .addCase(addBudgetCategoryThunk.fulfilled, (state) => {
         // state.items = action.payload;
-        state.loading = false;
+        state.catloading = false;
         toast.success("Successfully added");
       })
       .addCase(addBudgetCategoryThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.adderror = action.error;
+        state.catloading = false;
+        state.caterror = action.error;
         toast.error("Error occured");
       });
 
     builder
       .addCase(addBudgetSub_CategoryThunk.pending, (state) => {
-        state.loading = true;
+        state.subloading = true;
       })
       .addCase(addBudgetSub_CategoryThunk.fulfilled, (state) => {
         // state.items = action.payload;
-        state.loading = false;
+        state.subloading = false;
         toast.success("Successfully added");
       })
       .addCase(addBudgetSub_CategoryThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.adderror = action.error;
+        state.subloading = false;
+        state.suberror = action.error;
         toast.error("Error occured");
       });
 

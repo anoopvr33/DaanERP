@@ -9,12 +9,12 @@ const CustomerTable = ({ count, items }) => {
   const [page, setPage] = useState(1);
   const [expand, setExpand] = useState({ row: null, open: false });
 
-  const [array] = useState(items.data || []);
+  const [array] = useState(items?.data || []);
 
   const sortedArray = useMemo(() => {
     if (!Array.isArray(array)) return [];
     if (count === "") {
-      return items.data;
+      return items?.data;
     } else if (count === "Less Count") {
       return [...array].sort(
         (a, b) => a.total_booking_counts - b.total_booking_counts,
@@ -48,7 +48,7 @@ const CustomerTable = ({ count, items }) => {
         <tbody>
           {paginatedData?.length > 0 ? (
             paginatedData?.map((i, index) => (
-              <Fragment key={`${i.email}-${i.phone}-${i.last_booking_date}`}>
+              <Fragment key={`${i?.email}-${i?.phone}-${i?.last_booking_date}`}>
                 <tr
                   style={{
                     background: `${expand.row == index && expand.open ? "#f5f5ff" : ""}`,
