@@ -7,6 +7,7 @@ import Filter from "../components/Elements/Filter";
 import ErrorPage from "../components/Elements/Error";
 import LoadingItem from "../components/Elements/Loading";
 import { FormattedMonths } from "../components/Elements/yesterdayDate";
+import Button from "../components/Elements/button";
 
 const Payment = () => {
   const formattedHotels = useMemo(() => formatHotel() || [], []);
@@ -53,6 +54,16 @@ const Payment = () => {
               />
             </div>
           </div>
+          <div style={{ marginBottom: "0" }}>
+            <Button
+              onClick={() =>
+                (window.location.href =
+                  "https://admin.daanregency.com/reports/export_payment_excel/")
+              }
+              child={"Export Excel"}
+            ></Button>{" "}
+          </div>
+
           {loading ? (
             <LoadingItem />
           ) : error ? (

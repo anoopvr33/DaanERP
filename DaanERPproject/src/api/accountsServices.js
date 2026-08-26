@@ -1,16 +1,5 @@
 import { API, getCookie } from "../utils/axios";
 
-const credentials = {
-  withCredentials: true,
-  headers: {
-    "X-CSRFToken": getCookie("csrftoken"),
-  },
-};
-// Get budget --------------------------------------
-// API.post("/daybook/get_budget/", {
-//       date: dateset,
-//     });
-
 export const deleteAccount = async (URL, _id) => {
   const confirmed = window.confirm("Are you sure want to delete this data?");
 
@@ -21,11 +10,11 @@ export const deleteAccount = async (URL, _id) => {
 };
 
 export const CreateBudgetAPI = async (form) => {
-  return await API.post("/daybook/create_budget/", form, credentials);
+  return await API.post("/daybook/create_budget/", form);
 };
 
 export const Edit_Budget = async (data) => {
-  return await API.post("/daybook/update_budget/", data, credentials);
+  return await API.post("/daybook/update_budget/", data);
 };
 
 export const Get_Budget_CatSub = async () => {
@@ -41,15 +30,11 @@ export const GetBudget_CategoryAPI = async () => {
 };
 
 export const AddBudget_Category = async (data) => {
-  return await API.post("/daybook/create_budget_category/", data, credentials);
+  return await API.post("/daybook/create_budget_category/", data);
 };
 
 export const AddBudgetSub_CategoryAPI = async (data) => {
-  return await API.post(
-    "/daybook/create_budget_subcategory/",
-    data,
-    credentials,
-  );
+  return await API.post("/daybook/create_budget_subcategory/", data);
 };
 
 export const GetBudgetSub_Category = async (data) => {
@@ -58,13 +43,61 @@ export const GetBudgetSub_Category = async (data) => {
   });
 };
 
-///////////////////////////////////////////////////////// daily log
+export const Edit_Budget_Category = async (data) => {
+  return await API.post("/daybook/edit_budget_category", data);
+};
+
+export const Delete_Budget_Category = async (data) => {
+  // return await API.post("/daybook/delete_budget_category", data);
+  const confirmed = window.confirm("Are you sure want to delete this data?");
+
+  if (!confirmed) return;
+  return await API.post("/daybook/delete_budget_category/", data)
+    .then((res) => alert(res.data.status))
+    .catch((err) => alert(err));
+};
+
+export const Edit_Budget_SubCategory = async (data) => {
+  return await API.post("/daybook/edit_budget_subcategory", data);
+};
+
+export const Delete_Budget_SubCategory = async (data) => {
+  // return await API.post("/daybook/delete_budget_subcategory", data);
+
+  const confirmed = window.confirm("Are you sure want to delete this data?");
+
+  if (!confirmed) return;
+  return await API.post("/daybook/delete_budget_subcategory/", data)
+    .then((res) => alert(res.data.status))
+    .catch((err) => alert(err));
+};
+
+export const Export_Budget_Excel = async (data) => {
+  if (!data.hotel.length > 0) {
+    return alert("Something went wrong");
+  }
+
+  console.log("daily excel", data);
+
+  await API.post("/daybook/export_budget_excel/", data)
+    .then((res) => {
+      alert(res.data.status);
+      console.log("budget export", res);
+    })
+    .catch((err) => alert(err));
+};
+
+/////////////////////////////////////////////////////////
+
+// ----------------------------------------------------------------------  daily log
+
+//////////////////////////////////////////////////////////////////
 export const Get_DailyLog = async (data) => {
   return await API.post("daybook/get_daybook_log/", data);
 };
 
 export const Edit_DailyLog = async (data) => {
-  return await API.post("/daybook/update_daybook_log/", data, credentials);
+  return await API.post("/daybook/update_daybook_log/", data);
 };
 
 export const Get_DailyLog_CatSub = async () => {
@@ -78,21 +111,50 @@ export const Get_DailyLog_CategoryAPI = async () => {
 export const Add_DailyLog_CategoryAPI = async (data) => {
   console.log("api area categ", data);
 
-  return await API.post(
-    "/daybook/create_category/",
-    {
-      category: data,
-    },
-    credentials,
-  );
+  return await API.post("/daybook/create_category/", {
+    category: data,
+  });
 };
 
 export const Add_DailyLog_SubCategory = async (data) => {
-  return await API.post("/daybook/create_subcategory/", data, credentials);
+  return await API.post("/daybook/create_subcategory/", data);
 };
 
 export const Add_DailyLog = async (data) => {
-  return await API.post("/daybook/add_daybook_log/", data, credentials);
+  return await API.post("/daybook/add_daybook_log/", data);
+};
+
+export const Delete_Daily_Category = async (data) => {
+  const confirmed = window.confirm("Are you sure want to delete this data?");
+
+  if (!confirmed) return;
+  return await API.post("/daybook/delete_category/", data)
+    .then((res) => alert(res.data.status))
+    .catch((err) => alert(err));
+};
+
+export const Delete_Daily_SubCategory = async (data) => {
+  const confirmed = window.confirm("Are you sure want to delete this data?");
+
+  if (!confirmed) return;
+  return await API.post("/daybook/delete_subcategory/", data)
+    .then((res) => alert(res.data.status))
+    .catch((err) => alert(err));
+};
+
+export const Export_Daily_Excel = async (data) => {
+  if (!data.hotel.length > 0) {
+    return alert("Something went wrong");
+  }
+
+  console.log("daily excel", data);
+
+  await API.post("/daybook/export_daybook_log_excel/", data)
+    .then((res) => {
+      alert(res.data.status);
+      console.log("dayly export", res);
+    })
+    .catch((err) => alert(err));
 };
 
 ///////////////////////////////////////// hotel ops
@@ -112,6 +174,21 @@ export const Add_HotelOps = async (data) => {
   return await API.post("/daybook/add_hotelops/", data);
 };
 
+export const Export_Hotel_Excel = async (data) => {
+  if (!data.hotel.length > 0) {
+    return alert("Something went wrong");
+  }
+
+  console.log("daily excel", data);
+
+  await API.post("/daybook/export_hotelexpense_excel/", data)
+    .then((res) => {
+      alert(res.data.status);
+      console.log("budget export", res);
+    })
+    .catch((err) => alert(err));
+};
+
 ////////////////////////////////////////////// Vendor Payout
 
 export const Get_Vendor_API = async (data) => {
@@ -123,7 +200,7 @@ export const Get_Vendor_API = async (data) => {
 };
 
 export const Edit_Vendor = async (data) => {
-  return await API.post("/daybook/update_vendor_payout/", data, credentials);
+  return await API.post("/daybook/update_vendor_payout/", data);
 };
 
 export const Add_Vendor_API = async (dataa) => {
@@ -133,11 +210,28 @@ export const Add_Vendor_API = async (dataa) => {
       "X-CSRFToken": getCookie("csrftoken"),
       "Content-Type": "multipart/form-data",
     },
+
     transformRequest: [(data) => data], //  bypass JSON transform
   });
 };
 
+export const Export_Vendor_Excel = async (data) => {
+  if (!data.hotel.length > 0) {
+    return alert("Something went wrong");
+  }
+
+  console.log("daily excel", data);
+
+  await API.post("/daybook/export_vendor_payout_excel/", data)
+    .then((res) => {
+      alert(res.data.status);
+      console.log("budget export", res);
+    })
+    .catch((err) => alert(err));
+};
+
 //////////////////////////////////////////////// salary
+
 export const Get_Salary = async (data) => {
   return await API.post("/daybook/get_salary/", {
     from_date: data.prevMonth,
@@ -147,15 +241,24 @@ export const Get_Salary = async (data) => {
   });
 };
 export const Edit_Salary = async (data) => {
-  return await API.post("/daybook/update_salary/", data, credentials);
+  return await API.post("/daybook/update_salary/", data);
 };
 
 export const Add_Salary = async (data) => {
-  return await API.post("/daybook/add_salary/", data, {
-    withCredentials: true,
-    headers: {
-      "X-CSRFToken": getCookie("csrftoken"),
-      // "Content-Type": "multipart/form-data", // 👈 add this
-    },
-  });
+  return await API.post("/daybook/add_salary/", data);
+};
+
+export const Export_Salary_Excel = async (data) => {
+  if (!data.hotel.length > 0) {
+    return alert("Something went wrong");
+  }
+
+  console.log("daily excel", data);
+
+  await API.post("/daybook/export_salary_excel/", data)
+    .then((res) => {
+      alert(res.data.status);
+      console.log("budget export", res);
+    })
+    .catch((err) => alert(err));
 };

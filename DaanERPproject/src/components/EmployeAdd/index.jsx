@@ -13,8 +13,8 @@ const EmployeeAdd = () => {
     username: "",
     email: "",
     password: "",
-    is_superuser: null,
-    is_staff: null,
+    is_superuser: false,
+    is_staff: false,
     hotels: [],
   });
 
@@ -33,14 +33,13 @@ const EmployeeAdd = () => {
   const OnSubmit = async (e) => {
     e.preventDefault();
 
-
     const res = await API.post("/main/create_user/", data, {
       withCredentials: true,
       headers: {
         "X-CSRFToken": getCookie("csrftoken"),
       },
     });
-  
+
     if (res.data.status === "success") {
       alert("successfully added");
     } else alert("something went wrong");
@@ -66,8 +65,6 @@ const EmployeeAdd = () => {
     //     console.error("Error:", error);
     //   });
   };
-
-  
 
   useEffect(() => {
     const hotels = Hotels();
@@ -138,7 +135,7 @@ const EmployeeAdd = () => {
           className="custom-multi-select"
         ></Filter>
 
-        <FormItems
+        {/* <FormItems
           required={true}
           labelData={"Is Admin"}
           onChange={(e) =>
@@ -155,9 +152,9 @@ const EmployeeAdd = () => {
             { name: "no", value: false },
           ]}
           name={"is_superuser"}
-        ></FormItems>
+        ></FormItems> */}
 
-        <FormItems
+        {/* <FormItems
           required={true}
           labelData={"Is Staff"}
           onChange={(e) =>
@@ -174,7 +171,49 @@ const EmployeeAdd = () => {
             { name: "no", value: false },
           ]}
           name={"is_staff"}
-        ></FormItems>
+        ></FormItems> */}
+        <FormItems
+          required={true}
+          labelData={"User Role"}
+          onChange={(e) => {
+            const role = e.target.value;
+
+            if (role === "admin") {
+              setData({
+                ...data,
+                is_superuser: true,
+                is_staff: false,
+              });
+            } else if (role === "staff") {
+              setData({
+                ...data,
+                is_superuser: false,
+                is_staff: true,
+              });
+            } else if (role === "manager") {
+              setData({
+                ...data,
+                is_superuser: false,
+                is_staff: false,
+              });
+            } else {
+              setData({
+                ...data,
+                is_superuser: false,
+                is_staff: false,
+              });
+            }
+          }}
+          type="text"
+          element="select"
+          option={[
+            { name: "Select role", value: "" },
+            { name: "Admin", value: "admin" },
+            { name: "Manager", value: "manager" },
+            { name: "Staff", value: "staff" },
+          ]}
+          name={"user_role"}
+        />
 
         <Button type={"submit"} child={"Add Details"}></Button>
       </form>

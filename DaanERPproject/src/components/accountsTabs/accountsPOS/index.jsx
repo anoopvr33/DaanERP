@@ -14,9 +14,14 @@ import {
   getBudgetData,
 } from "../../../redux/budgetActualSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Get_Budget_CatSub } from "../../../api/accountsServices";
+import {
+  Export_Budget_Excel,
+  Get_Budget_CatSub,
+} from "../../../api/accountsServices";
 import CustomParagraph from "../../Elements/customParagraph";
 import { IsStaff, IsSuper } from "../../../utils";
+import BudgetCategoryList from "../budgetCategory";
+import ListBudgetCategory from "../listBudgetCategory";
 
 const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
   const [open, setOpen] = useState(null);
@@ -72,10 +77,9 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             onClick={() => setOpen(open === 2 ? null : 2)}
             child={"New Subcategory +"}
           ></Button>
-
           <Button
-            className={open === 3 && "active-btn"}
-            onClick={() => setOpen(open === 3 ? null : 3)}
+            className={open === 5 && "active-btn"}
+            onClick={() => setOpen(open === 5 ? null : 5)}
             child={
               <>
                 List Categories
@@ -83,7 +87,27 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
               </>
             }
           />
-
+          <Button
+            className={open === 3 && "active-btn"}
+            onClick={() => setOpen(open === 3 ? null : 3)}
+            child={
+              <>
+                List Sub_categories
+                <i class="fa fa-angle-down" aria-hidden="true"></i>{" "}
+              </>
+            }
+          />
+          <Button
+            className={"add-dailylog"}
+            onClick={() =>
+              Export_Budget_Excel({
+                from_date: prevMonth || "",
+                to_date: dateset || "",
+                hotel: hotels || [],
+              })
+            }
+            child={"Export Excel"}
+          ></Button>{" "}
           <Button
             onClick={() => setOpen(open === 4 ? null : 4)}
             className={"add-budget"}
@@ -152,142 +176,11 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
           </div>
         )}
 
+        {open === 5 && (
+          <ListBudgetCategory categories={CatOption}></ListBudgetCategory>
+        )}
         {open === 3 && (
-          // <div
-          //   style={{
-          //     width: "500px",
-          //     height: "fit-content",
-          //     maxHeight: "300px",
-          //     overflowY: "scroll",
-          //     border: "1px solid #d9d9d9",
-          //     borderRadius: "20px",
-          //     padding: "15px",
-          //   }}
-          //   className="add-account-main"
-          // >
-          //   <h3>Category and Subcategory</h3> <br />
-          //   {Object.entries(catSub).map(([key, values]) => (
-          //     <div key={key}>
-          //       <h4 style={{ textDecoration: "underline" }}>{key}</h4>
-          //       <ul style={{ padding: "10px 20px" }}>
-          //         {values.length === 0
-          //           ? "no data"
-          //           : values?.map((sub) => (
-          //               <li style={{ fontSize: "13px" }} key={sub.id}>
-          //                 {sub.sub}
-          //               </li>
-          //             ))}
-          //       </ul>
-          //     </div>
-          //   ))}
-          // </div>
-          <div className="category-manager">
-            <div className="category-manager-header">
-              <div>
-                <h3>Category & Subcategory</h3>
-                <p>Manage your categories and subcategories</p>
-              </div>
-
-              {/* <button className="add-category-btn" onClick={"handleAddCategory"}>
-              + Category
-            </button> */}
-            </div>
-
-            <div className="category-list">
-              {Object.entries(catSub).length === 0 ? (
-                <div className="empty-category">No categories available</div>
-              ) : (
-                Object.entries(catSub).map(([key, values]) => (
-                  <div className="category-card" key={key}>
-                    {/* Category Header */}
-                    <div className="category-header">
-                      <div className="category-info">
-                        <div className="category-icon">
-                          {key.charAt(0).toUpperCase()}
-                        </div>
-
-                        <div>
-                          <h4>{key}</h4>
-                          <span>
-                            {values.length}{" "}
-                            {values.length === 1
-                              ? "subcategory"
-                              : "subcategories"}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="category-actions">
-                        <i
-                          // onClick={() => setEdit(index)}
-                          style={{
-                            display: `${IsStaff() === true ? "none" : ""}`,
-                          }}
-                          class="fa fa-edit"
-                          aria-hidden="true"
-                        ></i>{" "}
-                        <br />
-                        <i
-                          // onClick={() =>
-                          //   deleteAccount("/daybook/delete_daybook_log/", item.id)
-                          // }
-                          style={{
-                            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-                          }}
-                          class="fa fa-trash"
-                          aria-hidden="true"
-                        ></i>
-                      </div>
-                    </div>
-
-                    {/* Subcategories */}
-                    <div className="subcategory-container">
-                      {values.length === 0 ? (
-                        <div className="no-subcategory">No subcategories</div>
-                      ) : (
-                        values.map((sub) => (
-                          <div className="subcategory-item" key={sub.id}>
-                            <div className="subcategory-name">
-                              <span className="subcategory-dot"></span>
-
-                              <span>{sub.sub}</span>
-                            </div>
-
-                            <div className="subcategory-actions">
-                              <i
-                                // onClick={() => setEdit(index)}
-                                style={{
-                                  display: `${IsStaff() === true ? "none" : ""}`,
-                                }}
-                                class="fa fa-edit"
-                                aria-hidden="true"
-                              ></i>{" "}
-                              <br />
-                              <i
-                                // onClick={() =>
-                                //   deleteAccount(
-                                //     "/daybook/delete_daybook_log/",
-                                //     item.id,
-                                //   )
-                                // }
-                                style={{
-                                  display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-                                }}
-                                class="fa fa-trash"
-                                aria-hidden="true"
-                              ></i>
-                            </div>
-                          </div>
-                        ))
-                      )}
-
-                      {/* Add Subcategory */}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+          <BudgetCategoryList catsub={catSub}></BudgetCategoryList>
         )}
 
         <br />
