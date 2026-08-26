@@ -51,7 +51,7 @@ const Employee = () => {
               <Button
                 onClick={() => setOpen(!open)}
                 className={"booking-add"}
-                child={open ? "Close" : "Add"}
+                child={open ? "Close X" : "Add +"}
               ></Button>
             </div>
           </div>

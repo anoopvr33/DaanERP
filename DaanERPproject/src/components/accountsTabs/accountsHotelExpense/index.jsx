@@ -10,6 +10,8 @@ import {
 } from "../../../redux/hotelOpsExpenseSlice";
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
+import { Export_Hotel_Excel } from "../../../api/accountsServices";
+import { Hotels } from "../../../utils";
 
 const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
   const [form, setForm] = useState({
@@ -82,6 +84,17 @@ const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
           onClick={() => dispatch(gethotelOpsData(form))}
           child={"Filter"}
         ></Button>
+        <Button
+          className={"add-dailylog"}
+          onClick={() =>
+            Export_Hotel_Excel({
+              from_date: prevMonth || "",
+              to_date: dateset || "",
+              hotel: Hotels() || [],
+            })
+          }
+          child={"Export Excel"}
+        ></Button>{" "}
       </div>
       <br />
       <AccountsHotel data={items} />

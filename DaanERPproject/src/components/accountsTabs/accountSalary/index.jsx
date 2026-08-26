@@ -8,6 +8,8 @@ import AccountsSalary from "../../accoutsTable/salary";
 import AddSalary from "../../accountAddComponents/salary";
 import CustomParagraph from "../../Elements/customParagraph";
 import { IsStaff, IsSuper } from "../../../utils";
+import DepartmentList from "../departmentList";
+import { Export_Salary_Excel } from "../../../api/accountsServices";
 
 const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(null);
@@ -16,12 +18,27 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
   return (
     <div>
       <div className="flex-1">
+        <Button
+          onClick={() => setOpen(open == 3 ? null : 3)}
+          child={"List Departments"}
+          // className={"add-dailylog"}
+        ></Button>
         <FormItems
           element="select"
           onChange={(e) => setDepartment(e.target.value)}
           option={["select department", "Housekeeping"]}
         ></FormItems>
-
+        <Button
+          className={"add-dailylog"}
+          onClick={() =>
+            Export_Salary_Excel({
+              from_date: prevMonth || "",
+              to_date: yesterdate || "",
+              hotel: hotels || [],
+            })
+          }
+          child={"Export Excel"}
+        ></Button>{" "}
         <i
           style={{
             display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
@@ -40,7 +57,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
       </div>
 
       {open == 1 && <AddSalary setOpen={setOpen}></AddSalary>}
-
+      {open == 3 && <DepartmentList setOpen={setOpen}></DepartmentList>}
       {open === 2 && (
         <div style={{ width: "fit-content" }} className="add-account-main">
           <h4>
@@ -62,6 +79,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
           </form>
         </div>
       )}
+
       <br />
       <CustomParagraph
         child={

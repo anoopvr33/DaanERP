@@ -5,6 +5,7 @@ import Button from "../../Elements/button";
 import { get_vendor_thunk } from "../../../redux/vendorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CustomParagraph from "../../Elements/customParagraph";
+import { Export_Vendor_Excel } from "../../../api/accountsServices";
 
 const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(false);
@@ -28,9 +29,20 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
       <div className="flex-1">
         <Button
           onClick={() => setOpen(!open)}
-          className={"add-dailylog"}
+          className={"add-dailylo"}
           child={"New Vendor +"}
         ></Button>
+        <Button
+          className={"add-dailylo"}
+          onClick={() =>
+            Export_Vendor_Excel({
+              from_date: prevMonth || "",
+              to_date: dateset || "",
+              hotel: hotels || [],
+            })
+          }
+          child={"Export Excel"}
+        ></Button>{" "}
       </div>
 
       {open && <AccountsVendorAdd setOpen={setOpen}></AccountsVendorAdd>}
@@ -38,7 +50,6 @@ const AccVendor = ({ dateset, trigger, prevMonth, hotels }) => {
       <CustomParagraph
         child={
           <>
-            {" "}
             <b>Date : </b> {dateset}
           </>
         }
