@@ -77,14 +77,9 @@ export const Export_Budget_Excel = async (data) => {
     return alert("Something went wrong");
   }
 
-  console.log("daily excel", data);
-
-  await API.post("/daybook/export_budget_excel/", data)
-    .then((res) => {
-      alert(res.data.status);
-      console.log("budget export", res);
-    })
-    .catch((err) => alert(err));
+  window.open(
+    `https://admin.daanregency.com/daybook/export_budget_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}`,
+  );
 };
 
 /////////////////////////////////////////////////////////
@@ -149,12 +144,9 @@ export const Export_Daily_Excel = async (data) => {
 
   console.log("daily excel", data);
 
-  await API.post("/daybook/export_daybook_log_excel/", data)
-    .then((res) => {
-      alert(res.data.status);
-      console.log("dayly export", res);
-    })
-    .catch((err) => alert(err));
+  window.open(
+    `https://admin.daanregency.com/daybook/export_daybook_log_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}`,
+  );
 };
 
 ///////////////////////////////////////// hotel ops
@@ -181,21 +173,18 @@ export const Export_Hotel_Excel = async (data) => {
 
   console.log("daily excel", data);
 
-  await API.post("/daybook/export_hotelexpense_excel/", data)
-    .then((res) => {
-      alert(res.data.status);
-      console.log("budget export", res);
-    })
-    .catch((err) => alert(err));
+  window.open(
+    `https://admin.daanregency.com/daybook/export_hotelexpense_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}`,
+  );
 };
 
 ////////////////////////////////////////////// Vendor Payout
 
 export const Get_Vendor_API = async (data) => {
   return await API.post("/daybook/get_vendor_payout/", {
-    from_date: data.prevMonth,
-    to_date: data.yesterdate,
-    hotel: data.hotels,
+    from_date: data.from_date,
+    to_date: data.to_date,
+    hotel: data.hotel,
   });
 };
 
@@ -222,20 +211,17 @@ export const Export_Vendor_Excel = async (data) => {
 
   console.log("daily excel", data);
 
-  await API.post("/daybook/export_vendor_payout_excel/", data)
-    .then((res) => {
-      alert(res.data.status);
-      console.log("budget export", res);
-    })
-    .catch((err) => alert(err));
+  window.open(
+    `https://admin.daanregency.com/daybook/export_vendor_payout_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}`,
+  );
 };
 
 //////////////////////////////////////////////// salary
 
 export const Get_Salary = async (data) => {
   return await API.post("/daybook/get_salary/", {
-    from_date: data.prevMonth,
-    to_date: data.yesterdate,
+    from_date: data.from_date,
+    to_date: data.to_date,
     hotels: data.hotels,
     departmemt: data.department,
   });
@@ -255,10 +241,7 @@ export const Export_Salary_Excel = async (data) => {
 
   console.log("daily excel", data);
 
-  await API.post("/daybook/export_salary_excel/", data)
-    .then((res) => {
-      alert(res.data.status);
-      console.log("budget export", res);
-    })
-    .catch((err) => alert(err));
+  window.open(
+    `https://admin.daanregency.com/daybook/export_salary_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}`,
+  );
 };

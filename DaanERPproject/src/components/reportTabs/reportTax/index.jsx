@@ -7,32 +7,45 @@ import { API, getCookie } from "../../../utils/axios";
 import { Hotels } from "../../../utils";
 
 const ReportTaxTab = ({ prevmonth, yesterday, hotel }) => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
-
-  const GetGst = async () => {
-    const response = await API.post(
-      "/bookings/gst_bookings_by_date/",
-      {
-        hotels: hotel,
-        from_date: prevmonth,
-        to_date: yesterday,
-        filter_method: "booking",
-      },
-      {
-        withCredentials: true,
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-      },
-    );
-    console.log("gst res", response);
-    setData(response.data.data);
-  };
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    const GetGst = async () => {
+      try {
+        setLoading(true);
+        const response = await API.post(
+          "/bookings/gst_bookings_by_date/",
+          {
+            hotels: hotel,
+            from_date: prevmonth,
+            to_date: yesterday,
+            filter_method: "booking",
+          },
+          {
+            withCredentials: true,
+            headers: {
+              "X-CSRFToken": getCookie("csrftoken"),
+            },
+          },
+        );
+        if (response.data.data) {
+          setLoading(false);
+          setData(response.data.data);
+        } else {
+          setLoading(false);
+          setError("something went wrong");
+        }
+      } catch (error) {
+        setLoading
+        setError(error.message);
+      }
+    };
+
     GetGst();
-  }, []);
+  }, [hotel, prevmonth, yesterday]);
 
   return (
     <div>
@@ -42,8 +55,8 @@ const ReportTaxTab = ({ prevmonth, yesterday, hotel }) => {
         <Button onClick={() => setOpen(!open)} child={"create +"}></Button>
       </div> */}
 
-      {open && <AccountsVendorAdd></AccountsVendorAdd>}
-      <ReportTax data={data}></ReportTax>
+      {/* {open && <AccountsVendorAdd></AccountsVendorAdd>} */}
+      <ReportTax error={error} loading={loading} data={data}></ReportTax>
     </div>
   );
 };

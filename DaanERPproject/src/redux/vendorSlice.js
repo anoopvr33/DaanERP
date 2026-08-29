@@ -6,7 +6,7 @@ export const get_vendor_thunk = createAsyncThunk(
   "vendor/getdata",
   async (data, thunkAPI) => {
     try {
-      Get_Vendor_API;
+    
       const response = await Get_Vendor_API(data);
       if (response?.data?.status === "success") return response?.data?.data;
       return thunkAPI.rejectWithValue(

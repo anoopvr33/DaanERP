@@ -1,7 +1,18 @@
+import ErrorPage from "../Elements/Error";
+import LoadingItem from "../Elements/Loading";
 import "./style.css";
 
-const ReportTax = ({ data }) => {
+const ReportTax = ({ data, error, loading }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
+
+  if (loading) {
+    return <LoadingItem></LoadingItem>;
+  }
+
+  if (error) {
+    return <ErrorPage></ErrorPage>;
+  }
+
   return (
     <table style={{ width: "700px" }} className="daan-table">
       <tr>

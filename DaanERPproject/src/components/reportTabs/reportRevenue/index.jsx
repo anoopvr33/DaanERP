@@ -4,15 +4,14 @@ import AccountsPosAdd from "../../accountAddComponents/pos";
 import { API } from "../../../utils/axios";
 import Button from "../../Elements/button";
 
-const ReportRevenueTab = ({ revenue }) => {
+const ReportRevenueTab = ({ revenue, prevmonth, yesterday }) => {
   return (
     <div className="acc-pos">
       <div>
         <div style={{ marginBottom: "10px" }}>
           <Button
             onClick={() =>
-              (window.location.href =
-                "https://admin.daanregency.com/reports/export_revenue_excel/")
+              (window.location.href = `https://admin.daanregency.com/reports/export_revenue_excel/?from_date=${prevmonth}&to_date=${yesterday}`)
             }
             child={"Export Excel"}
           ></Button>{" "}

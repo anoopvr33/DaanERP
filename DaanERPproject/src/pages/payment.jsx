@@ -24,6 +24,8 @@ const Payment = () => {
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
+  console.log("yesters, prev", yesterdayDate, prevMonthDate);
+
   return (
     <div className="daan">
       <div className="flex common-flex">
@@ -57,8 +59,8 @@ const Payment = () => {
           <div style={{ marginBottom: "0" }}>
             <Button
               onClick={() =>
-                (window.location.href =
-                  "https://admin.daanregency.com/reports/export_payment_excel/")
+                (window.location.href = ` https://admin.daanregency.com/reports/export_payment_excel/?from_date=${prevMonthDate}&to_date=${yesterdayDate}
+`)
               }
               child={"Export Excel"}
             ></Button>{" "}

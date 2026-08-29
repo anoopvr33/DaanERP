@@ -28,6 +28,14 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
           onChange={(e) => setDepartment(e.target.value)}
           option={["select department", "Housekeeping"]}
         ></FormItems>
+        <i
+          style={{
+            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+          }}
+          onClick={() => setOpen(open == 2 ? null : 2)}
+          class="fa fa-plus"
+          aria-hidden="true"
+        ></i>
         <Button
           className={"add-dailylog"}
           onClick={() =>
@@ -39,14 +47,6 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
           }
           child={"Export Excel"}
         ></Button>{" "}
-        <i
-          style={{
-            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-          }}
-          onClick={() => setOpen(open == 2 ? null : 2)}
-          class="fa fa-plus"
-          aria-hidden="true"
-        ></i>
         <span style={{ margin: "auto", marginRight: "0px" }}>
           <Button
             onClick={() => setOpen(open == 1 ? null : 1)}
