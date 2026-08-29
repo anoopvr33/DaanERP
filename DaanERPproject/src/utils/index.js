@@ -12,6 +12,8 @@ export const IsStaff = () => {
   return JSON.parse(localStorage.getItem("isStaff"));
 };
 
+
+
 export const formatHotel = () => {
   const hotels = Hotels();
   if (hotels?.length === 0 || !hotels) {

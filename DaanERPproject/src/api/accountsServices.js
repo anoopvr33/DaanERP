@@ -242,6 +242,6 @@ export const Export_Salary_Excel = async (data) => {
   console.log("daily excel", data);
 
   window.open(
-    `https://admin.daanregency.com/daybook/export_salary_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}`,
+    `https://admin.daanregency.com/daybook/export_salary_excel/?from_date=${data?.from_date}&to_date=${data?.to_date}&hotel=${data?.hotel}&department=${data.department}`,
   );
 };

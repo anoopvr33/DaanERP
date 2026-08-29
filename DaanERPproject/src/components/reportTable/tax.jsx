@@ -5,7 +5,7 @@ import "./style.css";
 const ReportTax = ({ data, error, loading }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
-  if (loading) {
+  if (loading && !error) {
     return <LoadingItem></LoadingItem>;
   }
 

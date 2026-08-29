@@ -91,6 +91,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const [audit, setAudit] = useState({ name: [], current: [], upto: [] });
   const [revenue, setRevenue] = useState([]);
   const [checkout, setCheckout] = useState([]);
+  const [error, setError] = useState(null);
 
   const GetAudit = async () => {
     console.log("report date format", prevmonth, yesterday, hotel);
@@ -134,7 +135,10 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
             res.occupancy_between_date,
           ],
         });
-      } else alert("something went wrong please login again");
+      } else {
+        setError("Something went wrong");
+        setLoading(false);
+      }
 
       setRevenue(res?.revenu_details);
       setCheckout(res?.checkout_details);
@@ -144,9 +148,11 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
       //   res?.revenu_details,
       // );
     } catch (error) {
-      alert(error, "please login");
+      setError(error.message);
+      // alert(error, "please login");
     } finally {
       setLoading(false);
+      // setError(/)
     }
   };
 
@@ -193,6 +199,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
             yesterday={yesterday}
             prevmonth={prevmonth}
             audit={audit}
+            error={error}
           ></ReportAuditTab>
         )}
         {tab === 1 && (
@@ -200,6 +207,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
             prevmonth={prevmonth}
             yesterday={yesterday}
             revenue={revenue}
+            error={error}
           ></ReportRevenueTab>
         )}
         {tab === 2 && (
@@ -214,6 +222,7 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
             prevmonth={prevmonth}
             yesterday={yesterday}
             checkout={checkout}
+            error={error}
           ></ReportCheckoutTab>
         )}
       </div>

@@ -43,6 +43,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
               from_date: prevMonth || "",
               to_date: yesterdate || "",
               hotel: hotels || [],
+              department: department,
             })
           }
           child={"Export Excel"}
