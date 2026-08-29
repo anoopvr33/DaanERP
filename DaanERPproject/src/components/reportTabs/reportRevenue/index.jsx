@@ -3,8 +3,14 @@ import ReportRevenue from "../../reportTable/revenue";
 import AccountsPosAdd from "../../accountAddComponents/pos";
 import { API } from "../../../utils/axios";
 import Button from "../../Elements/button";
+import ErrorPage from "../../Elements/Error";
 
-const ReportRevenueTab = ({ revenue, prevmonth, yesterday }) => {
+const ReportRevenueTab = ({ revenue, prevmonth, yesterday,error }) => {
+
+  if(error){
+    return <ErrorPage></ErrorPage>
+  }
+
   return (
     <div className="acc-pos">
       <div>

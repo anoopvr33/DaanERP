@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
 import AccountsDailyAdd from "../../accountAddComponents";
 import { API } from "../../../utils/axios";
 import ReportAudit from "../../reportTable/audit";
 import LoadingItem from "../../Elements/Loading";
+import ErrorPage from "../../Elements/Error";
 
-const ReportAuditTab = ({ audit, yesterday, prevmonth, loading }) => {
-  const [open, setOpen] = useState(false);
+const ReportAuditTab = ({ audit, yesterday, prevmonth, loading, error }) => {
+  if (error) {
+    return <ErrorPage></ErrorPage>;
+  }
 
   return (
     <div>
-      <div className="flex-1">
-        {/* <FormItems
-          value={formattedDate}
-          onChange={(e) => setDate(e.target.value)}
-          type="date"
-        ></FormItems>
-        <Button onClick={() => setOpen(!open)} child={"create +"}></Button> */}
-      </div>
-      {open && <AccountsDailyAdd></AccountsDailyAdd>}
+      <div className="flex-1"></div>
+
       {loading ? (
         <LoadingItem></LoadingItem>
       ) : (
         <ReportAudit
+          error={error}
           yesterday={yesterday}
           prevmonth={prevmonth}
           data={audit}

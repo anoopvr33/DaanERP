@@ -39,7 +39,7 @@ const ReportTaxTab = ({ prevmonth, yesterday, hotel }) => {
           setError("something went wrong");
         }
       } catch (error) {
-        setLoading
+        setLoading(false);
         setError(error.message);
       }
     };

@@ -1,5 +1,4 @@
 import "./style.css";
-import { useState } from "react";
 import AccPOS from "./accountsPOS";
 import AccDailyLog from "./accountDailyLog";
 import AccHotelExpense from "./accountsHotelExpense";
@@ -145,6 +144,7 @@ const AccountsTabs = ({ dateset, trigger, hotels, prevMonth }) => {
             trigger={trigger}
             dateset={dateset}
             prevMonth={prevMonth}
+            hotels={hotels}
           ></AccHotelExpense>
         )}
         {loc === 3 && !IsStaff() && (

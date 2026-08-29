@@ -1,6 +1,6 @@
 import "./style.css";
 
-const ReportAudit = ({ data, yesterday, prevmonth }) => {
+const ReportAudit = ({ data, yesterday, prevmonth,error }) => {
   // const head = data.length > 0 ? Object.keys(data[0]) : [];
 
   return (

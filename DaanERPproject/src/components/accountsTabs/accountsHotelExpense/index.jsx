@@ -11,9 +11,9 @@ import {
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
 import { Export_Hotel_Excel } from "../../../api/accountsServices";
-import { Hotels } from "../../../utils";
+// import { Hotels } from "../../../utils";
 
-const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
+const AccHotelExpense = ({ dateset, trigger, hotels, prevMonth }) => {
   const [form, setForm] = useState({
     from_date: prevMonth,
     to_date: dateset,
@@ -90,7 +90,7 @@ const AccHotelExpense = ({ dateset, trigger, prevMonth }) => {
             Export_Hotel_Excel({
               from_date: prevMonth || "",
               to_date: dateset || "",
-              hotel: Hotels() || [],
+              hotel: hotels || [],
             })
           }
           child={"Export Excel"}
