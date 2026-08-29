@@ -10,7 +10,7 @@ import ReportCheckoutTab from "./reportCheckout";
 
 const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const [tab, setTab] = useState(0);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const POS = {
@@ -138,11 +138,11 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
       setRevenue(res?.revenu_details);
       setCheckout(res?.checkout_details);
-      console.log(
-        "checkout response and revenue",
-        res?.checkout_details,
-        res?.revenu_details,
-      );
+      // console.log(
+      //   "checkout response and revenue",
+      //   res?.checkout_details,
+      //   res?.revenu_details,
+      // );
     } catch (error) {
       alert(error, "please login");
     } finally {
@@ -195,7 +195,13 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
             audit={audit}
           ></ReportAuditTab>
         )}
-        {tab === 1 && <ReportRevenueTab revenue={revenue}></ReportRevenueTab>}
+        {tab === 1 && (
+          <ReportRevenueTab
+            prevmonth={prevmonth}
+            yesterday={yesterday}
+            revenue={revenue}
+          ></ReportRevenueTab>
+        )}
         {tab === 2 && (
           <ReportTaxTab
             hotel={hotel}
@@ -204,7 +210,11 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
           ></ReportTaxTab>
         )}
         {tab === 3 && (
-          <ReportCheckoutTab checkout={checkout}></ReportCheckoutTab>
+          <ReportCheckoutTab
+            prevmonth={prevmonth}
+            yesterday={yesterday}
+            checkout={checkout}
+          ></ReportCheckoutTab>
         )}
       </div>
     </div>
