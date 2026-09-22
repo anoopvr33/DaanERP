@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import FormItems from "../Elements/formItems";
 import "./style.css";
+import { useState } from "react";
+import FormItems from "../Elements/formItems";
 import { Edit_Salary } from "../../api/accountsServices";
 import Button from "../Elements/button";
-import { Hotels, IsSuper } from "../../utils";
+import { Hotels, notSuper } from "../../utils";
 
 const SalaryEdit = ({
   setEdit,
@@ -33,6 +33,7 @@ const SalaryEdit = ({
     salary_advance: salary_advance,
     net_salary: net_salary,
   });
+
   const onChange = (e) => {
     if (!e) return;
 
@@ -40,6 +41,7 @@ const SalaryEdit = ({
     setForm({ ...form, [name]: value });
   };
 
+  // submit handler
   const onSubmit = async () => {
     await Edit_Salary(form)
       .then((res) => {
@@ -95,8 +97,8 @@ const SalaryEdit = ({
           name="basic_salary"
           value={form.basic_salary}
           onChange={onChange}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -119,8 +121,8 @@ const SalaryEdit = ({
           name="earning_salary"
           value={form.earning_salary}
           onChange={onChange}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -128,8 +130,8 @@ const SalaryEdit = ({
           name="salary_advance"
           value={form.salary_advance}
           onChange={onChange}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
 
         <FormItems
@@ -138,8 +140,8 @@ const SalaryEdit = ({
           name="net_salary"
           value={form.net_salary}
           onChange={onChange}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <Button onClick={onSubmit} child={"submit"}></Button>
       </div>

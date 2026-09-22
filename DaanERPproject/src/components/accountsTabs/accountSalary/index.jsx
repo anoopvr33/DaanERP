@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import AccountsVendorAdd from "../../accountAddComponents/vendor";
-// import AccountsTable from "../../accoutsTable";
-import AccountsVendor from "../../accoutsTable/vendor";
+import { useState } from "react";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
 import AccountsSalary from "../../accoutsTable/salary";
 import AddSalary from "../../accountAddComponents/salary";
 import CustomParagraph from "../../Elements/customParagraph";
-import { IsStaff, IsSuper } from "../../../utils";
+import { notSuper, trueStaff } from "../../../utils";
 import DepartmentList from "../departmentList";
 import { Export_Salary_Excel } from "../../../api/accountsServices";
+import AddStaff from "../../accountAddComponents/staff";
 
 const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
   const [open, setOpen] = useState(null);
@@ -19,6 +17,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
     <div>
       <div className="flex-1">
         <Button
+          className={open === 3 && "active-btn"}
           onClick={() => setOpen(open == 3 ? null : 3)}
           child={"List Departments"}
           // className={"add-dailylog"}
@@ -30,7 +29,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
         ></FormItems>
         <i
           style={{
-            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+            display: `${notSuper || trueStaff ? "none" : ""}`,
           }}
           onClick={() => setOpen(open == 2 ? null : 2)}
           class="fa fa-plus"
@@ -50,9 +49,16 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
         ></Button>{" "}
         <span style={{ margin: "auto", marginRight: "0px" }}>
           <Button
+            onClick={() => setOpen(open == 4 ? null : 4)}
+            child={"Add Staff +"}
+            className={open === 4 && "active-btn"}
+            // className={"add-dailylog"}
+          ></Button>{" "}
+          <Button
             onClick={() => setOpen(open == 1 ? null : 1)}
             child={"New Salary +"}
-            className={"add-dailylog"}
+            className={open === 1 && "active-btn"}
+            // className={"add-dailylog"}
           ></Button>
         </span>
       </div>
@@ -80,6 +86,7 @@ const AccSalary = ({ yesterdate, trigger, prevMonth, hotels }) => {
           </form>
         </div>
       )}
+      {open == 4 && <AddStaff setOpen={setOpen}></AddStaff>}
 
       <br />
       <CustomParagraph

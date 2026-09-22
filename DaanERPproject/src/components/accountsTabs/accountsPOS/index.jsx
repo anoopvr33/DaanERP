@@ -19,7 +19,7 @@ import {
   Get_Budget_CatSub,
 } from "../../../api/accountsServices";
 import CustomParagraph from "../../Elements/customParagraph";
-import { IsStaff, IsSuper } from "../../../utils";
+import { notSuper, trueStaff } from "../../../utils";
 import BudgetCategoryList from "../budgetCategory";
 import ListBudgetCategory from "../listBudgetCategory";
 
@@ -37,17 +37,20 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
     (state) => state.budget,
   );
 
+  // category options for select input
   const CatOption = [
     { name: "select category", value: "" },
     ...category.map((i) => ({ name: i.category, value: i.id })),
   ];
 
+  // getting category-subcategory data from api on page load
   useEffect(() => {
     Get_Budget_CatSub().then((res) => {
       if (res.data) setCatSub(res.data);
     });
   }, []);
 
+  //getting budget data from api on page load
   useEffect(() => {
     if (hotels?.length === 0) return;
     dispatch(
@@ -65,13 +68,13 @@ const AccPOS = ({ dateset, trigger, hotels, prevMonth }) => {
             className={open === 1 && "active-btn"}
             onClick={() => setOpen(open === 1 ? null : 1)}
             style={{
-              display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+              display: `${notSuper || trueStaff ? "none" : ""}`,
             }}
             child={"New Category +"}
           ></Button>
           <Button
             style={{
-              display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+              display: `${notSuper || trueStaff ? "none" : ""}`,
             }}
             className={open === 2 && "active-btn"}
             onClick={() => setOpen(open === 2 ? null : 2)}

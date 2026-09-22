@@ -11,7 +11,6 @@ import {
 import LoadingItem from "../../Elements/Loading";
 import ErrorPage from "../../Elements/Error";
 import { Export_Hotel_Excel } from "../../../api/accountsServices";
-// import { Hotels } from "../../../utils";
 
 const AccHotelExpense = ({ dateset, trigger, hotels, prevMonth }) => {
   const [form, setForm] = useState({
@@ -23,16 +22,19 @@ const AccHotelExpense = ({ dateset, trigger, hotels, prevMonth }) => {
 
   const dispatch = useDispatch();
 
+  // getting data from redux store
   const { items, loading, error, category, sub_category } = useSelector(
     (state) => state.hotelOps,
   );
 
+  // category input change handler
   const onCategoryChange = (e) => {
     const selected = category.find((i) => i.id === Number(e.target.value));
     setForm({ ...form, category: selected?.category });
     dispatch(gethotelOpsSub_Category(e.target.value));
   };
 
+  // subcategory input change handler
   const onSubCategoryChange = (e) => {
     const selected = sub_category.find((i) => i.id === Number(e.target.value));
     setForm({
@@ -41,6 +43,7 @@ const AccHotelExpense = ({ dateset, trigger, hotels, prevMonth }) => {
     });
   };
 
+  // category options for select input
   const categoryOptions = [
     { value: "", name: "select category" },
     ...category.map((i) => ({
@@ -49,11 +52,13 @@ const AccHotelExpense = ({ dateset, trigger, hotels, prevMonth }) => {
     })),
   ];
 
+  // subcategory options for select input
   const subCategoryOptions = [
     { value: "", name: "select sub-category" },
     ...sub_category.map((i) => ({ value: i.id, name: i.sub_category })),
   ];
 
+  // getting data from api on page load
   useEffect(() => {
     dispatch(gethotelOpsData(form));
     dispatch(gethotelOpsCategory());

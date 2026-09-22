@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import "./style.css";
 import { useSelector } from "react-redux";
 import AddBookindCheck from "../BookingCheckAdd";
@@ -6,10 +6,9 @@ import AddBookindCheckOut from "../BookingCheckAdd/checkout";
 import BookingEdit from "../bookingEdit";
 import ErrorPage from "../Elements/Error";
 import { DeleteBookingDataAPI } from "../../api";
-import { IsStaff, IsSuper } from "../../utils";
+import { notSuper, trueStaff } from "../../utils";
 import { SearchFilter } from "../Elements/searchFilter";
 import LoadingItem from "../Elements/Loading";
-import Button from "../Elements/button";
 
 const BookingTable = ({ status, setPage, page }) => {
   const [expand, setExpand] = useState({ row: null, open: false });
@@ -37,8 +36,6 @@ const BookingTable = ({ status, setPage, page }) => {
   const { inputValue } = useSelector((state) => state.search);
 
   const { FilterData } = SearchFilter(items, inputValue, status);
-
-;
 
   if (loading && !geterror) {
     return <LoadingItem></LoadingItem>;
@@ -132,7 +129,7 @@ const BookingTable = ({ status, setPage, page }) => {
                   <td>
                     {i.checkin_date === "" || !i.checkin_date ? (
                       <button
-                        disabled={IsSuper() === false}
+                        disabled={notSuper}
                         style={{ padding: "2px 10px", fontSize: "12px" }}
                         onClick={() => setOpen({ index: index, check: false })}
                       >
@@ -145,7 +142,7 @@ const BookingTable = ({ status, setPage, page }) => {
                   <td>
                     {i.checkout_date === "" || !i.checkout_date ? (
                       <button
-                        disabled={IsSuper() === false}
+                        disabled={notSuper}
                         style={{ padding: "2px 10px", fontSize: "12px" }}
                         onClick={() => setOpen({ index: index, check: true })}
                       >
@@ -182,7 +179,7 @@ const BookingTable = ({ status, setPage, page }) => {
                     <i
                       onClick={() => Delete(i.id)}
                       style={{
-                        display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                        display: `${notSuper || trueStaff ? "none" : ""}`,
                       }}
                       class="fa fa-trash"
                       aria-hidden="true"
@@ -234,7 +231,7 @@ const BookingTable = ({ status, setPage, page }) => {
                             Hotel Code <span>{i.hotel_code}</span>
                           </b>
                         </p>
-  <p>
+                        <p>
                           <b>
                             Hotel Name <span>{i.hotel_name}</span>
                           </b>

@@ -50,7 +50,7 @@ const Filter = ({
 }) => {
   return (
     <div className="custom-filter" style={{ display: "flex", gap: "10px" }}>
-      <label htmlFor="">
+      <label className="custom-label" htmlFor="">
         <p className="label-p" style={{ zIndex: "1" }}>
           Select Hotels
         </p>

@@ -4,7 +4,6 @@ import CustomerDetails from "./customerDetails";
 
 const CustomTabs = ({ date, count }) => {
   const [tab, setTab] = useState(0);
-  const [open, setOpen] = useState(false);
 
   const POS = {
     borderRadius: "20px 20px 0px 0px",

@@ -12,7 +12,7 @@ import {
   getDailyLogData,
 } from "../../../redux/dailyLogSlice";
 import CustomParagraph from "../../Elements/customParagraph";
-import { IsStaff, IsSuper } from "../../../utils";
+import { notSuper, trueStaff } from "../../../utils";
 import "../style.css";
 import CategoryList from "../category";
 import ListDailyCategory from "../listDailyCategory";
@@ -25,8 +25,10 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
 
   const dispatch = useDispatch();
 
+  // getting data from redux store
   const { items, category, catsub } = useSelector((state) => state.dailylog);
 
+  //align category options
   const categoryOption = [
     { name: "select category", value: "" },
     ...category.map((i) => ({
@@ -35,6 +37,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
     })),
   ];
 
+  // getting data from api on page load
   useEffect(() => {
     if (hotels.length === 0) return;
     dispatch(
@@ -52,7 +55,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
       <div className="flex-1">
         <Button
           style={{
-            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+            display: `${notSuper || trueStaff ? "none" : ""}`,
           }}
           className={open === 1 && "active-btn"}
           onClick={() => setOpen(open === 1 ? null : 1)}
@@ -61,7 +64,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
         <Button
           className={open === 2 && "active-btn"}
           style={{
-            display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+            display: `${notSuper || trueStaff ? "none" : ""}`,
           }}
           onClick={() => {
             setOpen(open === 2 ? null : 2);
@@ -71,6 +74,9 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
         ></Button>
         <Button
           className={open === 5 && "active-btn"}
+          style={{
+            display: `${notSuper || trueStaff ? "none" : ""}`,
+          }}
           onClick={() => {
             setOpen(open === 5 ? null : 5);
             dispatch(getDailyLogCategory());
@@ -113,11 +119,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
         />
       </div>
       {open === 5 && (
-        <ListDailyCategory
-          categories={categoryOption}
-          // setOpen={setOpen}
-          // formdate={dateset}
-        ></ListDailyCategory>
+        <ListDailyCategory categories={categoryOption}></ListDailyCategory>
       )}
 
       {open === 4 && (
@@ -189,116 +191,7 @@ const AccDailyLog = ({ dateset, trigger, hotels, prevMonth }) => {
         </div>
       )}
 
-      {open === 3 && (
-        // <div className="category-manager">
-        //   <div className="category-manager-header">
-        //     <div>
-        //       <h3>Category & Subcategory</h3>
-        //       <p>Manage your categories and subcategories</p>
-        //     </div>
-
-        //     {/* <button className="add-category-btn" onClick={"handleAddCategory"}>
-        //       + Category
-        //     </button> */}
-        //   </div>
-
-        //   <div className="category-list">
-        //     {Object.entries(catsub).length === 0 ? (
-        //       <div className="empty-category">No categories available</div>
-        //     ) : (
-        //       Object.entries(catsub).map(([key, values]) => (
-        //         <div className="category-card" key={key}>
-        //           {/* Category Header */}
-        //           <div className="category-header">
-        //             <div className="category-info">
-        //               <div className="category-icon">
-        //                 {key.charAt(0).toUpperCase()}
-        //               </div>
-
-        //               <div>
-        //                 <h4>{key}</h4>
-        //                 <span>
-        //                   {values.length}{" "}
-        //                   {values.length === 1
-        //                     ? "subcategory"
-        //                     : "subcategories"}
-        //                 </span>
-        //               </div>
-        //             </div>
-
-        //             <div className="category-actions">
-        //               <i
-        //                 // onClick={() => setEdit(index)}
-        //                 style={{
-        //                   display: `${IsStaff() === true ? "none" : ""}`,
-        //                 }}
-        //                 class="fa fa-edit"
-        //                 aria-hidden="true"
-        //               ></i>{" "}
-        //               <br />
-        //               <i
-        //                 // onClick={() =>
-        //                 //   deleteAccount("/daybook/delete_daybook_log/", item.id)
-        //                 // }
-        //                 style={{
-        //                   display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-        //                 }}
-        //                 class="fa fa-trash"
-        //                 aria-hidden="true"
-        //               ></i>
-        //             </div>
-        //           </div>
-
-        //           {/* Subcategories */}
-        //           <div className="subcategory-container">
-        //             {values.length === 0 ? (
-        //               <div className="no-subcategory">No subcategories</div>
-        //             ) : (
-        //               values.map((sub) => (
-        //                 <div className="subcategory-item" key={sub.id}>
-        //                   <div className="subcategory-name">
-        //                     <span className="subcategory-dot"></span>
-
-        //                     <span>{sub.sub}</span>
-        //                   </div>
-
-        //                   <div className="subcategory-actions">
-        //                     <i
-        //                       // onClick={() => setEdit(index)}
-        //                       style={{
-        //                         display: `${IsStaff() === true ? "none" : ""}`,
-        //                       }}
-        //                       class="fa fa-edit"
-        //                       aria-hidden="true"
-        //                     ></i>{" "}
-        //                     <br />
-        //                     <i
-        //                       // onClick={() =>
-        //                       //   deleteAccount(
-        //                       //     "/daybook/delete_daybook_log/",
-        //                       //     item.id,
-        //                       //   )
-        //                       // }
-        //                       style={{
-        //                         display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
-        //                       }}
-        //                       class="fa fa-trash"
-        //                       aria-hidden="true"
-        //                     ></i>
-        //                   </div>
-        //                 </div>
-        //               ))
-        //             )}
-
-        //             {/* Add Subcategory */}
-        //           </div>
-        //         </div>
-        //       ))
-        //     )}
-        //   </div>
-        // </div>
-        <CategoryList catsub={catsub}></CategoryList>
-      )}
+      {open === 3 && <CategoryList catsub={catsub}></CategoryList>}
       <br />
       <CustomParagraph
         child={

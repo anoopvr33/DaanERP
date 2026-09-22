@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { API } from "../../utils/axios";
 import "./style.css";
-import { IsStaff, IsSuper } from "../../utils";
+import { notSuper, trueStaff } from "../../utils";
 import VendorEdit from "../accountsEdit/vendorEdit";
 import { deleteAccount } from "../../api/accountsServices";
 
@@ -53,7 +52,7 @@ const AccountsVendor = ({ vendor }) => {
                   <i
                     onClick={() => setEdit(index)}
                     style={{
-                      display: `${IsStaff() === true ? "none" : ""}`,
+                      display: `${trueStaff ? "none" : ""}`,
                     }}
                     class="fa fa-edit"
                     aria-hidden="true"
@@ -64,7 +63,7 @@ const AccountsVendor = ({ vendor }) => {
                       deleteAccount("/daybook/delete_vendor_payout/", item.id)
                     }
                     style={{
-                      display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                      display: `${notSuper || trueStaff ? "none" : ""}`,
                     }}
                     class="fa fa-trash"
                     aria-hidden="true"

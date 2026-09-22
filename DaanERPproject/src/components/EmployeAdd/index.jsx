@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
-import { API, getCookie } from "../../utils/axios";
 import { Hotels } from "../../utils";
-import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import Filter from "../Elements/Filter";
+import { CreateEmployeeAPI } from "../../api/employee";
 
 const EmployeeAdd = () => {
   const [data, setData] = useState({
@@ -33,37 +32,11 @@ const EmployeeAdd = () => {
   const OnSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await API.post("/main/create_user/", data, {
-      withCredentials: true,
-      headers: {
-        "X-CSRFToken": getCookie("csrftoken"),
-      },
-    });
+    const res = CreateEmployeeAPI(data);
 
     if (res.data.status === "success") {
       alert("successfully added");
     } else alert("something went wrong");
-
-    // dispatch(addBookingThunk(data));
-
-    // fetch("https://27abf324a5b5.ngrok-free.app/bookings/booking_create/", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    // })
-    //   .then(async (response) => {
-    //     if (!response.status == "success") {
-    //       // const errorData = await response.json();
-    //       // throw errorData;
-    //       alert("success");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((result) => {
-    //     console.log("Success:", result);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   };
 
   useEffect(() => {

@@ -1,9 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
+import {  useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
-import { API } from "../../utils/axios";
-import { AddBooking_CheckIn, AddBooking_CheckOut } from "../../api";
+import { AddBooking_CheckOut } from "../../api";
 
 const PaymentModeOptions = [
   {

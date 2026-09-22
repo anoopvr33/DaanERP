@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";
 import "./style.css";
 import {
@@ -7,7 +7,7 @@ import {
   GetBudgetSub_Category,
 } from "../../api/accountsServices";
 import Button from "../Elements/button";
-import { Hotels, IsSuper } from "../../utils";
+import { Hotels, notSuper } from "../../utils";
 
 const BudgetEdit = ({
   setEdit,
@@ -30,13 +30,14 @@ const BudgetEdit = ({
   });
   const [subCat, setSubCat] = useState([{ sub_category: sub_cat }]);
 
+  // input change handler
   const onChange = (e) => {
     if (!e) return;
-
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
+  // submit handler
   const onSubmit = async () => {
     await Edit_Budget(form)
       .then((res) => {
@@ -45,6 +46,7 @@ const BudgetEdit = ({
       .catch((err) => alert(err));
   };
 
+  // assign category and fetch subcategory
   const setCategoryValue = async (e) => {
     if (!e) return;
     if (e.target.value === "") return;
@@ -58,12 +60,14 @@ const BudgetEdit = ({
     getSubcat(catValue.id);
   };
 
+  // assign subcategory
   const getSubcat = async (catValue) => {
     await GetBudgetSub_Category(catValue)
       .then((res) => setSubCat(res?.data?.data))
       .catch(() => setSubCat([]));
   };
 
+  // assign subcategory
   const setSubcategoryValue = (e) => {
     const subValue = subCat?.find((i) => i.sub_category == e.target.value);
     setForm({
@@ -72,8 +76,8 @@ const BudgetEdit = ({
     });
   };
 
+  // category & sub_category select options
   const subcategoryOptions = [
-    // { name: sub_cat, value: "" },
     { name: "Select subcategory", value: "" },
     ...subCat.map((i) => ({
       name: i.sub_category,
@@ -81,17 +85,18 @@ const BudgetEdit = ({
     })),
   ];
   const categoryOptions = [
-    // { name: category, value: "" },
     { name: "select Category", value: "" },
     ...categoryyy.map((i) => ({ name: i.category, value: i.category })),
   ];
 
+  // get subcategory
   useEffect(() => {
     const selecteded = categoryyy.find((i) => i.category === category)?.id;
     if (!selecteded) return;
     getSubcat(selecteded);
   }, [categoryyy]);
 
+  // get category
   useEffect(() => {
     GetBudget_CategoryAPI().then((res) => setCategory(res?.data?.data));
   }, []);
@@ -141,8 +146,8 @@ const BudgetEdit = ({
           labelData={"Budget Amt"}
           name="budget_amount"
           onChange={onChange}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
           value={form.budget_amount}
         ></FormItems>
         <FormItems
@@ -151,8 +156,8 @@ const BudgetEdit = ({
           name="actual_amount"
           onChange={onChange}
           value={form.actual_amount}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
-          readOnly={IsSuper() === false}
+          className={`${notSuper ? "normal-user" : ""}`}
+          readOnly={notSuper}
         ></FormItems>
         <Button onClick={onSubmit} child={"Submit"}></Button>
       </div>

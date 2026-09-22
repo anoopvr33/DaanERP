@@ -17,24 +17,29 @@ import { FormattedMonths } from "../../components/Elements/yesterdayDate";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
+  //hotel array for filter and api call
   const formattedHotels = useMemo(() => formatHotel() || [], []);
 
   const [hotelData, setHotelData] = useState(formattedHotels);
   const [hotelOptions] = useState(formattedHotels);
   const [trigger, setTrigger] = useState(false);
 
+  // getting dashboard data from redux store
   const {
     items: data,
     loading,
     error,
   } = useSelector((state) => state.dashboard);
 
+  // getting formatted yesterday and previous month date from FormattedMonths function
   const { formattedYesterday, formattedPrevMonth } = FormattedMonths();
 
   // React state example
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
+  // dispatching the getDashboardData action
   useEffect(() => {
     if (!hotelData.length) return;
 
@@ -51,9 +56,12 @@ const Dashboard = () => {
   return (
     <div className="dashboard daan">
       <div className="flex common-flex">
+        {/* //------------------------------------------ sidebar component */}
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
+          {/* //------------------------------------------ Navbar component */}
           <Navbar></Navbar>
+          {/* //------------------------------------------ Filter component */}
           <div className="h2-sub">
             <h2>Dashboard</h2>
             <div className="flex-1">
@@ -78,20 +86,25 @@ const Dashboard = () => {
               />
             </div>
           </div>
-
           {loading ? (
+            // ------------------------------------------ Loading component
             <LoadingItem />
           ) : error ? (
+            // ------------------------------------------ Error component
             <ErrorPage />
           ) : (
             <>
+              {/* //------------------------------------------ Dashboard Result component */}
               <DashResult data={data}></DashResult>
               <div className="flex-2">
+                {/* //------------------------------------------ Dashboard Graph components */}
                 <Chart data={data?.monthly_sales}></Chart>
                 <ExpenseChart data={data?.monthly_expense}></ExpenseChart>
               </div>
               <div className="flex-2">
+                {/* //------------------------------------------ Dashboard Previous data component */}
                 <DashboardPrev data={data}></DashboardPrev>
+                {/* //------------------------------------ Dashboard line chart component */}
                 <MarkOptimization
                   data={data?.daily_occupancy}
                 ></MarkOptimization>

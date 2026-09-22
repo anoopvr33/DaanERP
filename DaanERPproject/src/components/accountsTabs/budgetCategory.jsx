@@ -1,12 +1,5 @@
-import {
-  Delete_Budget_Category,
-  Delete_Budget_SubCategory,
-  // Delete_Daily_Category,
-  Edit_Budget_Category,
-  Edit_Budget_SubCategory,
-  // Edit_Daily_Category,
-} from "../../api/accountsServices";
-import { IsStaff, IsSuper } from "../../utils";
+import { Delete_Budget_SubCategory } from "../../api/accountsServices";
+import { notSuper, trueStaff } from "../../utils";
 
 const BudgetCategoryList = ({ catsub }) => {
   // const [editingCategory, setEditingCategory] = useState(null);
@@ -191,10 +184,7 @@ const BudgetCategoryList = ({ catsub }) => {
                               Delete_Budget_SubCategory({ id: sub.id })
                             }
                             style={{
-                              display:
-                                IsSuper() === false || IsStaff() === true
-                                  ? "none"
-                                  : "",
+                              display: notSuper || trueStaff ? "none" : "",
                               cursor: "pointer",
                               margin: "auto",
                               marginRight: "0px",

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import {  useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { addBookingThunk } from "../../redux/bookingSlice";
-import axios from "axios";
-import { API } from "../../utils/axios";
 import { Hotels } from "../../utils";
 
 const PaymentMode = [

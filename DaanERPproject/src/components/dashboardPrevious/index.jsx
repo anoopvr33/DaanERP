@@ -1,12 +1,4 @@
 import "./style.css";
-import {
-  ChartArea,
-  ChartBarIncreasing,
-  ChartBarStackedIcon,
-  Donut,
-  LineChart,
-} from "lucide-react";
-// import {RiDonutChartLine}
 
 const DashboardPrev = ({ data }) => {
   return (

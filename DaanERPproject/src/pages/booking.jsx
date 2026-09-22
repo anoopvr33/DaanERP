@@ -21,16 +21,16 @@ const Booking = () => {
   const [toggle, setToggle] = useState(false);
   const [dayData, setDaydata] = useState(null);
   const [sort] = useState("booking");
-
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(50);
 
+  // hotel array for filter and api call
   const formattedHotels = useMemo(() => formatHotel() || [], []);
-
   const [hotelOptions] = useState(formattedHotels);
 
   const dispatch = useDispatch();
 
+  // getting formatted yesterday and previous month date from FormattedMonths function
   const { formattedYesterday, formattedPrevMonth } = FormattedMonths();
 
   // React state example
@@ -61,7 +61,6 @@ const Booking = () => {
   }, [data.hotels, data.page, data.status, data.sort_order]);
 
   // find length of numbers between days
-
   useEffect(() => {
     const diffInMs =
       new Date(data.to_date).getTime() - new Date(data.from_date).getTime();
@@ -74,16 +73,19 @@ const Booking = () => {
   return (
     <div className="daan">
       <div className="flex common-flex">
+        {/* // ------------------------------------------ sidebar component */}
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
+          {/* // ------------------------------------------ Navbar component */}
           <Navbar placeholder={"Search Name, ID, Mob No ..."}></Navbar>
+
+          {/* // ------------------------------------------ Filter component  */}
           <div className="h2-sub">
             <h2>Booking Management</h2>
 
             <div className="flex-1">
               <Filter
                 onChange={(selected) => {
-                  // if (!selected) return setHotel([]);
                   if (!selected || selected.length === 0) {
                     setData({ ...data, hotels: Hotels() ? Hotels() : [] });
                     return;
@@ -101,7 +103,6 @@ const Booking = () => {
                 yesOnchange={(e) =>
                   setData({ ...data, to_date: e.target.value })
                 }
-                // child={"Filter"}
               />
               <FormItems
                 labelData="Sort"
@@ -122,6 +123,8 @@ const Booking = () => {
               ></Button>
             </div>
           </div>
+
+          {/* //length of data, filter and sort section */}
           <div
             style={{
               display: "flex",
@@ -164,6 +167,7 @@ const Booking = () => {
             ></Button>
           </div>
 
+          {/* // ------------------------------------------Loading, Error and Booking table component  */}
           {open && <BookingAdd></BookingAdd>}
           {loading ? (
             <LoadingItem />
@@ -171,7 +175,6 @@ const Booking = () => {
             <ErrorPage />
           ) : (
             <>
-              {/* <p>Showing {dayData} days result</p> */}
               <BookingTable
                 SortedDays={dayData}
                 setPage={(num) => {

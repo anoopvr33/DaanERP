@@ -115,6 +115,12 @@ export const Add_DailyLog_SubCategory = async (data) => {
   return await API.post("/daybook/create_subcategory/", data);
 };
 
+export const Get_DailyLog_SubCategory = async (data) => {
+  return await API.post("/daybook/get_subcategories/", {
+    category_id: data,
+  });
+};
+
 export const Add_DailyLog = async (data) => {
   return await API.post("/daybook/add_daybook_log/", data);
 };

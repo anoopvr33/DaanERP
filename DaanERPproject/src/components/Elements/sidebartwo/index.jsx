@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import { Hotels, IsStaff, IsSuper } from "../../../utils";
+import { Hotels, trueStaff, IsSuper } from "../../../utils";
 
 export default function SidebarTwo() {
   const [side, setOpen] = useState(false);
@@ -12,12 +12,12 @@ export default function SidebarTwo() {
 
   const menuItems = [
     "",
-    IsStaff() ? "" : "Dashboard",
+    trueStaff ? "" : "Dashboard",
     "Booking",
     "Customer",
     "Accounts",
-    IsStaff() ? "" : "Reports",
-    IsStaff() ? "" : "Payment",
+    trueStaff ? "" : "Reports",
+    trueStaff ? "" : "Payment",
 
     IsSuper() ? "Employees" : "",
     "",
@@ -25,12 +25,12 @@ export default function SidebarTwo() {
 
   const Icons = [
     "",
-    IsStaff() ? "" : <i class="fa-solid fa-chart-simple"></i>,
+    trueStaff ? "" : <i class="fa-solid fa-chart-simple"></i>,
     <i class="fa-solid fa-suitcase-rolling"></i>,
     <i class="fa-solid fa-users"></i>,
     <i class="fa-solid fa-hotel"></i>,
-    IsStaff() ? null : <i class="fa-solid fa-money-bill"></i>,
-    IsStaff() ? null : <i class="fa-solid fa-file-invoice-dollar"></i>,
+    trueStaff ? null : <i class="fa-solid fa-money-bill"></i>,
+    trueStaff ? null : <i class="fa-solid fa-file-invoice-dollar"></i>,
 
     IsSuper() ? <i class="fa-solid fa-user-tie"></i> : "",
   ];

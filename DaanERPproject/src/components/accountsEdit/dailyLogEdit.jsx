@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
-import FormItems from "../Elements/formItems";
 import "./style.css";
+import { useEffect, useMemo, useState } from "react";
+import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
-import { Edit_DailyLog } from "../../api/accountsServices";
-import { Hotels, IsSuper } from "../../utils";
+import {
+  Edit_DailyLog,
+  Get_DailyLog_SubCategory,
+} from "../../api/accountsServices";
+import { Hotels, notSuper } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { API } from "../../utils/axios";
 import { getDailyLogCategory } from "../../redux/dailyLogSlice";
 
 const DailyLogEdit = ({
@@ -20,17 +22,17 @@ const DailyLogEdit = ({
   desc,
   bank,
 }) => {
-const [form, setForm] = useState({
-  id: _id,
-  category,
-  sub_category: sub_cat,
-  receipts: receipt,
-  payments: payment,
-  balance,
-  hotel,
-  description: desc,
-  bank,
-});
+  const [form, setForm] = useState({
+    id: _id,
+    category,
+    sub_category: sub_cat,
+    receipts: receipt,
+    payments: payment,
+    balance,
+    hotel,
+    description: desc,
+    bank,
+  });
   const dispatch = useDispatch();
 
   const [subCat, setSubCat] = useState([{ sub_category: sub_cat }]);
@@ -81,18 +83,18 @@ const [form, setForm] = useState({
     })),
   ];
 
+  // get subcategory id based on selected category
   const subId = useMemo(() => {
     if (!statecate) return;
     return statecate.find((i) => i.category === form.category)?.id;
   }, [form.category, statecate]);
 
+  // fetch subcategory based on selected category
   useEffect(() => {
     if (!subId) return;
 
     const load = async () => {
-      const res = await API.post("/daybook/get_subcategories/", {
-        category_id: subId,
-      });
+      const res = await Get_DailyLog_SubCategory(subId);
 
       setSubCat(res.data.data);
 
@@ -152,8 +154,8 @@ const [form, setForm] = useState({
           name="receipts"
           onChange={onChange}
           value={form.receipts}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -161,8 +163,8 @@ const [form, setForm] = useState({
           name="payments"
           onChange={onChange}
           value={form.payments}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="number"
@@ -170,8 +172,8 @@ const [form, setForm] = useState({
           name="balance"
           onChange={onChange}
           value={form.balance}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="text"

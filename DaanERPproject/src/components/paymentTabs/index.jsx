@@ -1,16 +1,14 @@
 import "./style.css";
 import { useEffect, useState } from "react";
-import PaymentDetails from "./bill_company";
 import BillCompanyTab from "./bill_company";
 import UpiCompanyTab from "./upi_company";
 import UpiCurrentTab from "./upi_current";
 import CashPayTab from "./cash_pay";
-import { API, getCookie } from "../../utils/axios";
 import BankTransferTab from "./bank_transfer";
 import OutstandingTab from "./out_standing";
 import ComplementaryTab from "./complementary";
 import PaymentLink from "./paymentLink";
-// import AnimatedBarWidthExample from "./paymentGraph";
+import { GetPaymentReport } from "../../api/payment";
 
 const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
   const [tab, setTab] = useState(0);
@@ -143,26 +141,13 @@ const PaymentTabs = ({ yesterday, prevmonth, hotelsArray, trigger }) => {
 
     try {
       setLoading(true);
-      const response = await API.post(
-        "/reports/get_payment_report/",
-        {
-          hotels: hotelsArray,
-          from_date: prevmonth,
-          to_date: yesterday,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
-          },
-        },
-      );
-      // console.log("payemtn res", response);
+      const response = GetPaymentReport({ hotelsArray, prevmonth, yesterday });
+
       if (response.data.report) {
-        setData(response.data.report);
+        return setData(response.data.report);
       } else alert("some error");
     } catch (error) {
-      alert(error);
+      return alert(error);
     } finally {
       setLoading(false);
     }

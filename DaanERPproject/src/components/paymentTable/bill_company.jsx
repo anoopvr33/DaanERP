@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { Pageination } from "../Elements/pagination";
+import { PageinationUI } from "../Elements/pagination";
 import "./style.css";
 import Pagination from "@mui/material/Pagination";
 
 const BillCompany = ({ result }) => {
-  // const head = data.length > 0 ? Object.keys(data[0]) : [];
   const [page, setPage] = useState(1);
 
-
-  const { paginatedData, totalPages } = Pageination(result, page);
+  const { paginatedData, totalPages } = PageinationUI(result, page);
 
   return (
     <>
@@ -43,7 +41,6 @@ const BillCompany = ({ result }) => {
                   <td>{row.checkin}</td>
                   <td>{row.checkout}</td>
                   <td>{row.room_code}</td>
-                  {/* <td>{row.payment_link ? row.payment_link : "Null"}</td> */}
                 </tr>
               ))
               .reverse()

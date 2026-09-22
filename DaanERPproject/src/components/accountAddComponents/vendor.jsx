@@ -1,9 +1,8 @@
-import React, {  useState } from "react";
+import { useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import "./style.css";
 import { useDispatch } from "react-redux";
-import { API } from "../../utils/axios";
 import { Hotels } from "../../utils";
 import { add_vendor_thunk } from "../../redux/vendorSlice";
 
@@ -21,6 +20,7 @@ const AccountsVendorAdd = ({ setOpen }) => {
   });
   const dispatch = useDispatch();
 
+  // input change handler
   const OnInput = (e) => {
     const { name, files, value } = e.target;
 
@@ -37,6 +37,7 @@ const AccountsVendorAdd = ({ setOpen }) => {
     }
   };
 
+  // submit handler
   const OnSubmit = async (e) => {
     e.preventDefault();
 
@@ -51,14 +52,9 @@ const AccountsVendorAdd = ({ setOpen }) => {
     formData.append("payment_date", data.payment_date);
     formData.append("remarks", data.remarks);
     formData.append("hotel", data.hotel);
-  
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
 
     dispatch(add_vendor_thunk(formData));
   };
-
 
   return (
     <div className="add-account-main">

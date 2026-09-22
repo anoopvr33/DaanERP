@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pageination } from "../Elements/pagination";
+import { PageinationUI } from "../Elements/pagination";
 import "./style.css";
 import Pagination from "@mui/material/Pagination";
 
@@ -9,7 +9,7 @@ const ReportCheckout = ({ data }) => {
   const [page, setPage] = useState(1);
 
  
-  const { paginatedData, totalPages } = Pageination(data, page);
+  const { paginatedData, totalPages } = PageinationUI(data, page);
 
   return (
     <>

@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
-import { Fragment, useEffect, useMemo, useState } from "react";
-import { getCustomerData } from "../../redux/customerSlice";
+import { Fragment, useMemo, useState } from "react";
 import Pagination from "@mui/material/Pagination";
-import { Pageination } from "../Elements/pagination";
+import { PageinationUI } from "../Elements/pagination";
 
 const CustomerTable = ({ count, items }) => {
   const [page, setPage] = useState(1);
@@ -28,7 +26,7 @@ const CustomerTable = ({ count, items }) => {
     return array;
   }, [count, items]);
 
-  const { paginatedData, totalPages } = Pageination(sortedArray, page);
+  const { paginatedData, totalPages } = PageinationUI(sortedArray, page);
 
   return (
     <>

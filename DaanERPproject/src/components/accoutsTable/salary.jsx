@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { API } from "../../utils/axios";
 import "./style.css";
-import { IsStaff, IsSuper } from "../../utils";
-import VendorEdit from "../accountsEdit/vendorEdit";
+import { notSuper, trueStaff } from "../../utils";
 import SalaryEdit from "../accountsEdit/salaryEdit";
 import { deleteAccount, Get_Salary } from "../../api/accountsServices";
 
@@ -65,7 +63,7 @@ const AccountsSalary = ({
                 <td>
                   <i
                     style={{
-                      display: `${IsStaff() === true ? "none" : ""}`,
+                      display: `${trueStaff ? "none" : ""}`,
                     }}
                     onClick={() => setEdit(index)}
                     class="fa fa-edit"
@@ -77,7 +75,7 @@ const AccountsSalary = ({
                       deleteAccount("/daybook/delete_salary/", item.id)
                     }
                     style={{
-                      display: `${IsSuper() === false || IsStaff() === true ? "none" : ""}`,
+                      display: `${notSuper || trueStaff ? "none" : ""}`,
                     }}
                     class="fa fa-trash"
                     aria-hidden="true"

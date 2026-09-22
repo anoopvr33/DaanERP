@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import FormItems from "../Elements/formItems";
 import "./style.css";
+import { useState } from "react";
+import FormItems from "../Elements/formItems";
 import { Edit_Vendor } from "../../api/accountsServices";
 import Button from "../Elements/button";
-import { Hotels, IsSuper } from "../../utils";
+import { Hotels, notSuper } from "../../utils";
 
 const VendorEdit = ({
   setEdit,
@@ -73,8 +73,8 @@ const VendorEdit = ({
           name="amount"
           value={form.amount}
           onChange={onChange}
-          readOnly={IsSuper() === false}
-          className={`${IsSuper() === false ? "normal-user" : ""}`}
+          readOnly={notSuper}
+          className={`${notSuper ? "normal-user" : ""}`}
         ></FormItems>
         <FormItems
           type="text"

@@ -9,27 +9,31 @@ import ErrorPage from "../components/Elements/Error";
 import { FormattedMonths } from "../components/Elements/yesterdayDate";
 
 const Accounts = () => {
+  // hotel array for filter and api call
   const formattedHotels = useMemo(() => formatHotel() || [], []);
 
   const [hotelOptions] = useState(formattedHotels);
   const [hotelData, setHotelData] = useState(formattedHotels);
-
   const [trigger, setTrigger] = useState(false);
   const [loading] = useState(false);
   const [error] = useState(false);
 
   const { formattedYesterday, formattedPrevMonth } = FormattedMonths();
 
-  // React state example
+  // date formatting for yesterday and previous month
   const [yesterdayDate, setYesterdayDate] = useState(formattedYesterday);
   const [prevMonthDate, setPrevMonthDate] = useState(formattedPrevMonth);
 
   return (
     <div className="daan">
       <div className="flex common-flex">
+        {/* // ------------------------------------------ sidebar component */}
         <SidebarTwo></SidebarTwo>
         <div className="elements common-element">
+          {/* // ------------------------------------------ Navbar component */}
           <Navbar></Navbar>
+
+          {/* // ------------------------------------------ Filter component */}
           <div className="h2-sub">
             <h2
               style={{
@@ -63,6 +67,8 @@ const Accounts = () => {
               />
             </div>
           </div>
+
+          {/* // ------------------------------------------ Conditional rendering for loading, error and accounts tabs */}
           {loading ? (
             <LoadingItem />
           ) : error ? (
@@ -75,8 +81,6 @@ const Accounts = () => {
               hotels={hotelData.map((i) => i.value)}
             ></AccountsTabs>
           )}
-
-          {/* <CustomerTable></CustomerTable> */}
         </div>
       </div>
     </div>
