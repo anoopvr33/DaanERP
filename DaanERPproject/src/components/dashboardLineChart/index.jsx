@@ -1,7 +1,6 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 
 export default function MarkOptimization({ data }) {
-  const Occupancy = data?.map((i) => i.occupancy);
 
   // last 10 days
   const last10Days = data?.slice(-9);

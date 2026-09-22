@@ -1,42 +1,60 @@
+import { useState } from "react";
+import { PageinationUI } from "../Elements/pagination";
 import "./style.css";
+import Pagination from "@mui/material/Pagination";
 
 const AccountsHotel = ({ data }) => {
-  // const head = data.length > 0 ? Object.keys(data[0]) : [];
+  const [page, setPage] = useState(1);
 
-  // console.log("my hotels ops", data);
+  const { paginatedData, totalPages } = PageinationUI(data?.data, page);
 
   return (
-    <table style={{ width: "700px" }} className="daan-table">
-      <tr>
-        <th>Category</th>
-        <th>Sum of payments</th>
-      </tr>
+    <>
+      <table style={{ width: "700px" }} className="daan-table">
+        <tr>
+          <th>Category</th>
+          <th>Sum of payments</th>
+        </tr>
 
-      <tbody>
-        {data?.data?.length > 0 ? (
-          <>
-            {data?.data?.map((item) => (
-              <tr className="accounts-row">
-                <td>{item.category}</td>
-                <td>{item.sum_of_payments}</td>
+        <tbody>
+          {paginatedData?.length > 0 ? (
+            <>
+              {paginatedData?.map((item) => (
+                <tr className="accounts-row">
+                  <td>{item.category}</td>
+                  <td>{item.sum_of_payments}</td>
+                </tr>
+              ))}
+              <tr>
+                <td>
+                  <b>Grand Total</b>
+                </td>
+                <td>
+                  <b>{data?.grand_total}</b>
+                </td>
               </tr>
-            ))}
+            </>
+          ) : (
             <tr>
-              <td>
-                <b>Grand Total</b>
-              </td>
-              <td>
-                <b>{data?.grand_total}</b>
-              </td>
+              <td colSpan={5}>Empty Data</td>
             </tr>
-          </>
-        ) : (
-          <tr>
-            <td colSpan={5}>Empty Data</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+          )}
+        </tbody>
+      </table>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          margin: "20px",
+        }}
+      >
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+        />
+      </div>
+    </>
   );
 };
 

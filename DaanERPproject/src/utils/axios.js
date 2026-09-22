@@ -6,6 +6,7 @@ export function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
+// base URL
 export const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
@@ -15,6 +16,7 @@ export const API = axios.create({
   },
 });
 
+// Add a response interceptor to handle 401 errors
 API.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -32,7 +34,3 @@ API.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-// headers: {+78+
-//   "X-CSRFToken": getCookie("csrftoken")
-// }

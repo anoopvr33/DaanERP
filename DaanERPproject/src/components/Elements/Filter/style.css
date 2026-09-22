@@ -8,10 +8,10 @@
   /* width: 200px; */
 }
 
-.custom-filter label {
+.custom-label {
   position: relative;
 }
-.custom-filter .label-p {
+.label-p {
   position: absolute;
   top: -12px;
   left: 20px;

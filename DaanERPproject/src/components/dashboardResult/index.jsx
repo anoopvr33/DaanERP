@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import "./style.css";
-import { API } from "../../utils/axios";
 import { IndianRupee, Backpack } from "lucide-react";
 import { LucideBedDouble, DoorOpenIcon, ChartPie } from "lucide-react";
 
@@ -15,10 +13,6 @@ const DashResult = ({ data }) => {
           <b> Bookings</b>
         </span>
       </div>
-      {/* <div>
-        <h1>{data.room_result}</h1>
-        <b> Room Result</b>
-      </div> */}
       <div>
         <IndianRupee></IndianRupee>
         <span>
@@ -50,10 +44,7 @@ const DashResult = ({ data }) => {
           <b> Room Occupancy</b>
         </span>
       </div>
-      {/* <div>
-        <h1>{data?.revenu_count?.total_amount || "NaN"}</h1>
-        <b>Total Revenue</b>
-      </div> */}
+
     </div>
   );
 };

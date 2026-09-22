@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { API, getCookie } from "../../utils/axios";
+import { useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
 import { Hotels } from "../../utils/index";
+import { Add_Salary } from "../../api/accountsServices";
 
 const AddSalary = ({ setOpen }) => {
   const [form, setForm] = useState({
@@ -31,13 +31,7 @@ const AddSalary = ({ setOpen }) => {
   const OnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await API.post("/daybook/add_salary/", form, {
-        withCredentials: true,
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-          // "Content-Type": "multipart/form-data", // 👈 add this
-        },
-      });
+      const response = await Add_Salary(form);
       if (response.data) {
         alert("success");
       } else alert("something went wrong");
@@ -63,6 +57,7 @@ const AddSalary = ({ setOpen }) => {
 
         <FormItems
           required
+          element="select"
           labelData={"Name"}
           onChange={OnInput}
           name={"name"}

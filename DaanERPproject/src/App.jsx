@@ -14,11 +14,11 @@ import ProtectedRoute from "./components/Elements/ProtectedRoute";
 function App() {
   return (
     <div className="app">
+      {/* //------------------------------------------ toast container for notifications */}
       <ToastContainer></ToastContainer>
-
       <Routes>
         <Route path="/login" element={<UserLogin />}></Route>
-
+        {/* //------------------------------------------ protected routes for superuser */}
         <Route element={<ProtectedRoute />}>
           <Route
             path="/"
@@ -29,7 +29,7 @@ function App() {
           <Route path="/payment" element={<Payment />}></Route>
           <Route path="/employees" element={<Employee />}></Route>
         </Route>
-
+        
         <Route path="/customer" element={<Customer />}></Route>
         <Route path="/booking" element={<Booking />}></Route>
         <Route path="/accounts" element={<Accounts />}></Route>

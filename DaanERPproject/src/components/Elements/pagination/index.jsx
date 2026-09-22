@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 const rowsPerPage = 30;
 
-export const Pageination = (FilterData, page) => {
+export const PageinationUI = (FilterData, page) => {
   const paginatedData = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     return FilterData?.slice(start, start + rowsPerPage);

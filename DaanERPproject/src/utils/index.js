@@ -12,8 +12,11 @@ export const IsStaff = () => {
   return JSON.parse(localStorage.getItem("isStaff"));
 };
 
+export const notSuper = IsSuper() === false;
 
+export const trueStaff = IsStaff() === true;
 
+// Array of Hotels format function
 export const formatHotel = () => {
   const hotels = Hotels();
   if (hotels?.length === 0 || !hotels) {

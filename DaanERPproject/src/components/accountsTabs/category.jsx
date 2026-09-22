@@ -1,10 +1,5 @@
-import {
-  Delete_Daily_Category,
-  Delete_Daily_SubCategory,
-  // Edit_Daily_Category,
-  // Edit_Daily_SubCategory,
-} from "../../api/accountsServices";
-import { IsStaff, IsSuper } from "../../utils";
+import { Delete_Daily_SubCategory } from "../../api/accountsServices";
+import { notSuper, trueStaff } from "../../utils";
 
 const CategoryList = ({ catsub }) => {
   console.log("dailylog category", catsub);
@@ -143,35 +138,6 @@ const CategoryList = ({ catsub }) => {
                 <div className="category-actions"></div>
               </div>
 
-              {/* CATEGORY EDIT AREA */}
-              {/* {editingCategory === key && (
-                <div className="category-edit-area">
-                  <input
-                    type="text"
-                    value={categoryValue}
-                    onChange={(e) => setCategoryValue(e.target.value)}
-                    placeholder="Enter category name"
-                    autoFocus
-                  />
-
-                  <div className="edit-buttons">
-                    <button
-                      className="update-btn"
-                      onClick={() => handleCategoryUpdate(key)}
-                    >
-                      Update
-                    </button>
-
-                    <button
-                      className="cancel-btn"
-                      onClick={handleCategoryCancel}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              )} */}
-
               {/* SUBCATEGORIES */}
               <div className="subcategory-container">
                 {values.length === 0 ? (
@@ -194,10 +160,7 @@ const CategoryList = ({ catsub }) => {
                               Delete_Daily_SubCategory({ id: sub.id })
                             }
                             style={{
-                              display:
-                                IsSuper() === false || IsStaff() === true
-                                  ? "none"
-                                  : "",
+                              display: notSuper || trueStaff ? "none" : "",
                               cursor: "pointer",
                             }}
                             className="fa fa-trash"
@@ -205,40 +168,6 @@ const CategoryList = ({ catsub }) => {
                           />
                         </div>
                       </div>
-
-                      {/* SUBCATEGORY EDIT AREA */}
-                      {/* {editingSubcategory?.category === key &&
-                        editingSubcategory?.id === sub.id && (
-                          <div className="subcategory-edit-area">
-                            <input
-                              type="text"
-                              value={subcategoryValue}
-                              onChange={(e) =>
-                                setSubcategoryValue(e.target.value)
-                              }
-                              placeholder="Enter subcategory name"
-                              autoFocus
-                            />
-
-                            <div className="edit-buttons">
-                              <button
-                                className="update-btn"
-                                onClick={() =>
-                                  handleSubcategoryUpdate(key, sub)
-                                }
-                              >
-                                Update
-                              </button>
-
-                              <button
-                                className="cancel-btn"
-                                onClick={handleSubcategoryCancel}
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        )} */}
                     </div>
                   ))
                 )}

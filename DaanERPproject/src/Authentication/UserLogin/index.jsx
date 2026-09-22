@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { API } from "../../utils/axios";
 import "./style.css";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCookie } from "../../utils/axios";
+import { LoginAPI } from "../../api/authServices";
 
 const UserLogin = () => {
   const navigate = useNavigate();
 
-  const [data, setData] = useState({ username: "", password: "" });
+  const [data, setData] = useState({ username: null, password: null });
 
   const EnterData = (e) => {
     const { name, value } = e.target;
@@ -15,53 +14,37 @@ const UserLogin = () => {
   };
 
   const OnLog = async () => {
-    try {
-      const response = await API.post("/main/admin_login/", data, {
-        withCredentials: true,
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-      });
-
-      if (response?.data?.hotel) {
-        localStorage.setItem("hotel", JSON.stringify(response?.data?.hotel));
-        localStorage.setItem(
-          "isSuper",
-          JSON.stringify(response?.data?.is_superuser ? true : false),
-        );
-        localStorage.setItem(
-          "isStaff",
-          JSON.stringify(response?.data?.is_staff ? true : false),
-        );
-        if (response?.data?.is_staff === true) {
-          return navigate("/Booking/?index=2");
-        }
-        navigate("/");
-      } else {
-        throw new Error("something wrong");
-      }
-    } catch (error) {
-      alert(error);
+    if (!data.password || !data.username) {
+      return alert("Please enter username and password");
     }
+
+    if (data.password)
+      try {
+        const response = await LoginAPI(data);
+
+        if (response?.data?.hotel) {
+          localStorage.setItem("hotel", JSON.stringify(response?.data?.hotel));
+          localStorage.setItem(
+            "isSuper",
+            JSON.stringify(response?.data?.is_superuser ? true : false),
+          );
+          localStorage.setItem(
+            "isStaff",
+            JSON.stringify(response?.data?.is_staff ? true : false),
+          );
+          if (response?.data?.is_staff === true) {
+            return navigate("/Booking/?index=2");
+          }
+          navigate("/");
+        } else {
+          throw new Error("something wrong");
+        }
+      } catch (error) {
+        alert(error);
+      }
   };
 
-  // const OnLogin = async () => {
-  //   const response = await API.get("/main/profile/", {
-  //     withCredentials: true,
-  //     headers: {
-  //       "X-CSRFToken": getCookie("csrftoken"),
-  //     },
-  //   });
 
-  //   console.log("mylog res", response);
-
-  //   if (response.data.message) {
-  //     localStorage.setItem("token", response.data.token);
-
-  //   } else {
-  //     return alert("Invalid Credentials");
-  //   }
-  // };
 
   useEffect(() => {
     // SetTokenFalse();

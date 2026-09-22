@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AddBookingAPI, GetCustomerDataAPI } from "../api";
 import { toast } from "react-toastify";
 import { GetDashboardAPI } from "../api/dashboardServices";
 

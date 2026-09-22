@@ -3,10 +3,8 @@ import { useEffect, useState } from "react";
 import ReportAuditTab from "./reportAudit";
 import ReportRevenueTab from "./reportRevenue";
 import ReportTaxTab from "./reportTax";
-import ReportTotalTab from "./reportTotal";
-import { API, getCookie } from "../../utils/axios";
-import { Hotels } from "../../utils";
 import ReportCheckoutTab from "./reportCheckout";
+import { Get_Night_Audit_Report } from "../../api/report";
 
 const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
   const [tab, setTab] = useState(0);
@@ -100,24 +98,12 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
     try {
       setLoading(true);
-      const response = await API.post(
-        "/reports/get_nightaudit_report/",
-        {
-          hotels: hotel,
-          from_date: prevmonth,
-          to_date: yesterday,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
-          },
-        },
-      );
-      console.log("daily resssss", response);
+      const response = await Get_Night_Audit_Report({
+        hotels: hotel,
+        from_date: prevmonth,
+        to_date: yesterday,
+      });
       const res = response.data.report;
-
-      console.log("kakakaka", res);
 
       if (response.data.status === "success") {
         setAudit({
@@ -142,24 +128,15 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
 
       setRevenue(res?.revenu_details);
       setCheckout(res?.checkout_details);
-      // console.log(
-      //   "checkout response and revenue",
-      //   res?.checkout_details,
-      //   res?.revenu_details,
-      // );
     } catch (error) {
       setError(error.message);
-      // alert(error, "please login");
     } finally {
       setLoading(false);
-      // setError(/)
     }
   };
 
   useEffect(() => {
     GetAudit();
-    // console.log("fate", formattedDate);
-    // eslint(react-hooks/set-state-in-effect)
   }, [trigger, hotel]);
 
   useEffect(() => {
@@ -181,18 +158,11 @@ const ReportTabs = ({ yesterday, prevmonth, hotel, trigger }) => {
           </p>
         ))}
       </div>
-      {/* {loading && (
-        <div style={{ padding: "20px" }}>
-          <p>Loading...</p>
-        </div>
-      )} */}
 
       <div
         style={{ borderRadius: tab === 0 && "0px 20px 20px 20px" }}
         className="report-tabs-container"
       >
-        {/* {loading ? <p>Loading...</p> : ""} */}
-        {/* <p>Loading</p> */}
         {tab === 0 && (
           <ReportAuditTab
             loading={loading}

@@ -1,7 +1,7 @@
-import {  useState } from "react";
+import "./style.css";
+import { useState } from "react";
 import FormItems from "../Elements/formItems";
 import Button from "../Elements/button";
-import "./style.css";
 import { API } from "../../utils/axios";
 
 const AccountsHotelAdd = ({ formdate }) => {
@@ -12,11 +12,14 @@ const AccountsHotelAdd = ({ formdate }) => {
     remarks: "",
   });
 
+  // hotelops input change handler
   const OnInput = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
 
+  // currentl not using
+  // hotelops form submit handler
   const OnSubmit = async (e) => {
     e.preventDefault();
 

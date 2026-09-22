@@ -1,13 +1,13 @@
-// get employees
+import { API } from "../utils/axios";
 
-// API.get(
-//         "/main/show_user/",)
+export const CreateEmployeeAPI = async (form) => {
+  return await API.post("/main/create_user/", form);
+};
 
-// add employee
-// API.post("/main/create_user/", {
-//     username: "",
-//     email: "",
-//     password: "",
-//     is_superuser: false,
-//     hotels: [],
-//   },
+export const DeleteEmployeeAPI = async (_id) => {
+  return await API.post("/main/delete_user/", { id: _id });
+};
+
+export const GetEmployeeAPI = async () => {
+  return await API.get("/main/show_user/");
+};
