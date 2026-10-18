@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import "./style.css";
 import { useEffect, useState } from "react";
 import FormItems from "../Elements/formItems";

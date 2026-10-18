@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import FormItems from "../../Elements/formItems";
 import Button from "../../Elements/button";
 import AccountsTable from "../../accoutsTable";
-import AccountsDailyAdd from "../../accountAddComponents";
+import AccountsDailyAdd from "../../accountAddComponents/dailyLog";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addDailyLog_CategoryThunk,
